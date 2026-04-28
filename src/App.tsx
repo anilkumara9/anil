@@ -34,11 +34,13 @@ export default function NewspaperPortfolio() {
       day: 'numeric' 
     }));
 
-    // Check for saved dark mode preference
+    // Default to light mode, then honor the user's saved theme choice.
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedDarkMode);
     if (savedDarkMode) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
