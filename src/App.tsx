@@ -17,7 +17,7 @@ export default function NewspaperPortfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const resumeUrl = "https://drive.google.com/file/d/1qSFAWwtuPwmt1x-yCTEFaAMi4qh4b14f/view?usp=sharing";
+  const resumeUrl = "https://drive.google.com/file/d/1UWQDJJsJjohpk44rKD3EzCDaDoFmvk08/view?usp=sharing";
   
   // Intersection Observer hooks for animations
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
