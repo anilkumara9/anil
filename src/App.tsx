@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowRight, ExternalLink, Mail, Github, Linkedin, Calendar, MapPin, Award, Code, BookOpen, Download } from "lucide-react";
+import { ExternalLink, Mail, Github, Linkedin, Calendar, MapPin, Award, Code, BookOpen, Download } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -12,12 +12,12 @@ import TypewriterText from "./components/TypewriterText";
 import DarkModeToggle from "./components/DarkModeToggle";
 import ContactForm from "./components/ContactForm";
 import InteractiveTimeline from "./components/InteractiveTimeline";
-import { generateResumePDF } from "./utils/pdfGenerator";
 
 export default function NewspaperPortfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const resumeUrl = "https://drive.google.com/file/d/1qSFAWwtuPwmt1x-yCTEFaAMi4qh4b14f/view?usp=sharing";
   
   // Intersection Observer hooks for animations
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
@@ -53,87 +53,80 @@ export default function NewspaperPortfolio() {
     }
   };
 
-  const downloadResume = async () => {
-    // Try provided/static assets first; fall back to generating dynamically
-    const candidateAssetUrls: string[] = [
-      "/asset/updated%20resume.pdf", // provided path
-      "/assets/updated%20resume.pdf",
-      "/updated%20resume.pdf",
-      "/assets/Meda_Anilkumar_Resume.pdf",
-      "/Meda_Anilkumar_Resume.pdf",
-      "/assets/resume.pdf",
-      "/resume.pdf",
-    ];
+  const skillGroups = [
+    {
+      title: "Core Programming",
+      skills: ["DSA", "Python", "Java", "OOP", "System Design Basics"],
+    },
+    {
+      title: "AI / ML",
+      skills: ["ML Fundamentals", "Deep Learning", "LLM Basics", "Embeddings", "RAG"],
+    },
+    {
+      title: "Agentic AI",
+      skills: ["LangChain", "LlamaIndex", "AI Agents", "Function Calling", "AI Workflows"],
+    },
+    {
+      title: "Full Stack",
+      skills: ["React/Next.js", "Node.js", "FastAPI", "REST APIs", "Auth & Security"],
+    },
+    {
+      title: "Systems & Cloud",
+      skills: ["PostgreSQL", "MongoDB", "Vector DBs", "Docker", "AWS/GCP"],
+    },
+  ];
 
-    for (const url of candidateAssetUrls) {
-      try {
-        const headOk = await fetch(url, { method: "HEAD" }).then(r => r.ok).catch(() => false);
-        if (headOk) {
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = url.split('/').pop() || 'resume.pdf';
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-          return;
-        }
-        const getResp = await fetch(url);
-        if (getResp.ok) {
-          const blob = await getResp.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = url.split('/').pop() || 'resume.pdf';
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-          URL.revokeObjectURL(blobUrl);
-          return;
-        }
-      } catch (_) {
-        // continue to next candidate
-      }
-    }
-
-    const resumeData = {
-      name: "Meda Anilkumar",
-      email: "anilkumarmeda6@gmail.com",
-      phone: "+91 9986489887",
-      location: "Bengaluru, Karnataka",
-      education: "B.E. Computer Science (Data Science) - CGPA: 8.09",
-      skills: skills,
-      projects: projects,
-    };
-    generateResumePDF(resumeData);
-  };
-
-  const skills = [
-    'Python', 'JavaScript', 'TypeScript', 'Java', 'React', 'Next.js', 'Node.js', 'MongoDB',
-    'Docker', 'AWS', 'GCP', 'Vercel', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'LangChain',
-    'RAG', 'Prisma', 'Neon DB', 'PostgreSQL', 'Chroma DB', 'Tailwind CSS', 'TRPC', 'Expo'
+  const focusAreas = [
+    {
+      title: "DSA + Problem Solving",
+      detail: "Practicing structured problem solving for coding rounds and scalable thinking.",
+    },
+    {
+      title: "System Design Mindset",
+      detail: "Understands APIs, databases, auth, deployment, and clean product architecture.",
+    },
+    {
+      title: "Agentic AI Edge",
+      detail: "Building AI agents, RAG workflows, tool calling, and LLM-powered applications.",
+    },
+    {
+      title: "Production Shipping",
+      detail: "Turns ideas into deployed projects with full-stack execution and ownership.",
+    },
   ];
 
   const projects = [
     {
+      title: "ML Stock Price Prediction System",
+      period: "May 2025 - Present",
+      description: "Machine-learning powered system that predicts future stock prices using historical market data and time-series forecasting models.",
+      details: [
+        "Trained and tested Linear Regression, Random Forest, and LSTM neural networks to compare accuracy and improve predictive performance.",
+        "Built interactive visualizations and a Streamlit interface for exploring forecasts, trends, and model outputs."
+      ],
+      tech: ["Python", "Pandas", "NumPy", "Scikit-Learn", "TensorFlow/Keras", "LSTM", "Matplotlib", "Plotly", "Streamlit", "Yahoo Finance API"],
+      impact: "Demonstrates ML modeling, time-series forecasting, data visualization, and practical financial analytics",
+    },
+    {
       title: "AI-Powered Interview Preparation Platform",
-      description: "Full-stack web app with AI voice interviews and blockchain credential verification",
+      description: "Full-stack AI interview platform with voice practice, feedback flows, and credential verification",
       tech: ["Next.js 15", "Firebase", "Vapi AI", "Gemini AI", "Ethereum", "IPFS"],
-      impact: "Revolutionary interview prep with blockchain verification",
+      impact: "Shows product thinking, AI integration, authentication, and deployable full-stack delivery",
       link: "https://github.com/anilkumara9/ai-tutor",
     },
     {
       title: "Deep-Research Assistant",
-      description: "Autonomous research agent using reinforcement learning for web-scale data extraction",
-      tech: ["Python", "Reinforcement Learning", "Web Scraping", "AI"],
+      description: "Research assistant that gathers, filters, and summarizes information from multiple web sources",
+      tech: ["Python", "Machine Learning", "Web Scraping", "NLP"],
       link: "https://github.com/anilkumara9/deepresearch",
-      impact: "Automated multi-source information synthesis for complex topics"
+      impact: "Demonstrates Python automation, ML workflows, and practical data processing"
     },
     {
       title: "Vibe-Coding (Polo)",
-      description: "AI-driven coding platform generating optimized, production-ready code from natural language",
+      description: "AI coding assistant that turns natural-language prompts into structured project code",
       tech: ["Next.js", "Prisma", "Neon DB", "Tailwind CSS", "Vercel SDK", "Gemini AI"],
       link: "https://github.com/anilkumara9",
-      impact: "Eliminated repetitive coding tasks, accelerated prototyping"
+      impact: "Highlights modern app architecture, AI SDK usage, and fast prototyping ability"
     }
   ];
 
@@ -164,19 +157,10 @@ export default function NewspaperPortfolio() {
               
               {/* Right - Actions */}
               <div className="flex items-center gap-4">
-                <Button
-                  onClick={downloadResume}
-                  variant="outline"
-                  size="sm"
-                  className="group hover:bg-primary hover:text-primary-foreground hidden sm:flex"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download Resume
-                </Button>
-                <a href="https://portfolio-cli.netlify.app/" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm" className="hover:bg-primary hover:text-primary-foreground hidden sm:flex">
-                    CLI Portfolio
-                    <ExternalLink className="h-3 w-3 ml-2" />
+                <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm" className="group hover:bg-primary hover:text-primary-foreground hidden sm:flex">
+                    Download Resume
+                    <Download className="h-3 w-3 ml-2" />
                   </Button>
                 </a>
                 <div className="flex items-center gap-2">
@@ -221,12 +205,12 @@ export default function NewspaperPortfolio() {
                   MEDA ANILKUMAR
                 </h1>
                 <h2 className="headline text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-light">
-                  AI INNOVATOR READY TO TRANSFORM TECH
+                  AI/ML DEVELOPER READY FOR IMPACT
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                  Computer Science undergraduate specializing in Data Science with hands-on experience 
-                  building AI-powered applications and scalable platforms. Multiple hackathon victories 
-                  showcase exceptional talent in machine learning and full-stack development.
+                  Computer Science undergraduate specializing in Data Science, focused on building practical 
+                  AI/ML products with clean full-stack execution. Available for internships and entry-level 
+                  software, AI, and data roles where strong project ownership matters.
                 </p>
                 <div className="byline text-muted-foreground pt-4">
                   By Tech Editorial Team • The AI Times • Bengaluru, Karnataka
@@ -234,6 +218,23 @@ export default function NewspaperPortfolio() {
               </div>
             </div>
           </motion.article>
+
+          {/* Engineering Focus */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="mb-12 grid md:grid-cols-4 gap-4"
+          >
+            {focusAreas.map((area) => (
+              <Card key={area.title} className="hover-lift border-primary/20">
+                <CardContent className="p-4 space-y-2">
+                  <h3 className="headline text-sm">{area.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{area.detail}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </motion.section>
 
           {/* Three Column Layout */}
           <div className="grid lg:grid-cols-3 gap-8">
@@ -258,9 +259,9 @@ export default function NewspaperPortfolio() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm leading-relaxed">
-                    "I'm passionate about solving complex problems at scale and contributing to high-impact 
-                    products. My focus on AI-powered applications and data science drives innovation 
-                    that makes a real difference."
+                    "I build practical AI and full-stack projects, learn quickly, and focus on shipping useful 
+                    products. I'm looking for an opportunity to contribute to engineering teams working on 
+                    software, machine learning, or data-driven products."
                   </p>
                   <Separator />
                   <div className="space-y-2 text-xs">
@@ -274,7 +275,7 @@ export default function NewspaperPortfolio() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Award className="h-3 w-3" />
-                      <span>CGPA: 8.09</span>
+                      <span>CGPA: 8.29 • Open to AI/ML internships and fresher roles</span>
                     </div>
                   </div>
                 </CardContent>
@@ -288,27 +289,34 @@ export default function NewspaperPortfolio() {
                     TECHNICAL ARSENAL
                   </CardTitle>
                   <CardDescription className="byline text-primary">
-                    Core Technologies & Skills
+                    Focused Skills for Software and AI Roles
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill, index) => (
-                      <motion.div
-                        key={skill}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={skillsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                        transition={{ delay: index * 0.05, duration: 0.3 }}
-                      >
-                        <Badge 
-                          variant="secondary" 
-                          className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
-                        >
-                          {skill}
-                        </Badge>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {skillGroups.map((group) => (
+                    <div key={group.title} className="space-y-2">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {group.title}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {group.skills.map((skill, index) => (
+                          <motion.div
+                            key={skill}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={skillsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ delay: index * 0.05, duration: 0.3 }}
+                          >
+                            <Badge
+                              variant="secondary"
+                              className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
+                            >
+                              {skill}
+                            </Badge>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
@@ -343,9 +351,22 @@ export default function NewspaperPortfolio() {
                     <Card className="hover-lift">
                       <CardHeader>
                         <CardTitle className="headline text-lg">{project.title}</CardTitle>
+                        {"period" in project && project.period && (
+                          <div className="text-xs font-semibold text-primary">{project.period}</div>
+                        )}
                         <CardDescription className="text-sm">{project.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-3">
+                        {"details" in project && project.details && (
+                          <div className="space-y-1">
+                            {project.details.map((detail) => (
+                              <div key={detail} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                                <span className="text-primary font-bold">•</span>
+                                <span>{detail}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                         <div className="flex flex-wrap gap-1">
                           {project.tech.map((tech) => (
                             <Badge key={tech} variant="outline" className="text-xs">
@@ -379,6 +400,7 @@ export default function NewspaperPortfolio() {
                   </motion.div>
                 ))}
               </div>
+
             </motion.div>
 
             {/* Right Column */}
@@ -422,9 +444,10 @@ export default function NewspaperPortfolio() {
                   <div className="space-y-2">
                     <div className="font-semibold text-sm">B.E. Computer Science (Data Science)</div>
                     <div className="text-xs text-muted-foreground">New Horizon College of Engineering • 2022-Present</div>
-                    <div className="text-xs">CGPA: 8.09</div>
+                    <div className="text-xs">CGPA: 8.29</div>
+                    <div className="text-xs">Relevant focus: AI/ML, Data Science, Databases, Web Development</div>
                     <div className="text-xs text-muted-foreground mt-2">Pre-University (PCMB)</div>
-                    <div className="text-xs text-muted-foreground">BKG PU College, Sandour • 71.3%</div>
+                    <div className="text-xs text-muted-foreground">BKG PU College, Sandour</div>
                   </div>
                 </CardContent>
               </Card>
@@ -449,7 +472,8 @@ export default function NewspaperPortfolio() {
                 <h3 className="headline text-lg mb-2">EDUCATION</h3>
                 <p className="text-sm text-muted-foreground">B.E. Computer Science (Data Science)</p>
                 <p className="text-sm text-muted-foreground">New Horizon College of Engineering</p>
-                <p className="text-sm text-muted-foreground">CGPA: 8.09</p>
+                <p className="text-sm text-muted-foreground">CGPA: 8.29</p>
+                <p className="text-sm text-muted-foreground">Focused on AI/ML and full-stack projects</p>
               </div>
               <div>
                 <h3 className="headline text-lg mb-2">SPECIALIZATION</h3>

@@ -4,7 +4,6 @@ A clean, fast personal portfolio built with React + Vite + TypeScript.
 
 ## Live
 
-- CLI Portfolio: https://portfolio-cli.netlify.app/
 - Site: (add your production URL here)
 
 ## Features
@@ -12,7 +11,8 @@ A clean, fast personal portfolio built with React + Vite + TypeScript.
 - Modern newspaper-style layout with animations
 - Dark mode toggle (saved in localStorage)
 - Featured projects with GitHub links
-- Resume download button
+- Google Drive resume link
+- Recruiter-focused project, skills, and contact sections
 
 ## Quick Start
 
@@ -39,5 +39,5 @@ npm run preview
 
 - `src/App.tsx` – main page
 - `src/components/` – UI components
-- `asset/` – resume and assets
+- `asset/` – project assets
 

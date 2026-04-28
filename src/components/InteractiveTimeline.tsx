@@ -60,11 +60,12 @@ const InteractiveTimeline: React.FC = () => {
       date: '2022-Present',
       title: 'B.E. Computer Science (Data Science)',
       organization: 'New Horizon College of Engineering, Bengaluru',
-      description: 'Specializing in Data Science with exceptional academic performance',
+      description: 'Specializing in Data Science with hands-on AI/ML and full-stack project work',
       type: 'education',
       details: [
-        'Current CGPA: 8.09',
-        'Focus on AI/ML, Data Science, and Full-Stack Development',
+        'Current CGPA: 8.29',
+        'Focus on AI/ML, Data Science, Databases, and Full-Stack Development',
+        'Built deployable projects using Python, Next.js, and modern AI tooling',
         'Led multiple student tech events, boosting participation by 30%'
       ]
     },
@@ -76,7 +77,6 @@ const InteractiveTimeline: React.FC = () => {
       description: 'Strong foundation in Physics, Chemistry, Mathematics, and Biology',
       type: 'education',
       details: [
-        'Percentage: 71.3%',
         'Built strong analytical and problem-solving skills',
         'Developed interest in technology and programming'
       ]

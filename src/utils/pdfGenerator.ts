@@ -65,21 +65,21 @@ export const generateResumePDF = (data: ResumeData) => {
   // Education
   addSection('EDUCATION');
   addText('New Horizon College of Engineering, Bengaluru', 12, true);
-  addText('B.E. in Computer Science (Data Science) - CGPA: 8.09', 11);
+  addText('B.E. in Computer Science (Data Science) - CGPA: 8.29', 11);
   addText('Aug 2022 - Present', 10);
   yPosition += 3;
   addText('BKG PU College, Sandour', 12, true);
-  addText('Pre-University Course (PCMB Stream) - 71.3%', 11);
+  addText('Pre-University Course (PCMB Stream)', 11);
   addText('Jun 2020 - May 2022', 10);
   
   // Technical Skills
   addSection('TECHNICAL SKILLS');
   const skillCategories = [
-    'Programming: Python, Java, JavaScript, TypeScript, HTML, CSS, SQL',
-    'Frameworks/Technologies: Node.js, React, Next.js, Prisma, MongoDB, Tailwind CSS, Docker, Expo, TRPC',
-    'Cloud Platforms: Google Cloud Platform, AWS, Vercel',
-    'AI/ML: LangChain, RAG, PyTorch, TensorFlow, Scikit-learn',
-    'Databases: Neon DB, Prisma, MySQL, PostgreSQL, Chroma DB'
+    'Core Programming: Data Structures & Algorithms, Python, Java, OOP, System Design Basics',
+    'AI/ML: ML Fundamentals, Deep Learning, LLM Basics, Embeddings, RAG',
+    'Agentic AI: LangChain, LlamaIndex, AI Agents, Function Calling, AI Workflows',
+    'Full Stack: React, Next.js, Node.js, FastAPI, REST APIs, Authentication & Security',
+    'Systems & Cloud: PostgreSQL, MongoDB, Vector Databases, Docker, AWS/GCP'
   ];
   
   skillCategories.forEach(category => {
