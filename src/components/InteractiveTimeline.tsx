@@ -19,66 +19,64 @@ const InteractiveTimeline: React.FC = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([
     {
       id: '1',
-      date: '2024',
-      title: 'Multiple Hackathon Victories',
-      organization: 'Various Competitions',
-      description: 'Consistent top performer in AI and full-stack development challenges',
-      type: 'achievement',
+      date: 'Jan 2026 - Present',
+      title: 'Creator of Spora & Invisly',
+      organization: 'Product Development',
+      description: 'Built Spora (next-gen social platform) and Invisly (real-time AI interview assistant)',
+      type: 'project',
       details: [
-        'Codeforces REVA Hackathon - Third Prize',
-        'Kaspersky Manipal Hackathon - Top 5 Teams',
-        'CIDECODE Hackathon (PES University) - Finalist'
+        'Spora: Social platform with personalized content discovery, short videos, and real-time interaction (testing link live on Play Store)',
+        'Invisly: AI-powered desktop assistant for real-time technical interview support (invisly.in)'
       ]
     },
     {
       id: '2',
-      date: '2024',
-      title: 'Advanced AI Certifications',
-      organization: 'IBM & NPTEL',
-      description: 'Earned elite certifications in cloud computing and database management',
-      type: 'certification',
+      date: '2026',
+      title: 'SCBI Research',
+      organization: 'AI & Foundation Models',
+      description: 'Researching Self-Consistent Basis Invention (SCBI) architecture',
+      type: 'project',
       details: [
-        'IBM SkillsBuild - Advanced Cloud and AI Applications',
-        'NPTEL DBMS - Elite Certification for Database Management Systems'
+        'Inference-time representation-learning architecture',
+        'Enables frozen foundation models to discover, validate, and reuse latent problem-solving representations without weight updates'
       ]
     },
     {
       id: '3',
-      date: '2023-2024',
-      title: 'AI-Powered Project Portfolio',
-      organization: 'Personal Development',
-      description: 'Built cutting-edge applications showcasing AI expertise',
-      type: 'project',
+      date: '2024 - 2025',
+      title: 'Hackathon Victories & Recognition',
+      organization: 'PES University & REVA University',
+      description: 'Award-winning full-stack and AI problem solver',
+      type: 'achievement',
       details: [
-        'AI-Powered Interview Preparation Platform with blockchain verification',
-        'Deep-Research Assistant using reinforcement learning',
-        'Vibe-Coding (Polo) - AI-driven coding platform'
+        'CIDECODE Hackathon (PES University) - Finalist for AI-Powered Problem Solving',
+        'Codeforces REVA Hackathon - Third Prize for Full-Stack Application Development'
       ]
     },
     {
       id: '4',
-      date: '2022-Present',
-      title: 'B.E. Computer Science (Data Science)',
-      organization: 'New Horizon College of Engineering, Bengaluru',
-      description: 'Specializing in Data Science with hands-on AI/ML and full-stack project work',
-      type: 'education',
+      date: '2024 - 2025',
+      title: 'Featured AI & ML Projects',
+      organization: 'Machine Learning & Web Systems',
+      description: 'Developed ML Stock Price Prediction System, Vibe-Coding (Polo), and AI Interview Prep Platform',
+      type: 'project',
       details: [
-        'Current CGPA: 8.29',
-        'Focus on AI/ML, Data Science, Databases, and Full-Stack Development',
-        'Built deployable projects using Python, Next.js, and modern AI tooling',
-        'Led multiple student tech events, boosting participation by 30%'
+        'ML Stock Price Prediction: Time-series forecasting with Linear Regression, Random Forest, and LSTM neural networks',
+        'Vibe-Coding (Polo): AI platform turning natural prompts into production-ready web apps',
+        'AI-Powered Interview Prep Platform: Full-stack web app with AI voice interviews and blockchain verification'
       ]
     },
     {
       id: '5',
-      date: '2020-2022',
-      title: 'Pre-University Course (PCMB)',
-      organization: 'BKG PU College, Sandour',
-      description: 'Strong foundation in Physics, Chemistry, Mathematics, and Biology',
+      date: 'Aug 2022 - Present',
+      title: 'B.E. in Computer Science',
+      organization: 'New Horizon College of Engineering, Bengaluru',
+      description: 'Specializing in AI and web development with strong DSA problem-solving skills',
       type: 'education',
       details: [
-        'Built strong analytical and problem-solving skills',
-        'Developed interest in technology and programming'
+        'Current CGPA: 8.09',
+        'Specializing in AI and web development',
+        'Hackathon winner & active open-source creator'
       ]
     }
   ]);

@@ -17,7 +17,7 @@ export default function NewspaperPortfolio() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const resumeUrl = "https://drive.google.com/file/d/1UWQDJJsJjohpk44rKD3EzCDaDoFmvk08/view?usp=sharing";
+  const resumeUrl = "https://drive.google.com/file/d/1ccU7QI9gERllMVEea1Sac3FSjQ3avhio/view?usp=sharing";
   
   // Intersection Observer hooks for animations
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
@@ -57,86 +57,96 @@ export default function NewspaperPortfolio() {
 
   const skillGroups = [
     {
-      title: "Core Programming",
-      skills: ["DSA", "Python", "Java", "OOP", "System Design Basics"],
+      title: "Languages & Core",
+      skills: ["Python", "Java", "JavaScript", "SQL", "DSA"],
     },
     {
-      title: "AI / ML",
-      skills: ["ML Fundamentals", "Deep Learning", "LLM Basics", "Embeddings", "RAG"],
+      title: "Web & Frameworks",
+      skills: ["Next.js", "React", "Node.js", "Express.js", "Tailwind CSS"],
     },
     {
-      title: "Agentic AI",
-      skills: ["LangChain", "LlamaIndex", "AI Agents", "Function Calling", "AI Workflows"],
+      title: "AI / ML & LLMs",
+      skills: ["LangChain", "RAG", "MCP", "PyTorch", "Scikit-learn", "Production-ready LLM pipelines"],
     },
     {
-      title: "Full Stack",
-      skills: ["React/Next.js", "Node.js", "FastAPI", "REST APIs", "Auth & Security"],
-    },
-    {
-      title: "Systems & Cloud",
-      skills: ["PostgreSQL", "MongoDB", "Vector DBs", "Docker", "AWS/GCP"],
+      title: "Databases & DevOps",
+      skills: ["MongoDB", "MySQL", "Vector Databases", "AWS", "Google Cloud Platform", "Docker", "Git/GitHub"],
     },
   ];
 
   const focusAreas = [
     {
-      title: "DSA + Problem Solving",
-      detail: "Practicing structured problem solving for coding rounds and scalable thinking.",
+      title: "AI & Web Specialization",
+      detail: "Building impactful software solutions, AI products, and real-time interactive web applications.",
     },
     {
-      title: "System Design Mindset",
-      detail: "Understands APIs, databases, auth, deployment, and clean product architecture.",
+      title: "Strong DSA & Problem Solving",
+      detail: "Solid Data Structures & Algorithms foundation with a competitive problem-solving mindset.",
     },
     {
-      title: "Agentic AI Edge",
-      detail: "Building AI agents, RAG workflows, tool calling, and LLM-powered applications.",
+      title: "Inference-Time AI Research",
+      detail: "Researching Self-Consistent Basis Invention (SCBI) for frozen foundation models.",
     },
     {
-      title: "Production Shipping",
-      detail: "Turns ideas into deployed projects with full-stack execution and ownership.",
+      title: "Hackathon Winner",
+      detail: "Proven track record in competitive hackathons including REVA Hackathon & PES CIDECODE.",
     },
+  ];
+
+  const myWork = [
+    {
+      title: "Spora",
+      role: "builder",
+      period: "Jan-2026 - Present",
+      description: "Built Spora, a next-generation social media platform featuring personalized content discovery, short videos, articles, and real-time user interactions.",
+      link: "https://play.google.com/apps/testing/com.anilkumar09.news",
+      tech: ["Android / Mobile", "Personalized Content", "Real-Time Interaction", "Media Stream"],
+    },
+    {
+      title: "Invisly",
+      role: "builder",
+      period: "2025 - Present",
+      description: "Built Invisly, an AI-powered desktop interview assistant designed to provide real-time support during technical interviews, helping candidates analyze questions and generate relevant responses quickly.",
+      link: "https://invisly.in/",
+      tech: ["Desktop AI Assistant", "LLM Integration", "Real-Time Support", "Interview Analysis"],
+    }
   ];
 
   const projects = [
     {
       title: "ML Stock Price Prediction System",
-      period: "May 2025 - Present",
-      description: "Machine-learning powered system that predicts future stock prices using historical market data and time-series forecasting models.",
+      period: "May 2025 - June 2025",
+      description: "A machine-learning powered system that predicts future stock prices using historical market data and time-series forecasting models.",
       details: [
-        "Trained and tested Linear Regression, Random Forest, and LSTM neural networks to compare accuracy and improve predictive performance.",
-        "Built interactive visualizations and a Streamlit interface for exploring forecasts, trends, and model outputs."
+        "Trained and tested multiple algorithms including Linear Regression, Random Forest, and LSTM neural networks to evaluate accuracy and improve predictive performance."
       ],
-      tech: ["Python", "Pandas", "NumPy", "Scikit-Learn", "TensorFlow/Keras", "LSTM", "Matplotlib", "Plotly", "Streamlit", "Yahoo Finance API"],
-      impact: "Demonstrates ML modeling, time-series forecasting, data visualization, and practical financial analytics",
-    },
-    {
-      title: "AI-Powered Interview Preparation Platform",
-      description: "Full-stack AI interview platform with voice practice, feedback flows, and credential verification",
-      tech: ["Next.js 15", "Firebase", "Vapi AI", "Gemini AI", "Ethereum", "IPFS"],
-      impact: "Shows product thinking, AI integration, authentication, and deployable full-stack delivery",
-      link: "https://github.com/anilkumara9/ai-tutor",
-    },
-    {
-      title: "Deep-Research Assistant",
-      description: "Research assistant that gathers, filters, and summarizes information from multiple web sources",
-      tech: ["Python", "Machine Learning", "Web Scraping", "NLP"],
-      link: "https://github.com/anilkumara9/deepresearch",
-      impact: "Demonstrates Python automation, ML workflows, and practical data processing"
+      tech: ["Python", "Linear Regression", "Random Forest", "LSTM Neural Networks", "Scikit-learn", "Time-Series"],
+      impact: "Predictive financial modeling & neural network time-series forecasting",
     },
     {
       title: "Vibe-Coding (Polo)",
-      description: "AI coding assistant that turns natural-language prompts into structured project code",
-      tech: ["Next.js", "Prisma", "Neon DB", "Tailwind CSS", "Vercel SDK", "Gemini AI"],
+      period: "Jan 2025 - Mar 2025",
+      description: "An AI-driven coding platform that takes user input and generates complete, production-ready web-sites automatically.",
+      details: [
+        "Functions similar to platforms like Lovable or Bolt, enabling users to build web applications without manual coding."
+      ],
+      tech: ["Next.js", "React", "AI Agent Pipelines", "Tailwind CSS", "LLM APIs"],
+      impact: "Automated web application generation from natural language prompts",
       link: "https://github.com/anilkumara9",
-      impact: "Highlights modern app architecture, AI SDK usage, and fast prototyping ability"
+    },
+    {
+      title: "AI-Powered Interview Preparation Platform",
+      period: "Aug 2024 - Sep 2024",
+      description: "Full-stack web app with AI voice interviews and blockchain credential verification.",
+      tech: ["Next.js", "AI Voice", "Gemini AI", "Blockchain", "Credential Verification"],
+      impact: "Voice AI interview simulation & decentralized verification",
+      link: "https://github.com/anilkumara9/ai-tutor",
     }
   ];
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'dark' : ''}`}>
       <div className="min-h-screen bg-background text-foreground relative">
-        {/* Dark Mode Toggle moved into header actions */}
-
         {/* Newspaper Header */}
         <motion.header 
           initial={{ opacity: 0, y: -50 }}
@@ -150,7 +160,7 @@ export default function NewspaperPortfolio() {
               {/* Left - Newspaper Info */}
               <div className="text-left">
                 <div className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-                  {currentDate} • DATA SCIENCE EDITION
+                  {currentDate} • AI & WEB DEVELOPMENT EDITION
                 </div>
                 <h1 className="headline text-2xl md:text-4xl lg:text-5xl font-bold">
                   THE AI TIMES
@@ -201,21 +211,23 @@ export default function NewspaperPortfolio() {
             <div className="newspaper-border p-8 bg-card hover-lift">
               <div className="text-center space-y-6">
                 <Badge variant="outline" className="byline text-primary">
-                  EXCLUSIVE: Rising AI Talent Profile
+                  PROFILE: AI & WEB DEVELOPMENT SPECIALIST • HACKATHON WINNER
                 </Badge>
                 <h1 className="headline text-4xl md:text-6xl lg:text-7xl leading-tight">
-                  MEDA ANILKUMAR
+                  ANILKUMAR
                 </h1>
                 <h2 className="headline text-2xl md:text-3xl lg:text-4xl text-muted-foreground font-light">
-                  AI/ML DEVELOPER READY FOR IMPACT
+                  COMPUTER SCIENCE UNDERGRADUATE & PRODUCT BUILDER
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                  Computer Science undergraduate specializing in Data Science, focused on building practical 
-                  AI/ML products with clean full-stack execution. Available for internships and entry-level 
-                  software, AI, and data roles where strong project ownership matters.
+                  Computer Science undergraduate specializing in AI and web development with strong problem-solving 
+                  skills (DSA) and a passion for building impactful software solutions and Hackathon Winner.
                 </p>
-                <div className="byline text-muted-foreground pt-4">
-                  By Tech Editorial Team • The AI Times • Bengaluru, Karnataka
+                <div className="byline text-muted-foreground pt-4 flex flex-wrap justify-center items-center gap-4 text-xs">
+                  <span>📍 Bengaluru, Karnataka</span>
+                  <span>📧 anilkumarmeda6@gmail.com</span>
+                  <span>📞 +91 9986489887</span>
+                  <span>🎓 B.E. in Computer Science (CGPA: 8.09)</span>
                 </div>
               </div>
             </div>
@@ -253,45 +265,64 @@ export default function NewspaperPortfolio() {
                 <CardHeader>
                   <CardTitle className="headline text-2xl flex items-center gap-2">
                     <Award className="h-6 w-6" />
-                    EXCLUSIVE INTERVIEW
+                    PROFILE SUMMARY
                   </CardTitle>
                   <CardDescription className="byline text-primary">
-                    Meet the Developer
+                    About Meda Anilkumar
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm leading-relaxed">
-                    "I build practical AI and full-stack projects, learn quickly, and focus on shipping useful 
-                    products. I'm looking for an opportunity to contribute to engineering teams working on 
-                    software, machine learning, or data-driven products."
+                    "Computer Science undergraduate specializing in AI and web development with strong problem-solving 
+                    skills(DSA) and a passion for building impactful software solutions and Hackathon Winner."
                   </p>
                   <Separator />
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center gap-2">
-                      <MapPin className="h-3 w-3" />
+                      <MapPin className="h-3 w-3 text-primary" />
                       <span>Bengaluru, Karnataka</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Calendar className="h-3 w-3" />
-                      <span>B.E. Computer Science (Data Science)</span>
+                      <BookOpen className="h-3 w-3 text-primary" />
+                      <span>B.E. in Computer Science (8.09 CGPA)</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Award className="h-3 w-3" />
-                      <span>CGPA: 8.29 • Open to AI/ML internships and fresher roles</span>
+                      <Award className="h-3 w-3 text-primary" />
+                      <span>Hackathon Winner & Product Builder</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Skills Section with Chart */}
+              {/* Research Highlight Section */}
+              <Card className="hover-lift newspaper-border border-primary/40 bg-card">
+                <CardHeader>
+                  <Badge variant="secondary" className="w-fit mb-1 text-xs">
+                    ACTIVE RESEARCH
+                  </Badge>
+                  <CardTitle className="headline text-xl">
+                    Research (I Am Working On)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-xs font-semibold text-primary">
+                    SCBI (Self-Consistent Basis Invention)
+                  </p>
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    Researching SCBI: an inference-time representation-learning architecture that aims to let frozen foundation models discover, validate, and reuse latent problem-solving representations without permanent weight updates.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Skills Section */}
               <Card className="hover-lift" id="skills" ref={skillsRef}>
                 <CardHeader>
                   <CardTitle className="headline text-xl flex items-center gap-2">
                     <Code className="h-5 w-5" />
-                    TECHNICAL ARSENAL
+                    SKILLS & TECH STACK
                   </CardTitle>
                   <CardDescription className="byline text-primary">
-                    Focused Skills for Software and AI Roles
+                    Proven Technologies & Frameworks
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -337,10 +368,51 @@ export default function NewspaperPortfolio() {
               id="projects"
               ref={projectsRef}
             >
+              {/* MY WORK / LIVE PRODUCTS */}
               <div className="space-y-6">
                 <div className="text-center">
-                  <h2 className="headline text-3xl mb-2">FEATURED PROJECTS</h2>
-                  <p className="byline text-muted-foreground">EXCLUSIVE COVERAGE</p>
+                  <h2 className="headline text-3xl mb-1">MY WORK</h2>
+                  <p className="byline text-primary font-semibold">BUILT PRODUCTS & PLATFORMS</p>
+                </div>
+
+                {myWork.map((work) => (
+                  <Card key={work.title} className="hover-lift border-2 border-primary/30">
+                    <CardHeader className="pb-3">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <Badge variant="default" className="text-xs mb-1 capitalize">
+                            {work.role}
+                          </Badge>
+                          <CardTitle className="headline text-xl">{work.title}</CardTitle>
+                        </div>
+                        <div className="text-xs font-semibold text-primary">{work.period}</div>
+                      </div>
+                      <CardDescription className="text-sm pt-2">{work.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="flex flex-wrap gap-1">
+                        {work.tech.map((tech) => (
+                          <Badge key={tech} variant="outline" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <a href={work.link} target="_blank" rel="noopener noreferrer">
+                        <Button variant="default" size="sm" className="w-full mt-2 group">
+                          Launch / Test {work.title}
+                          <ExternalLink className="h-3 w-3 ml-2 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                      </a>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* PROJECTS */}
+              <div className="space-y-6 pt-4">
+                <div className="text-center">
+                  <h2 className="headline text-2xl mb-1">PROJECTS</h2>
+                  <p className="byline text-muted-foreground">FEATURED ENGINEERING & ML SYSTEMS</p>
                 </div>
                 
                 {projects.map((project, index) => (
@@ -353,13 +425,13 @@ export default function NewspaperPortfolio() {
                     <Card className="hover-lift">
                       <CardHeader>
                         <CardTitle className="headline text-lg">{project.title}</CardTitle>
-                        {"period" in project && project.period && (
+                        {project.period && (
                           <div className="text-xs font-semibold text-primary">{project.period}</div>
                         )}
                         <CardDescription className="text-sm">{project.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-3">
-                        {"details" in project && project.details && (
+                        {project.details && (
                           <div className="space-y-1">
                             {project.details.map((detail) => (
                               <div key={detail} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
@@ -377,22 +449,12 @@ export default function NewspaperPortfolio() {
                           ))}
                         </div>
                         <div className="text-xs font-semibold text-primary">
-                          IMPACT: {project.impact}
+                          KEY HIGHLIGHT: {project.impact}
                         </div>
-                        {project.link ? (
+                        {project.link && (
                           <a href={project.link} target="_blank" rel="noopener noreferrer">
                             <Button variant="outline" size="sm" className="w-full group">
-                              View on GitHub
-                              <ExternalLink className="h-3 w-3 ml-2 transition-transform group-hover:translate-x-1" />
-                            </Button>
-                          </a>
-                        ) : (
-                          <a href={`#project-${index}`} onClick={(e) => {
-                            e.preventDefault();
-                            alert(`More details about ${project.title} coming soon! Check GitHub for live demos.`);
-                          }}>
-                            <Button variant="outline" size="sm" className="w-full group">
-                              Read Full Story
+                              View Project / Repository
                               <ExternalLink className="h-3 w-3 ml-2 transition-transform group-hover:translate-x-1" />
                             </Button>
                           </a>
@@ -402,7 +464,6 @@ export default function NewspaperPortfolio() {
                   </motion.div>
                 ))}
               </div>
-
             </motion.div>
 
             {/* Right Column */}
@@ -422,15 +483,29 @@ export default function NewspaperPortfolio() {
                 <CardHeader>
                   <CardTitle className="headline text-xl flex items-center gap-2">
                     <Award className="h-5 w-5" />
-                    HONORS & AWARDS
+                    AWARDS & HONORS
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="text-sm font-semibold">🏆 IBM SkillsBuild - Advanced Cloud & AI Certified</div>
-                  <div className="text-sm font-semibold">🎯 NPTEL DBMS - Elite Certification</div>
-                  <div className="text-sm font-semibold">🥉 Codeforces REVA Hackathon - Third Prize</div>
-                  <div className="text-sm font-semibold">🔝 Kaspersky Manipal Hackathon - Top 5 Teams</div>
-                  <div className="text-sm font-semibold">⭐ CIDECODE Hackathon - Finalist (PES University)</div>
+                <CardContent className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="text-sm font-semibold flex items-start gap-2">
+                      <span className="text-amber-500">⭐</span>
+                      <div>
+                        <div>CIDECODE Hackathon (PES University)</div>
+                        <div className="text-xs text-muted-foreground italic">Finalist for AI-Powered Problem Solving</div>
+                      </div>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="space-y-1">
+                    <div className="text-sm font-semibold flex items-start gap-2">
+                      <span className="text-amber-500">🥉</span>
+                      <div>
+                        <div>Codeforces REVA Hackathon</div>
+                        <div className="text-xs text-muted-foreground italic">Third Prize for Full-Stack Application Development</div>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -444,12 +519,13 @@ export default function NewspaperPortfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    <div className="font-semibold text-sm">B.E. Computer Science (Data Science)</div>
-                    <div className="text-xs text-muted-foreground">New Horizon College of Engineering • 2022-Present</div>
-                    <div className="text-xs">CGPA: 8.29</div>
-                    <div className="text-xs">Relevant focus: AI/ML, Data Science, Databases, Web Development</div>
-                    <div className="text-xs text-muted-foreground mt-2">Pre-University (PCMB)</div>
-                    <div className="text-xs text-muted-foreground">BKG PU College, Sandour</div>
+                    <div className="font-semibold text-sm">B.E. in Computer Science</div>
+                    <div className="text-xs font-semibold text-primary">CGPA: 8.09</div>
+                    <div className="text-xs text-muted-foreground">New Horizon College of Engineering, Bengaluru</div>
+                    <div className="text-xs text-muted-foreground">Aug 2022 - Present</div>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                      Computer Science undergraduate specializing in AI and web development with strong problem-solving skills(DSA) and a passion for building impactful software solutions.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -469,28 +545,29 @@ export default function NewspaperPortfolio() {
                 <p className="text-sm text-muted-foreground">Phone: +91 9986489887</p>
                 <p className="text-sm text-muted-foreground">Email: anilkumarmeda6@gmail.com</p>
                 <p className="text-sm text-muted-foreground">Location: Bengaluru, Karnataka</p>
+                <p className="text-sm text-muted-foreground">GitHub: github.com/anilkumara9</p>
               </div>
               <div>
                 <h3 className="headline text-lg mb-2">EDUCATION</h3>
-                <p className="text-sm text-muted-foreground">B.E. Computer Science (Data Science)</p>
+                <p className="text-sm text-muted-foreground">B.E. in Computer Science</p>
                 <p className="text-sm text-muted-foreground">New Horizon College of Engineering</p>
-                <p className="text-sm text-muted-foreground">CGPA: 8.29</p>
-                <p className="text-sm text-muted-foreground">Focused on AI/ML and full-stack projects</p>
+                <p className="text-sm text-muted-foreground">CGPA: 8.09</p>
+                <p className="text-sm text-muted-foreground">Aug 2022 - Present</p>
               </div>
               <div>
                 <h3 className="headline text-lg mb-2">SPECIALIZATION</h3>
-                <p className="text-sm text-muted-foreground">AI & Machine Learning</p>
-                <p className="text-sm text-muted-foreground">Full-Stack Development</p>
-                <p className="text-sm text-muted-foreground">Data Science & Analytics</p>
+                <p className="text-sm text-muted-foreground">AI & Web Development</p>
+                <p className="text-sm text-muted-foreground">Data Structures & Algorithms (DSA)</p>
+                <p className="text-sm text-muted-foreground">Desktop AI & Social Platforms</p>
               </div>
             </div>
             
             <Separator className="my-6" />
             
             <div className="text-xs font-mono text-muted-foreground space-y-2">
-              <p>THE AI TIMES - DATA SCIENCE EDITION • ESTABLISHED 2024 • BENGALURU, KARNATAKA</p>
-              <p>"All the AI That's Fit to Deploy"</p>
-              <p className="text-primary font-semibold">READY TO INNOVATE? CONNECT WITH MEDA ANILKUMAR TODAY</p>
+              <p>THE AI TIMES - ANILKUMAR PORTFOLIO EDITION • BENGALURU, KARNATAKA</p>
+              <p>"Building Impactful AI & Web Solutions"</p>
+              <p className="text-primary font-semibold">CONNECT WITH ANILKUMAR TODAY</p>
             </div>
           </motion.footer>
         </main>

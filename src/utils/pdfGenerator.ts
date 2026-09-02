@@ -60,26 +60,29 @@ export const generateResumePDF = (data: ResumeData) => {
   
   // Profile Summary
   addSection('PROFILE');
-  addText('Innovative Computer Science undergraduate specializing in Data Science, with hands-on experience designing AI-powered applications and scalable web platforms. Proven ability to reduce processing times, enhance user experiences, and lead cross-functional projects. Passionate about solving complex problems at scale and contributing to high-impact products in top-tier tech companies.');
+  addText('Computer Science undergraduate specializing in AI and web development with strong problem-solving skills(DSA) and a passion for building impactful software solutions and Hackathon Winner.');
   
   // Education
   addSection('EDUCATION');
   addText('New Horizon College of Engineering, Bengaluru', 12, true);
-  addText('B.E. in Computer Science (Data Science) - CGPA: 8.29', 11);
+  addText('B.E. in Computer Science - CGPA: 8.09', 11);
   addText('Aug 2022 - Present', 10);
-  yPosition += 3;
-  addText('BKG PU College, Sandour', 12, true);
-  addText('Pre-University Course (PCMB Stream)', 11);
-  addText('Jun 2020 - May 2022', 10);
   
+  // My Work
+  addSection('MY WORK (LIVE PRODUCTS)');
+  addText('Spora (Jan 2026 - Present)', 11, true);
+  addText('Built Spora, a next-generation social media platform featuring personalized content discovery, short videos, articles, and real-time user interactions.');
+  addText('Invisly (AI Desktop Assistant)', 11, true);
+  addText('Built Invisly, an AI-powered desktop interview assistant designed to provide real-time support during technical interviews, helping candidates analyze questions and generate relevant responses quickly.');
+  
+  // Research
+  addSection('RESEARCH');
+  addText('Researching SCBI (Self-Consistent Basis Invention): an inference-time representation-learning architecture that aims to let frozen foundation models discover, validate, and reuse latent problem-solving representations without permanent weight updates.');
+
   // Technical Skills
   addSection('TECHNICAL SKILLS');
   const skillCategories = [
-    'Core Programming: Data Structures & Algorithms, Python, Java, OOP, System Design Basics',
-    'AI/ML: ML Fundamentals, Deep Learning, LLM Basics, Embeddings, RAG',
-    'Agentic AI: LangChain, LlamaIndex, AI Agents, Function Calling, AI Workflows',
-    'Full Stack: React, Next.js, Node.js, FastAPI, REST APIs, Authentication & Security',
-    'Systems & Cloud: PostgreSQL, MongoDB, Vector Databases, Docker, AWS/GCP'
+    'Skills: Python, Java, JavaScript, SQL, Next.js, React, Node.js, Express.js, Tailwind CSS, MongoDB, MySQL, Vector Databases, AWS, Google Cloud Platform, Docker, Git/GitHub, LangChain, RAG, MCP, PyTorch, Scikit-learn, Production-ready LLM pipelines & DSA'
   ];
   
   skillCategories.forEach(category => {
@@ -97,13 +100,10 @@ export const generateResumePDF = (data: ResumeData) => {
   });
   
   // Awards & Achievements
-  addSection('AWARDS & ACHIEVEMENTS');
+  addSection('AWARDS');
   const achievements = [
-    'IBM SkillsBuild – Certified in Advanced Cloud and AI Applications',
-    'NPTEL DBMS – Elite Certification for Database Management Systems',
-    'CIDECODE Hackathon (PES University) – Finalist for AI-Powered Problem Solving',
-    'Codeforces REVA Hackathon – Third Prize for Full-Stack Application Development',
-    'Kaspersky Manipal Hackathon – Qualified among the Top 5 Teams'
+    'CIDECODE Hackathon (PES University) - Finalist for AI-Powered Problem Solving',
+    'Codeforces REVA Hackathon - Third Prize for Full-Stack Application Development'
   ];
   
   achievements.forEach(achievement => {
