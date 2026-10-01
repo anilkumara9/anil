@@ -21,7 +21,7 @@ export default function MobbinPortfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   // URLs
-  const paperUrl = "https://drive.google.com/file/d/1ixGAoj-02c2dIN19v7_pUytsiVSv2z3k/view?usp=sharing";
+  const paperUrl = "https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing";
   const resumeUrl = "https://drive.google.com/file/d/1uAQiDxxkg_35bjBjwUKiTU817psK3fpD/view?usp=sharing";
   const githubUrl = "https://github.com/anilkumara9";
   const linkedinUrl = "https://www.linkedin.com/in/anilkumar-meda-2b2624331";

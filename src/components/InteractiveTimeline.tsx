@@ -55,7 +55,7 @@ const InteractiveTimeline: React.FC = () => {
         'Released open falsification kit on GitHub for transparent community verification',
         'Investigating activation steering, LLM interpretability, and causal transfer'
       ],
-      link: 'https://drive.google.com/file/d/1ixGAoj-02c2dIN19v7_pUytsiVSv2z3k/view?usp=sharing',
+      link: 'https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing',
       linkText: 'Read Paper'
     },
     {
