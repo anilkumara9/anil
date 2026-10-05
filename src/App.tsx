@@ -422,33 +422,33 @@ export default function MobbinPortfolio() {
     <div className="min-h-screen bg-[#ffffff] text-[#111113] selection:bg-[#111113] selection:text-[#ffffff] w-full max-w-full overflow-x-hidden">
 
       {/* ================= MINIMAL EDITORIAL NAVBAR ================= */}
-      <div className={`sticky top-3 sm:top-6 z-50 w-full px-3 sm:px-6 flex justify-center pointer-events-none mb-4 sm:mb-6 transition-all duration-300 transform ${
+      <div className={`sticky top-2 sm:top-5 z-50 w-full px-2.5 sm:px-6 flex justify-center pointer-events-none mb-3 sm:mb-6 transition-all duration-300 transform ${
         isHeaderVisible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0"
       }`}>
-        <header className="pointer-events-auto bg-[#ffffff]/90 backdrop-blur-md rounded-full px-3.5 sm:px-7 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-6 border border-[#e4e4e9] shadow-xs max-w-5xl w-full">
+        <header className="pointer-events-auto bg-[#ffffff]/95 backdrop-blur-md rounded-full px-3 sm:px-5 lg:px-7 py-2 sm:py-2.5 flex items-center justify-between gap-2 border border-[#e4e4e9] shadow-sm max-w-5xl w-full">
 
           {/* Logo Mark */}
-          <a href="#hero" className="flex items-center gap-3 group shrink-0">
-            <div className="relative">
+          <a href="#hero" className="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
+            <div className="relative shrink-0">
               <img
                 src="/anil.png"
                 alt="Meda Anilkumar"
-                className="h-8 w-8 rounded-full object-cover transition-transform group-hover:scale-105 border border-[#e0e0e0] shrink-0"
+                className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover transition-transform group-hover:scale-105 border border-[#e0e0e0] shrink-0"
               />
               <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
-            <div className="flex flex-col text-left">
-              <span className="font-[650] text-[14px] tracking-tight text-[#111113] leading-tight">
+            <div className="flex flex-col text-left truncate">
+              <span className="font-[650] text-[13.5px] sm:text-[14px] tracking-tight text-[#111113] leading-tight truncate">
                 Meda Anilkumar
               </span>
-              <span className="text-[10.5px] font-[500] text-[#6e6e78] hidden sm:block">
+              <span className="text-[10px] sm:text-[10.5px] font-[500] text-[#6e6e78] hidden md:block">
                 SWE & AI Builder
               </span>
             </div>
           </a>
 
-          {/* Minimal Navigation Links: About, Projects, Skills, Research, Timeline, Contact */}
-          <nav className="hidden md:flex items-center gap-5 xl:gap-7 text-[13.5px] font-[500] text-[#6e6e78]">
+          {/* Minimal Navigation Links - Shown only on large desktop screens to prevent header overflow on tablets */}
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13.5px] font-[500] text-[#6e6e78]">
             <a href="#about" className="hover:text-[#111113] transition-colors">About</a>
             <a href="#projects" className="hover:text-[#111113] transition-colors">Projects</a>
             <a href="#skills" className="hover:text-[#111113] transition-colors">Skills</a>
@@ -457,31 +457,33 @@ export default function MobbinPortfolio() {
             <a href="#contact" className="hover:text-[#111113] transition-colors">Contact</a>
           </nav>
 
-          {/* Minimal Nav Actions */}
-          <div className="flex items-center gap-2 shrink-0">
+          {/* Nav Actions - Adaptively sized so buttons NEVER come outside the header pill on any device */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Quick Resume Button: visible on all devices, compact on small phones */}
             <a
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline text-[12.5px] h-8.5 px-3.5 hidden sm:inline-flex"
+              className="btn-outline text-[11.5px] sm:text-[12.5px] h-8 sm:h-8.5 px-2.5 sm:px-3.5 inline-flex items-center gap-1.5 shadow-2xs shrink-0"
               title="View & Download Resume"
             >
-              <Download className="h-3 w-3" />
-              <span>Resume</span>
+              <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-indigo-600 shrink-0" />
+              <span className="hidden xs:inline">Resume</span>
             </a>
 
+            {/* Quick Contact CTA: visible on screens >= 640px */}
             <a
               href="#contact"
-              className="btn-primary text-[12.5px] h-8.5 px-4 hidden sm:inline-flex"
+              className="btn-primary text-[12px] sm:text-[12.5px] h-8 sm:h-8.5 px-3 sm:px-4 hidden sm:inline-flex shadow-2xs shrink-0"
             >
               <span>Get in touch</span>
             </a>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile / Tablet Menu Button (shown whenever lg navigation links are hidden: < 1024px) */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden h-8 w-8 rounded-full bg-[#f3f3f6] text-[#111113] flex items-center justify-center hover:bg-[#e4e4e9] transition-colors cursor-pointer"
+              className="lg:hidden h-8 w-8 sm:h-8.5 sm:w-8.5 rounded-full bg-[#f3f3f6] hover:bg-[#e4e4e9] text-[#111113] flex items-center justify-center transition-colors cursor-pointer shrink-0"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -491,79 +493,113 @@ export default function MobbinPortfolio() {
         </header>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with Backdrop */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-3 sm:inset-x-4 top-16 sm:top-20 z-50 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[24px] p-5 sm:p-6 shadow-2xl space-y-4 md:hidden animate-in fade-in slide-in-from-top-4 duration-200 max-h-[calc(100vh-5rem)] overflow-y-auto">
-          <div className="flex flex-col space-y-2 text-[15px] font-[500] text-[#111113]">
-            <a
-              href="#hero"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              Home
-            </a>
-            <a
-              href="#about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#projects"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors font-[600]"
-            >
-              Projects in Action
-            </a>
-            <a
-              href="#skills"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              Skills
-            </a>
-            <a
-              href="#research"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              Research (Springer)
-            </a>
-            <a
-              href="#experience"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              Career Timeline
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors"
-            >
-              Contact
-            </a>
+        <>
+          {/* Backdrop overlay to close when clicking outside */}
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs lg:hidden animate-in fade-in duration-200"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+
+          <div className="fixed inset-x-3 sm:inset-x-6 top-16 sm:top-20 z-50 max-w-md mx-auto bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[24px] p-4 sm:p-5 shadow-2xl space-y-3 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200 max-h-[calc(100vh-5.5rem)] overflow-y-auto">
+            <div className="flex items-center justify-between pb-2 border-b border-[#f0f0f4]">
+              <span className="text-[12px] font-[600] uppercase tracking-wider text-[#6e6e78]">Navigation</span>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="h-7 w-7 rounded-full bg-[#f3f3f6] text-[#111113] flex items-center justify-center hover:bg-[#e4e4e9] transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+            <div className="flex flex-col space-y-1 text-[14.5px] font-[500] text-[#111113]">
+              <a
+                href="#hero"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span>Home</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span>About Meda</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#projects"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors font-[600] flex items-center justify-between"
+              >
+                <span className="flex items-center gap-2">
+                  <span>Projects in Action</span>
+                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">7</span>
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#skills"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span>Architecture &amp; Stack</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#research"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span className="flex items-center gap-2">
+                  <span>Research Paper</span>
+                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-purple-50 text-purple-700">Springer</span>
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#experience"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span>Career Timeline</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
+              >
+                <span>Contact</span>
+                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
+              </a>
+            </div>
+
+            <div className="pt-3 border-t border-[#f0f0f4] flex flex-col xs:flex-row gap-2">
+              <a
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline flex-1 text-[13px] h-10 w-full"
+              >
+                <Download className="h-4 w-4" />
+                <span>Download Resume</span>
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn-primary flex-1 text-[13px] h-10 w-full"
+              >
+                <span>Get in touch</span>
+              </a>
+            </div>
           </div>
-          <div className="pt-3 border-t border-[#f0f0f4] flex gap-2">
-            <a
-              href={resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline flex-1 text-[13px] h-10"
-            >
-              <Download className="h-4 w-4" />
-              <span>Resume</span>
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn-primary flex-1 text-[13px] h-10"
-            >
-              <span>Contact</span>
-            </a>
-          </div>
-        </div>
+        </>
       )}
 
       {/* ================= MAIN CONTAINER ================= */}
@@ -634,20 +670,20 @@ export default function MobbinPortfolio() {
               </p>
 
               {/* Action CTA Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-1">
-                <a href="#projects" className="btn-primary px-6 sm:px-7 h-11 sm:h-12 text-[14px] sm:text-[14.5px] shadow-sm">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-1 w-full max-w-full">
+                <a href="#projects" className="btn-primary px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-[13px] sm:text-[14px] shadow-sm max-w-full">
                   <span>Explore my work</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </a>
 
                 <a
                   href={resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline px-6 sm:px-7 h-11 sm:h-12 text-[14px] sm:text-[14.5px] shadow-xs"
+                  className="btn-outline px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-[13px] sm:text-[14px] shadow-xs max-w-full"
                   title="View & Download Resume"
                 >
-                  <Download className="h-4 w-4" />
+                  <Download className="h-4 w-4 shrink-0" />
                   <span>View resume</span>
                 </a>
 
@@ -656,15 +692,15 @@ export default function MobbinPortfolio() {
                   href={paperUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 rounded-full text-[14px] sm:text-[14.5px] font-[650] bg-[#ffffff] text-[#111113] border border-[#e4e4e9] hover:border-indigo-300 hover:bg-indigo-50/60 hover:text-indigo-950 transition-all duration-200 shadow-2xs cursor-pointer group"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 h-10 sm:h-11 md:h-12 rounded-full text-[13px] sm:text-[14px] font-[650] bg-[#ffffff] text-[#111113] border border-[#e4e4e9] hover:border-indigo-300 hover:bg-indigo-50/60 hover:text-indigo-950 transition-all duration-200 shadow-2xs cursor-pointer group max-w-full"
                   title="Read Springer-Accepted Research Paper (SCBI)"
                 >
-                  <FileText className="h-4 w-4 text-indigo-600 transition-colors" />
+                  <FileText className="h-4 w-4 text-indigo-600 transition-colors shrink-0" />
                   <span>Research paper</span>
-                  <span className="text-[10.5px] uppercase tracking-wider font-[750] px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700">
+                  <span className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-[750] px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 shrink-0">
                     Springer
                   </span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-indigo-600 transition-colors" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-indigo-600 transition-colors shrink-0" />
                 </a>
               </div>
 
@@ -854,7 +890,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Segmented Filter Pills */}
-            <div className="flex flex-wrap items-center p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[13px] font-[500] border border-[#e4e4e9]">
+            <div className="flex items-center gap-1 p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[13px] font-[500] border border-[#e4e4e9] max-w-full overflow-x-auto no-scrollbar shrink-0">
               {[
                 { id: "all", label: "All Work" },
                 { id: "product", label: "Shipped Platforms" },
@@ -863,7 +899,7 @@ export default function MobbinPortfolio() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedCategory === tab.id
+                  className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 ${selectedCategory === tab.id
                       ? 'bg-[#ffffff] text-[#111113] font-[600] shadow-xs'
                       : 'text-[#6e6e78] hover:text-[#111113]'
                     }`}
@@ -948,12 +984,12 @@ export default function MobbinPortfolio() {
                   </div>
 
                   {/* Actions Row - Structured 2-Button Grid */}
-                  <div className="pt-3 mt-1 border-t border-[#f0f0f4] grid grid-cols-2 gap-2">
+                  <div className="pt-3 mt-1 border-t border-[#f0f0f4] grid grid-cols-2 gap-2 w-full">
                     <a
                       href={project.links[0]?.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-9 px-3 rounded-full bg-[#111113] hover:bg-indigo-600 text-white font-[600] text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs hover:shadow-xs active:scale-98 whitespace-nowrap group/btn"
+                      className="h-9 px-2.5 sm:px-3 rounded-full bg-[#111113] hover:bg-indigo-600 text-white font-[600] text-[11.5px] sm:text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs hover:shadow-xs active:scale-98 min-w-0 group/btn"
                     >
                       <span className="truncate">{project.links[0]?.label}</span>
                       <ArrowUpRight className="h-3 w-3 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -962,11 +998,11 @@ export default function MobbinPortfolio() {
                     <button
                       type="button"
                       onClick={() => setActiveProjectModal(project)}
-                      className="h-9 px-3 rounded-full bg-white hover:bg-[#f8f8fa] text-[#111113] border border-[#e4e4e9] hover:border-[#111113] font-[600] text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs active:scale-98 whitespace-nowrap cursor-pointer"
+                      className="h-9 px-2.5 sm:px-3 rounded-full bg-white hover:bg-[#f8f8fa] text-[#111113] border border-[#e4e4e9] hover:border-[#111113] font-[600] text-[11.5px] sm:text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs active:scale-98 min-w-0 cursor-pointer"
                       title="Inspect Low-Level Architecture Specs"
                     >
                       <Cpu className="h-3 w-3 text-indigo-600 shrink-0" />
-                      <span>Architecture</span>
+                      <span className="truncate">Architecture</span>
                     </button>
                   </div>
 
@@ -1020,7 +1056,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Domain Switcher Pills */}
-            <div className="flex flex-wrap items-center p-1 bg-[#f3f3f6] rounded-full text-[12.5px] font-[500] border border-[#e4e4e9]">
+            <div className="flex items-center gap-1 p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[12.5px] font-[500] border border-[#e4e4e9] max-w-full overflow-x-auto no-scrollbar shrink-0">
               {[
                 { id: "all", label: "All Capabilities" },
                 { id: "ai", label: "AI & Foundation Models" },
@@ -1030,7 +1066,7 @@ export default function MobbinPortfolio() {
                 <button
                   key={tab.id}
                   onClick={() => setSkillDomainFilter(tab.id)}
-                  className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${skillDomainFilter === tab.id
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 ${skillDomainFilter === tab.id
                       ? 'bg-[#ffffff] text-[#111113] font-[600] shadow-xs'
                       : 'text-[#6e6e78] hover:text-[#111113]'
                     }`}
@@ -1148,27 +1184,27 @@ export default function MobbinPortfolio() {
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-[#f0f0f4] flex flex-wrap gap-2.5">
+              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] flex flex-col xs:flex-row gap-2.5">
                 <a
                   href="https://github.com/anilkumara9/SCBI"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary text-[13px] h-10 px-4 flex-1"
+                  className="btn-primary text-[12.5px] sm:text-[13px] h-10 px-3.5 sm:px-4 flex-1 min-w-0 justify-center"
                 >
-                  <Github className="h-4 w-4" />
-                  <span>GitHub Falsification Kit</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
+                  <Github className="h-4 w-4 shrink-0" />
+                  <span className="truncate">GitHub Falsification Kit</span>
+                  <ExternalLink className="h-3.5 w-3.5 shrink-0" />
                 </a>
 
                 <a
                   href={paperUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline text-[13px] h-10 px-4"
+                  className="btn-outline text-[12.5px] sm:text-[13px] h-10 px-3.5 sm:px-4 justify-center shrink-0"
                 >
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-4 w-4 text-indigo-600 shrink-0" />
                   <span>Paper</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
                 </a>
               </div>
             </div>
@@ -1550,7 +1586,7 @@ export default function MobbinPortfolio() {
               <span className="hidden sm:inline font-mono text-[12px] text-[#6e6e78]">
                 Architecture Specifications · {activeProjectModal.title}
               </span>
-              <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                 {activeProjectModal.links?.map((link: any) => (
                   <a
                     key={link.label}
