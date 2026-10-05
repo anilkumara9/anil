@@ -36,47 +36,47 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[32px] p-8 sm:p-12 transition-all shadow-xs hover:shadow-md">
-      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
+    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[24px] sm:rounded-[32px] p-4.5 sm:p-8 md:p-12 transition-all shadow-xs hover:shadow-md overflow-hidden w-full">
+      <div className="grid lg:grid-cols-12 gap-8 lg:gap-14">
         
         {/* Left Column: Direct contact channels & recruitment pitch */}
-        <div className="lg:col-span-6 space-y-6">
-          <div className="space-y-3">
-            <h3 className="text-3xl sm:text-4xl font-[700] text-[#111113] leading-[1.12]">
+        <div className="lg:col-span-6 space-y-5 sm:space-y-6">
+          <div className="space-y-2.5 sm:space-y-3">
+            <h3 className="text-2xl sm:text-4xl font-[700] text-[#111113] leading-[1.15]">
               Let's build <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">something great</span>.
             </h3>
-            <p className="text-[15px] font-[400] text-[#6e6e78] leading-relaxed">
+            <p className="text-[14px] sm:text-[15px] font-[400] text-[#6e6e78] leading-relaxed">
               I'm actively interviewing for Software Engineer and AI Engineer roles where I can combine rapid product execution with model layer depth. Based in Bengaluru, open to remote and relocation.
             </p>
           </div>
 
           {/* Quick Contact Stadium Pills */}
-          <div className="space-y-3 pt-2">
+          <div className="space-y-2.5 sm:space-y-3 pt-1">
             
             {/* Email Pill */}
-            <div className="p-2 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors">
+            <div className="p-1.5 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors min-w-0">
               <a 
                 href="mailto:anilkumarmeda6@gmail.com" 
-                className="flex items-center gap-3 text-[#111113] text-[13.5px] font-[600] truncate pl-2 hover:text-indigo-600 transition-colors"
+                className="flex items-center gap-2 sm:gap-3 text-[#111113] text-[12px] sm:text-[13.5px] font-[600] truncate min-w-0 pl-1.5 sm:pl-2 hover:text-indigo-600 transition-colors"
               >
-                <div className="h-8 w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
-                  <Mail className="h-4 w-4" />
+                <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
+                  <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </div>
                 <span className="truncate">anilkumarmeda6@gmail.com</span>
               </a>
               <button
                 type="button"
-                className="h-8 px-3.5 rounded-full text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white"
+                className="h-7 sm:h-8 px-2.5 sm:px-3.5 rounded-full text-[11px] sm:text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white shrink-0"
                 onClick={() => copyToClipboard('anilkumarmeda6@gmail.com', 'email')}
               >
                 {copied === 'email' ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-emerald-500" />
                     <span className="text-emerald-600">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="h-3.5 w-3.5" />
+                    <Copy className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     <span>Copy</span>
                   </>
                 )}
@@ -84,29 +84,29 @@ const ContactForm: React.FC = () => {
             </div>
 
             {/* Phone Pill */}
-            <div className="p-2 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors">
+            <div className="p-1.5 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors min-w-0">
               <a 
                 href="tel:+919986489887" 
-                className="flex items-center gap-3 text-[#111113] text-[13.5px] font-[600] truncate pl-2 hover:text-indigo-600 transition-colors"
+                className="flex items-center gap-2 sm:gap-3 text-[#111113] text-[12px] sm:text-[13.5px] font-[600] truncate min-w-0 pl-1.5 sm:pl-2 hover:text-indigo-600 transition-colors"
               >
-                <div className="h-8 w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
-                  <Phone className="h-4 w-4" />
+                <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
+                  <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </div>
                 <span>+91 9986489887</span>
               </a>
               <button
                 type="button"
-                className="h-8 px-3.5 rounded-full text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white"
+                className="h-7 sm:h-8 px-2.5 sm:px-3.5 rounded-full text-[11px] sm:text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white shrink-0"
                 onClick={() => copyToClipboard('+919986489887', 'phone')}
               >
                 {copied === 'phone' ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-emerald-500" />
                     <span className="text-emerald-600">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="h-3.5 w-3.5" />
+                    <Copy className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     <span>Copy</span>
                   </>
                 )}
@@ -114,48 +114,48 @@ const ContactForm: React.FC = () => {
             </div>
 
             {/* LinkedIn & GitHub Cards */}
-            <div className="grid grid-cols-2 gap-3 pt-1">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 pt-1">
               <a 
                 href="https://www.linkedin.com/in/anilkumar-meda-2b2624331" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="h-11 px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[13px] font-[600] text-[#111113] group"
+                className="h-10 sm:h-11 px-3 sm:px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[12px] sm:text-[13px] font-[600] text-[#111113] group"
               >
-                <div className="flex items-center gap-2">
-                  <Linkedin className="h-4 w-4 text-indigo-600" />
-                  <span>LinkedIn</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 truncate">
+                  <Linkedin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-indigo-600 shrink-0" />
+                  <span className="truncate">LinkedIn</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
               </a>
 
               <a 
                 href="https://github.com/anilkumara9" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="h-11 px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[13px] font-[600] text-[#111113] group"
+                className="h-10 sm:h-11 px-3 sm:px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[12px] sm:text-[13px] font-[600] text-[#111113] group"
               >
-                <div className="flex items-center gap-2">
-                  <Github className="h-4 w-4 text-indigo-600" />
-                  <span>GitHub</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 truncate">
+                  <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-indigo-600 shrink-0" />
+                  <span className="truncate">GitHub</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
               </a>
             </div>
 
           </div>
 
           {/* Location & Availability Note */}
-          <div className="pt-2 flex items-center gap-2 text-[12.5px] font-[500] text-[#6e6e78]">
-            <MapPin className="h-3.5 w-3.5 text-indigo-600" />
+          <div className="pt-1 flex items-center gap-2 text-[12px] sm:text-[12.5px] font-[500] text-[#6e6e78]">
+            <MapPin className="h-3.5 w-3.5 text-indigo-600 shrink-0" />
             <span>Bengaluru, Karnataka · Available for immediate hiring</span>
           </div>
 
         </div>
 
         {/* Right Column: Direct Message Box */}
-        <div className="lg:col-span-6 bg-[#f8f8fa] border border-[#e4e4e9] rounded-[28px] p-6 sm:p-8 space-y-4">
+        <div className="lg:col-span-6 bg-[#f8f8fa] border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] p-4.5 sm:p-6 md:p-8 space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-[17px] font-[700] text-[#111113]">
+            <h4 className="text-[16px] sm:text-[17px] font-[700] text-[#111113]">
               Send a direct message
             </h4>
             <span className="text-[11px] font-[600] text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">

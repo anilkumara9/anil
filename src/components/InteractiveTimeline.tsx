@@ -165,40 +165,40 @@ const InteractiveTimeline: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[32px] p-8 sm:p-12 transition-all shadow-xs">
+    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[24px] sm:rounded-[32px] p-4.5 sm:p-8 md:p-12 transition-all shadow-xs overflow-hidden w-full">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-6 border-b border-[#e4e4e9] mb-10">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 border-b border-[#e4e4e9] mb-8 sm:mb-10">
         <div>
-          <h3 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
+          <h3 className="text-2xl sm:text-4xl font-[700] text-[#111113]">
             Engineering and research <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">journey</span>.
           </h3>
         </div>
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[12px] font-[600] text-[#111113]">
+        <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[11.5px] sm:text-[12px] font-[600] text-[#111113] w-fit">
           <span className="h-2 w-2 rounded-full bg-indigo-600" />
           <span>2022 – 2026 Track Record</span>
         </div>
       </div>
 
-      <div className="relative pl-2 sm:pl-4">
+      <div className="relative pl-1 sm:pl-4">
         {/* Timeline Hairline */}
-        <div className="absolute left-[19px] sm:left-[27px] top-4 bottom-4 w-px bg-[#e4e4e9]" />
+        <div className="absolute left-[15px] sm:left-[27px] top-4 bottom-4 w-px bg-[#e4e4e9]" />
         
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {events.map((event) => {
             const Icon = getIcon(event.type);
             const badge = getTypeBadge(event.type);
 
             return (
-              <div key={event.id} className="relative flex items-start gap-4 sm:gap-6 group">
+              <div key={event.id} className="relative flex items-start gap-3 sm:gap-6 group">
                 
                 {/* Node Squircle */}
-                <div className="relative z-10 flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-[#ffffff] border border-[#e4e4e9] group-hover:border-[#111113] text-[#111113] shadow-xs group-hover:shadow-sm transition-all">
-                  <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 group-hover:text-indigo-600 transition-colors" />
+                <div className="relative z-10 flex h-8 w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-[#ffffff] border border-[#e4e4e9] group-hover:border-[#111113] text-[#111113] shadow-xs group-hover:shadow-sm transition-all">
+                  <Icon className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 group-hover:text-indigo-600 transition-colors" />
                 </div>
                 
                 {/* Content Box */}
-                <div className="flex-1 bg-[#ffffff] group-hover:bg-[#f8f8fa]/60 border border-[#e4e4e9] group-hover:border-[#111113] rounded-[24px] p-5 sm:p-6 space-y-3 transition-all duration-200 shadow-2xs">
+                <div className="flex-1 bg-[#ffffff] group-hover:bg-[#f8f8fa]/60 border border-[#e4e4e9] group-hover:border-[#111113] rounded-[18px] sm:rounded-[24px] p-4 sm:p-6 space-y-2.5 sm:space-y-3 transition-all duration-200 shadow-2xs min-w-0">
                   
                   {/* Top row with Date & Badge */}
                   <div className="flex flex-wrap items-center justify-between gap-2">

@@ -419,13 +419,13 @@ export default function MobbinPortfolio() {
 
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-[#111113] selection:bg-[#111113] selection:text-[#ffffff]">
+    <div className="min-h-screen bg-[#ffffff] text-[#111113] selection:bg-[#111113] selection:text-[#ffffff] w-full max-w-full overflow-x-hidden">
 
       {/* ================= MINIMAL EDITORIAL NAVBAR ================= */}
-      <div className={`sticky top-4 sm:top-6 z-50 w-full px-4 sm:px-6 flex justify-center pointer-events-none mb-6 transition-all duration-300 transform ${
+      <div className={`sticky top-3 sm:top-6 z-50 w-full px-3 sm:px-6 flex justify-center pointer-events-none mb-4 sm:mb-6 transition-all duration-300 transform ${
         isHeaderVisible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0"
       }`}>
-        <header className="pointer-events-auto bg-[#ffffff]/90 backdrop-blur-md rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between gap-4 sm:gap-6 border border-[#e4e4e9] shadow-xs max-w-5xl w-full">
+        <header className="pointer-events-auto bg-[#ffffff]/90 backdrop-blur-md rounded-full px-3.5 sm:px-7 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-6 border border-[#e4e4e9] shadow-xs max-w-5xl w-full">
 
           {/* Logo Mark */}
           <a href="#hero" className="flex items-center gap-3 group shrink-0">
@@ -493,7 +493,7 @@ export default function MobbinPortfolio() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-4 top-20 z-50 bg-[#ffffff] border border-[#e4e4e9] rounded-[24px] p-6 shadow-2xl space-y-4 md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="fixed inset-x-3 sm:inset-x-4 top-16 sm:top-20 z-50 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[24px] p-5 sm:p-6 shadow-2xl space-y-4 md:hidden animate-in fade-in slide-in-from-top-4 duration-200 max-h-[calc(100vh-5rem)] overflow-y-auto">
           <div className="flex flex-col space-y-2 text-[15px] font-[500] text-[#111113]">
             <a
               href="#hero"
@@ -567,13 +567,13 @@ export default function MobbinPortfolio() {
       )}
 
       {/* ================= MAIN CONTAINER ================= */}
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-2 sm:py-4 space-y-20 md:space-y-28">
+      <main className="container mx-auto px-3.5 sm:px-6 lg:px-8 max-w-7xl py-2 sm:py-4 space-y-14 sm:space-y-20 md:space-y-28 overflow-x-hidden w-full">
 
         {/* ================= EDITORIAL HERO SECTION WITH BORDER-ALIGNED POLAROIDS ================= */}
-        <section id="hero" className="relative pt-4 pb-8 sm:py-8 lg:py-12 flex flex-col justify-center">
+        <section id="hero" className="relative pt-2 pb-6 sm:py-8 lg:py-12 flex flex-col justify-center overflow-x-hidden w-full">
 
           {/* Subtle Ambient Background Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-indigo-100/60 via-purple-100/50 to-blue-100/60 blur-3xl pointer-events-none rounded-full -z-10" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[700px] h-[250px] sm:h-[350px] bg-gradient-to-r from-indigo-100/60 via-purple-100/50 to-blue-100/60 blur-3xl pointer-events-none rounded-full -z-10 max-w-full" />
 
           {/* 3-Column Wide Border-Aligned Hero Layout */}
           <div className="w-full flex items-center justify-between gap-4 lg:gap-8 xl:gap-12">
@@ -624,7 +624,7 @@ export default function MobbinPortfolio() {
               </div>
 
               {/* Editorial Main Headline with Serif Italic Accent */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[54px] font-[850] text-[#111113] leading-[1.1] tracking-tight">
+              <h1 className="text-[26px] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[54px] font-[850] text-[#111113] leading-[1.15] tracking-tight break-words">
                 Hi, I'm <span className="font-editorial italic text-indigo-600 text-[1.12em] font-normal tracking-normal">Meda Anilkumar</span>, building software &amp; AI products.
               </h1>
 
@@ -715,15 +715,15 @@ export default function MobbinPortfolio() {
                 <button
                   type="button"
                   onClick={() => copyToClipboard('anilkumarmeda6@gmail.com', 'hero-email')}
-                  className="inline-flex items-center gap-1.5 hover:text-[#111113] transition-colors cursor-pointer group bg-transparent border-0 p-0 font-[600]"
+                  className="inline-flex items-center gap-1.5 hover:text-[#111113] transition-colors cursor-pointer group bg-transparent border-0 p-0 font-[600] max-w-full"
                   title="Click to copy email address"
                 >
-                  <Mail className="h-4 w-4 text-[#6e6e78] group-hover:text-indigo-600" />
-                  <span className="underline decoration-dotted underline-offset-4">anilkumarmeda6@gmail.com</span>
+                  <Mail className="h-4 w-4 text-[#6e6e78] group-hover:text-indigo-600 shrink-0" />
+                  <span className="underline decoration-dotted underline-offset-4 truncate max-w-[210px] xs:max-w-none">anilkumarmeda6@gmail.com</span>
                   {copiedItem === 'hero-email' ? (
-                    <span className="badge-popular text-[10.5px] py-0.5 px-2">Copied!</span>
+                    <span className="badge-popular text-[10.5px] py-0.5 px-2 shrink-0">Copied!</span>
                   ) : (
-                    <Copy className="h-3 w-3 opacity-50 group-hover:opacity-100" />
+                    <Copy className="h-3 w-3 opacity-50 group-hover:opacity-100 shrink-0" />
                   )}
                 </button>
 
@@ -762,7 +762,7 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= ABOUT SECTION ================= */}
-        <section id="about" className="space-y-8 scroll-mt-24">
+        <section id="about" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
 
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
@@ -777,7 +777,7 @@ export default function MobbinPortfolio() {
           <div className="grid lg:grid-cols-12 gap-6 items-stretch">
 
             {/* Left Column: Compact Humanized Story */}
-            <div className="lg:col-span-7 bg-[#ffffff] border border-[#e4e4e9] rounded-[28px] p-6 sm:p-8 flex flex-col justify-center space-y-4 shadow-xs">
+            <div className="lg:col-span-7 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] p-5 sm:p-7 md:p-8 flex flex-col justify-center space-y-4 shadow-xs">
               <div className="space-y-3.5">
                 <h3 className="text-xl sm:text-2xl font-[700] text-[#111113] leading-snug tracking-tight">
                   Full-stack AI engineer & researcher turning ambiguous problems into real-world systems.
@@ -813,7 +813,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Right Column: Editorial Portrait Card */}
-            <div className="lg:col-span-5 bg-[#ffffff] border border-[#e4e4e9] rounded-[28px] p-3.5 sm:p-4 flex flex-col justify-center shadow-xs">
+            <div className="lg:col-span-5 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] p-3 sm:p-4 flex flex-col justify-center shadow-xs">
               <div className="relative w-full h-[320px] sm:h-[350px] lg:h-full lg:min-h-[320px] rounded-[20px] overflow-hidden bg-[#f0f0f4] border border-zinc-200 shadow-sm group">
                 <img
                   src="/anil.png"
@@ -844,7 +844,7 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= SELECTED WORK & PROJECTS ================= */}
-        <section id="projects" className="space-y-8 scroll-mt-24">
+        <section id="projects" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
 
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
             <div>
@@ -854,7 +854,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Segmented Filter Pills */}
-            <div className="flex items-center p-1 bg-[#f3f3f6] rounded-full text-[13px] font-[500] border border-[#e4e4e9]">
+            <div className="flex flex-wrap items-center p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[13px] font-[500] border border-[#e4e4e9]">
               {[
                 { id: "all", label: "All Work" },
                 { id: "product", label: "Shipped Platforms" },
@@ -863,7 +863,7 @@ export default function MobbinPortfolio() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedCategory === tab.id
+                  className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer ${selectedCategory === tab.id
                       ? 'bg-[#ffffff] text-[#111113] font-[600] shadow-xs'
                       : 'text-[#6e6e78] hover:text-[#111113]'
                     }`}
@@ -877,12 +877,12 @@ export default function MobbinPortfolio() {
           {/* Horizontal Single-Line Project Showcase (Carousel) */}
           <div
             ref={projectsScrollRef}
-            className="flex gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar -mx-3.5 px-3.5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
           >
             {filteredProjects.map((project, idx) => (
               <div
                 key={project.id}
-                className="group w-[80vw] sm:w-[320px] lg:w-[340px] shrink-0 snap-start bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="group w-[82vw] max-w-[340px] sm:w-[320px] lg:w-[340px] shrink-0 snap-start bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[22px] sm:rounded-[24px] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
 
                 {/* Artwork Container - Compact & Sleek */}
@@ -1011,7 +1011,7 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= CORE CAPABILITIES & STACK ================= */}
-        <section id="skills" className="space-y-8 scroll-mt-24">
+        <section id="skills" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
             <div>
               <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
@@ -1093,7 +1093,7 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= RESEARCH & PUBLICATIONS ================= */}
-        <section id="research" className="space-y-8 scroll-mt-24">
+        <section id="research" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
             <div>
               <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
@@ -1108,7 +1108,7 @@ export default function MobbinPortfolio() {
           <div className="grid lg:grid-cols-2 gap-8">
 
             {/* Research Card 1: SCBI */}
-            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[32px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
+            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] sm:rounded-[32px] p-5 sm:p-7 md:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-full text-[11px] font-[600] tracking-wide uppercase bg-purple-50 text-purple-700 border border-purple-200">
@@ -1174,7 +1174,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Research Card 2: LaTable */}
-            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[32px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
+            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] sm:rounded-[32px] p-5 sm:p-7 md:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-full text-[11px] font-[600] tracking-wide uppercase bg-blue-50 text-blue-700 border border-blue-200">
@@ -1241,10 +1241,10 @@ export default function MobbinPortfolio() {
       </main>
 
       {/* ================= HIGH-IMPACT BOLD DARK FOOTER (MATCHING REFERENCE) ================= */}
-      <footer className="w-full bg-[#0c0c0e] text-[#f4f4f6] pt-20 pb-14 px-6 mt-28 relative overflow-hidden">
+      <footer className="w-full bg-[#0c0c0e] text-[#f4f4f6] pt-16 sm:pt-20 pb-12 sm:pb-14 px-4 sm:px-6 mt-20 sm:mt-28 relative overflow-hidden">
 
         {/* Subtle radial ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent blur-3xl pointer-events-none rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] h-[200px] sm:h-[250px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent blur-3xl pointer-events-none rounded-full max-w-full" />
 
         <div className="container mx-auto max-w-5xl space-y-12 relative z-10 text-center">
 
@@ -1259,13 +1259,13 @@ export default function MobbinPortfolio() {
           </div>
 
           {/* Action Row */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             <a
               href={emailUrl}
-              className="px-6 h-12 rounded-full bg-white text-black font-[650] text-[14px] inline-flex items-center gap-2 hover:bg-zinc-200 transition-all hover:scale-102"
+              className="px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white text-black font-[650] text-[13px] sm:text-[14px] inline-flex items-center gap-2 hover:bg-zinc-200 transition-all hover:scale-102 max-w-full"
             >
-              <Mail className="h-4 w-4" />
-              <span>anilkumarmeda6@gmail.com</span>
+              <Mail className="h-4 w-4 shrink-0" />
+              <span className="truncate max-w-[210px] xs:max-w-none">anilkumarmeda6@gmail.com</span>
             </a>
 
             <button
@@ -1342,15 +1342,15 @@ export default function MobbinPortfolio() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveProjectModal(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-white border border-[#e4e4e9] rounded-[28px] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-2xl bg-white border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] shadow-2xl overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Sticky Modal Header */}
-            <div className="flex items-start justify-between gap-4 p-5 sm:p-6 border-b border-[#e4e4e9] bg-white/95 backdrop-blur-md shrink-0">
+            <div className="flex items-start justify-between gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#e4e4e9] bg-white/95 backdrop-blur-md shrink-0">
               <div>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-mono font-[700] bg-indigo-50 border border-indigo-200 text-indigo-700 uppercase tracking-wider">
@@ -1378,7 +1378,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Scrollable Modal Body with Sleek Scrollbar */}
-            <div className="p-5 sm:p-6 space-y-6 overflow-y-auto modal-scrollbar flex-1">
+            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto modal-scrollbar flex-1">
 
               {/* Artwork Banner Preview */}
               <div className="relative h-40 sm:h-48 w-full rounded-[18px] overflow-hidden border border-[#e4e4e9] bg-slate-900 shrink-0">
@@ -1546,7 +1546,7 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Sticky Modal Footer with Actions */}
-            <div className="p-4 sm:p-5 border-t border-[#e4e4e9] bg-[#f8f8fa] flex flex-wrap items-center justify-between gap-3 shrink-0">
+            <div className="p-3.5 sm:p-5 border-t border-[#e4e4e9] bg-[#f8f8fa] flex flex-wrap items-center justify-between gap-3 shrink-0">
               <span className="hidden sm:inline font-mono text-[12px] text-[#6e6e78]">
                 Architecture Specifications · {activeProjectModal.title}
               </span>
