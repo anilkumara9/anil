@@ -1,0 +1,6 @@
+# robots.txt for Meda Anilkumar Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://anilkumara9.github.io/anil/sitemap.xml

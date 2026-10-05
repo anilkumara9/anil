@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle, Phone, Linkedin, Github, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Mail, Send, CheckCircle, Phone, Linkedin, Github, Copy, Check, ArrowUpRight, Sparkles, MapPin } from 'lucide-react';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -36,44 +36,43 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#ffffff] border border-[#f0f0f0] rounded-[24px] p-8 sm:p-12 transition-colors">
-      <div className="grid lg:grid-cols-12 gap-12">
+    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[32px] p-8 sm:p-12 transition-all shadow-xs hover:shadow-md">
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
         
-        {/* Left Column: Direct contact channels */}
+        {/* Left Column: Direct contact channels & recruitment pitch */}
         <div className="lg:col-span-6 space-y-6">
           <div className="space-y-3">
-            <span className="text-[12px] font-semibold text-[#707070] uppercase tracking-wider block">
-              Contact
-            </span>
-            <h3 className="text-3xl sm:text-4xl font-[650] text-[#141414] leading-[1.13]">
-              Let's talk about opportunities.
+            <h3 className="text-3xl sm:text-4xl font-[700] text-[#111113] leading-[1.12]">
+              Let's build <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">something great</span>.
             </h3>
-            <p className="text-[16px] font-[456] text-[#707070] leading-[1.38]">
-              I'm actively interviewing for Software Engineer and AI Engineer roles where I can build real products and work close to the model layer. Based in Bengaluru, open to both remote and on-site roles.
+            <p className="text-[15px] font-[400] text-[#6e6e78] leading-relaxed">
+              I'm actively interviewing for Software Engineer and AI Engineer roles where I can combine rapid product execution with model layer depth. Based in Bengaluru, open to remote and relocation.
             </p>
           </div>
 
           {/* Quick Contact Stadium Pills */}
           <div className="space-y-3 pt-2">
-            <div className="p-3.5 rounded-full bg-[#f3f3f3] flex items-center justify-between">
+            
+            {/* Email Pill */}
+            <div className="p-2 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors">
               <a 
                 href="mailto:anilkumarmeda6@gmail.com" 
-                className="flex items-center gap-3 text-[#141414] text-[14px] font-[500] truncate hover:opacity-80 transition-opacity"
+                className="flex items-center gap-3 text-[#111113] text-[13.5px] font-[600] truncate pl-2 hover:text-indigo-600 transition-colors"
               >
-                <div className="h-8 w-8 rounded-full bg-[#141414] text-[#ffffff] flex items-center justify-center shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
                   <Mail className="h-4 w-4" />
                 </div>
                 <span className="truncate">anilkumarmeda6@gmail.com</span>
               </a>
               <button
                 type="button"
-                className="h-8 px-3 rounded-full text-[12px] font-semibold text-[#141414] bg-[#ffffff] border border-[#e0e0e0] flex items-center gap-1.5 transition-colors cursor-pointer hover:border-[#141414]"
+                className="h-8 px-3.5 rounded-full text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white"
                 onClick={() => copyToClipboard('anilkumarmeda6@gmail.com', 'email')}
               >
                 {copied === 'email' ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-[#0066ff]" />
-                    <span className="text-[#0066ff]">Copied</span>
+                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <span className="text-emerald-600">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -84,25 +83,26 @@ const ContactForm: React.FC = () => {
               </button>
             </div>
 
-            <div className="p-3.5 rounded-full bg-[#f3f3f3] flex items-center justify-between">
+            {/* Phone Pill */}
+            <div className="p-2 sm:p-2.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between gap-2 hover:border-[#111113] transition-colors">
               <a 
                 href="tel:+919986489887" 
-                className="flex items-center gap-3 text-[#141414] text-[14px] font-[500] truncate hover:opacity-80 transition-opacity"
+                className="flex items-center gap-3 text-[#111113] text-[13.5px] font-[600] truncate pl-2 hover:text-indigo-600 transition-colors"
               >
-                <div className="h-8 w-8 rounded-full bg-[#141414] text-[#ffffff] flex items-center justify-center shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[#111113] text-white flex items-center justify-center shrink-0">
                   <Phone className="h-4 w-4" />
                 </div>
                 <span>+91 9986489887</span>
               </a>
               <button
                 type="button"
-                className="h-8 px-3 rounded-full text-[12px] font-semibold text-[#141414] bg-[#ffffff] border border-[#e0e0e0] flex items-center gap-1.5 transition-colors cursor-pointer hover:border-[#141414]"
+                className="h-8 px-3.5 rounded-full text-[12px] font-[600] text-[#111113] bg-[#ffffff] border border-[#e4e4e9] flex items-center gap-1.5 transition-colors cursor-pointer hover:bg-[#111113] hover:text-white"
                 onClick={() => copyToClipboard('+919986489887', 'phone')}
               >
                 {copied === 'phone' ? (
                   <>
-                    <Check className="h-3.5 w-3.5 text-[#0066ff]" />
-                    <span className="text-[#0066ff]">Copied</span>
+                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <span className="text-emerald-600">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -113,47 +113,62 @@ const ContactForm: React.FC = () => {
               </button>
             </div>
 
+            {/* LinkedIn & GitHub Cards */}
             <div className="grid grid-cols-2 gap-3 pt-1">
               <a 
                 href="https://www.linkedin.com/in/anilkumar-meda-2b2624331" 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="h-11 px-4 rounded-full bg-[#ffffff] border border-[#e0e0e0] flex items-center justify-between hover:bg-[#f3f3f3] transition-colors text-[13px] font-[500] text-[#141414]"
+                rel="noopener noreferrer" 
+                className="h-11 px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[13px] font-[600] text-[#111113] group"
               >
                 <div className="flex items-center gap-2">
-                  <Linkedin className="h-4 w-4" />
+                  <Linkedin className="h-4 w-4 text-indigo-600" />
                   <span>LinkedIn</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-[#707070]" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               <a 
                 href="https://github.com/anilkumara9" 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="h-11 px-4 rounded-full bg-[#ffffff] border border-[#e0e0e0] flex items-center justify-between hover:bg-[#f3f3f3] transition-colors text-[13px] font-[500] text-[#141414]"
+                rel="noopener noreferrer" 
+                className="h-11 px-4 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-between hover:border-[#111113] hover:bg-[#ffffff] transition-all text-[13px] font-[600] text-[#111113] group"
               >
                 <div className="flex items-center gap-2">
-                  <Github className="h-4 w-4" />
+                  <Github className="h-4 w-4 text-indigo-600" />
                   <span>GitHub</span>
                 </div>
-                <ArrowUpRight className="h-3.5 w-3.5 text-[#707070]" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
+
           </div>
+
+          {/* Location & Availability Note */}
+          <div className="pt-2 flex items-center gap-2 text-[12.5px] font-[500] text-[#6e6e78]">
+            <MapPin className="h-3.5 w-3.5 text-indigo-600" />
+            <span>Bengaluru, Karnataka · Available for immediate hiring</span>
+          </div>
+
         </div>
 
-        {/* Right Column: Direct message form */}
-        <div className="lg:col-span-6 bg-[#f3f3f3] rounded-[24px] p-6 sm:p-8 space-y-4">
-          <h4 className="text-[18px] font-[650] text-[#141414]">
-            Send a direct message.
-          </h4>
+        {/* Right Column: Direct Message Box */}
+        <div className="lg:col-span-6 bg-[#f8f8fa] border border-[#e4e4e9] rounded-[28px] p-6 sm:p-8 space-y-4">
+          <div className="flex items-center justify-between">
+            <h4 className="text-[17px] font-[700] text-[#111113]">
+              Send a direct message
+            </h4>
+            <span className="text-[11px] font-[600] text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Usually replies &lt; 2 hrs
+            </span>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5">
             <div className="grid sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-[12px] font-semibold text-[#707070] block mb-1">
-                  Name
+                <label className="text-[12px] font-[600] text-[#111113] block mb-1">
+                  Your Name
                 </label>
                 <input
                   type="text"
@@ -161,14 +176,14 @@ const ContactForm: React.FC = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your name"
-                  className="w-full input-field"
+                  placeholder="e.g. Maya Sharma"
+                  className="w-full px-4 py-2.5 rounded-[14px] bg-[#ffffff] border border-[#e4e4e9] text-[#111113] text-[13.5px] focus:outline-none focus:border-[#111113] focus:ring-1 focus:ring-[#111113] transition-all"
                 />
               </div>
 
               <div>
-                <label className="text-[12px] font-semibold text-[#707070] block mb-1">
-                  Email
+                <label className="text-[12px] font-[600] text-[#111113] block mb-1">
+                  Email Address
                 </label>
                 <input
                   type="email"
@@ -176,29 +191,29 @@ const ContactForm: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="your@email.com"
-                  className="w-full input-field"
+                  placeholder="e.g. maya@company.com"
+                  className="w-full px-4 py-2.5 rounded-[14px] bg-[#ffffff] border border-[#e4e4e9] text-[#111113] text-[13.5px] focus:outline-none focus:border-[#111113] focus:ring-1 focus:ring-[#111113] transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[12px] font-semibold text-[#707070] block mb-1">
-                Company / Role
+              <label className="text-[12px] font-[600] text-[#111113] block mb-1">
+                Company / Venture
               </label>
               <input
                 type="text"
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Company or venture"
-                className="w-full input-field"
+                placeholder="e.g. Stripe, early-stage stealth, or university lab"
+                className="w-full px-4 py-2.5 rounded-[14px] bg-[#ffffff] border border-[#e4e4e9] text-[#111113] text-[13.5px] focus:outline-none focus:border-[#111113] focus:ring-1 focus:ring-[#111113] transition-all"
               />
             </div>
 
             <div>
-              <label className="text-[12px] font-semibold text-[#707070] block mb-1">
-                Message
+              <label className="text-[12px] font-[600] text-[#111113] block mb-1">
+                Your Message
               </label>
               <textarea
                 name="message"
@@ -206,23 +221,23 @@ const ContactForm: React.FC = () => {
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Let's discuss an engineering role, collaboration, or project..."
-                className="w-full input-field resize-none rounded-[16px]"
+                placeholder="Let's talk about an SWE or AI Engineer role, a collaboration, or probing foundation models..."
+                className="w-full px-4 py-3 rounded-[16px] bg-[#ffffff] border border-[#e4e4e9] text-[#111113] text-[13.5px] focus:outline-none focus:border-[#111113] focus:ring-1 focus:ring-[#111113] resize-none transition-all leading-relaxed"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full btn-primary cursor-pointer"
+              className="w-full h-11 rounded-full bg-[#111113] hover:bg-black text-white font-[600] text-[14px] flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-xs"
             >
               <Send className="h-4 w-4" />
               <span>Send Message</span>
             </button>
 
             {submitSuccess && (
-              <div className="p-3 rounded-full bg-[#ffffff] border border-[#e0e0e0] text-center text-[13px] text-[#141414] font-medium flex items-center justify-center gap-2">
-                <CheckCircle className="h-4 w-4 text-[#0066ff]" />
-                <span>Email client opened with pre-filled message!</span>
+              <div className="p-3 rounded-full bg-[#ffffff] border border-[#e4e4e9] text-center text-[12.5px] text-[#111113] font-medium flex items-center justify-center gap-2 shadow-xs">
+                <CheckCircle className="h-4 w-4 text-emerald-500" />
+                <span>Email client opened with pre-filled inquiry!</span>
               </div>
             )}
           </form>

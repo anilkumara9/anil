@@ -1,55 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, Cambria, serif;
 
-  /* Mobbin Color Tokens */
+  /* Mobbin & Editorial Color Tokens */
   --color-canvas: #ffffff;
-  --color-canvas-soft: #f3f3f3;
-  --color-field: #f0f0f0;
-  --color-hairline-soft: #f0f0f0;
-  --color-hairline: #e0e0e0;
-  --color-ink: #141414;
-  --color-ink-soft: #262626;
-  --color-text-muted: #707070;
-  --color-text-faint: #adadad;
-  --color-accent: #0066ff;
+  --color-canvas-soft: #f8f8fa;
+  --color-field: #f3f3f6;
+  --color-hairline-soft: #f0f0f4;
+  --color-hairline: #e4e4e9;
+  --color-ink: #111113;
+  --color-ink-soft: #232326;
+  --color-text-muted: #6e6e78;
+  --color-text-faint: #a0a0ab;
+  --color-accent: #4f46e5;
+  --color-accent-soft: #6366f1;
 }
 
 :root {
   --canvas: #ffffff;
-  --canvas-soft: #f3f3f3;
-  --field: #f0f0f0;
-  --hairline-soft: #f0f0f0;
-  --hairline: #e0e0e0;
-  --ink: #141414;
-  --ink-soft: #262626;
-  --text-muted: #707070;
-  --text-faint: #adadad;
-  --accent: #0066ff;
+  --canvas-soft: #f8f8fa;
+  --field: #f3f3f6;
+  --hairline-soft: #f0f0f4;
+  --hairline: #e4e4e9;
+  --ink: #111113;
+  --ink-soft: #232326;
+  --text-muted: #6e6e78;
+  --text-faint: #a0a0ab;
+  --accent: #4f46e5;
+}
+
+.font-editorial {
+  font-family: "Instrument Serif", Georgia, Cambria, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-serif-clean {
+  font-family: "Instrument Serif", Georgia, Cambria, serif;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    letter-spacing: 0;
   }
   body {
     background-color: var(--canvas);
     color: var(--ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    letter-spacing: 0;
     overflow-x: hidden;
   }
 
-  /* Headings in Mobbin tight weight 650 & tight line-height */
   h1, h2, h3, h4, h5, h6 {
     font-weight: 650;
-    letter-spacing: 0;
     color: var(--ink);
+    letter-spacing: -0.02em;
   }
 }
 
@@ -71,6 +80,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     gap: 8px;
     transition: opacity 0.15s ease, transform 0.15s ease;
   }
@@ -91,6 +101,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     gap: 8px;
     transition: background-color 0.15s ease, border-color 0.15s ease;
   }
@@ -194,6 +205,49 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
+  }
+
+  /* Polaroid & Scrapbook card effects (Steady, no bouncing) */
+  .polaroid-card {
+    background-color: #ffffff;
+    padding: 10px 10px 24px 10px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .polaroid-card:hover {
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.18), 0 6px 16px -4px rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+    z-index: 30;
+  }
+
+  /* Hide scrollbar for carousels */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Sleek Modal Scrollbar */
+  .modal-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  .modal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .modal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .modal-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 9999px;
+  }
+  .modal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
   }
 }
 
