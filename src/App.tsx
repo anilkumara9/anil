@@ -62,6 +62,7 @@ export default function MobbinPortfolio() {
 
   // URLs
   const paperUrl = "https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing";
+  const openReviewUrl = "https://openreview.net/pdf?id=QGcF4561UP";
   const resumeUrl = "https://drive.google.com/file/d/19GDGtbuCselt_nlv07FmMmnzNsBU4746/view?usp=sharing";
   const playStoreUrl = "https://play.google.com/apps/testing/com.anilkumara9.news";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
@@ -255,6 +256,7 @@ export default function MobbinPortfolio() {
       stack: ["PyTorch", "Hugging Face", "LLM Interpretability", "Activation Steering", "Representation Learning"],
       links: [
         { label: "Read Paper", url: paperUrl, primary: true },
+        { label: "OpenReview", url: openReviewUrl, primary: false },
         { label: "GitHub Kit", url: "https://github.com/anilkumara9/SCBI", primary: false }
       ]
     },
@@ -539,7 +541,7 @@ export default function MobbinPortfolio() {
               >
                 <span className="flex items-center gap-2">
                   <span>Projects in Action</span>
-                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">7</span>
+                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">{allProjects.length}</span>
                 </span>
                 <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
               </a>
@@ -606,7 +608,7 @@ export default function MobbinPortfolio() {
       <main className="container mx-auto px-3.5 sm:px-6 lg:px-8 max-w-7xl py-2 sm:py-4 space-y-14 sm:space-y-20 md:space-y-28 overflow-x-hidden w-full">
 
         {/* ================= EDITORIAL HERO SECTION WITH BORDER-ALIGNED POLAROIDS ================= */}
-        <section id="hero" className="relative pt-2 pb-6 sm:py-8 lg:py-12 flex flex-col justify-center overflow-x-hidden w-full">
+        <section id="hero" className="relative pt-8 pb-4 sm:pt-12 sm:pb-6 lg:pt-16 lg:pb-8 flex flex-col justify-center overflow-x-hidden w-full">
 
           {/* Subtle Ambient Background Glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[700px] h-[250px] sm:h-[350px] bg-gradient-to-r from-indigo-100/60 via-purple-100/50 to-blue-100/60 blur-3xl pointer-events-none rounded-full -z-10 max-w-full" />
@@ -625,6 +627,7 @@ export default function MobbinPortfolio() {
                     src="/anil.png"
                     alt="Meda Anilkumar"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    loading="eager"
                   />
                 </div>
                 <div className="text-center px-1">
@@ -635,13 +638,13 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Center Hero Column - Compact, perfectly proportioned, all content above fold */}
-            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-4 sm:space-y-5 relative z-10 flex-1 px-1">
+            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-3 sm:space-y-3.5 relative z-10 flex-1 px-1">
 
               {/* Mobile Polaroids Duo (Shown ONLY on mobile < lg, placed at the top so cards NEVER go below) */}
-              <div className="flex lg:hidden items-center justify-center gap-3 pb-1">
+              <div className="flex lg:hidden items-center justify-center gap-3 pb-0.5">
                 <div className="polaroid-card shadow-md p-2 rounded-[14px] bg-white ring-1 ring-black/5 w-28" style={{ transform: 'rotate(-2deg)' }}>
                   <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-zinc-200">
-                    <img src="/anil.png" alt="Meda Anilkumar" className="w-full h-full object-cover object-top" />
+                    <img src="/anil.png" alt="Meda Anilkumar" className="w-full h-full object-cover object-top" loading="eager" />
                   </div>
                   <span className="text-[11px] font-bold text-[#111113] block truncate">Anilkumar 👨‍💻</span>
                 </div>
@@ -654,93 +657,115 @@ export default function MobbinPortfolio() {
               </div>
 
               {/* Status Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[12.5px] sm:text-[13px] font-[650] text-[#111113] shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[12px] sm:text-[12.5px] font-[650] text-[#111113] shadow-xs">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Available for new opportunities</span>
               </div>
 
               {/* Editorial Main Headline with Serif Italic Accent */}
-              <h1 className="text-[26px] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[54px] font-[850] text-[#111113] leading-[1.15] tracking-tight break-words">
+              <h1 className="text-[26px] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-[850] text-[#111113] leading-[1.15] tracking-tight break-words">
                 Hi, I'm <span className="font-editorial italic text-indigo-600 text-[1.12em] font-normal tracking-normal">Meda Anilkumar</span>, building software &amp; AI products.
               </h1>
 
               {/* Descriptive Subtext */}
-              <p className="text-[15px] sm:text-[16.5px] font-[400] text-[#555560] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
+              <p className="text-[14.5px] sm:text-[16px] font-[400] text-[#555560] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
                 Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Solo founder of <strong className="text-[#111113] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
               </p>
 
-              {/* Action CTA Buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-1 w-full max-w-full">
-                <a href="#projects" className="btn-primary px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-[13px] sm:text-[14px] shadow-sm max-w-full">
-                  <span>Explore my work</span>
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </a>
+              {/* Unified Action Hub — 2 clean rows of 3 buttons */}
+              <div className="space-y-2 sm:space-y-2.5 pt-1">
+                {/* Row 1: Primary Action & Live Products (3 in a row) */}
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                  {/* View Resume Primary CTA */}
+                  <a
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary h-9 sm:h-9.5 px-4 sm:px-5 text-[12.5px] sm:text-[13px] shadow-xs inline-flex items-center gap-2 cursor-pointer"
+                    title="View & Download Resume"
+                  >
+                    <Download className="h-4 w-4 shrink-0" />
+                    <span>View resume</span>
+                  </a>
 
-                <a
-                  href={resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-[13px] sm:text-[14px] shadow-xs max-w-full"
-                  title="View & Download Resume"
-                >
-                  <Download className="h-4 w-4 shrink-0" />
-                  <span>View resume</span>
-                </a>
+                  {/* Google Play Store */}
+                  <a
+                    href={playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 h-9 sm:h-9.5 rounded-full bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] text-[12px] sm:text-[12.5px] font-[600] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="Download / Test Spora on Google Play Store"
+                  >
+                    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M3.609 1.814L13.792 12 3.61 22.186A2.38 2.38 0 0 1 3.39 21.8V2.2c0-.134.076-.268.219-.386z" fill="#00D2FF" />
+                      <path d="M17.295 8.498L13.792 12 3.609 1.814 17.295 8.498z" fill="#00E676" />
+                      <path d="M13.792 12l3.503 3.502-13.685 6.684L13.792 12z" fill="#FF3344" />
+                      <path d="M17.295 8.498l3.447 1.963a.85.85 0 0 1 0 1.487l-3.447 1.963-3.503-1.909 3.503-3.504z" fill="#FFD600" />
+                    </svg>
+                    <span>Google Play</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] transition-colors" />
+                  </a>
 
-                {/* Research Paper Button */}
-                <a
-                  href={paperUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 h-10 sm:h-11 md:h-12 rounded-full text-[13px] sm:text-[14px] font-[650] bg-[#ffffff] text-[#111113] border border-[#e4e4e9] hover:border-indigo-300 hover:bg-indigo-50/60 hover:text-indigo-950 transition-all duration-200 shadow-2xs cursor-pointer group max-w-full"
-                  title="Read Springer-Accepted Research Paper (SCBI)"
-                >
-                  <FileText className="h-4 w-4 text-indigo-600 transition-colors shrink-0" />
-                  <span>Research paper</span>
-                  <span className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-[750] px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 shrink-0">
-                    Springer
-                  </span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-indigo-600 transition-colors shrink-0" />
-                </a>
+                  {/* Spora on X */}
+                  <a
+                    href={sporaXUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 h-9 sm:h-9.5 rounded-full bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] text-[12px] sm:text-[12.5px] font-[600] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="Watch Spora Product Demo Video on 𝕏"
+                  >
+                    <span className="font-bold text-[12px] leading-none">𝕏</span>
+                    <span>Spora on 𝕏</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] transition-colors" />
+                  </a>
+                </div>
+
+                {/* Row 2: Research & Code Links (3 in a row) */}
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                  {/* Research Paper Pill */}
+                  <a
+                    href={paperUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-indigo-300 hover:bg-indigo-50/60 hover:text-indigo-700 transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="Read Springer-Accepted Research Paper (SCBI)"
+                  >
+                    <FileText className="h-3.5 w-3.5 text-indigo-600 shrink-0" />
+                    <span>Research paper</span>
+                    <span className="text-[9px] uppercase tracking-wider font-[750] px-1.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 shrink-0 hidden xs:inline">Springer</span>
+                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-indigo-600 transition-colors shrink-0" />
+                  </a>
+
+                  {/* OpenReview Pill */}
+                  <a
+                    href={openReviewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-violet-300 hover:bg-violet-50/60 hover:text-violet-700 transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="Read Paper on OpenReview (SCBI)"
+                  >
+                    <BookOpen className="h-3.5 w-3.5 text-violet-600 shrink-0" />
+                    <span>OpenReview</span>
+                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-violet-600 transition-colors shrink-0" />
+                  </a>
+
+                  {/* GitHub Kit Pill */}
+                  <a
+                    href="https://github.com/anilkumara9/SCBI"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="SCBI GitHub Falsification Kit"
+                  >
+                    <Github className="h-3.5 w-3.5 shrink-0" />
+                    <span>GitHub Kit</span>
+                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-[#111113] transition-colors shrink-0" />
+                  </a>
+                </div>
               </div>
 
-              {/* Spora & Google Playstore Button Row */}
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 pt-0.5">
-                {/* Google Play Store Button */}
-                <a
-                  href={playStoreUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-[#111113] text-white text-[12px] sm:text-[12.5px] font-[600] hover:bg-[#232326] transition-all shadow-xs cursor-pointer group"
-                  title="Download / Test Spora on Google Play Store"
-                >
-                  {/* Exact 4-Color Google Play Store Logo */}
-                  <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M3.609 1.814L13.792 12 3.61 22.186A2.38 2.38 0 0 1 3.39 21.8V2.2c0-.134.076-.268.219-.386z" fill="#00D2FF" />
-                    <path d="M17.295 8.498L13.792 12 3.609 1.814 17.295 8.498z" fill="#00E676" />
-                    <path d="M13.792 12l3.503 3.502-13.685 6.684L13.792 12z" fill="#FF3344" />
-                    <path d="M17.295 8.498l3.447 1.963a.85.85 0 0 1 0 1.487l-3.447 1.963-3.503-1.909 3.503-3.504z" fill="#FFD600" />
-                  </svg>
-                  <span>Google Play</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 group-hover:text-white transition-colors" />
-                </a>
-
-                {/* Spora on X Link Button */}
-                <a
-                  href={sporaXUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[#111113] text-[12px] sm:text-[12.5px] font-[600] hover:bg-[#efeff4] hover:border-[#d8d8df] transition-all shadow-xs cursor-pointer group"
-                  title="Watch Spora Product Demo Video on 𝕏"
-                >
-                  <span className="font-bold text-[12px] leading-none">𝕏</span>
-                  <span>Spora on 𝕏</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] transition-colors" />
-                </a>
-              </div>
-
-              {/* Metadata Contact Row */}
-              <div className="pt-1 flex flex-wrap items-center justify-center gap-y-1.5 gap-x-5 text-[12.5px] sm:text-[13px] font-[500] text-[#6e6e78]">
+              {/* Metadata Contact Row — with proper, comfortable gap */}
+              <div className="pt-4 sm:pt-6 flex flex-wrap items-center justify-center gap-y-1.5 gap-x-5 text-[12.5px] sm:text-[13px] font-[500] text-[#6e6e78]">
                 <span className="inline-flex items-center gap-1.5 text-[#111113] font-[600]">
                   <MapPin className="h-4 w-4 text-indigo-600" />
                   <span>Bengaluru, Karnataka</span>
@@ -784,6 +809,7 @@ export default function MobbinPortfolio() {
                     src="/ghibli-hackathon.jpg"
                     alt="Hackathon victory"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                 </div>
                 <div className="text-center px-1">
@@ -855,6 +881,7 @@ export default function MobbinPortfolio() {
                   src="/anil.png"
                   alt="Meda Anilkumar"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
@@ -1184,27 +1211,36 @@ export default function MobbinPortfolio() {
                 </div>
               </div>
 
-              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] flex flex-col xs:flex-row gap-2.5">
+              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] grid grid-cols-3 gap-2">
                 <a
                   href="https://github.com/anilkumara9/SCBI"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary text-[12.5px] sm:text-[13px] h-10 px-3.5 sm:px-4 flex-1 min-w-0 justify-center"
+                  className="btn-primary text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0"
                 >
                   <Github className="h-4 w-4 shrink-0" />
-                  <span className="truncate">GitHub Falsification Kit</span>
-                  <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">GitHub Kit</span>
                 </a>
 
                 <a
                   href={paperUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline text-[12.5px] sm:text-[13px] h-10 px-3.5 sm:px-4 justify-center shrink-0"
+                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0"
                 >
                   <FileText className="h-4 w-4 text-indigo-600 shrink-0" />
-                  <span>Paper</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">PDF Paper</span>
+                </a>
+
+                <a
+                  href={openReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0 hover:border-violet-300 hover:text-violet-700"
+                  title="Read on OpenReview"
+                >
+                  <BookOpen className="h-4 w-4 text-violet-600 shrink-0" />
+                  <span className="truncate">OpenReview</span>
                 </a>
               </div>
             </div>
@@ -1298,7 +1334,7 @@ export default function MobbinPortfolio() {
           <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             <a
               href={emailUrl}
-              className="px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white text-black font-[650] text-[13px] sm:text-[14px] inline-flex items-center gap-2 hover:bg-zinc-200 transition-all hover:scale-102 max-w-full"
+              className="px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white text-black font-[650] text-[13px] sm:text-[14px] inline-flex items-center gap-2 hover:bg-zinc-200 transition-all hover:scale-[1.02] max-w-full"
             >
               <Mail className="h-4 w-4 shrink-0" />
               <span className="truncate max-w-[210px] xs:max-w-none">anilkumarmeda6@gmail.com</span>
@@ -1352,6 +1388,11 @@ export default function MobbinPortfolio() {
             <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
               <FileText className="h-4 w-4" />
               <span>Springer Paper</span>
+            </a>
+            <span>·</span>
+            <a href={openReviewUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+              <BookOpen className="h-4 w-4" />
+              <span>OpenReview</span>
             </a>
           </div>
 

@@ -55,8 +55,8 @@ const InteractiveTimeline: React.FC = () => {
         'Released open-source turn-key falsification kit on GitHub for transparent verification',
         'Accepted for publication in peer-reviewed scientific proceedings (Springer)'
       ],
-      link: 'https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing',
-      linkText: 'Read Paper'
+      link: 'https://openreview.net/pdf?id=QGcF4561UP',
+      linkText: 'OpenReview PDF'
     },
     {
       id: '4',
@@ -194,7 +194,7 @@ const InteractiveTimeline: React.FC = () => {
                 
                 {/* Node Squircle */}
                 <div className="relative z-10 flex h-8 w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-[#ffffff] border border-[#e4e4e9] group-hover:border-[#111113] text-[#111113] shadow-xs group-hover:shadow-sm transition-all">
-                  <Icon className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 group-hover:text-indigo-600 transition-colors" />
+                  <Icon className="h-3.5 w-3.5 sm:h-[18px] sm:w-[18px] group-hover:text-indigo-600 transition-colors" />
                 </div>
                 
                 {/* Content Box */}
