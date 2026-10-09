@@ -55,6 +55,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
       items: [
         { title: 'Download Resume (PDF)', desc: 'Open verified resume file', icon: Download, url: resumeUrl },
         { title: 'Read SCBI Research Paper', desc: 'Full empirical paper on causal steering', icon: FileText, url: paperUrl },
+        { title: 'SCBI Research Breakdown on 𝕏', desc: 'Read research post & findings thread', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2108649451917308224?s=20' },
         { title: 'View Spora Demo on 𝕏', desc: 'Knowledge platform video demo', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2096482373299057022' },
         { title: 'GitHub Profile', desc: 'Explore all repositories & open source code', icon: Github, url: 'https://github.com/anilkumara9' },
         { title: 'LinkedIn Profile', desc: 'Connect professionally', icon: Linkedin, url: 'https://www.linkedin.com/in/anilkumar-meda-2b2624331' },

@@ -66,6 +66,7 @@ export default function MobbinPortfolio() {
   const resumeUrl = "https://drive.google.com/file/d/19GDGtbuCselt_nlv07FmMmnzNsBU4746/view?usp=sharing";
   const playStoreUrl = "https://play.google.com/apps/testing/com.anilkumara9.news";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
+  const researchXUrl = "https://x.com/anilKumar09873/status/2108649451917308224?s=20";
   const githubUrl = "https://github.com/anilkumara9";
   const linkedinUrl = "https://www.linkedin.com/in/anilkumar-meda-2b2624331";
   const twitterUrl = "https://x.com/anilKumar09873";
@@ -257,7 +258,8 @@ export default function MobbinPortfolio() {
       links: [
         { label: "Read Paper", url: paperUrl, primary: true },
         { label: "OpenReview", url: openReviewUrl, primary: false },
-        { label: "GitHub Kit", url: "https://github.com/anilkumara9/SCBI", primary: false }
+        { label: "GitHub Kit", url: "https://github.com/anilkumara9/SCBI", primary: false },
+        { label: "Research on 𝕏", url: researchXUrl, primary: false }
       ]
     },
     {
@@ -761,6 +763,19 @@ export default function MobbinPortfolio() {
                     <span>GitHub Kit</span>
                     <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-[#111113] transition-colors shrink-0" />
                   </a>
+
+                  {/* Research on X Pill */}
+                  <a
+                    href={researchXUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    title="Read Research Post on 𝕏"
+                  >
+                    <span className="font-bold text-[11px] leading-none">𝕏</span>
+                    <span>Research on 𝕏</span>
+                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-[#111113] transition-colors shrink-0" />
+                  </a>
                 </div>
               </div>
 
@@ -1211,7 +1226,7 @@ export default function MobbinPortfolio() {
                 </div>
               </div>
 
-              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] grid grid-cols-3 gap-2">
+              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <a
                   href="https://github.com/anilkumara9/SCBI"
                   target="_blank"
@@ -1241,6 +1256,17 @@ export default function MobbinPortfolio() {
                 >
                   <BookOpen className="h-4 w-4 text-violet-600 shrink-0" />
                   <span className="truncate">OpenReview</span>
+                </a>
+
+                <a
+                  href={researchXUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0 hover:border-[#111113]"
+                  title="Read Research Post on 𝕏"
+                >
+                  <span className="font-bold text-[12px] leading-none shrink-0">𝕏</span>
+                  <span className="truncate">Research on 𝕏</span>
                 </a>
               </div>
             </div>
@@ -1393,6 +1419,10 @@ export default function MobbinPortfolio() {
             <a href={openReviewUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
               <BookOpen className="h-4 w-4" />
               <span>OpenReview</span>
+            </a>
+            <span>·</span>
+            <a href={researchXUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+              <span>𝕏 Research</span>
             </a>
           </div>
 
