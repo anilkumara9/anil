@@ -43,7 +43,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
         { id: 'about', title: 'About Meda', desc: 'Background, education, and career profile', icon: Sparkles },
         { id: 'research', title: 'SCBI Research Spotlight', desc: 'Inference-time representation learning', icon: FileText },
         { id: 'experience', title: 'Work Experience (CampusPe)', desc: 'AI intern, production GenAI features', icon: Folder },
-        { id: 'projects', title: 'Featured Projects (7)', desc: 'Spora (200+ users), Edge ML, Invisly, Polo', icon: Folder },
+        { id: 'projects', title: 'Featured Projects (8)', desc: 'OmniRecon (21 MCP tools), Spora (200+ users), Edge ML, Invisly', icon: Folder },
         { id: 'skills', title: 'Technical Skills Matrix', desc: 'PyTorch, Next.js, Edge ML, LangChain, Cloud', icon: Sparkles },
         { id: 'education', title: 'Education & Awards', desc: 'NHCE B.E. (8.09 CGPA) & REVA Hackathon 2nd Prize', icon: Folder },
         { id: 'timeline', title: 'Interactive Timeline', desc: 'Chronological roadmap of projects & research', icon: Folder },
@@ -54,6 +54,8 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: 'Direct Links & Actions',
       items: [
         { title: 'Download Resume (PDF)', desc: 'Open verified resume file', icon: Download, url: resumeUrl },
+        { title: 'OmniRecon on GitHub', desc: 'Full-spectrum web recon MCP server (21 tools, 163 tests)', icon: Github, url: 'https://github.com/anilkumara9/omnirecon' },
+        { title: 'OmniRecon Launch on 𝕏', desc: 'Read launch announcement & architecture breakdown', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2109905045814968746?s=20' },
         { title: 'Read SCBI Research Paper', desc: 'Full empirical paper on causal steering', icon: FileText, url: paperUrl },
         { title: 'SCBI Research Breakdown on 𝕏', desc: 'Read research post & findings thread', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2108649451917308224?s=20' },
         { title: 'View Spora Demo on 𝕏', desc: 'Knowledge platform video demo', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2096482373299057022' },

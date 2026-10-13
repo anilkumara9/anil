@@ -67,6 +67,8 @@ export default function MobbinPortfolio() {
   const playStoreUrl = "https://play.google.com/apps/testing/com.anilkumara9.news";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
   const researchXUrl = "https://x.com/anilKumar09873/status/2108649451917308224?s=20";
+  const omnireconGithubUrl = "https://github.com/anilkumara9/omnirecon";
+  const omnireconXUrl = "https://x.com/anilKumar09873/status/2109905045814968746?s=20";
   const githubUrl = "https://github.com/anilkumara9";
   const linkedinUrl = "https://www.linkedin.com/in/anilkumar-meda-2b2624331";
   const twitterUrl = "https://x.com/anilKumar09873";
@@ -159,7 +161,7 @@ export default function MobbinPortfolio() {
       category: "AI / LLM & Agents",
       icon: Cpu,
       items: [
-        "PyTorch", "Hugging Face", "LangChain", "RAG", "Vector Databases",
+        "PyTorch", "Hugging Face", "Model Context Protocol (MCP)", "LangChain", "RAG", "Vector Databases",
         "LLM APIs", "AI Agents", "Prompt Engineering", "Large Tabular Models", "Activation Steering"
       ],
     },
@@ -186,6 +188,43 @@ export default function MobbinPortfolio() {
   ];
 
   const allProjects = [
+    {
+      id: "omnirecon",
+      title: "OmniRecon: Full-Spectrum Web Recon for Coding Agents",
+      period: "Oct 2026 – Present",
+      role: "Creator & Open Source Author",
+      type: "product",
+      featured: true,
+      badge: "21 MCP Tools · 163 Tests",
+      accentBadge: true,
+      image: "/ghibli-omnirecon.jpg",
+      tagline: "Autonomous Web Reconnaissance & Rebuild Blueprint for Coding Agents 🔍",
+      description: "Equips AI coding agents (such as Claude Code) with full-spectrum web exploration capabilities: maps routes, captures live API calls, extracts design systems, and generates evidence-backed rebuild blueprints with automated verification.",
+      lldType: "MCP RUNTIME / RECON PROTOCOL",
+      lldMetric: "21 MCP Tools · 163 Tests Passing",
+      lldStorage: "Evidence Artifacts & HAR Buffers",
+      lldPattern: "Browser Automation + Rebuild Diff Engine",
+      lldFlow: ["Claude Code / AI Agent", "21 MCP Tools Gateway", "Headless Browser Automation", "Network & Design Token Harvester", "Rebuild Blueprint & Diff Engine"],
+      bulletPoints: [
+        "Enables coding agents to actively explore, inspect live network calls, and extract UI styles rather than just reading static code",
+        "Provides 21 purpose-built Model Context Protocol (MCP) tools covering browser automation, HAR capture, and design analysis",
+        "Automated rebuild verification that directly compares reconstructed applications against target live sites (163 tests passing, MIT licensed)"
+      ],
+      deepDive: {
+        problem: "Coding agents shouldn't just read code. When tasked with analyzing, rebuilding, or refactoring web software, LLMs lack the sensory awareness to inspect running browser state, detect runtime API payloads, or evaluate design fidelity against live systems.",
+        architecture: "Architected on the Model Context Protocol (MCP) as an extensible agent server. Orchestrates headless browser drivers, real-time network traffic interception (capturing authenticated routes and endpoints), automated CSS/token extraction, and a dual-viewport visual and structural diff verification engine.",
+        keyOutcomes: [
+          "Delivered 21 robust MCP tools allowing coding agents to autonomously traverse complex web applications.",
+          "Implemented automated rebuild verification that programmatically benchmarks new implementations against the source.",
+          "Published as an open-source MIT-licensed package with one-command installation and 163 passing unit and integration tests."
+        ]
+      },
+      stack: ["TypeScript", "Model Context Protocol (MCP)", "Claude Code", "Playwright", "Network Inspection", "Vitest"],
+      links: [
+        { label: "Announcement on 𝕏", url: omnireconXUrl, primary: true },
+        { label: "Code on GitHub", url: omnireconGithubUrl, primary: false }
+      ]
+    },
     {
       id: "spora",
       title: "Spora: Knowledge-First Social Media Platform",
@@ -671,7 +710,7 @@ export default function MobbinPortfolio() {
 
               {/* Descriptive Subtext */}
               <p className="text-[14.5px] sm:text-[16px] font-[400] text-[#555560] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
-                Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Solo founder of <strong className="text-[#111113] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
+                Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Creator of <strong className="text-[#111113] font-[700]">OmniRecon</strong> (21 MCP tools), founder of <strong className="text-[#111113] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
               </p>
 
               {/* Unified Action Hub — 2 clean rows of 3 buttons */}

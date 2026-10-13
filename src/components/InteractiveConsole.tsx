@@ -63,12 +63,33 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-slate-300 text-[12px]">
             <p className="text-slate-400">Available commands:</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">omnirecon</span> — Autonomous web recon MCP for coding agents (21 tools, 163 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">spora</span> — Bootstrapped social platform specs (200+ users)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">scbi</span> — Foundation model representation steering findings</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">skills</span> — Full technical stack & tool matrix</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">experience</span> — Industry work at CampusPe</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">contact</span> — Reach out via email, phone, or LinkedIn</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">clear</span> — Reset terminal output</p>
+          </div>
+        );
+        break;
+      case 'omnirecon':
+        output = (
+          <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
+            <p className="font-bold text-white flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              OmniRecon: Full-Spectrum Web Recon for Coding Agents
+            </p>
+            <p className="text-slate-400">Open Source · 21 MCP Tools · 163 Tests Passing · MIT Licensed</p>
+            <p>Empowers Claude Code and autonomous agents to explore websites, map routes, capture live API calls, extract design systems, and verify rebuilds against originals.</p>
+            <div className="flex items-center gap-3 pt-1">
+              <a href="https://github.com/anilkumara9/omnirecon" target="_blank" rel="noopener noreferrer" className="text-[#F2F536] hover:underline inline-flex items-center gap-1">
+                GitHub Repo <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <a href="https://x.com/anilKumar09873/status/2109905045814968746?s=20" target="_blank" rel="noopener noreferrer" className="text-[#FC535B] hover:underline inline-flex items-center gap-1">
+                Launch on 𝕏 <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
           </div>
         );
         break;

@@ -17,6 +17,21 @@ interface TimelineEvent {
 const InteractiveTimeline: React.FC = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([
     {
+      id: 'omnirecon',
+      date: 'Oct 2026 – Present',
+      title: 'OmniRecon: Full-Spectrum Web Recon for Coding Agents',
+      organization: 'Open Source · 21 MCP Tools',
+      description: 'Gives Claude Code and coding agents the sensory ability to explore websites, map routes, capture API calls, and verify rebuilds.',
+      type: 'project',
+      details: [
+        'Brings together 21 MCP tools for browser automation, network request sniffing, design system extraction, and rebuild blueprints',
+        'Engineered an automated rebuild verification engine that directly benchmarks recreated applications against the original live site',
+        'MIT licensed with 163 passing unit and integration tests and one-command installation'
+      ],
+      link: 'https://github.com/anilkumara9/omnirecon',
+      linkText: 'GitHub Repo'
+    },
+    {
       id: '1',
       date: 'Mar 2026 – Present',
       title: 'Spora: Knowledge-first social platform',

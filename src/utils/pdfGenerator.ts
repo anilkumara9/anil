@@ -70,6 +70,8 @@ export const generateResumePDF = (data: ResumeData) => {
   
   // My Work
   addSection('MY WORK (LIVE PRODUCTS)');
+  addText('OmniRecon (Full-Spectrum Web Recon for Coding Agents)', 11, true);
+  addText('Built OmniRecon, a suite of 21 Model Context Protocol (MCP) tools with 163 passing tests enabling coding agents to explore websites, capture live API traffic, extract design systems, and verify rebuilds.');
   addText('Spora (Jan 2026 - Present)', 11, true);
   addText('Built Spora, a next-generation social media platform featuring personalized content discovery, short videos, articles, and real-time user interactions.');
   addText('Invisly (AI Desktop Assistant)', 11, true);
