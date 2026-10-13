@@ -445,12 +445,12 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
               <span className="font-bold text-white text-[15px]">200+ Active Users reached with $0 external funding</span>
             </div>
             <a 
-              href="https://play.google.com/apps/testing/com.anilkumara9.news" 
+              href="https://play.google.com/store/apps/details?id=com.anilkumar09.news&pcampaignid=web_share" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[#FC535B] font-semibold hover:underline inline-flex items-center gap-1"
             >
-              Android Testing <ArrowUpRight className="h-3.5 w-3.5" />
+              Google Play <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>

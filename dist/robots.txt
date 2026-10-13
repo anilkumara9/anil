@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://anilkumara9.github.io/anil/sitemap.xml
+Sitemap: https://anilkumarmeda.netlify.app/sitemap.xml

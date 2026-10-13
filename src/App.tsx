@@ -64,7 +64,7 @@ export default function MobbinPortfolio() {
   const paperUrl = "https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing";
   const openReviewUrl = "https://openreview.net/pdf?id=QGcF4561UP";
   const resumeUrl = "https://drive.google.com/file/d/19GDGtbuCselt_nlv07FmMmnzNsBU4746/view?usp=sharing";
-  const playStoreUrl = "https://play.google.com/apps/testing/com.anilkumara9.news";
+  const playStoreUrl = "https://play.google.com/store/apps/details?id=com.anilkumar09.news&pcampaignid=web_share";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
   const researchXUrl = "https://x.com/anilKumar09873/status/2108649451917308224?s=20";
   const omnireconGithubUrl = "https://github.com/anilkumara9/omnirecon";
@@ -259,7 +259,7 @@ export default function MobbinPortfolio() {
       stack: ["React", "Next.js", "Mobile First", "Vector Discovery", "Real-Time Interaction", "Media Stream"],
       links: [
         { label: "Demo on 𝕏", url: "https://x.com/anilKumar09873/status/2096482373299057022", primary: true },
-        { label: "Android Testing", url: "https://play.google.com/apps/testing/com.anilkumara9.news", primary: false }
+        { label: "Google Play Store", url: "https://play.google.com/store/apps/details?id=com.anilkumar09.news&pcampaignid=web_share", primary: false }
       ]
     },
     {
