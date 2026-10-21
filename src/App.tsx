@@ -63,7 +63,7 @@ export default function MobbinPortfolio() {
   // URLs
   const paperUrl = "https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing";
   const openReviewUrl = "https://openreview.net/pdf?id=QGcF4561UP";
-  const resumeUrl = "https://drive.google.com/file/d/19GDGtbuCselt_nlv07FmMmnzNsBU4746/view?usp=sharing";
+  const resumeUrl = "https://drive.google.com/file/d/1_crI1PRZ34A0HcuYu4M23cfre7iPkJ6s/view?usp=sharing";
   const playStoreUrl = "https://play.google.com/store/apps/details?id=com.anilkumar09.news&pcampaignid=web_share";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
   const researchXUrl = "https://x.com/anilKumar09873/status/2108649451917308224?s=20";
