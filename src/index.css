@@ -1,46 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Inter:wght@400;500;600;700;800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, Cambria, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Shantell Sans", cursive, sans-serif;
+  --font-shantell: "Shantell Sans", cursive, sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --font-bagel: "Bagel Fat One", cursive;
 
-  /* Mobbin & Editorial Color Tokens */
-  --color-canvas: #ffffff;
-  --color-canvas-soft: #f8f8fa;
-  --color-field: #f3f3f6;
-  --color-hairline-soft: #f0f0f4;
-  --color-hairline: #e4e4e9;
-  --color-ink: #111113;
-  --color-ink-soft: #232326;
-  --color-text-muted: #6e6e78;
-  --color-text-faint: #a0a0ab;
-  --color-accent: #4f46e5;
-  --color-accent-soft: #6366f1;
+  /* Yashb Design System Palette Tokens */
+  --color-primary: #111111;
+  --color-canvas: #EFECE4;
+  --color-ink: #45433D;
+  --color-accent-1: #6A6253;
+  --color-accent-2: #2B2620;
+  --color-accent-3: #C4CCF6;
+  --color-accent-4: #4B63FF;
+  --color-neutral-1: #E7E1D2;
+  --color-neutral-2: #FFFFFF;
+  --color-neutral-3: #FAF7EF;
+
+  --color-canvas-soft: #FAF7EF;
+  --color-field: #E8E4DA;
+  --color-hairline: #DBD8D0;
+  --color-hairline-soft: #E7E1D2;
+  --color-text-muted: #817E77;
+  --color-text-faint: #9E9B93;
 }
 
 :root {
-  --canvas: #ffffff;
-  --canvas-soft: #f8f8fa;
-  --field: #f3f3f6;
-  --hairline-soft: #f0f0f4;
-  --hairline: #e4e4e9;
-  --ink: #111113;
-  --ink-soft: #232326;
-  --text-muted: #6e6e78;
-  --text-faint: #a0a0ab;
-  --accent: #4f46e5;
+  --canvas: #EFECE4;
+  --canvas-soft: #FAF7EF;
+  --field: #E8E4DA;
+  --hairline: #DBD8D0;
+  --hairline-soft: #E7E1D2;
+  --primary: #111111;
+  --ink: #45433D;
+  --accent-1: #6A6253;
+  --accent-2: #2B2620;
+  --accent-3: #C4CCF6;
+  --accent-4: #4B63FF;
+  --neutral-1: #E7E1D2;
+  --neutral-2: #FFFFFF;
+  --neutral-3: #FAF7EF;
+  --text-muted: #817E77;
+  --text-faint: #9E9B93;
+  --accent: #4B63FF;
+
+  /* Yashb Borderless Thick Attractive 3D Soft Clay Shadows (Matching user reference) */
+  --shadow-3d-button-primary: 0 4px 10px -2px rgba(0, 0, 0, 0.28), 0 10px 22px -3px rgba(0, 0, 0, 0.35), 0 18px 32px -6px rgba(0, 0, 0, 0.2), inset 0 1.5px 2px rgba(255, 255, 255, 0.32), inset 0 -2.5px 4px rgba(0, 0, 0, 0.7);
+  --shadow-3d-button-secondary: 0 4px 12px -2px rgba(80, 70, 55, 0.14), 0 10px 22px -3px rgba(80, 70, 55, 0.11), 0 18px 32px -6px rgba(80, 70, 55, 0.07), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.85), inset 0 -2px 4px rgba(180, 168, 145, 0.18);
+  --shadow-3d-button-accent: 0 4px 12px -2px rgba(75, 99, 255, 0.38), 0 10px 24px -3px rgba(75, 99, 255, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2.5px 4px rgba(0, 20, 120, 0.4);
+
+  --shadow-3d-card: 0 4px 14px -2px rgba(80, 70, 55, 0.12), 0 12px 28px -4px rgba(80, 70, 55, 0.09), 0 24px 44px -8px rgba(80, 70, 55, 0.05), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(180, 168, 145, 0.14);
+  --shadow-3d-card-hover: 0 8px 22px -3px rgba(80, 70, 55, 0.15), 0 18px 36px -5px rgba(80, 70, 55, 0.11), 0 32px 54px -8px rgba(80, 70, 55, 0.07), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.95);
+
+  --shadow-yashb-nav: 0 6px 18px -2px rgba(80, 70, 55, 0.15), 0 14px 30px -4px rgba(80, 70, 55, 0.11), 0 24px 44px -8px rgba(80, 70, 55, 0.07), inset 0 1.5px 2px #FFFFFF, inset 0 3px 6px rgba(255, 255, 255, 0.92), inset 0 -2px 4px rgba(180, 168, 145, 0.16);
 }
 
-.font-editorial {
-  font-family: "Instrument Serif", Georgia, Cambria, serif;
-  font-style: italic;
-  font-weight: 400;
+.font-shantell {
+  font-family: "Shantell Sans", cursive, sans-serif;
 }
 
-.font-serif-clean {
-  font-family: "Instrument Serif", Georgia, Cambria, serif;
+.font-bagel {
+  font-family: "Bagel Fat One", cursive;
+}
+
+.font-space {
+  font-family: "Space Mono", monospace;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
 }
 
 @layer base {
@@ -54,6 +85,7 @@
     width: 100%;
     max-width: 100vw;
     -webkit-text-size-adjust: 100%;
+    background-color: var(--canvas);
   }
 
   body {
@@ -71,6 +103,7 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    background-color: var(--canvas);
   }
 
   img, video {
@@ -78,48 +111,79 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 650;
+    font-family: "Shantell Sans", cursive, sans-serif;
+    font-weight: 800;
     color: var(--ink);
     letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: #111111;
+    color: #FAF7EF;
   }
 }
 
 @layer utilities {
-  /* Squircle 30% border radius */
-  .squircle-icon {
-    border-radius: 30%;
+  /* 3D Borderless Tactile Navigation Dock (Matching user reference image) */
+  .yashb-nav {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F4 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: none !important;
+    box-shadow: var(--shadow-yashb-nav);
+    border-radius: 9999px !important;
   }
 
-  /* Mobbin Button Styles */
+  /* 3D Thick Primary Button: satisfying physical keypress (No blue on hover/click) */
   .btn-primary {
-    background-color: var(--ink);
-    color: var(--canvas);
-    border-radius: 9999px;
+    background: linear-gradient(180deg, #22201D 0%, #11100E 100%);
+    color: #FAF8F4;
+    border-radius: 9999px !important;
+    border: none !important;
+    font-family: "Inter", sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    height: 44px;
-    padding: 0 20px;
+    font-size: 13px;
+    height: 42px;
+    padding: 0 22px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
     max-width: 100%;
     gap: 8px;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    box-shadow: var(--shadow-3d-button-primary);
+    transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s ease-out;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px -2px rgba(0, 0, 0, 0.32), 0 14px 28px -3px rgba(0, 0, 0, 0.4), 0 22px 38px -6px rgba(0, 0, 0, 0.24), inset 0 1.5px 2px rgba(255, 255, 255, 0.45);
+    background: linear-gradient(180deg, #2B2824 0%, #171513 100%);
+    color: #FFFFFF;
+  }
+  .btn-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35), inset 0 2.5px 5px rgba(0, 0, 0, 0.8);
+    color: #FAF8F4;
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
   }
 
+  /* 3D Thick Secondary / White Clay Button (Matching user reference image) */
   .btn-outline {
-    background-color: var(--canvas);
-    color: var(--ink);
-    border: 1px solid var(--hairline);
-    border-radius: 9999px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F4 100%);
+    color: #1F1D1A;
+    border: none !important;
+    border-radius: 9999px !important;
+    font-family: "Inter", sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    height: 44px;
+    font-size: 13px;
+    height: 42px;
     padding: 0 20px;
     display: inline-flex;
     align-items: center;
@@ -127,123 +191,270 @@
     white-space: nowrap;
     max-width: 100%;
     gap: 8px;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
+    box-shadow: var(--shadow-3d-button-secondary);
+    transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s ease-out;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-outline:hover {
-    background-color: var(--canvas-soft);
-    border-color: var(--ink);
+    transform: translateY(-2px);
+    color: #111111;
+    background: #FFFFFF;
+    box-shadow: 0 6px 16px -2px rgba(80, 70, 55, 0.18), 0 14px 28px -3px rgba(80, 70, 55, 0.13), 0 22px 38px -6px rgba(80, 70, 55, 0.08), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.9), inset 0 -1.5px 3px rgba(180, 168, 145, 0.14);
+  }
+  .btn-outline:active {
+    transform: translateY(2px);
+    color: #111111;
+    box-shadow: 0 2px 4px rgba(80, 70, 55, 0.12), inset 0 2px 4px rgba(180, 168, 145, 0.25);
+  }
+  .btn-outline:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
   }
 
-  .btn-pill-soft {
-    background-color: var(--canvas-soft);
-    color: var(--ink);
-    border-radius: 9999px;
-    font-weight: 500;
-    font-size: 13px;
-    height: 36px;
-    padding: 0 16px;
+  /* 3D Dedicated Icon Buttons (Guaranteed visible centered icons) */
+  .btn-icon-3d {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    position: relative !important;
+    transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s ease-out;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-icon-3d:hover {
+    transform: translateY(-2px);
+  }
+  .btn-icon-3d:active {
+    transform: translateY(2px);
+  }
+  .btn-icon-3d:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
+  }
+
+  /* 3D Thick Accent Button */
+  .btn-3d-accent {
+    background-color: #4B63FF;
+    color: #FFFFFF;
+    border: none !important;
+    border-radius: 9999px !important;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    height: 39px;
+    padding: 0 18px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    transition: background-color 0.15s ease;
+    white-space: nowrap;
+    max-width: 100%;
+    gap: 7px;
+    box-shadow: var(--shadow-3d-button-accent);
+    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-3d-accent:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 0 #2A40D6, 0 12px 22px rgba(75, 99, 255, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.65);
+  }
+  .btn-3d-accent:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #2A40D6, 0 2px 6px rgba(75, 99, 255, 0.3), inset 0 2.5px 5px rgba(0, 20, 120, 0.55);
+  }
+
+  /* 3D Tactile Card (Borderless soft clay depth matching button UI) */
+  .card-yashb {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+    border: none !important;
+    border-radius: 28px;
+    box-shadow: 0 4px 14px -2px rgba(80, 70, 55, 0.12), 0 12px 28px -4px rgba(80, 70, 55, 0.09), 0 24px 44px -8px rgba(80, 70, 55, 0.05), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(180, 168, 145, 0.14);
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+  .card-yashb:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px -3px rgba(80, 70, 55, 0.15), 0 18px 36px -5px rgba(80, 70, 55, 0.11), 0 32px 54px -8px rgba(80, 70, 55, 0.07), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.95);
+  }
+
+  /* 3D Project Card (Completely static - no hover lift, bouncy movement, or zoom) */
+  .card-project {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+    border: none !important;
+    border-radius: 28px;
+    box-shadow: 0 4px 14px -2px rgba(80, 70, 55, 0.12), 0 12px 28px -4px rgba(80, 70, 55, 0.09), 0 24px 44px -8px rgba(80, 70, 55, 0.05), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(180, 168, 145, 0.14);
+    transform: none !important;
+    transition: none !important;
+  }
+  .card-project:hover {
+    transform: none !important;
+  }
+
+  /* 3D Compact Inset Card (Borderless soft clay depth) */
+  .card-tactile-sm {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+    border: none !important;
+    border-radius: 22px;
+    box-shadow: 0 3px 10px -2px rgba(80, 70, 55, 0.11), 0 8px 20px -3px rgba(80, 70, 55, 0.08), inset 0 1.5px 2px #FFFFFF, inset 0 -1.5px 3px rgba(180, 168, 145, 0.14);
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+  .card-tactile-sm:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 16px -3px rgba(80, 70, 55, 0.14), 0 14px 26px -4px rgba(80, 70, 55, 0.10), inset 0 1.5px 2px #FFFFFF, inset 0 -1.5px 3px rgba(180, 168, 145, 0.12);
+  }
+
+  /* 3D Pill / Soft Filter (Matching user reference image) */
+  .btn-pill-soft {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F4 100%);
+    color: #2B2620;
+    border: none !important;
+    border-radius: 9999px !important;
+    font-weight: 600;
+    font-size: 12.5px;
+    height: 40px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    box-shadow: 0 4px 10px -2px rgba(80, 70, 55, 0.13), 0 8px 18px -3px rgba(80, 70, 55, 0.09), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.8), inset 0 -1.5px 3px rgba(180, 168, 145, 0.15);
+    transition: transform 0.14s ease-out, background-color 0.14s ease-out, color 0.14s ease-out, box-shadow 0.14s ease-out;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-pill-soft:hover {
-    background-color: var(--field);
+    transform: translateY(-2px);
+    background: #FFFFFF;
+    color: #111111;
+    box-shadow: 0 6px 14px -2px rgba(80, 70, 55, 0.17), 0 12px 24px -3px rgba(80, 70, 55, 0.12), inset 0 1.5px 2px #FFFFFF, inset 0 3px 5px rgba(255, 255, 255, 0.9), inset 0 -1.5px 3px rgba(180, 168, 145, 0.12);
+  }
+  .btn-pill-soft:active {
+    transform: translateY(2px);
+    color: #111111;
+    box-shadow: 0 2px 4px rgba(80, 70, 55, 0.12), inset 0 2px 4px rgba(180, 168, 145, 0.25);
+  }
+  .btn-pill-soft:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
   }
 
-  /* Mobbin Cards */
-  .card-resting {
-    background-color: var(--canvas);
-    border: 1px solid var(--hairline-soft);
-    border-radius: 24px;
-    transition: border-color 0.15s ease;
-  }
-  .card-resting:hover {
-    border-color: var(--hairline);
-  }
-
-  .card-featured {
-    background-color: var(--canvas-soft);
-    border: 1px solid transparent;
-    border-radius: 24px;
-    transition: background-color 0.15s ease;
-  }
-  .card-featured:hover {
-    background-color: var(--field);
-  }
-
-  /* Mobbin Popular Badge */
-  .badge-popular {
-    background-color: #0066ff;
-    color: #ffffff;
-    border-radius: 9999px;
-    font-size: 12px;
+  /* 3D Interactive Tag (Borderless tactile clay pill) */
+  .tag-yashb {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F4 100%);
+    color: #45433D;
+    border: none !important;
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
     font-weight: 600;
-    padding: 2px 10px;
+    border-radius: 9999px;
+    padding: 3.5px 11px;
+    box-shadow: 0 2.5px 7px -1px rgba(80, 70, 55, 0.12), inset 0 1px 1.5px #FFFFFF, inset 0 -1px 2px rgba(180, 168, 145, 0.15);
+    transition: background-color 0.12s ease-out, color 0.12s ease-out, transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tag-yashb:hover {
+    background: #FFFFFF;
+    color: #111111;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px -1px rgba(80, 70, 55, 0.16), inset 0 1px 1.5px #FFFFFF;
+  }
+
+  /* 3D Borderless Badge Accents */
+  .badge-yashb-blue {
+    background-color: #111111;
+    color: #FAF7EF;
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 9999px;
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    border: none !important;
+    box-shadow: 0 2.5px 0 #000000, 0 4px 10px rgba(0, 0, 0, 0.18), inset 0 1px 1.5px rgba(255, 255, 255, 0.25);
   }
 
-  /* Mobbin Overlay Badge */
-  .badge-overlay {
-    background-color: rgba(115, 115, 115, 0.56);
-    color: #ffffff;
+  .badge-yashb-lavender {
+    background-color: #E7E1D2;
+    color: #111111;
+    font-family: "Space Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
     border-radius: 9999px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: none !important;
+    box-shadow: 0 2.5px 0 #CEC8B8, 0 4px 8px rgba(45, 40, 32, 0.08), inset 0 1.2px 1.5px rgba(255, 255, 255, 0.85);
   }
 
-  /* Mobbin Field Input */
+  /* 3D Borderless Polaroid Card (Hero only) */
+  .polaroid-card {
+    background-color: #FFFFFF;
+    padding: 10px 10px 18px 10px;
+    border-radius: 20px;
+    border: none !important;
+    box-shadow: 0 6px 0 #DBD6C7, 0 16px 30px rgba(40, 34, 22, 0.12), inset 0 2px 2px rgba(255, 255, 255, 0.95);
+    transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+  }
+  .polaroid-card:hover {
+    box-shadow: 0 8px 0 #D3CDBC, 0 20px 38px rgba(40, 34, 22, 0.16), inset 0 2px 2px #FFFFFF;
+  }
+
+  /* 3D Tactile Input fields (Borderless soft clay inset matching Contact form) */
   .input-field {
-    background-color: var(--field);
-    color: var(--ink);
-    border-radius: 16px;
-    padding: 12px 16px;
+    background: #FFFFFF;
+    color: #111111;
+    border-radius: 18px;
+    padding: 13px 18px;
     font-size: 14px;
-    border: 2px solid transparent;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    border: none !important;
+    font-family: "Inter", sans-serif;
+    box-shadow: inset 0 2px 4px rgba(60, 50, 35, 0.08), 0 1.5px 2px #FFFFFF;
+    transition: box-shadow 0.15s ease-out;
   }
   .input-field:focus {
     outline: none;
-    border-color: var(--ink);
-    background-color: var(--canvas);
+    box-shadow: inset 0 2px 4px rgba(60, 50, 35, 0.12), 0 0 0 2px #111111, 0 1.5px 2px #FFFFFF;
   }
   .input-field::placeholder {
-    color: var(--text-faint);
+    color: #9E9B93;
   }
 
-  /* Custom Slim Scrollbar for Gallery Experience */
+  /* Custom Slim Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--hairline);
+    background: #DBD8D0;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
-  }
-
-  /* Polaroid & Scrapbook card effects (Steady, no bouncing) */
-  .polaroid-card {
-    background-color: #ffffff;
-    padding: 10px 10px 24px 10px;
-    border-radius: 14px;
-    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .polaroid-card:hover {
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.18), 0 6px 16px -4px rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.12);
-    z-index: 30;
+    background: #817E77;
   }
 
   /* Hide scrollbar for carousels */
@@ -258,7 +469,7 @@
   /* Sleek Modal Scrollbar */
   .modal-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #DBD8D0 transparent;
   }
   .modal-scrollbar::-webkit-scrollbar {
     width: 6px;
@@ -267,11 +478,10 @@
     background: transparent;
   }
   .modal-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
+    background-color: #DBD8D0;
     border-radius: 9999px;
   }
   .modal-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
+    background-color: #817E77;
   }
 }
-

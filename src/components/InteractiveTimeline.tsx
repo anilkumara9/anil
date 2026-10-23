@@ -154,17 +154,17 @@ const InteractiveTimeline: React.FC = () => {
   const getTypeBadge = (type: TimelineEvent['type']) => {
     switch (type) {
       case 'education':
-        return { label: 'Education', style: 'bg-blue-50 text-blue-700 border-blue-200' };
+        return { label: 'Education', style: 'bg-[#C4CCF6]/60 text-[#2B2620] border-[#DBD8D0]' };
       case 'achievement':
-        return { label: 'Award & Podium', style: 'bg-amber-50 text-amber-700 border-amber-200' };
+        return { label: 'Award & Podium', style: 'bg-[#FAF7EF] text-[#111111] border-[#DBD8D0]' };
       case 'experience':
-        return { label: 'Industry Role', style: 'bg-emerald-50 text-emerald-700 border-emerald-200' };
+        return { label: 'Industry Role', style: 'bg-[#FAF7EF] text-[#2B2620] border-[#DBD8D0]' };
       case 'research':
-        return { label: 'Research Paper', style: 'bg-purple-50 text-purple-700 border-purple-200' };
+        return { label: 'Springer Research', style: 'bg-[#C4CCF6] text-[#111111] border-[#DBD8D0]' };
       case 'project':
-        return { label: 'Shipped Product', style: 'bg-indigo-50 text-indigo-700 border-indigo-200' };
+        return { label: 'Shipped Product', style: 'bg-[#111111] text-[#FAF7EF] border-[#111111]' };
       default:
-        return { label: 'Milestone', style: 'bg-[#f8f8fa] text-[#111113] border-[#e4e4e9]' };
+        return { label: 'Milestone', style: 'bg-[#FAF7EF] text-[#45433D] border-[#DBD8D0]' };
     }
   };
 
@@ -180,91 +180,91 @@ const InteractiveTimeline: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#ffffff] border border-[#e4e4e9] rounded-[24px] sm:rounded-[32px] p-4.5 sm:p-8 md:p-12 transition-all shadow-xs overflow-hidden w-full">
+    <div className="card-yashb p-5 sm:p-7 md:p-9 overflow-hidden w-full">
       
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 border-b border-[#e4e4e9] mb-8 sm:mb-10">
+      {/* Header (No dividing line) */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2 mb-6 sm:mb-8">
         <div>
-          <h3 className="text-2xl sm:text-4xl font-[700] text-[#111113]">
-            Engineering and research <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">journey</span>.
+          <h3 className="font-shantell text-2xl sm:text-3xl font-[800] text-[#111111] tracking-tight">
+            Engineering &amp; research <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">journey</span>.
           </h3>
         </div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[11.5px] sm:text-[12px] font-[600] text-[#111113] w-fit">
-          <span className="h-2 w-2 rounded-full bg-indigo-600" />
-          <span>2022 – 2026 Track Record</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-[0_3px_8px_-1px_rgba(80,70,55,0.14),inset_0_1.5px_2px_#fff] text-[11px] font-mono font-[700] text-[#111111] w-fit">
+          <span className="h-2 w-2 rounded-full bg-[#4B63FF] animate-pulse" />
+          <span>2022 – 2026 TRACK RECORD</span>
         </div>
       </div>
 
-      <div className="relative pl-1 sm:pl-4">
+      <div className="relative pl-1 sm:pl-3">
         {/* Timeline Hairline */}
-        <div className="absolute left-[15px] sm:left-[27px] top-4 bottom-4 w-px bg-[#e4e4e9]" />
+        <div className="absolute left-[14px] sm:left-[22px] top-3 bottom-3 w-0.5 bg-[#DBD8D0]/60" />
         
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-3.5 sm:space-y-4">
           {events.map((event) => {
             const Icon = getIcon(event.type);
             const badge = getTypeBadge(event.type);
 
             return (
-              <div key={event.id} className="relative flex items-start gap-3 sm:gap-6 group">
+              <div key={event.id} className="relative flex items-start gap-3 sm:gap-5 group">
                 
-                {/* Node Squircle */}
-                <div className="relative z-10 flex h-8 w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-[#ffffff] border border-[#e4e4e9] group-hover:border-[#111113] text-[#111113] shadow-xs group-hover:shadow-sm transition-all">
-                  <Icon className="h-3.5 w-3.5 sm:h-[18px] sm:w-[18px] group-hover:text-indigo-600 transition-colors" />
+                {/* 3D Node Pill */}
+                <div className="relative z-10 flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_4px_10px_-2px_rgba(80,70,55,0.16),inset_0_1.5px_2px_#fff] text-[#111111] transition-all">
+                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#111111]" />
                 </div>
                 
-                {/* Content Box */}
-                <div className="flex-1 bg-[#ffffff] group-hover:bg-[#f8f8fa]/60 border border-[#e4e4e9] group-hover:border-[#111113] rounded-[18px] sm:rounded-[24px] p-4 sm:p-6 space-y-2.5 sm:space-y-3 transition-all duration-200 shadow-2xs min-w-0">
+                {/* Content Box - Borderless 3D Soft Clay Card */}
+                <div className="flex-1 bg-gradient-to-b from-[#FFFFFF] to-[#FAF8F5] rounded-[22px] p-4 sm:p-5 space-y-2 transition-all duration-150 shadow-[0_4px_12px_-2px_rgba(80,70,55,0.11),0_10px_20px_-3px_rgba(80,70,55,0.07),inset_0_1.5px_2px_#fff,inset_0_-1.5px_3px_rgba(180,168,145,0.14)] hover:shadow-[0_8px_20px_-3px_rgba(80,70,55,0.14),0_16px_30px_-5px_rgba(80,70,55,0.09),inset_0_1.5px_2px_#fff] min-w-0">
                   
                   {/* Top row with Date & Badge */}
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[12.5px] font-[600] text-[#111113]">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5">
+                    <span className="text-[11.5px] sm:text-[12px] font-mono font-[700] text-[#111111] uppercase tracking-wider">
                       {event.date}
                     </span>
-                    <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-[600] uppercase tracking-wide border ${badge.style}`}>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-[700] uppercase tracking-wider shadow-[0_2px_5px_-1px_rgba(80,70,55,0.12),inset_0_1px_1.5px_#fff] border-0 ${badge.style}`}>
                       {badge.label}
                     </span>
                   </div>
                   
                   {/* Title & Organization */}
                   <div>
-                    <h4 className="text-[16px] sm:text-[18px] font-[700] text-[#111113] leading-snug group-hover:text-indigo-600 transition-colors">
+                    <h4 className="font-shantell text-[15.5px] sm:text-[17px] font-[800] text-[#111111] leading-snug">
                       {event.title}
                     </h4>
-                    <p className="text-[13px] font-[500] text-[#6e6e78] mt-0.5">
+                    <p className="text-[12.5px] font-[500] text-[#6A6253] mt-0.5 font-inter">
                       {event.organization}
                     </p>
-                    <p className="text-[13.5px] font-[400] text-[#6e6e78] mt-2 leading-relaxed">
+                    <p className="text-[13px] sm:text-[13.5px] font-[400] text-[#45433D] mt-1.5 leading-relaxed font-inter">
                       {event.description}
                     </p>
                   </div>
                   
                   {/* Expandable Details */}
                   {event.details && (
-                    <div className="pt-1">
+                    <div className="pt-0.5">
                       <button
                         type="button"
-                        className="text-[12px] text-[#111113] font-[600] inline-flex items-center gap-1.5 transition-colors cursor-pointer hover:text-indigo-600"
+                        className="text-[11.5px] text-[#111111] font-[600] inline-flex items-center gap-1 transition-colors cursor-pointer hover:underline"
                         onClick={() => toggleExpand(event.id)}
                       >
                         <span>{event.isExpanded ? 'Hide details' : 'View details & outcomes'}</span>
-                        <ChevronRight className={`h-3.5 w-3.5 transition-transform duration-200 ${event.isExpanded ? 'rotate-90' : ''}`} />
+                        <ChevronRight className={`h-3 w-3 transition-transform duration-200 ${event.isExpanded ? 'rotate-90' : ''}`} />
                       </button>
                       
                       {event.isExpanded && (
-                        <div className="mt-3 space-y-2.5 pl-3 border-l-2 border-indigo-600 pt-1">
+                        <div className="mt-2.5 space-y-2 pl-3 border-l-2 border-[#111111] pt-0.5">
                           {event.details.map((detail, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-[13px] text-[#6e6e78] leading-relaxed">
-                              <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 shrink-0 mt-2" />
+                            <div key={idx} className="flex items-start gap-2 text-[12.5px] text-[#45433D] leading-relaxed font-inter">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[#111111] shrink-0 mt-1.5" />
                               <span>{detail}</span>
                             </div>
                           ))}
                           {event.link && (
-                            <div className="pt-2">
+                            <div className="pt-1.5">
                               <a 
                                 href={event.link} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="btn-pill-soft text-[12px] inline-flex items-center gap-1.5"
+                                className="btn-outline text-[11.5px] h-8 px-3 inline-flex items-center gap-1.5"
                               >
                                 <span>{event.linkText || 'Open link'}</span>
                                 <ExternalLink className="h-3 w-3" />

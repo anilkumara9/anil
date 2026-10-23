@@ -5,7 +5,7 @@ import {
   Layers, Database, Cloud, Terminal, CheckCircle2, FlaskConical,
   Briefcase, Trophy, ArrowRight, Play, Check, Copy, Code2, Globe, Search,
   X, ChevronRight, ChevronLeft, UserCheck, ShieldCheck, Zap, Share2, Menu, Smartphone,
-  Monitor, Mic, Star, Flame, Compass, Heart, AlertCircle
+  Monitor, Mic, Star, Flame, Compass, Heart, AlertCircle, LayoutGrid, Columns3
 } from "lucide-react";
 
 // Custom Components
@@ -15,6 +15,7 @@ import { generateResumePDF } from "./utils/pdfGenerator";
 
 export default function MobbinPortfolio() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [projectViewMode, setProjectViewMode] = useState<"carousel" | "grid">("carousel");
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const [activeProjectModal, setActiveProjectModal] = useState<any | null>(null);
   const [skillDomainFilter, setSkillDomainFilter] = useState<string>("all");
@@ -130,10 +131,11 @@ export default function MobbinPortfolio() {
       location: "Bengaluru, Karnataka, India",
       education: "B.E. in Computer Science - CGPA: 8.09 (NHCE Bengaluru)",
       skills: [
-        "Python", "Java", "JavaScript", "TypeScript", "SQL",
-        "React", "Next.js", "Node.js", "Express.js", "Tailwind CSS",
-        "PyTorch", "Hugging Face", "LangChain", "RAG", "LLM APIs",
-        "MongoDB", "PostgreSQL", "AWS", "Docker", "Git"
+        "Python", "Java", "C", "JavaScript", "TypeScript", "SQL",
+        "React.js", "Next.js", "Node.js", "Express.js", "REST APIs", "Tailwind CSS",
+        "Pytest", "Vitest", "Playwright", "TDD",
+        "PyTorch", "Hugging Face", "LangChain", "RAG", "Vector Databases", "LLM APIs", "AI Agents", "MCP",
+        "MongoDB", "MySQL", "PostgreSQL", "Redis", "SQLite", "AWS", "GCP", "Docker", "Kubernetes", "Linux", "Git"
       ],
       projects: allProjects.map(p => ({
         title: p.title,
@@ -154,36 +156,56 @@ export default function MobbinPortfolio() {
   const skillCategories = [
     {
       category: "Languages",
-      icon: Terminal,
-      items: ["Python", "Java", "JavaScript", "TypeScript", "SQL", "C"],
+      icon: Code2,
+      domain: "languages",
+      items: ["Python", "Java", "C", "JavaScript", "TypeScript", "SQL"],
     },
     {
-      category: "AI / LLM & Agents",
+      category: "Frameworks & APIs",
+      icon: Layers,
+      domain: "frameworks",
+      items: ["React.js", "Next.js", "Node.js", "Express.js", "REST APIs", "Tailwind CSS"],
+    },
+    {
+      category: "Testing",
+      icon: CheckCircle2,
+      domain: "testing",
+      items: ["Pytest", "Vitest", "Playwright", "Test-Driven Development (TDD)"],
+    },
+    {
+      category: "AI / LLM",
       icon: Cpu,
+      domain: "ai",
       items: [
-        "PyTorch", "Hugging Face", "Model Context Protocol (MCP)", "LangChain", "RAG", "Vector Databases",
-        "LLM APIs", "AI Agents", "Prompt Engineering", "Large Tabular Models", "Activation Steering"
+        "PyTorch", "Hugging Face", "LangChain", "RAG", "Vector Databases",
+        "LLM APIs", "AI Agents", "MCP (Model Context Protocol)",
+        "Prompt Engineering", "Model Evaluation", "Large Tabular Models (LTM)", "LLM Pipelines"
       ],
     },
     {
-      category: "Frontend & Full Stack",
-      icon: Layers,
-      items: ["React.js", "Next.js", "Tailwind CSS", "Node.js", "Express.js", "REST APIs", "WebSockets"],
-    },
-    {
-      category: "Data & ML",
+      category: "Machine Learning & Data",
       icon: FlaskConical,
-      items: ["Scikit-learn", "XGBoost", "Pandas", "Feature Engineering", "Model Evaluation", "ML Kit"],
+      domain: "data",
+      items: ["Scikit-learn", "XGBoost", "Pandas", "NumPy"],
     },
     {
-      category: "Cloud & DevOps",
+      category: "Cloud, Databases & DevOps",
       icon: Cloud,
-      items: ["AWS", "GCP", "Docker", "Kubernetes", "Linux", "Microservices", "CI/CD", "Git", "GitHub"],
+      domain: "infra",
+      items: [
+        "MongoDB", "MySQL", "PostgreSQL", "Redis", "SQLite",
+        "AWS", "GCP", "Docker", "Kubernetes", "Linux",
+        "Microservices", "System Design", "CI/CD", "Git", "GitHub"
+      ],
     },
     {
-      category: "Databases",
-      icon: Database,
-      items: ["MongoDB", "MySQL", "PostgreSQL", "Pinecone"],
+      category: "Security",
+      icon: ShieldCheck,
+      domain: "security",
+      items: [
+        "AI Agent Security", "Prompt Injection Defense", "Secret Redaction",
+        "Egress Control", "JWT", "Authentication", "Authorization"
+      ],
     },
   ];
 
@@ -454,216 +476,94 @@ export default function MobbinPortfolio() {
   const filteredSkills = skillDomainFilter === "all"
     ? skillCategories
     : skillCategories.filter(cat => {
-      if (skillDomainFilter === "ai") return cat.category.toLowerCase().includes("ai") || cat.category.toLowerCase().includes("ml");
-      if (skillDomainFilter === "fullstack") return cat.category.toLowerCase().includes("frontend") || cat.category.toLowerCase().includes("languages");
-      if (skillDomainFilter === "infra") return cat.category.toLowerCase().includes("cloud") || cat.category.toLowerCase().includes("databases");
+      if (skillDomainFilter === "ai") return cat.domain === "ai" || cat.domain === "data";
+      if (skillDomainFilter === "fullstack") return cat.domain === "languages" || cat.domain === "frameworks" || cat.domain === "testing";
+      if (skillDomainFilter === "infra") return cat.domain === "infra";
+      if (skillDomainFilter === "security") return cat.domain === "security";
       return true;
     });
 
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-[#111113] selection:bg-[#111113] selection:text-[#ffffff] w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-[#EFECE4] text-[#45433D] selection:bg-[#111111] selection:text-[#FAF7EF] w-full max-w-full overflow-x-hidden font-inter">
 
-      {/* ================= MINIMAL EDITORIAL NAVBAR ================= */}
-      <div className={`sticky top-2 sm:top-5 z-50 w-full px-2.5 sm:px-6 flex justify-center pointer-events-none mb-3 sm:mb-6 transition-all duration-300 transform ${
+      {/* ================= YASHB TACTILE NAVBAR (Floating comfortably with space above, no bottom line) ================= */}
+      <div className={`sticky top-3 sm:top-5 z-50 w-full px-3 sm:px-6 flex justify-center pointer-events-none transition-all duration-300 transform ${
         isHeaderVisible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0"
       }`}>
-        <header className="pointer-events-auto bg-[#ffffff]/95 backdrop-blur-md rounded-full px-3 sm:px-5 lg:px-7 py-2 sm:py-2.5 flex items-center justify-between gap-2 border border-[#e4e4e9] shadow-sm max-w-5xl w-full">
+        <header className="pointer-events-auto yashb-nav px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3 max-w-4xl w-full">
 
           {/* Logo Mark */}
-          <a href="#hero" className="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
+          <a href="#hero" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
             <div className="relative shrink-0">
               <img
                 src="/anil.png"
                 alt="Meda Anilkumar"
-                className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover transition-transform group-hover:scale-105 border border-[#e0e0e0] shrink-0"
+                className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover transition-transform group-hover:scale-105 shadow-[0_2.5px_0_#DBD6C7] shrink-0"
               />
-              <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white" />
+              <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-[#4B63FF] ring-2 ring-[#FAF7EF]" />
             </div>
             <div className="flex flex-col text-left truncate">
-              <span className="font-[650] text-[13.5px] sm:text-[14px] tracking-tight text-[#111113] leading-tight truncate">
+              <span className="font-shantell font-[800] text-[15px] sm:text-[16px] tracking-tight text-[#111111] leading-tight truncate">
                 Meda Anilkumar
               </span>
-              <span className="text-[10px] sm:text-[10.5px] font-[500] text-[#6e6e78] hidden md:block">
-                SWE & AI Builder
+              <span className="font-mono text-[10px] font-[700] text-[#6A6253] uppercase tracking-wider hidden md:block">
+                SWE &amp; AI BUILDER
               </span>
             </div>
           </a>
 
-          {/* Minimal Navigation Links - Shown only on large desktop screens to prevent header overflow on tablets */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13.5px] font-[500] text-[#6e6e78]">
-            <a href="#about" className="hover:text-[#111113] transition-colors">About</a>
-            <a href="#projects" className="hover:text-[#111113] transition-colors">Projects</a>
-            <a href="#skills" className="hover:text-[#111113] transition-colors">Skills</a>
-            <a href="#research" className="hover:text-[#111113] transition-colors">Research</a>
-            <a href="#experience" className="hover:text-[#111113] transition-colors">Timeline</a>
-            <a href="#contact" className="hover:text-[#111113] transition-colors">Contact</a>
+          {/* Navigation Links - Clean Yashb typography */}
+          <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-[13.5px] lg:text-[14px] font-[600] font-inter text-[#45433D]">
+            <a href="#about" className="hover:text-[#111111] transition-colors">About</a>
+            <a href="#projects" className="hover:text-[#111111] transition-colors">Projects</a>
+            <a href="#skills" className="hover:text-[#111111] transition-colors">Skills</a>
+            <a href="#research" className="hover:text-[#111111] transition-colors">Research</a>
+            <a href="#experience" className="hover:text-[#111111] transition-colors">Timeline</a>
+            <a href="#contact" className="hover:text-[#111111] transition-colors">Contact</a>
           </nav>
 
-          {/* Nav Actions - Adaptively sized so buttons NEVER come outside the header pill on any device */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Quick Resume Button: visible on all devices, compact on small phones */}
+          {/* Nav Action - Single Clean Crisp 3D Button (No empty button) */}
+          <div className="flex items-center gap-2 shrink-0">
             <a
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline text-[11.5px] sm:text-[12.5px] h-8 sm:h-8.5 px-2.5 sm:px-3.5 inline-flex items-center gap-1.5 shadow-2xs shrink-0"
+              className="btn-primary text-[13px] h-9 px-4.5 inline-flex items-center gap-2 shrink-0 font-[600]"
               title="View & Download Resume"
             >
-              <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-indigo-600 shrink-0" />
-              <span className="hidden xs:inline">Resume</span>
+              <Download className="h-3.5 w-3.5 text-[#FAF7EF] shrink-0" />
+              <span>Resume</span>
             </a>
-
-            {/* Quick Contact CTA: visible on screens >= 640px */}
-            <a
-              href="#contact"
-              className="btn-primary text-[12px] sm:text-[12.5px] h-8 sm:h-8.5 px-3 sm:px-4 hidden sm:inline-flex shadow-2xs shrink-0"
-            >
-              <span>Get in touch</span>
-            </a>
-
-            {/* Mobile / Tablet Menu Button (shown whenever lg navigation links are hidden: < 1024px) */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden h-8 w-8 sm:h-8.5 sm:w-8.5 rounded-full bg-[#f3f3f6] hover:bg-[#e4e4e9] text-[#111113] flex items-center justify-center transition-colors cursor-pointer shrink-0"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
           </div>
 
         </header>
       </div>
 
-      {/* Mobile Drawer with Backdrop */}
-      {mobileMenuOpen && (
-        <>
-          {/* Backdrop overlay to close when clicking outside */}
-          <div
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs lg:hidden animate-in fade-in duration-200"
-            onClick={() => setMobileMenuOpen(false)}
+
+
+      {/* ================= MAIN CONTAINER - EXTENDS FULLY TO SIDES ================= */}
+      <main className="mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-[1360px] pt-3 sm:pt-6 pb-20 sm:pb-28 flex flex-col gap-16 sm:gap-24 lg:gap-32 w-full">
+
+        {/* ================= YASHB HERO SECTION ================= */}
+        <section id="hero" className="relative pt-7 pb-10 sm:pt-11 sm:pb-16 lg:pt-15 lg:pb-20 flex flex-col justify-center w-full">
+
+          {/* Ambient Warm Radial Background Glow */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[600px] lg:w-[920px] h-[260px] sm:h-[380px] pointer-events-none rounded-full -z-10 opacity-70 blur-3xl" 
+            style={{ background: "radial-gradient(120% 130% at 38% 14%, rgb(254, 253, 249) 0%, rgb(241, 236, 225) 60%, rgb(226, 216, 198) 100%)" }}
           />
-
-          <div className="fixed inset-x-3 sm:inset-x-6 top-16 sm:top-20 z-50 max-w-md mx-auto bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[24px] p-4 sm:p-5 shadow-2xl space-y-3 lg:hidden animate-in fade-in slide-in-from-top-4 duration-200 max-h-[calc(100vh-5.5rem)] overflow-y-auto">
-            <div className="flex items-center justify-between pb-2 border-b border-[#f0f0f4]">
-              <span className="text-[12px] font-[600] uppercase tracking-wider text-[#6e6e78]">Navigation</span>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="h-7 w-7 rounded-full bg-[#f3f3f6] text-[#111113] flex items-center justify-center hover:bg-[#e4e4e9] transition-colors"
-                aria-label="Close menu"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
-            <div className="flex flex-col space-y-1 text-[14.5px] font-[500] text-[#111113]">
-              <a
-                href="#hero"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span>Home</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span>About Meda</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#projects"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors font-[600] flex items-center justify-between"
-              >
-                <span className="flex items-center gap-2">
-                  <span>Projects in Action</span>
-                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">{allProjects.length}</span>
-                </span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#skills"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span>Architecture &amp; Stack</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#research"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span className="flex items-center gap-2">
-                  <span>Research Paper</span>
-                  <span className="text-[10px] font-[700] px-2 py-0.5 rounded-full bg-purple-50 text-purple-700">Springer</span>
-                </span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#experience"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span>Career Timeline</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 hover:bg-[#f8f8fa] rounded-[12px] transition-colors flex items-center justify-between"
-              >
-                <span>Contact</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[#a0a0ab]" />
-              </a>
-            </div>
-
-            <div className="pt-3 border-t border-[#f0f0f4] flex flex-col xs:flex-row gap-2">
-              <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline flex-1 text-[13px] h-10 w-full"
-              >
-                <Download className="h-4 w-4" />
-                <span>Download Resume</span>
-              </a>
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn-primary flex-1 text-[13px] h-10 w-full"
-              >
-                <span>Get in touch</span>
-              </a>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* ================= MAIN CONTAINER ================= */}
-      <main className="container mx-auto px-3.5 sm:px-6 lg:px-8 max-w-7xl py-2 sm:py-4 space-y-14 sm:space-y-20 md:space-y-28 overflow-x-hidden w-full">
-
-        {/* ================= EDITORIAL HERO SECTION WITH BORDER-ALIGNED POLAROIDS ================= */}
-        <section id="hero" className="relative pt-8 pb-4 sm:pt-12 sm:pb-6 lg:pt-16 lg:pb-8 flex flex-col justify-center overflow-x-hidden w-full">
-
-          {/* Subtle Ambient Background Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[700px] h-[250px] sm:h-[350px] bg-gradient-to-r from-indigo-100/60 via-purple-100/50 to-blue-100/60 blur-3xl pointer-events-none rounded-full -z-10 max-w-full" />
 
           {/* 3-Column Wide Border-Aligned Hero Layout */}
           <div className="w-full flex items-center justify-between gap-4 lg:gap-8 xl:gap-12">
 
             {/* Left Image Card: Positioned on the left border */}
-            <div className="hidden lg:flex w-[200px] xl:w-[230px] shrink-0 justify-start">
+            <div className="hidden lg:flex w-[210px] xl:w-[235px] shrink-0 justify-start">
               <div
-                className="polaroid-card group cursor-pointer w-[195px] xl:w-[220px] shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] bg-white ring-1 ring-black/5 p-3 pb-3.5 rounded-[20px]"
-                style={{ '--rot': '-4deg', transform: 'rotate(-4deg)' } as React.CSSProperties}
+                className="polaroid-card group cursor-pointer w-[205px] xl:w-[230px] transition-all duration-300 hover:scale-[1.03]"
+                style={{ '--rot': '-3.5deg', transform: 'rotate(-3.5deg)' } as React.CSSProperties}
               >
-                <div className="aspect-[4/4.8] w-full rounded-[14px] overflow-hidden bg-[#ebebf0] mb-2.5 shadow-inner border border-zinc-200">
+                <div className="aspect-[4/4.7] w-full rounded-[12px] overflow-hidden bg-[#FAF7EF] mb-2 shadow-inner border border-[#DBD8D0]">
                   <img
                     src="/anil.png"
                     alt="Meda Anilkumar"
@@ -672,69 +572,57 @@ export default function MobbinPortfolio() {
                   />
                 </div>
                 <div className="text-center px-1">
-                  <span className="text-[15px] xl:text-[16px] font-[800] text-[#111113] block leading-tight">Meda Anilkumar</span>
-                  <span className="text-[11.5px] xl:text-[12px] text-indigo-600 font-[700] mt-0.5 block">SWE & AI Builder 🚀</span>
+                  <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Meda Anilkumar</span>
+                  <span className="font-mono text-[10.5px] text-[#4B63FF] font-[700] mt-0.5 block uppercase tracking-wider">SWE &amp; AI BUILDER 🚀</span>
                 </div>
               </div>
             </div>
 
-            {/* Center Hero Column - Compact, perfectly proportioned, all content above fold */}
-            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-3 sm:space-y-3.5 relative z-10 flex-1 px-1">
+            {/* Center Hero Column - Extends comfortably without being squeezed */}
+            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-3.5 sm:space-y-4 relative z-10 flex-1 px-1 sm:px-2">
 
-              {/* Mobile Polaroids Duo (Shown ONLY on mobile < lg, placed at the top so cards NEVER go below) */}
+              {/* Mobile Polaroids Duo */}
               <div className="flex lg:hidden items-center justify-center gap-3 pb-0.5">
-                <div className="polaroid-card shadow-md p-2 rounded-[14px] bg-white ring-1 ring-black/5 w-28" style={{ transform: 'rotate(-2deg)' }}>
-                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-zinc-200">
+                <div className="polaroid-card shadow-md p-1.5 rounded-[12px] w-24 sm:w-28" style={{ transform: 'rotate(-2deg)' }}>
+                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-[#DBD8D0]">
                     <img src="/anil.png" alt="Meda Anilkumar" className="w-full h-full object-cover object-top" loading="eager" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#111113] block truncate">Anilkumar 👨‍💻</span>
+                  <span className="font-shantell text-[11px] sm:text-[12px] font-[800] text-[#111111] block truncate">Anilkumar 👨‍💻</span>
                 </div>
-                <div className="polaroid-card shadow-md p-2 rounded-[14px] bg-white ring-1 ring-black/5 w-28" style={{ transform: 'rotate(2deg)' }}>
-                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-zinc-200">
+                <div className="polaroid-card shadow-md p-1.5 rounded-[12px] w-24 sm:w-28" style={{ transform: 'rotate(2deg)' }}>
+                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-[#DBD8D0]">
                     <img src="/ghibli-hackathon.jpg" alt="Hackathon win" className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#111113] block truncate">REVA 2nd 🏆</span>
+                  <span className="font-shantell text-[11px] sm:text-[12px] font-[800] text-[#111111] block truncate">REVA 2nd 🏆</span>
                 </div>
               </div>
 
-              {/* Status Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] text-[12px] sm:text-[12.5px] font-[650] text-[#111113] shadow-xs">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Available for new opportunities</span>
+              {/* Status Pill Badge with playful tilt */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFFFFF] border border-[#DBD8D0] text-[11.5px] sm:text-[12px] font-mono font-[700] text-[#111111] shadow-[0_2px_0_#DBD8D0,inset_0_1px_1.5px_#fff] rotate-[-1deg]">
+                <span className="h-2 w-2 rounded-full bg-[#4B63FF] animate-pulse" />
+                <span>AVAILABLE FOR FULL-TIME ROLES</span>
               </div>
 
-              {/* Editorial Main Headline with Serif Italic Accent */}
-              <h1 className="text-[26px] xs:text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-[850] text-[#111113] leading-[1.15] tracking-tight break-words">
-                Hi, I'm <span className="font-editorial italic text-indigo-600 text-[1.12em] font-normal tracking-normal">Meda Anilkumar</span>, building software &amp; AI products.
+              {/* Yashb Main Headline */}
+              <h1 className="font-shantell text-[28px] xs:text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] font-[800] text-[#111111] leading-[1.12] tracking-[-0.5px] break-words max-w-3xl mx-auto">
+                Hi, I'm <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">Meda Anilkumar</span>, building software &amp; AI products.
               </h1>
 
-              {/* Descriptive Subtext */}
-              <p className="text-[14.5px] sm:text-[16px] font-[400] text-[#555560] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
-                Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Creator of <strong className="text-[#111113] font-[700]">OmniRecon</strong> (21 MCP tools), founder of <strong className="text-[#111113] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
+              {/* Subtext in Inter */}
+              <p className="font-inter text-[14.5px] sm:text-[16px] font-[400] text-[#45433D] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
+                Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Creator of <strong className="text-[#111111] font-[700]">OmniRecon</strong> (21 MCP tools), founder of <strong className="text-[#111111] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
               </p>
 
-              {/* Unified Action Hub — 2 clean rows of 3 buttons */}
-              <div className="space-y-2 sm:space-y-2.5 pt-1">
-                {/* Row 1: Primary Action & Live Products (3 in a row) */}
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-                  {/* View Resume Primary CTA */}
-                  <a
-                    href={resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary h-9 sm:h-9.5 px-4 sm:px-5 text-[12.5px] sm:text-[13px] shadow-xs inline-flex items-center gap-2 cursor-pointer"
-                    title="View & Download Resume"
-                  >
-                    <Download className="h-4 w-4 shrink-0" />
-                    <span>View resume</span>
-                  </a>
-
-                  {/* Google Play Store */}
+              {/* Action Hub with Tactile 3D Soft Clay Buttons */}
+              <div className="flex flex-col items-center gap-3.5 sm:gap-4 pt-3 sm:pt-4 w-full max-w-3xl mx-auto">
+                
+                {/* Row 1: Products & Research Paper */}
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full">
                   <a
                     href={playStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 h-9 sm:h-9.5 rounded-full bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] text-[12px] sm:text-[12.5px] font-[600] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    className="btn-outline h-10 sm:h-11 px-4.5 sm:px-5.5 text-[12.5px] sm:text-[13px] group"
                     title="Download / Test Spora on Google Play Store"
                   >
                     <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -744,121 +632,115 @@ export default function MobbinPortfolio() {
                       <path d="M17.295 8.498l3.447 1.963a.85.85 0 0 1 0 1.487l-3.447 1.963-3.503-1.909 3.503-3.504z" fill="#FFD600" />
                     </svg>
                     <span>Google Play</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] transition-colors" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors" />
                   </a>
 
-                  {/* Spora on X */}
-                  <a
-                    href={sporaXUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 h-9 sm:h-9.5 rounded-full bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] text-[12px] sm:text-[12.5px] font-[600] transition-all duration-200 shadow-2xs cursor-pointer group"
-                    title="Watch Spora Product Demo Video on 𝕏"
-                  >
-                    <span className="font-bold text-[12px] leading-none">𝕏</span>
-                    <span>Spora on 𝕏</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6e6e78] group-hover:text-[#111113] transition-colors" />
-                  </a>
-                </div>
-
-                {/* Row 2: Research & Code Links (3 in a row) */}
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-                  {/* Research Paper Pill */}
                   <a
                     href={paperUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-indigo-300 hover:bg-indigo-50/60 hover:text-indigo-700 transition-all duration-200 shadow-2xs cursor-pointer group"
+                    className="btn-outline h-10 sm:h-11 px-4.5 sm:px-5.5 text-[12.5px] sm:text-[13px] group"
                     title="Read Springer-Accepted Research Paper (SCBI)"
                   >
-                    <FileText className="h-3.5 w-3.5 text-indigo-600 shrink-0" />
+                    <FileText className="h-4 w-4 text-[#111111] shrink-0" />
                     <span>Research paper</span>
-                    <span className="text-[9px] uppercase tracking-wider font-[750] px-1.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 shrink-0 hidden xs:inline">Springer</span>
-                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-indigo-600 transition-colors shrink-0" />
+                    <span className="text-[9.5px] uppercase tracking-wider font-[750] px-1.5 py-0.5 rounded-full bg-[#111111] text-[#FAF7EF] shrink-0 hidden md:inline">Springer</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
                   </a>
 
-                  {/* OpenReview Pill */}
+                  <a
+                    href={sporaXUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline h-10 sm:h-11 px-4.5 sm:px-5.5 text-[12.5px] sm:text-[13px] group"
+                    title="Watch Spora Product Demo Video on 𝕏"
+                  >
+                    <span className="font-bold text-[13px] leading-none">𝕏</span>
+                    <span>Spora on 𝕏</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors" />
+                  </a>
+                </div>
+
+                {/* Row 2: Remaining 3 Buttons (OpenReview, GitHub Kit, Research on 𝕏) */}
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 w-full">
                   <a
                     href={openReviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-violet-300 hover:bg-violet-50/60 hover:text-violet-700 transition-all duration-200 shadow-2xs cursor-pointer group"
+                    className="btn-pill-soft text-[12px] font-mono group"
                     title="Read Paper on OpenReview (SCBI)"
                   >
-                    <BookOpen className="h-3.5 w-3.5 text-violet-600 shrink-0" />
+                    <BookOpen className="h-3.5 w-3.5 text-[#111111] shrink-0" />
                     <span>OpenReview</span>
-                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-violet-600 transition-colors shrink-0" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
                   </a>
 
-                  {/* GitHub Kit Pill */}
                   <a
                     href="https://github.com/anilkumara9/SCBI"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    className="btn-pill-soft text-[12px] font-mono group"
                     title="SCBI GitHub Falsification Kit"
                   >
                     <Github className="h-3.5 w-3.5 shrink-0" />
                     <span>GitHub Kit</span>
-                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-[#111113] transition-colors shrink-0" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
                   </a>
 
-                  {/* Research on X Pill */}
                   <a
                     href={researchXUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 h-8 sm:h-8.5 rounded-full text-[12px] sm:text-[12.5px] font-[600] bg-white text-[#111113] border border-[#e4e4e9] hover:border-[#111113] hover:bg-[#f8f8fa] transition-all duration-200 shadow-2xs cursor-pointer group"
+                    className="btn-pill-soft text-[12px] font-mono group"
                     title="Read Research Post on 𝕏"
                   >
                     <span className="font-bold text-[11px] leading-none">𝕏</span>
                     <span>Research on 𝕏</span>
-                    <ArrowUpRight className="h-3 w-3 text-[#6e6e78] group-hover:text-[#111113] transition-colors shrink-0" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
                   </a>
                 </div>
               </div>
 
-              {/* Metadata Contact Row — with proper, comfortable gap */}
-              <div className="pt-4 sm:pt-6 flex flex-wrap items-center justify-center gap-y-1.5 gap-x-5 text-[12.5px] sm:text-[13px] font-[500] text-[#6e6e78]">
-                <span className="inline-flex items-center gap-1.5 text-[#111113] font-[600]">
-                  <MapPin className="h-4 w-4 text-indigo-600" />
+              {/* Metadata Contact Row */}
+              <div className="pt-5 sm:pt-6 flex flex-wrap items-center justify-center gap-y-2 gap-x-5 sm:gap-x-7 text-[12.5px] sm:text-[13px] font-[500] text-[#6A6253] font-inter">
+                <span className="inline-flex items-center gap-1.5 text-[#111111] font-[600]">
+                  <MapPin className="h-4 w-4 text-[#111111]" />
                   <span>Bengaluru, Karnataka</span>
                 </span>
 
-                <span className="text-[#d8d8de] hidden sm:inline">·</span>
+                <span className="text-[#DBD8D0] hidden sm:inline">·</span>
 
                 <button
                   type="button"
                   onClick={() => copyToClipboard('anilkumarmeda6@gmail.com', 'hero-email')}
-                  className="inline-flex items-center gap-1.5 hover:text-[#111113] transition-colors cursor-pointer group bg-transparent border-0 p-0 font-[600] max-w-full"
+                  className="inline-flex items-center gap-2 hover:text-[#111111] transition-colors cursor-pointer group bg-transparent border-0 p-0 font-[600] max-w-full text-[#111111]"
                   title="Click to copy email address"
                 >
-                  <Mail className="h-4 w-4 text-[#6e6e78] group-hover:text-indigo-600 shrink-0" />
+                  <Mail className="h-4 w-4 text-[#6A6253] group-hover:text-[#111111] shrink-0" />
                   <span className="underline decoration-dotted underline-offset-4 truncate max-w-[210px] xs:max-w-none">anilkumarmeda6@gmail.com</span>
                   {copiedItem === 'hero-email' ? (
-                    <span className="badge-popular text-[10.5px] py-0.5 px-2 shrink-0">Copied!</span>
+                    <span className="badge-yashb-blue text-[10px] py-0.5 px-2 shrink-0">Copied!</span>
                   ) : (
-                    <Copy className="h-3 w-3 opacity-50 group-hover:opacity-100 shrink-0" />
+                    <Copy className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 shrink-0" />
                   )}
                 </button>
 
-                <span className="text-[#d8d8de] hidden sm:inline">·</span>
+                <span className="text-[#DBD8D0] hidden sm:inline">·</span>
 
-                <span className="inline-flex items-center gap-1.5 text-[#111113] font-[600]">
-                  <Award className="h-4 w-4 text-indigo-600" />
+                <span className="inline-flex items-center gap-1.5 text-[#111111] font-[600]">
+                  <Award className="h-4 w-4 text-[#111111]" />
                   <span>B.E. CSE · CGPA 8.09 / 10</span>
                 </span>
               </div>
-
             </div>
 
             {/* Right Image Card: Positioned on the right border */}
-            <div className="hidden lg:flex w-[200px] xl:w-[230px] shrink-0 justify-end">
+            <div className="hidden lg:flex w-[210px] xl:w-[235px] shrink-0 justify-end">
               <div
-                className="polaroid-card group cursor-pointer w-[195px] xl:w-[220px] shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] bg-white ring-1 ring-black/5 p-3 pb-3.5 rounded-[20px]"
-                style={{ '--rot': '4deg', transform: 'rotate(4deg)' } as React.CSSProperties}
+                className="polaroid-card group cursor-pointer w-[205px] xl:w-[230px] transition-all duration-300 hover:scale-[1.03]"
+                style={{ '--rot': '3.5deg', transform: 'rotate(3.5deg)' } as React.CSSProperties}
               >
-                <div className="aspect-[4/4.8] w-full rounded-[14px] overflow-hidden bg-[#ebebf0] mb-2.5 shadow-inner border border-zinc-200">
+                <div className="aspect-[4/4.7] w-full rounded-[12px] overflow-hidden bg-[#FAF7EF] mb-2 shadow-inner border border-[#DBD8D0]">
                   <img
                     src="/ghibli-hackathon.jpg"
                     alt="Hackathon victory"
@@ -867,8 +749,8 @@ export default function MobbinPortfolio() {
                   />
                 </div>
                 <div className="text-center px-1">
-                  <span className="text-[15px] xl:text-[16px] font-[800] text-[#111113] block leading-tight">Hackathon Victory</span>
-                  <span className="text-[11.5px] xl:text-[12px] text-indigo-600 font-[700] mt-0.5 block">REVA 2nd Prize 🏆</span>
+                  <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Hackathon Victory</span>
+                  <span className="font-mono text-[10.5px] text-[#4B63FF] font-[700] mt-0.5 block uppercase tracking-wider">REVA 2nd PRIZE 🏆</span>
                 </div>
               </div>
             </div>
@@ -878,13 +760,13 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= ABOUT SECTION ================= */}
-        <section id="about" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
+        <section id="about" className="scroll-mt-24 space-y-6 sm:space-y-8 w-full">
 
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
+          {/* Header (No dividing line) */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
-                Meet <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">Anilkumar</span>.
+              <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
+                Meet <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">Anilkumar</span>.
               </h2>
             </div>
           </div>
@@ -892,35 +774,35 @@ export default function MobbinPortfolio() {
           {/* 2-Column Luxury Story & Profile Card */}
           <div className="grid lg:grid-cols-12 gap-6 items-stretch">
 
-            {/* Left Column: Compact Humanized Story */}
-            <div className="lg:col-span-7 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] p-5 sm:p-7 md:p-8 flex flex-col justify-center space-y-4 shadow-xs">
+            {/* Left Column: Humanized Story */}
+            <div className="lg:col-span-7 card-yashb p-6 sm:p-8 md:p-10 flex flex-col justify-center space-y-4">
               <div className="space-y-3.5">
-                <h3 className="text-xl sm:text-2xl font-[700] text-[#111113] leading-snug tracking-tight">
-                  Full-stack AI engineer & researcher turning ambiguous problems into real-world systems.
+                <h3 className="font-shantell text-xl sm:text-2xl font-[800] text-[#111111] leading-snug tracking-tight">
+                  Full-stack AI engineer &amp; researcher turning ambiguous problems into real-world systems.
                 </h3>
-                <div className="space-y-3 text-[14px] sm:text-[15px] text-[#4b4b53] leading-relaxed">
+                <div className="space-y-3 font-inter text-[14.5px] sm:text-[15.5px] text-[#45433D] leading-relaxed">
                   <p>
                     Hey, I’m Anil Kumar! I’m a Computer Science graduate specializing in Data Science, focused on full-stack architecture, applied AI, and developer tools. I enjoy diving deep into hard technical problems and building software that feels effortless to use.
                   </p>
                   <p>
-                    I’ve shipped products end-to-end across AI, mobile, and web systems. On <strong className="text-[#111113] font-[600]">Spora</strong>, I owned the entire stack from the ground up—building the product interfaces, backend infrastructure, AI-driven discovery, and production deployment. I’ve also built real-time voice and streaming pipelines, tuning latency and reliability for high-concurrency environments.
+                    I’ve shipped products end-to-end across AI, mobile, and web systems. On <strong className="text-[#111111] font-[700]">Spora</strong>, I owned the entire stack from the ground up—building the product interfaces, backend infrastructure, AI-driven discovery, and production deployment. I’ve also built real-time voice and streaming pipelines, tuning latency and reliability for high-concurrency environments.
                   </p>
                   <p>
-                    Alongside building, I conduct independent AI research (including a paper accepted by <strong className="text-[#111113] font-[600]">Springer</strong>), which taught me to challenge assumptions and prove solutions with measurable data. I love working closely with teams and users, understanding true operational constraints, and turning complex, open-ended requirements into dependable software that ships.
+                    Alongside building, I conduct independent AI research (including a paper accepted by <strong className="text-[#111111] font-[700]">Springer</strong>), which taught me to challenge assumptions and prove solutions with measurable data. I love working closely with teams and users, understanding true operational constraints, and turning complex, open-ended requirements into dependable software that ships.
                   </p>
                 </div>
 
-                {/* Compact Focus Pills */}
-                <div className="pt-1 flex flex-wrap gap-2 text-[12px] font-[550] text-[#333338]">
-                  <span className="px-3 py-1 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] inline-flex items-center gap-1.5">
+                {/* Focus Tags */}
+                <div className="pt-2 flex flex-wrap gap-2 text-[12px]">
+                  <span className="tag-yashb inline-flex items-center gap-1.5">
                     <span>⚡</span>
-                    <span>Full-Stack & Applied AI</span>
+                    <span>Full-Stack &amp; Applied AI</span>
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] inline-flex items-center gap-1.5">
+                  <span className="tag-yashb inline-flex items-center gap-1.5">
                     <span>🎧</span>
-                    <span>Real-Time Streaming & Inference</span>
+                    <span>Real-Time Streaming &amp; Inference</span>
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] inline-flex items-center gap-1.5">
+                  <span className="tag-yashb inline-flex items-center gap-1.5">
                     <span>📄</span>
                     <span>Springer-Accepted Author</span>
                   </span>
@@ -929,8 +811,8 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Right Column: Editorial Portrait Card */}
-            <div className="lg:col-span-5 bg-[#ffffff] border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] p-3 sm:p-4 flex flex-col justify-center shadow-xs">
-              <div className="relative w-full h-[320px] sm:h-[350px] lg:h-full lg:min-h-[320px] rounded-[20px] overflow-hidden bg-[#f0f0f4] border border-zinc-200 shadow-sm group">
+            <div className="lg:col-span-5 card-yashb p-3 sm:p-4 flex flex-col justify-center">
+              <div className="relative w-full h-[320px] sm:h-[350px] lg:h-full lg:min-h-[320px] rounded-[22px] overflow-hidden bg-[#FAF7EF] shadow-[inset_0_2px_4px_rgba(60,50,35,0.06),0_1.5px_2px_#fff] group">
                 <img
                   src="/anil.png"
                   alt="Meda Anilkumar"
@@ -940,19 +822,19 @@ export default function MobbinPortfolio() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
                 {/* Top Floating Badge */}
-                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/40 text-[11px] font-[600] text-emerald-800 shadow-xs flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Available for roles</span>
+                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-mono font-[700] text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.15),inset_0_1px_1.5px_#fff] flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#4B63FF] animate-pulse" />
+                  <span>AVAILABLE FOR ROLES</span>
                 </div>
 
                 {/* Bottom Overlay Info */}
                 <div className="absolute bottom-5 left-5 right-5 text-white">
                   <div className="flex items-center gap-1.5 mb-1.5">
-                    <MapPin className="h-3.5 w-3.5 text-emerald-400" />
-                    <span className="text-[11.5px] font-[600] uppercase tracking-wider text-emerald-300">Bengaluru, India</span>
+                    <MapPin className="h-3.5 w-3.5 text-[#C4CCF6]" />
+                    <span className="font-mono text-[11px] font-[700] uppercase tracking-wider text-[#C4CCF6]">Bengaluru, India</span>
                   </div>
-                  <h3 className="text-2xl font-[700] text-white leading-tight">Meda Anilkumar</h3>
-                  <p className="text-[13px] text-zinc-300 font-[500] mt-0.5">Software Engineer & AI Systems Builder</p>
+                  <h3 className="font-shantell text-2xl font-[800] text-white leading-tight">Meda Anilkumar</h3>
+                  <p className="font-inter text-[13px] text-[#FAF7EF]/90 font-[500] mt-0.5">Software Engineer &amp; AI Systems Builder</p>
                 </div>
               </div>
             </div>
@@ -961,195 +843,301 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= SELECTED WORK & PROJECTS ================= */}
-        <section id="projects" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
+        <section id="projects" className="space-y-6 sm:space-y-8 scroll-mt-24 w-full">
 
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
+          {/* Section Header (No dividing line below) */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-1">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
-                Featured <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">projects</span> & systems.
+              <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
+                Featured <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">projects</span> &amp; systems.
               </h2>
+              <p className="font-inter text-[13.5px] sm:text-[14px] text-[#6A6253] mt-1">
+                Full-spectrum autonomous agent tools, consumer platforms, and foundation model research.
+              </p>
             </div>
 
-            {/* Segmented Filter Pills */}
-            <div className="flex items-center gap-1 p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[13px] font-[500] border border-[#e4e4e9] max-w-full overflow-x-auto no-scrollbar shrink-0">
-              {[
-                { id: "all", label: "All Work" },
-                { id: "product", label: "Shipped Platforms" },
-                { id: "research", label: "Research" }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 ${selectedCategory === tab.id
-                      ? 'bg-[#ffffff] text-[#111113] font-[600] shadow-xs'
-                      : 'text-[#6e6e78] hover:text-[#111113]'
-                    }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Horizontal Single-Line Project Showcase (Carousel) */}
-          <div
-            ref={projectsScrollRef}
-            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar -mx-3.5 px-3.5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
-          >
-            {filteredProjects.map((project, idx) => (
-              <div
-                key={project.id}
-                className="group w-[82vw] max-w-[340px] sm:w-[320px] lg:w-[340px] shrink-0 snap-start bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[22px] sm:rounded-[24px] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-
-                {/* Artwork Container - Compact & Sleek */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900 border-b border-[#f0f0f4]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Single Clean Status Badge */}
-                  <div className="absolute top-3 left-3 pointer-events-none">
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-[600] bg-black/65 backdrop-blur-md text-white border border-white/20 shadow-xs flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>{project.badge}</span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Content & Details - Compact & Focused */}
-                <div className="p-4 sm:p-5 space-y-3 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2.5">
-
-                    {/* Timeline Period & Telemetry */}
-                    <div className="flex items-center justify-between text-[11.5px] font-[500] text-[#6e6e78]">
-                      <span>{project.period}</span>
-                      <span className="text-[10.5px] font-mono text-indigo-600 font-[650] truncate max-w-[140px]">{project.lldMetric}</span>
-                    </div>
-
-                    {/* Title & Role */}
-                    <div>
-                      <h3 className="text-[16px] sm:text-[17px] font-[700] text-[#111113] leading-snug group-hover:text-indigo-600 transition-colors line-clamp-1">
-                        {project.title}
-                      </h3>
-                      <span className="text-[12px] font-[500] text-[#6e6e78] block mt-0.5">
-                        {project.role}
-                      </span>
-                    </div>
-
-                    {/* 2-line Description Summary */}
-                    <p className="text-[12.5px] text-[#4b4b53] leading-relaxed line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    {/* Stack Badges - Compact Top 3 */}
-                    <div className="flex flex-wrap gap-1 pt-0.5">
-                      {project.stack.slice(0, 3).map((tech: string) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 rounded-md text-[10.5px] font-[550] bg-[#f8f8fa] border border-[#e4e4e9] text-[#111113]"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.stack.length > 3 && (
-                        <span className="px-1.5 py-0.5 rounded-md text-[10px] font-[550] bg-[#f8f8fa] border border-[#e4e4e9] text-[#6e6e78]">
-                          +{project.stack.length - 3}
-                        </span>
-                      )}
-                    </div>
-
-                  </div>
-
-                  {/* Actions Row - Structured 2-Button Grid */}
-                  <div className="pt-3 mt-1 border-t border-[#f0f0f4] grid grid-cols-2 gap-2 w-full">
-                    <a
-                      href={project.links[0]?.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="h-9 px-2.5 sm:px-3 rounded-full bg-[#111113] hover:bg-indigo-600 text-white font-[600] text-[11.5px] sm:text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs hover:shadow-xs active:scale-98 min-w-0 group/btn"
-                    >
-                      <span className="truncate">{project.links[0]?.label}</span>
-                      <ArrowUpRight className="h-3 w-3 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                    </a>
-
-                    <button
-                      type="button"
-                      onClick={() => setActiveProjectModal(project)}
-                      className="h-9 px-2.5 sm:px-3 rounded-full bg-white hover:bg-[#f8f8fa] text-[#111113] border border-[#e4e4e9] hover:border-[#111113] font-[600] text-[11.5px] sm:text-[12px] inline-flex items-center justify-center gap-1 transition-all shadow-2xs active:scale-98 min-w-0 cursor-pointer"
-                      title="Inspect Low-Level Architecture Specs"
-                    >
-                      <Cpu className="h-3 w-3 text-indigo-600 shrink-0" />
-                      <span className="truncate">Architecture</span>
-                    </button>
-                  </div>
-
-                </div>
-
+            {/* Filter & View Mode Controls: First Carousel, Second Grid */}
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+              {/* Segmented Filter Pills */}
+              <div className="flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md rounded-full text-[12px] sm:text-[12.5px] font-[500] shadow-[0_4px_12px_-2px_rgba(80,70,55,0.12),inset_0_1.5px_2px_#fff] max-w-full overflow-x-auto no-scrollbar shrink-0">
+                {[
+                  { id: "all", label: "All Work" },
+                  { id: "product", label: "Shipped Platforms" },
+                  { id: "research", label: "Research" }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setSelectedCategory(tab.id)}
+                    className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 font-inter text-[12px] ${selectedCategory === tab.id
+                        ? 'bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] font-[600] shadow-[0_3px_8px_-1px_rgba(0,0,0,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.3)]'
+                        : 'text-[#45433D] hover:text-[#111111] hover:bg-black/5'
+                      }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
               </div>
-            ))}
+
+              {/* View Mode Toggle: First Carousel, Second Grid */}
+              <div className="hidden sm:inline-flex items-center gap-1 p-1 bg-white/90 backdrop-blur-md rounded-full shadow-[0_4px_12px_-2px_rgba(80,70,55,0.12),inset_0_1.5px_2px_#fff]">
+                <button
+                  type="button"
+                  onClick={() => setProjectViewMode("carousel")}
+                  className={`px-3 py-1.5 rounded-full transition-all cursor-pointer font-inter text-[11.5px] font-[600] inline-flex items-center gap-1.5 ${
+                    projectViewMode === "carousel"
+                      ? "bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] shadow-xs"
+                      : "text-[#6A6253] hover:text-[#111111]"
+                  }`}
+                  title="Switch to Carousel View (First layout)"
+                  aria-label="Carousel view"
+                >
+                  <Columns3 className="h-3.5 w-3.5" />
+                  <span>Carousel</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setProjectViewMode("grid")}
+                  className={`px-3 py-1.5 rounded-full transition-all cursor-pointer font-inter text-[11.5px] font-[600] inline-flex items-center gap-1.5 ${
+                    projectViewMode === "grid"
+                      ? "bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] shadow-xs"
+                      : "text-[#6A6253] hover:text-[#111111]"
+                  }`}
+                  title="Switch to Grid View (Second layout)"
+                  aria-label="Grid view"
+                >
+                  <LayoutGrid className="h-3.5 w-3.5" />
+                  <span>Grid</span>
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Carousel Navigation Bar Below Cards */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-[#f0f0f4]">
-            <div className="flex items-center gap-3 text-[13px] text-[#6e6e78]">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f8f8fa] border border-[#e4e4e9] font-[600] text-[#111113]">
-                <Terminal className="h-3.5 w-3.5 text-indigo-600" />
-                <span>Low-Level Architecture Showcase</span>
-              </span>
-              <span className="hidden sm:inline">·</span>
-              <span className="hidden sm:inline font-[500]">
-                {filteredProjects.length} systems & platforms
-              </span>
-            </div>
+          {/* Project Showcase: First Carousel Layout, Second Grid Layout */}
+          {projectViewMode === "carousel" ? (
+            /* First: Carousel View (Wide tactile cards with smooth scroll) */
+            <div className="space-y-4">
+              <div
+                ref={projectsScrollRef}
+                className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar w-full px-1"
+              >
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    className="card-project w-[88vw] max-w-[420px] sm:w-[410px] md:w-[430px] shrink-0 snap-start p-6 sm:p-7 flex flex-col justify-between min-h-[460px] sm:min-h-[480px]"
+                  >
+                    <div className="space-y-4 flex-1 flex flex-col">
+                      {/* Top Bar: Status Badge + Period */}
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="badge-yashb-blue shadow-xs">
+                          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                          <span>{project.badge}</span>
+                        </span>
+                        <span className="font-mono text-[11.5px] font-[600] text-[#6A6253]">
+                          {project.period}
+                        </span>
+                      </div>
 
-            {/* 2 Navigation Buttons to Move Left and Right */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => scrollProjects("left")}
-                aria-label="Previous system"
-                className="h-12 w-12 rounded-full border border-[#e4e4e9] bg-[#ffffff] text-[#111113] hover:bg-[#111113] hover:text-white hover:border-[#111113] shadow-2xs hover:shadow-md transition-all flex items-center justify-center cursor-pointer active:scale-95 group"
-              >
-                <ChevronLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
-              </button>
-              <button
-                onClick={() => scrollProjects("right")}
-                aria-label="Next system"
-                className="h-12 w-12 rounded-full border border-[#111113] bg-[#111113] text-white hover:bg-indigo-600 hover:border-indigo-600 shadow-2xs hover:shadow-md transition-all flex items-center justify-center cursor-pointer active:scale-95 group"
-              >
-                <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              </button>
+                      {/* Title, Role & LLD Metric */}
+                      <div className="space-y-1.5 pt-1">
+                        <h3 className="font-shantell text-[18.5px] sm:text-[20px] font-[800] text-[#111111] leading-snug">
+                          {project.title}
+                        </h3>
+                        <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] font-mono">
+                          <span className="font-[600] text-[#6A6253]">{project.role}</span>
+                          <span className="font-[700] text-[#4B63FF]">{project.lldMetric}</span>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="font-inter text-[13.5px] text-[#45433D] leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      {/* Key Highlight Box */}
+                      {project.bulletPoints && project.bulletPoints[0] && (
+                        <div className="p-3.5 rounded-[16px] bg-[#FAF8F4] text-[12.5px] text-[#2B2620] leading-relaxed font-inter shadow-[inset_0_1.5px_2px_rgba(60,50,35,0.06),0_1px_1.5px_#fff] flex items-start gap-2.5 border-l-3 border-[#4B63FF]">
+                          <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                          <span>{project.bulletPoints[0]}</span>
+                        </div>
+                      )}
+
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
+                        {project.stack.map((tech: string) => (
+                          <span key={tech} className="tag-yashb text-[11px]">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="pt-5 mt-auto grid grid-cols-2 gap-2.5 w-full border-t border-[#DBD8D0]/50">
+                      <a
+                        href={project.links[0]?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary h-9.5 text-[12px] px-3 justify-center min-w-0 group/btn"
+                      >
+                        <span className="truncate">{project.links[0]?.label}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setActiveProjectModal(project)}
+                        className="btn-outline h-9.5 text-[12px] px-3 justify-center min-w-0 cursor-pointer"
+                        title="Inspect Low-Level Architecture Specs"
+                      >
+                        <Cpu className="h-3.5 w-3.5 text-[#4B63FF] shrink-0" />
+                        <span className="truncate">Architecture</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Carousel Controls Bar */}
+              <div className="flex items-center justify-center sm:justify-end gap-2.5 pt-2">
+                <button
+                  type="button"
+                  onClick={() => scrollProjects("left")}
+                  aria-label="Previous system"
+                  className="btn-outline btn-icon-3d"
+                  title="Scroll left"
+                >
+                  <ChevronLeft className="h-5 w-5 stroke-[2.2] shrink-0 text-[#111111]" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollProjects("right")}
+                  aria-label="Next system"
+                  className="btn-primary btn-icon-3d"
+                  title="Scroll right"
+                >
+                  <ChevronRight className="h-5 w-5 stroke-[2.2] shrink-0 text-[#FAF7EF]" />
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            /* Second: Grid View */
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 w-full">
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    className="card-project p-6 sm:p-7 flex flex-col justify-between min-h-[460px] sm:min-h-[480px]"
+                  >
+                    <div className="space-y-4 flex-1 flex flex-col">
+                      {/* Top Bar: Status Badge + Period */}
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="badge-yashb-blue shadow-xs">
+                          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                          <span>{project.badge}</span>
+                        </span>
+                        <span className="font-mono text-[11.5px] font-[600] text-[#6A6253]">
+                          {project.period}
+                        </span>
+                      </div>
+
+                      {/* Title, Role & LLD Metric */}
+                      <div className="space-y-1.5 pt-1">
+                        <h3 className="font-shantell text-[18.5px] sm:text-[20px] font-[800] text-[#111111] leading-snug">
+                          {project.title}
+                        </h3>
+                        <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] font-mono">
+                          <span className="font-[600] text-[#6A6253]">{project.role}</span>
+                          <span className="font-[700] text-[#4B63FF]">{project.lldMetric}</span>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="font-inter text-[13.5px] text-[#45433D] leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      {/* Key Highlight Box */}
+                      {project.bulletPoints && project.bulletPoints[0] && (
+                        <div className="p-3.5 rounded-[16px] bg-[#FAF8F4] text-[12.5px] text-[#2B2620] leading-relaxed font-inter shadow-[inset_0_1.5px_2px_rgba(60,50,35,0.06),0_1px_1.5px_#fff] flex items-start gap-2.5 border-l-3 border-[#4B63FF]">
+                          <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                          <span>{project.bulletPoints[0]}</span>
+                        </div>
+                      )}
+
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
+                        {project.stack.map((tech: string) => (
+                          <span key={tech} className="tag-yashb text-[11px]">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="pt-5 mt-auto grid grid-cols-2 gap-2.5 w-full border-t border-[#DBD8D0]/50">
+                      <a
+                        href={project.links[0]?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary h-9.5 text-[12px] px-3 justify-center min-w-0 group/btn"
+                      >
+                        <span className="truncate">{project.links[0]?.label}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => setActiveProjectModal(project)}
+                        className="btn-outline h-9.5 text-[12px] px-3 justify-center min-w-0 cursor-pointer"
+                        title="Inspect Low-Level Architecture Specs"
+                      >
+                        <Cpu className="h-3.5 w-3.5 text-[#4B63FF] shrink-0" />
+                        <span className="truncate">Architecture</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Grid Footer Action */}
+              <div className="flex items-center justify-center pt-2">
+                <button
+                  type="button"
+                  onClick={() => setProjectViewMode("carousel")}
+                  className="text-[12px] font-mono font-[700] text-[#4B63FF] hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-white px-4 py-2 rounded-full shadow-[0_2.5px_6px_-1px_rgba(80,70,55,0.12),inset_0_1px_1.5px_#fff]"
+                >
+                  <Columns3 className="h-3.5 w-3.5" />
+                  <span>Switch back to Carousel View</span>
+                </button>
+              </div>
+            </div>
+          )}
 
         </section>
 
         {/* ================= CORE CAPABILITIES & STACK ================= */}
-        <section id="skills" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
+        <section id="skills" className="space-y-6 sm:space-y-8 scroll-mt-24 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
-                Architectural <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">stack</span> & systems.
+              <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
+                Architectural <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">stack</span> &amp; systems.
               </h2>
             </div>
 
-            {/* Domain Switcher Pills */}
-            <div className="flex items-center gap-1 p-1 bg-[#f3f3f6] rounded-full text-[12px] sm:text-[12.5px] font-[500] border border-[#e4e4e9] max-w-full overflow-x-auto no-scrollbar shrink-0">
+            {/* Domain Switcher Pills - Borderless 3D Stadium Dock */}
+            <div className="flex items-center gap-1.5 p-1.5 bg-white/85 backdrop-blur-md rounded-full text-[12px] sm:text-[12.5px] font-[500] shadow-[0_4px_12px_-2px_rgba(80,70,55,0.12),inset_0_1.5px_2px_#fff] max-w-full overflow-x-auto no-scrollbar shrink-0">
               {[
-                { id: "all", label: "All Capabilities" },
-                { id: "ai", label: "AI & Foundation Models" },
-                { id: "fullstack", label: "Full-Stack & Systems" },
-                { id: "infra", label: "DevOps & Databases" }
+                { id: "all", label: "All Stack" },
+                { id: "ai", label: "AI & ML" },
+                { id: "fullstack", label: "Languages & Frameworks" },
+                { id: "infra", label: "Cloud & DevOps" },
+                { id: "security", label: "Security & Testing" }
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setSkillDomainFilter(tab.id)}
-                  className={`px-3 sm:px-3.5 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 ${skillDomainFilter === tab.id
-                      ? 'bg-[#ffffff] text-[#111113] font-[600] shadow-xs'
-                      : 'text-[#6e6e78] hover:text-[#111113]'
+                  className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 font-inter text-[12px] ${skillDomainFilter === tab.id
+                      ? 'bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] font-[600] shadow-[0_3px_8px_-1px_rgba(0,0,0,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.3)]'
+                      : 'text-[#45433D] hover:text-[#111111] hover:bg-black/5'
                     }`}
                 >
                   {tab.label}
@@ -1167,13 +1155,13 @@ export default function MobbinPortfolio() {
                 return (
                   <div
                     key={group.category}
-                    className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] p-6 space-y-4 transition-all duration-200 shadow-2xs hover:shadow-sm"
+                    className="card-yashb p-6 space-y-4"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-xl bg-[#f8f8fa] border border-[#e4e4e9] flex items-center justify-center shrink-0 text-indigo-600">
-                        <Icon className="h-4 w-4" />
+                      <div className="h-10 w-10 rounded-[14px] bg-white shadow-[0_3px_8px_-1px_rgba(80,70,55,0.14),inset_0_1.5px_2px_#fff] flex items-center justify-center shrink-0 text-[#4B63FF]">
+                        <Icon className="h-4.5 w-4.5" />
                       </div>
-                      <h4 className="text-[15.5px] font-[700] text-[#111113]">
+                      <h4 className="font-shantell text-[16.5px] font-[800] text-[#111111]">
                         {group.category}
                       </h4>
                     </div>
@@ -1182,7 +1170,7 @@ export default function MobbinPortfolio() {
                       {group.items.map((skill) => (
                         <span
                           key={skill}
-                          className="px-3 py-1 rounded-full text-[12px] font-[500] bg-[#f8f8fa] text-[#111113] border border-[#e4e4e9] hover:bg-[#111113] hover:text-white transition-all cursor-default"
+                          className="tag-yashb text-[11.5px]"
                         >
                           {skill}
                         </span>
@@ -1194,14 +1182,14 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Engineering Depth Philosophy Banner */}
-            <div className="p-4 sm:p-5 rounded-[20px] bg-[#f8f8fa] border border-[#e4e4e9] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[13px] text-[#6e6e78]">
+            <div className="card-tactile-sm p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[13.5px] text-[#45433D] font-inter">
               <div className="flex items-center gap-2.5">
-                <Sparkles className="h-4 w-4 text-indigo-600 shrink-0" />
+                <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0" />
                 <span>
-                  <strong className="text-[#111113] font-[600]">Engineering Principle:</strong> From transformer residual stream activations down to sub-100ms client-side DOM reconciliation, engineered for production reliability.
+                  <strong className="text-[#111111] font-[700]">Engineering Principle:</strong> From transformer residual stream activations down to sub-100ms client-side DOM reconciliation, engineered for production reliability.
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-indigo-600 font-[600] shrink-0">
+              <span className="font-mono text-[11px] text-[#4B63FF] font-[700] uppercase tracking-wider shrink-0">
                 zero-leakage · type-safe · reproducible
               </span>
             </div>
@@ -1210,69 +1198,69 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= RESEARCH & PUBLICATIONS ================= */}
-        <section id="research" className="space-y-6 sm:space-y-8 scroll-mt-24 overflow-x-hidden w-full">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#e4e4e9] pb-6">
+        <section id="research" className="space-y-6 sm:space-y-8 scroll-mt-24 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-[700] text-[#111113]">
-                Foundation models & <span className="font-editorial text-indigo-600 text-[1.18em] font-normal">interpretability</span>.
+              <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
+                Foundation models &amp; <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">interpretability</span>.
               </h2>
             </div>
-            <p className="text-[14px] text-[#6e6e78] max-w-md sm:text-right">
+            <p className="font-inter text-[13px] text-[#6A6253] max-w-md sm:text-right">
               Probing frozen transformer representations and tabular generative models with open falsification suites.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
 
             {/* Research Card 1: SCBI */}
-            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] sm:rounded-[32px] p-5 sm:p-7 md:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
-              <div className="space-y-4">
+            <div className="card-yashb p-5 sm:p-7 md:p-8 flex flex-col justify-between space-y-4">
+              <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-[600] tracking-wide uppercase bg-purple-50 text-purple-700 border border-purple-200">
+                  <span className="badge-yashb-lavender">
                     Springer Accepted
                   </span>
-                  <span className="text-[12px] font-[600] text-[#111113]">
-                    Jan 2026 – Present
+                  <span className="font-mono text-[11.5px] font-[700] text-[#111111]">
+                    JAN 2026 – PRESENT
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-[700] text-[#111113] leading-tight">
+                  <h3 className="font-shantell text-lg sm:text-xl font-[800] text-[#111111] leading-tight">
                     SCBI: Self-Consistent Basis Invention
                   </h3>
-                  <p className="text-[13px] font-[500] text-indigo-600 mt-1">
-                    Mechanistic Interpretability & Latent Basis Discovery for Frozen Models
+                  <p className="font-mono text-[12px] font-[700] text-[#4B63FF] mt-1">
+                    Mechanistic Interpretability &amp; Latent Basis Discovery
                   </p>
                 </div>
 
-                <div className="p-4 rounded-[18px] bg-[#f8f8fa] border border-[#f0f0f4] text-[13.5px] text-[#111113] leading-relaxed font-mono text-[12px]">
+                <div className="p-4 rounded-[20px] bg-gradient-to-b from-[#FAF8F4] to-[#F3EFE6] text-[12.5px] text-[#111111] leading-relaxed font-mono shadow-[inset_0_2px_4px_rgba(60,50,35,0.06),0_1.5px_2px_#fff]">
                   "Empirical boundary result: decodable concept directions (~0.7 cosine) demonstrate zero causal transfer under static steering (p = 1.0, replicated)."
                 </div>
 
-                <div className="space-y-2 text-[13px] text-[#6e6e78]">
+                <div className="space-y-1.5 text-[13px] text-[#45433D] font-inter">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>Inference-time representation learning without modifying billions of weights</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>Shipped turn-key open-source falsification suite on GitHub</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>Accepted for publication in peer-reviewed scientific proceedings (Springer)</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-[#f0f0f4] grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <a
                   href="https://github.com/anilkumara9/SCBI"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0"
+                  className="btn-primary text-[11.5px] sm:text-[12px] h-9 px-2 sm:px-3 justify-center min-w-0"
                 >
-                  <Github className="h-4 w-4 shrink-0" />
+                  <Github className="h-3.5 w-3.5 shrink-0 text-[#FAF7EF]" />
                   <span className="truncate">GitHub Kit</span>
                 </a>
 
@@ -1280,9 +1268,9 @@ export default function MobbinPortfolio() {
                   href={paperUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0"
+                  className="btn-outline text-[11.5px] sm:text-[12px] h-9 px-2 sm:px-3 justify-center min-w-0"
                 >
-                  <FileText className="h-4 w-4 text-indigo-600 shrink-0" />
+                  <FileText className="h-3.5 w-3.5 text-[#111111] shrink-0" />
                   <span className="truncate">PDF Paper</span>
                 </a>
 
@@ -1290,10 +1278,10 @@ export default function MobbinPortfolio() {
                   href={openReviewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0 hover:border-violet-300 hover:text-violet-700"
+                  className="btn-outline text-[11.5px] sm:text-[12px] h-9 px-2 sm:px-3 justify-center min-w-0 hover:text-[#111111]"
                   title="Read on OpenReview"
                 >
-                  <BookOpen className="h-4 w-4 text-violet-600 shrink-0" />
+                  <BookOpen className="h-3.5 w-3.5 text-[#111111] shrink-0" />
                   <span className="truncate">OpenReview</span>
                 </a>
 
@@ -1301,63 +1289,63 @@ export default function MobbinPortfolio() {
                   href={researchXUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline text-[12px] sm:text-[13px] h-10 px-2 sm:px-3 justify-center min-w-0 hover:border-[#111113]"
+                  className="btn-outline text-[11.5px] sm:text-[12px] h-9 px-2 sm:px-3 justify-center min-w-0 hover:text-[#111111]"
                   title="Read Research Post on 𝕏"
                 >
-                  <span className="font-bold text-[12px] leading-none shrink-0">𝕏</span>
+                  <span className="font-bold text-[11px] leading-none shrink-0">𝕏</span>
                   <span className="truncate">Research on 𝕏</span>
                 </a>
               </div>
             </div>
 
             {/* Research Card 2: LaTable */}
-            <div className="bg-[#ffffff] border border-[#e4e4e9] hover:border-[#111113] rounded-[24px] sm:rounded-[32px] p-5 sm:p-7 md:p-8 flex flex-col justify-between transition-all duration-200 shadow-sm hover:shadow-md">
+            <div className="card-yashb p-6 sm:p-8 md:p-9 flex flex-col justify-between space-y-5">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-[600] tracking-wide uppercase bg-blue-50 text-blue-700 border border-blue-200">
+                  <span className="badge-yashb-blue">
                     Foundation Models
                   </span>
-                  <span className="text-[12px] font-[500] text-[#6e6e78]">
+                  <span className="font-mono text-[12px] font-[700] text-[#6A6253]">
                     2025 – 2026
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-[700] text-[#111113] leading-tight">
+                  <h3 className="font-shantell text-xl sm:text-2xl font-[800] text-[#111111] leading-tight">
                     LaTable: Generative Models for Tabular Data
                   </h3>
-                  <p className="text-[13px] font-[500] text-indigo-600 mt-1">
-                    Diffusion-Transformer Generation & LLM Metadata Conditioning
+                  <p className="font-mono text-[12.5px] font-[700] text-[#4B63FF] mt-1">
+                    Diffusion-Transformer Generation &amp; Metadata Conditioning
                   </p>
                 </div>
 
-                <div className="p-4 rounded-[18px] bg-[#f8f8fa] border border-[#f0f0f4] text-[13.5px] text-[#111113] leading-relaxed">
+                <div className="p-4 rounded-[20px] bg-gradient-to-b from-[#FAF8F4] to-[#F3EFE6] text-[13px] text-[#111111] leading-relaxed font-mono shadow-[inset_0_2px_4px_rgba(60,50,35,0.06),0_1.5px_2px_#fff]">
                   "Researched diffusion-transformer generation of tabular datasets; analyzed LLM metadata encoding, mixed-type modeling, and permutation equivariance."
                 </div>
 
-                <div className="space-y-2 text-[13px] text-[#6e6e78]">
+                <div className="space-y-2 text-[13.5px] text-[#45433D] font-inter">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>Diffusion formulations for mixed continuous and discrete distributions</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>Benchmarked against CTGAN and TabDDPM baselines</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                     <span>LLM contextual encoders for relational column prior mapping</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-[#f0f0f4] flex items-center justify-between text-[13px] text-[#6e6e78]">
-                <span className="font-[500] flex items-center gap-1.5 text-[#111113]">
-                  <FlaskConical className="h-4 w-4 text-indigo-600" />
-                  <span>Tabular Modality Research</span>
+              <div className="pt-6 flex items-center justify-between text-[13px] text-[#6A6253]">
+                <span className="font-mono font-[700] flex items-center gap-1.5 text-[#111111]">
+                  <FlaskConical className="h-4 w-4 text-[#4B63FF]" />
+                  <span>TABULAR MODALITY RESEARCH</span>
                 </span>
-                <span className="text-[12px] bg-[#f8f8fa] px-3 py-1 rounded-full font-[600] text-[#111113]">
-                  Independent Project
+                <span className="tag-yashb text-[11px] font-mono font-[700] text-[#111111]">
+                  INDEPENDENT PROJECT
                 </span>
               </div>
             </div>
@@ -1377,38 +1365,46 @@ export default function MobbinPortfolio() {
 
       </main>
 
-      {/* ================= HIGH-IMPACT BOLD DARK FOOTER (MATCHING REFERENCE) ================= */}
-      <footer className="w-full bg-[#0c0c0e] text-[#f4f4f6] pt-16 sm:pt-20 pb-12 sm:pb-14 px-4 sm:px-6 mt-20 sm:mt-28 relative overflow-hidden">
+      {/* ================= YASHB TACTILE WARM DARK FOOTER ================= */}
+      <footer 
+        className="w-full text-[#FAF7EF] pt-20 sm:pt-24 pb-14 sm:pb-16 px-4 sm:px-6 mt-20 sm:mt-28 relative overflow-hidden bg-[#181614] border-t border-[#34302A]"
+      >
 
-        {/* Subtle radial ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] h-[200px] sm:h-[250px] bg-gradient-to-b from-indigo-500/10 via-purple-500/5 to-transparent blur-3xl pointer-events-none rounded-full max-w-full" />
+        {/* Soft Warm Radial Ambient Top Glow */}
+        <div 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] sm:w-[850px] h-[240px] pointer-events-none rounded-full opacity-60 blur-3xl -z-0"
+          style={{ background: "radial-gradient(50% 50% at 50% 0%, rgba(239, 236, 228, 0.16) 0%, transparent 100%)" }}
+        />
 
-        <div className="container mx-auto max-w-5xl space-y-12 relative z-10 text-center">
+        <div className="container mx-auto max-w-[1360px] space-y-12 relative z-10 text-center">
 
           {/* Main Footer Headline */}
-          <div className="space-y-4 max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-[700] text-white tracking-tight leading-[1.1]">
-              Ready to build <span className="font-editorial text-indigo-400 text-[1.2em] font-normal">something amazing?</span>
+          <div className="space-y-3.5 max-w-3xl mx-auto">
+            <span className="font-mono text-[11px] font-[700] uppercase tracking-widest text-[#E7E1D2]/70 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md shadow-xs inline-block mb-1">
+              LET'S COLLABORATE
+            </span>
+            <h2 className="font-shantell text-3xl sm:text-5xl lg:text-[54px] font-[800] text-[#FAF8F5] tracking-tight leading-[1.15]">
+              Ready to build <span className="underline decoration-[#DBD6C7]/50 decoration-wavy">something amazing?</span>
             </h2>
-            <p className="text-[16px] text-zinc-400 leading-relaxed">
-              Open for full-time Software Engineer & AI Engineer roles in Bengaluru or Remote. Let's discuss how I can bring product velocity and AI depth to your team.
+            <p className="font-inter text-[15px] sm:text-[16.5px] text-[#E7E1D2]/80 leading-relaxed max-w-2xl mx-auto pt-1">
+              Open for full-time Software Engineer &amp; AI Engineer roles in Bengaluru or Remote worldwide. Let's talk about turning complex requirements into dependable systems that ship.
             </p>
           </div>
 
-          {/* Action Row */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          {/* Action Row - Tactile 3D Buttons (Generous spacing & height) */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4.5 pt-1">
             <a
               href={emailUrl}
-              className="px-5 sm:px-6 h-11 sm:h-12 rounded-full bg-white text-black font-[650] text-[13px] sm:text-[14px] inline-flex items-center gap-2 hover:bg-zinc-200 transition-all hover:scale-[1.02] max-w-full"
+              className="btn-outline h-12 px-6 text-[13.5px] font-[600] inline-flex items-center gap-2.5 shadow-[0_8px_24px_-4px_rgba(0,0,0,0.5),inset_0_1.5px_2px_#fff,inset_0_-2px_4px_rgba(180,168,145,0.2)] bg-gradient-to-b from-[#FFFFFF] to-[#FAF8F4] text-[#111111]"
             >
-              <Mail className="h-4 w-4 shrink-0" />
+              <Mail className="h-4 w-4 shrink-0 text-[#111111]" />
               <span className="truncate max-w-[210px] xs:max-w-none">anilkumarmeda6@gmail.com</span>
             </a>
 
             <button
               type="button"
               onClick={() => copyToClipboard('anilkumarmeda6@gmail.com', 'footer-email')}
-              className="px-5 h-12 rounded-full bg-zinc-900 text-white border border-zinc-700 font-[500] text-[13px] inline-flex items-center gap-2 hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="h-12 px-5 rounded-full bg-white/10 hover:bg-white/15 text-[#FAF7EF] backdrop-blur-md text-[13px] font-[600] inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_1.5px_rgba(255,255,255,0.18)] cursor-pointer transition-all hover:-translate-y-0.5 active:translate-y-0.5"
             >
               {copiedItem === 'footer-email' ? (
                 <>
@@ -1427,55 +1423,59 @@ export default function MobbinPortfolio() {
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 h-12 rounded-full bg-zinc-900 text-white border border-zinc-700 font-[500] text-[13px] inline-flex items-center gap-2 hover:bg-zinc-800 transition-colors"
+              className="h-12 px-5 rounded-full bg-white/10 hover:bg-white/15 text-[#FAF7EF] backdrop-blur-md text-[13px] font-[600] inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_1.5px_rgba(255,255,255,0.18)] cursor-pointer transition-all hover:-translate-y-0.5 active:translate-y-0.5"
             >
               <Download className="h-4 w-4" />
-              <span>Resume</span>
+              <span>Resume PDF</span>
             </a>
           </div>
 
-          {/* Social Links Row */}
-          <div className="pt-8 border-t border-zinc-800/80 flex flex-wrap items-center justify-center gap-6 text-[14px] font-[500] text-zinc-400">
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <Github className="h-4 w-4" />
-              <span>GitHub</span>
-            </a>
-            <span>·</span>
-            <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <Linkedin className="h-4 w-4" />
-              <span>LinkedIn</span>
-            </a>
-            <span>·</span>
-            <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <span>𝕏 Profile</span>
-            </a>
-            <span>·</span>
-            <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <FileText className="h-4 w-4" />
-              <span>Springer Paper</span>
-            </a>
-            <span>·</span>
-            <a href={openReviewUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <BookOpen className="h-4 w-4" />
-              <span>OpenReview</span>
-            </a>
-            <span>·</span>
-            <a href={researchXUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
-              <span>𝕏 Research</span>
-            </a>
+          {/* Social Links Dock - Floating 3D Stadium Capsule (Matching reference image) */}
+          <div className="pt-4 flex justify-center">
+            <div className="inline-flex flex-wrap items-center justify-center gap-5 sm:gap-7 px-6 sm:px-9 py-3 sm:py-3.5 rounded-full bg-white/[0.08] backdrop-blur-md shadow-[0_8px_24px_-4px_rgba(0,0,0,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.15)] text-[13px] sm:text-[13.5px] font-[600] text-[#E7E1D2]">
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <Github className="h-4 w-4" />
+                <span>GitHub</span>
+              </a>
+              <span className="opacity-40">·</span>
+              <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <Linkedin className="h-4 w-4" />
+                <span>LinkedIn</span>
+              </a>
+              <span className="opacity-40">·</span>
+              <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <span className="font-bold text-[12.5px] leading-none">𝕏</span>
+                <span>Profile</span>
+              </a>
+              <span className="opacity-40">·</span>
+              <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <FileText className="h-4 w-4" />
+                <span>Springer Paper</span>
+              </a>
+              <span className="opacity-40">·</span>
+              <a href={openReviewUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <BookOpen className="h-4 w-4" />
+                <span>OpenReview</span>
+              </a>
+              <span className="opacity-40">·</span>
+              <a href={researchXUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <span className="font-bold text-[12.5px] leading-none">𝕏</span>
+                <span>Research</span>
+              </a>
+            </div>
           </div>
 
           {/* Copyright & Keyboard Hint */}
-          <div className="pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[12px] text-zinc-500">
-            <p>© {new Date().getFullYear()} Meda Anilkumar. Designed & built with care in Bengaluru.</p>
-            <div className="flex items-center justify-center gap-2">
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 font-mono text-[10px] text-zinc-300">C</kbd>
-              <span>to copy email</span>
+          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[12px] text-[#E7E1D2]/60 font-inter">
+            <p>© {new Date().getFullYear()} Meda Anilkumar. Designed &amp; built in Bengaluru, Karnataka.</p>
+            <div className="hidden sm:flex items-center justify-center gap-2">
+              <kbd className="px-1.5 py-0.5 rounded-[4px] bg-white/10 border border-white/20 font-mono text-[10px] text-[#FAF7EF]">C</kbd>
+              <span>copy email</span>
               <span className="mx-1">·</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 font-mono text-[10px] text-zinc-300">R</kbd>
+              <kbd className="px-1.5 py-0.5 rounded-[4px] bg-white/10 border border-white/20 font-mono text-[10px] text-[#FAF7EF]">R</kbd>
               <span>resume</span>
               <span className="mx-1">·</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 font-mono text-[10px] text-zinc-300">P</kbd>
+              <kbd className="px-1.5 py-0.5 rounded-[4px] bg-white/10 border border-white/20 font-mono text-[10px] text-[#FAF7EF]">P</kbd>
               <span>paper</span>
             </div>
           </div>
@@ -1492,24 +1492,24 @@ export default function MobbinPortfolio() {
           onClick={() => setActiveProjectModal(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-white border border-[#e4e4e9] rounded-[22px] sm:rounded-[28px] shadow-2xl overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-3xl bg-[#FFFFFF] rounded-[24px] shadow-2xl overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Sticky Modal Header */}
-            <div className="flex items-start justify-between gap-3 sm:gap-4 p-4 sm:p-6 border-b border-[#e4e4e9] bg-white/95 backdrop-blur-md shrink-0">
+            <div className="flex items-start justify-between gap-3 sm:gap-4 p-4 sm:p-6 shadow-[0_2.5px_0_#DBD6C7] bg-[#FAF7EF]/95 backdrop-blur-md shrink-0">
               <div>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-mono font-[700] bg-indigo-50 border border-indigo-200 text-indigo-700 uppercase tracking-wider">
+                  <span className="badge-yashb-blue text-[10px]">
                     {activeProjectModal.lldType || "SYSTEM ARCHITECTURE"}
                   </span>
-                  <span className="text-[12px] font-[500] text-[#6e6e78]">
+                  <span className="font-mono text-[11.5px] font-[700] text-[#6A6253]">
                     {activeProjectModal.period}
                   </span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-[700] text-[#111113]">
+                <h3 className="font-shantell text-xl sm:text-2xl font-[800] text-[#111111]">
                   {activeProjectModal.title}
                 </h3>
-                <p className="text-[12.5px] sm:text-[13px] text-[#6e6e78] font-[500] mt-0.5">
+                <p className="font-mono text-[12px] text-[#6A6253] font-[600] mt-0.5">
                   {activeProjectModal.role}
                 </p>
               </div>
@@ -1517,28 +1517,30 @@ export default function MobbinPortfolio() {
               <button
                 onClick={() => setActiveProjectModal(null)}
                 aria-label="Close modal"
-                className="p-2 rounded-full hover:bg-[#f3f3f6] text-[#6e6e78] hover:text-[#111113] transition-colors cursor-pointer border border-transparent hover:border-[#e4e4e9] shrink-0"
+                className="btn-outline h-8 w-8 p-0 flex items-center justify-center cursor-pointer shrink-0"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Scrollable Modal Body with Sleek Scrollbar */}
-            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto modal-scrollbar flex-1">
+            {/* Scrollable Modal Body */}
+            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto modal-scrollbar flex-1 bg-[#FFFFFF]">
 
-              {/* Artwork Banner Preview */}
-              <div className="relative h-40 sm:h-48 w-full rounded-[18px] overflow-hidden border border-[#e4e4e9] bg-slate-900 shrink-0">
-                <img
-                  src={activeProjectModal.image}
-                  alt={activeProjectModal.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[12px] pointer-events-none">
-                  <span className="font-mono bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/20 text-indigo-300 font-[650] text-[11px]">
+              {/* Architecture Blueprint Banner */}
+              <div className="p-4 sm:p-5 rounded-[16px] bg-gradient-to-r from-[#1E1C1A] to-[#11100E] text-[#FAF8F5] shadow-[inset_0_1px_2px_rgba(255,255,255,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#A5B4FC] font-[700] block">
+                    {activeProjectModal.lldType || "SYSTEM ARCHITECTURE SPEC"}
+                  </span>
+                  <span className="font-shantell text-[17px] sm:text-[19px] font-[800] text-[#FFFFFF] block leading-snug">
+                    {activeProjectModal.title}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="font-mono bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-[#C4CCF6] font-[700] text-[11px]">
                     {activeProjectModal.lldMetric}
                   </span>
-                  <span className="bg-emerald-500/85 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-[600] flex items-center gap-1.5 shadow-xs">
+                  <span className="badge-yashb-blue text-[10.5px]">
                     <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
                     <span>{activeProjectModal.badge}</span>
                   </span>
@@ -1549,27 +1551,27 @@ export default function MobbinPortfolio() {
               {activeProjectModal.lldFlow && activeProjectModal.lldFlow.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="font-[750] text-indigo-600 flex items-center gap-1.5 uppercase tracking-wider">
+                    <span className="font-[750] text-[#4B63FF] flex items-center gap-1.5 uppercase tracking-wider">
                       <Terminal className="h-3.5 w-3.5" />
-                      <span>Component Pipeline & Data Flow</span>
+                      <span>Component Pipeline &amp; Data Flow</span>
                     </span>
-                    <span className="text-[#8c8c96] font-[500] text-[10.5px]">Execution Trace</span>
+                    <span className="text-[#6A6253] font-[500] text-[10.5px]">Execution Trace</span>
                   </div>
 
-                  <div className="p-3.5 rounded-[16px] bg-[#f8f8fa] border border-[#e4e4e9]">
+                  <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
                     <div className="flex items-center gap-1.5 overflow-x-auto modal-scrollbar pb-1 pt-0.5">
                       {activeProjectModal.lldFlow.map((step: string, sIdx: number) => (
                         <React.Fragment key={sIdx}>
-                          <div className="shrink-0 px-2.5 py-1 rounded-[8px] bg-white border border-[#e4e4e9] shadow-2xs flex items-center gap-1.5">
-                            <span className="h-3.5 w-3.5 rounded-full bg-indigo-50 text-indigo-600 font-mono text-[9.5px] font-bold flex items-center justify-center">
+                          <div className="shrink-0 px-2.5 py-1 rounded-[6px] bg-white border border-[#DBD8D0] shadow-2xs flex items-center gap-1.5">
+                            <span className="h-3.5 w-3.5 rounded-full bg-[#C4CCF6] text-[#2B2620] font-mono text-[9.5px] font-bold flex items-center justify-center">
                               {sIdx + 1}
                             </span>
-                            <span className="text-[11.5px] font-mono font-[600] text-[#111113]">
+                            <span className="text-[11.5px] font-mono font-[700] text-[#111111]">
                               {step}
                             </span>
                           </div>
                           {sIdx < activeProjectModal.lldFlow.length - 1 && (
-                            <span className="text-indigo-500 font-bold text-[11px] shrink-0">➔</span>
+                            <span className="text-[#4B63FF] font-bold text-[11px] shrink-0">➔</span>
                           )}
                         </React.Fragment>
                       ))}
@@ -1580,11 +1582,11 @@ export default function MobbinPortfolio() {
 
               {/* System Overview */}
               <div className="space-y-1.5">
-                <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
-                  <Layers className="h-3.5 w-3.5 text-indigo-600" />
+                <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
+                  <Layers className="h-3.5 w-3.5 text-[#4B63FF]" />
                   <span>System Overview</span>
                 </h4>
-                <p className="text-[13.5px] text-[#333338] leading-relaxed bg-[#f8f8fa] p-4 rounded-[16px] border border-[#e4e4e9]">
+                <p className="text-[13.5px] text-[#45433D] font-inter leading-relaxed bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                   {activeProjectModal.description}
                 </p>
               </div>
@@ -1592,11 +1594,11 @@ export default function MobbinPortfolio() {
               {/* Problem & System Constraints */}
               {activeProjectModal.deepDive?.problem && (
                 <div className="space-y-1.5">
-                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
+                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
                     <AlertCircle className="h-3.5 w-3.5 text-amber-600" />
-                    <span>Problem & System Constraints</span>
+                    <span>Problem &amp; System Constraints</span>
                   </h4>
-                  <p className="text-[13.5px] text-[#333338] leading-relaxed bg-[#f8f8fa] p-4 rounded-[16px] border border-[#e4e4e9]">
+                  <p className="text-[13.5px] text-[#45433D] font-inter leading-relaxed bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                     {activeProjectModal.deepDive.problem}
                   </p>
                 </div>
@@ -1605,11 +1607,11 @@ export default function MobbinPortfolio() {
               {/* Low-Level Design & Key Decisions */}
               {activeProjectModal.deepDive?.architecture && (
                 <div className="space-y-1.5">
-                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
-                    <Cpu className="h-3.5 w-3.5 text-indigo-600" />
-                    <span>Low-Level Architecture & Technical Invariants</span>
+                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
+                    <Cpu className="h-3.5 w-3.5 text-[#4B63FF]" />
+                    <span>Low-Level Architecture &amp; Technical Invariants</span>
                   </h4>
-                  <p className="text-[13.5px] text-[#333338] leading-relaxed bg-[#f8f8fa] p-4 rounded-[16px] border border-[#e4e4e9]">
+                  <p className="text-[13.5px] text-[#45433D] font-inter leading-relaxed bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                     {activeProjectModal.deepDive.architecture}
                   </p>
                 </div>
@@ -1617,35 +1619,35 @@ export default function MobbinPortfolio() {
 
               {/* Technical Telemetry & Invariants Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[12px]">
-                <div className="p-3.5 rounded-[14px] bg-[#f8f8fa] border border-[#e4e4e9]">
-                  <span className="text-[10px] uppercase font-[700] text-indigo-600 block mb-0.5">Primary Storage</span>
-                  <span className="text-[#111113] font-[600] text-[12px]">{activeProjectModal.lldStorage || "Stateful Cache / DB"}</span>
+                <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
+                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Primary Storage</span>
+                  <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldStorage || "Stateful Cache / DB"}</span>
                 </div>
-                <div className="p-3.5 rounded-[14px] bg-[#f8f8fa] border border-[#e4e4e9]">
-                  <span className="text-[10px] uppercase font-[700] text-indigo-600 block mb-0.5">Concurrency Pattern</span>
-                  <span className="text-[#111113] font-[600] text-[12px]">{activeProjectModal.lldPattern || "Asynchronous Non-Blocking"}</span>
+                <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
+                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Concurrency Pattern</span>
+                  <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldPattern || "Asynchronous Non-Blocking"}</span>
                 </div>
-                <div className="p-3.5 rounded-[14px] bg-[#f8f8fa] border border-[#e4e4e9]">
-                  <span className="text-[10px] uppercase font-[700] text-indigo-600 block mb-0.5">Key Metric / Latency</span>
-                  <span className="text-[#111113] font-[600] text-[12px]">{activeProjectModal.lldMetric || "Sub-second Execution"}</span>
+                <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
+                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Key Metric / Latency</span>
+                  <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldMetric || "Sub-second Execution"}</span>
                 </div>
-                <div className="p-3.5 rounded-[14px] bg-[#f8f8fa] border border-[#e4e4e9]">
-                  <span className="text-[10px] uppercase font-[700] text-indigo-600 block mb-0.5">System Paradigm</span>
-                  <span className="text-[#111113] font-[600] text-[12px]">{activeProjectModal.lldType || "Decoupled Architecture"}</span>
+                <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
+                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">System Paradigm</span>
+                  <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldType || "Decoupled Architecture"}</span>
                 </div>
               </div>
 
-              {/* Core Engineering Highlights (Full list moved from card) */}
+              {/* Core Engineering Highlights */}
               {activeProjectModal.bulletPoints && activeProjectModal.bulletPoints.length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
-                    <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
+                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
+                    <Sparkles className="h-3.5 w-3.5 text-[#4B63FF]" />
                     <span>Core Engineering Highlights</span>
                   </h4>
-                  <div className="space-y-2 bg-[#f8f8fa] p-4 rounded-[16px] border border-[#e4e4e9]">
+                  <div className="space-y-2 bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                     {activeProjectModal.bulletPoints.map((pt: string, i: number) => (
-                      <div key={i} className="flex items-start gap-2.5 text-[13px] text-[#333338]">
-                        <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+                      <div key={i} className="flex items-start gap-2.5 text-[13px] text-[#45433D] font-inter">
+                        <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </div>
                     ))}
@@ -1656,13 +1658,13 @@ export default function MobbinPortfolio() {
               {/* Measurable Outcomes */}
               {activeProjectModal.deepDive?.keyOutcomes && activeProjectModal.deepDive.keyOutcomes.length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
+                  <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                     <span>Measurable System Outcomes</span>
                   </h4>
-                  <div className="space-y-2 bg-[#f8f8fa] p-4 rounded-[16px] border border-[#e4e4e9]">
+                  <div className="space-y-2 bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                     {activeProjectModal.deepDive.keyOutcomes.map((outcome: string, i: number) => (
-                      <div key={i} className="flex items-start gap-2.5 text-[13px] text-[#333338]">
+                      <div key={i} className="flex items-start gap-2.5 text-[13px] text-[#45433D] font-inter">
                         <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{outcome}</span>
                       </div>
@@ -1673,15 +1675,15 @@ export default function MobbinPortfolio() {
 
               {/* Full Tech Stack */}
               <div className="space-y-2">
-                <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#8c8c96] flex items-center gap-1.5">
-                  <Code2 className="h-3.5 w-3.5 text-indigo-600" />
+                <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
+                  <Code2 className="h-3.5 w-3.5 text-[#4B63FF]" />
                   <span>Full Technology Stack</span>
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {activeProjectModal.stack.map((tech: string) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-md text-[11.5px] font-[600] bg-[#f8f8fa] border border-[#e4e4e9] text-[#111113]"
+                      className="tag-yashb text-[11.5px]"
                     >
                       {tech}
                     </span>
@@ -1692,8 +1694,8 @@ export default function MobbinPortfolio() {
             </div>
 
             {/* Sticky Modal Footer with Actions */}
-            <div className="p-3.5 sm:p-5 border-t border-[#e4e4e9] bg-[#f8f8fa] flex flex-wrap items-center justify-between gap-3 shrink-0">
-              <span className="hidden sm:inline font-mono text-[12px] text-[#6e6e78]">
+            <div className="p-3.5 sm:p-5 shadow-[0_-2.5px_0_#DBD6C7] bg-[#FAF7EF] flex flex-wrap items-center justify-between gap-3 shrink-0">
+              <span className="hidden sm:inline font-mono text-[12px] text-[#6A6253]">
                 Architecture Specifications · {activeProjectModal.title}
               </span>
               <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
@@ -1705,8 +1707,8 @@ export default function MobbinPortfolio() {
                     rel="noopener noreferrer"
                     className={
                       link.primary
-                        ? 'h-9 px-4 rounded-full bg-[#111113] hover:bg-indigo-600 text-white font-[600] text-[12px] inline-flex items-center justify-center gap-1.5 transition-all shadow-xs flex-1 sm:flex-none'
-                        : 'h-9 px-4 rounded-full bg-white hover:bg-[#f3f3f6] text-[#111113] border border-[#e4e4e9] font-[600] text-[12px] inline-flex items-center justify-center gap-1.5 transition-all shadow-2xs flex-1 sm:flex-none'
+                        ? 'btn-primary text-[12px] h-9 px-4 flex-1 sm:flex-none'
+                        : 'btn-outline text-[12px] h-9 px-4 flex-1 sm:flex-none'
                     }
                   >
                     <span>{link.label}</span>
@@ -1716,7 +1718,7 @@ export default function MobbinPortfolio() {
                 <button
                   type="button"
                   onClick={() => setActiveProjectModal(null)}
-                  className="h-9 px-4 rounded-full bg-white hover:bg-[#f3f3f6] text-[#6e6e78] hover:text-[#111113] border border-[#e4e4e9] font-[600] text-[12px] transition-colors cursor-pointer"
+                  className="btn-outline text-[12px] h-9 px-4 cursor-pointer"
                 >
                   Close
                 </button>
