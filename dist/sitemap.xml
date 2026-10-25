@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://anilkumarmeda.netlify.app/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -12,7 +12,7 @@
       <image:caption>Meda Anilkumar portrait and portfolio</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://anilkumarmeda.netlify.app/og-preview.png</image:loc>
+      <image:loc>https://anilkumarmeda.netlify.app/og-preview-v2.jpg</image:loc>
       <image:title>Meda Anilkumar Portfolio</image:title>
       <image:caption>Meda Anilkumar Software and AI Engineer portfolio</image:caption>
     </image:image>
