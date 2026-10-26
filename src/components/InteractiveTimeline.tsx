@@ -49,7 +49,7 @@ const InteractiveTimeline: React.FC = () => {
     {
       id: '2',
       date: 'Feb 2026 – May 2026',
-      title: 'AI Intern — CampusPe',
+      title: 'AI Intern at CampusPe',
       organization: 'CampusPe · Bengaluru, IN',
       description: 'Worked directly with product leadership on Generative AI pipelines and model optimization.',
       type: 'experience',
@@ -118,7 +118,7 @@ const InteractiveTimeline: React.FC = () => {
     {
       id: '7',
       date: 'Aug – Sep 2024',
-      title: 'REVA University Hackathon — Second Prize Podium',
+      title: 'REVA University Hackathon (2nd Prize Winner)',
       organization: 'REVA University · Bengaluru',
       description: 'Built conversational voice AI interview simulation platform competing against 50+ squads.',
       type: 'achievement',
@@ -154,13 +154,13 @@ const InteractiveTimeline: React.FC = () => {
   const getTypeBadge = (type: TimelineEvent['type']) => {
     switch (type) {
       case 'education':
-        return { label: 'Education', style: 'bg-[#C4CCF6]/60 text-[#2B2620] border-[#DBD8D0]' };
+        return { label: 'Education', style: 'bg-[#FECE12]/40 text-[#2B2620] border-[#DBD8D0]' };
       case 'achievement':
         return { label: 'Award & Podium', style: 'bg-[#FAF7EF] text-[#111111] border-[#DBD8D0]' };
       case 'experience':
         return { label: 'Industry Role', style: 'bg-[#FAF7EF] text-[#2B2620] border-[#DBD8D0]' };
       case 'research':
-        return { label: 'Springer Research', style: 'bg-[#C4CCF6] text-[#111111] border-[#DBD8D0]' };
+        return { label: 'Springer Research', style: 'bg-[#FECE12] text-[#111111] border-[#DBD8D0]' };
       case 'project':
         return { label: 'Shipped Product', style: 'bg-[#111111] text-[#FAF7EF] border-[#111111]' };
       default:
@@ -186,11 +186,11 @@ const InteractiveTimeline: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2 mb-6 sm:mb-8">
         <div>
           <h3 className="font-shantell text-2xl sm:text-3xl font-[800] text-[#111111] tracking-tight">
-            Engineering &amp; research <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">journey</span>.
+            Engineering &amp; research <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">journey</span>.
           </h3>
         </div>
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-[0_3px_8px_-1px_rgba(80,70,55,0.14),inset_0_1.5px_2px_#fff] text-[11px] font-mono font-[700] text-[#111111] w-fit">
-          <span className="h-2 w-2 rounded-full bg-[#4B63FF] animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-[#FECE12] animate-pulse" />
           <span>2022 – 2026 TRACK RECORD</span>
         </div>
       </div>

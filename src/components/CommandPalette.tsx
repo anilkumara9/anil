@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, X, FileText, Download, Github, Linkedin, Mail, Phone, ExternalLink, Sparkles, Folder, ArrowRight } from 'lucide-react';
+import { Search, X, FileText, Download, Github, Linkedin, Mail, Phone, ExternalLink, Sparkles, Folder, ArrowRight, GitPullRequest } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -44,6 +44,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
         { id: 'research', title: 'SCBI Research Spotlight', desc: 'Inference-time representation learning', icon: FileText },
         { id: 'experience', title: 'Work Experience (CampusPe)', desc: 'AI intern, production GenAI features', icon: Folder },
         { id: 'projects', title: 'Featured Projects (8)', desc: 'OmniRecon (21 MCP tools), Spora (200+ users), Edge ML, Invisly', icon: Folder },
+        { id: 'opensource', title: 'Open-Source Contributions', desc: 'LiteLLM (62k★), Haystack (27k★), Hugging Face, pandas, LangChain', icon: GitPullRequest },
         { id: 'skills', title: 'Technical Skills Matrix', desc: 'PyTorch, Next.js, Edge ML, LangChain, Cloud', icon: Sparkles },
         { id: 'education', title: 'Education & Awards', desc: 'NHCE B.E. (8.09 CGPA) & REVA Hackathon 2nd Prize', icon: Folder },
         { id: 'timeline', title: 'Interactive Timeline', desc: 'Chronological roadmap of projects & research', icon: Folder },

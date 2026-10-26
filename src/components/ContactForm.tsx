@@ -47,7 +47,7 @@ const ContactForm: React.FC = () => {
               <span>ACTIVELY INTERVIEWING</span>
             </span>
             <h3 className="font-shantell text-2xl sm:text-3xl lg:text-4xl font-[800] text-[#111111] leading-[1.15] tracking-tight">
-              Let's build <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">something great</span>.
+              Let's build <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">something great</span>.
             </h3>
             <p className="font-inter text-[14.5px] sm:text-[15.5px] font-[400] text-[#45433D] leading-relaxed pt-1">
               I'm actively interviewing for Software Engineer and AI Engineer roles where I can combine rapid product execution with model layer depth. Based in Bengaluru, open to remote and relocation worldwide.

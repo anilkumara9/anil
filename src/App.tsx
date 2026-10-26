@@ -5,23 +5,23 @@ import {
   Layers, Database, Cloud, Terminal, CheckCircle2, FlaskConical,
   Briefcase, Trophy, ArrowRight, Play, Check, Copy, Code2, Globe, Search,
   X, ChevronRight, ChevronLeft, UserCheck, ShieldCheck, Zap, Share2, Menu, Smartphone,
-  Monitor, Mic, Star, Flame, Compass, Heart, AlertCircle, LayoutGrid, Columns3
+  Monitor, Mic, Star, Flame, Compass, Heart, AlertCircle, LayoutGrid, Columns3,
+  GitPullRequest
 } from "lucide-react";
 
 // Custom Components
 import ContactForm from "./components/ContactForm";
 import InteractiveTimeline from "./components/InteractiveTimeline";
+import OpenSourceSection from "./components/OpenSourceSection";
 import { generateResumePDF } from "./utils/pdfGenerator";
 
 export default function MobbinPortfolio() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [projectViewMode, setProjectViewMode] = useState<"carousel" | "grid">("carousel");
+  const [selectedCategory, setSelectedCategory] = useState<string>("flagship");
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const [activeProjectModal, setActiveProjectModal] = useState<any | null>(null);
   const [skillDomainFilter, setSkillDomainFilter] = useState<string>("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
-  const projectsScrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-hide header on scroll down, show on scroll up
   useEffect(() => {
@@ -45,26 +45,10 @@ export default function MobbinPortfolio() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollProjects = (direction: "left" | "right") => {
-    if (projectsScrollRef.current) {
-      const scrollAmount = projectsScrollRef.current.clientWidth * 0.85;
-      projectsScrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (projectsScrollRef.current) {
-      projectsScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-    }
-  }, [selectedCategory]);
-
   // URLs
   const paperUrl = "https://drive.google.com/file/d/1CCAr86Jl00ynZZyDdFU8kL5x879OL9M3/view?usp=sharing";
   const openReviewUrl = "https://openreview.net/pdf?id=QGcF4561UP";
-  const resumeUrl = "https://drive.google.com/file/d/1_crI1PRZ34A0HcuYu4M23cfre7iPkJ6s/view?usp=sharing";
+  const resumeUrl = "https://drive.google.com/file/d/1w8k__EWaOjgQ_lIn8L2xTy4CxIAGGHXe/view?usp=sharing";
   const playStoreUrl = "https://play.google.com/store/apps/details?id=com.anilkumar09.news&pcampaignid=web_share";
   const sporaXUrl = "https://x.com/anilKumar09873/status/2096482373299057022";
   const researchXUrl = "https://x.com/anilKumar09873/status/2108649451917308224?s=20";
@@ -215,7 +199,7 @@ export default function MobbinPortfolio() {
       title: "OmniRecon: Full-Spectrum Web Recon for Coding Agents",
       period: "Oct 2026 – Present",
       role: "Creator & Open Source Author",
-      type: "product",
+      type: "flagship",
       featured: true,
       badge: "21 MCP Tools · 163 Tests",
       accentBadge: true,
@@ -252,7 +236,7 @@ export default function MobbinPortfolio() {
       title: "Spora: Knowledge-First Social Media Platform",
       period: "Mar 2026 – Present",
       role: "Solo Founder & Developer",
-      type: "product",
+      type: "flagship",
       featured: true,
       badge: "Flagship · 200+ users",
       accentBadge: true,
@@ -328,7 +312,7 @@ export default function MobbinPortfolio() {
       title: "AI Interview Platform (REVA Hackathon Winner)",
       period: "Aug – Sep 2024",
       role: "Hackathon Team Lead",
-      type: "product",
+      type: "hackathon",
       featured: true,
       badge: "Second Prize · Winner out of 50+ Teams",
       accentBadge: true,
@@ -364,7 +348,7 @@ export default function MobbinPortfolio() {
       title: "Invisly: Real-Time AI Desktop Copilot",
       period: "Jan 2026",
       role: "Full-Stack AI Builder",
-      type: "product",
+      type: "flagship",
       featured: false,
       badge: "Live in Production",
       accentBadge: false,
@@ -400,7 +384,7 @@ export default function MobbinPortfolio() {
       title: "On-Device Video Person Re-ID & Dynamic Collage",
       period: "Feb – Mar 2026",
       role: "Edge ML Engineer",
-      type: "ml",
+      type: "research",
       featured: false,
       badge: "100% Offline Edge ML",
       accentBadge: false,
@@ -487,49 +471,44 @@ export default function MobbinPortfolio() {
   return (
     <div className="min-h-screen bg-[#EFECE4] text-[#45433D] selection:bg-[#111111] selection:text-[#FAF7EF] w-full max-w-full overflow-x-hidden font-inter">
 
-      {/* ================= YASHB TACTILE NAVBAR (Floating comfortably with space above, no bottom line) ================= */}
+      {/* ================= YASHB TACTILE NAVBAR (Compact, short floating capsule) ================= */}
       <div className={`sticky top-3 sm:top-5 z-50 w-full px-3 sm:px-6 flex justify-center pointer-events-none transition-all duration-300 transform ${
         isHeaderVisible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0"
       }`}>
-        <header className="pointer-events-auto yashb-nav px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3 max-w-4xl w-full">
+        <header className="pointer-events-auto yashb-nav px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-3 sm:gap-4 max-w-3xl w-full">
 
           {/* Logo Mark */}
-          <a href="#hero" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
+          <a href="#hero" className="flex items-center gap-2 sm:gap-2.5 group shrink-0 min-w-0">
             <div className="relative shrink-0">
               <img
                 src="/anil.png"
                 alt="Meda Anilkumar"
-                className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover transition-transform group-hover:scale-105 shadow-[0_2.5px_0_#DBD6C7] shrink-0"
+                className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-full object-cover transition-transform group-hover:scale-105 shadow-[0_2px_0_#DBD6C7] shrink-0"
               />
-              <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-[#4B63FF] ring-2 ring-[#FAF7EF]" />
+              <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-[#FECE12] ring-2 ring-[#FAF7EF]" />
             </div>
-            <div className="flex flex-col text-left truncate">
-              <span className="font-shantell font-[800] text-[15px] sm:text-[16px] tracking-tight text-[#111111] leading-tight truncate">
+            <div className="flex items-center text-left truncate">
+              <span className="font-shantell font-[800] text-[14px] sm:text-[15.5px] tracking-tight text-[#111111] leading-tight truncate">
                 Meda Anilkumar
-              </span>
-              <span className="font-mono text-[10px] font-[700] text-[#6A6253] uppercase tracking-wider hidden md:block">
-                SWE &amp; AI BUILDER
               </span>
             </div>
           </a>
 
-          {/* Navigation Links - Clean Yashb typography */}
-          <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-[13.5px] lg:text-[14px] font-[600] font-inter text-[#45433D]">
+          {/* Navigation Links - Curated 4 core sections, compact & balanced */}
+          <nav className="hidden md:flex items-center gap-5 sm:gap-6 text-[13px] sm:text-[13.5px] font-[600] font-inter text-[#45433D]">
             <a href="#about" className="hover:text-[#111111] transition-colors">About</a>
             <a href="#projects" className="hover:text-[#111111] transition-colors">Projects</a>
-            <a href="#skills" className="hover:text-[#111111] transition-colors">Skills</a>
             <a href="#research" className="hover:text-[#111111] transition-colors">Research</a>
-            <a href="#experience" className="hover:text-[#111111] transition-colors">Timeline</a>
             <a href="#contact" className="hover:text-[#111111] transition-colors">Contact</a>
           </nav>
 
-          {/* Nav Action - Single Clean Crisp 3D Button (No empty button) */}
+          {/* Nav Action - Single Clean Crisp 3D Button */}
           <div className="flex items-center gap-2 shrink-0">
             <a
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-[13px] h-9 px-4.5 inline-flex items-center gap-2 shrink-0 font-[600]"
+              className="btn-primary text-[12.5px] h-8 sm:h-8.5 px-3.5 sm:px-4 inline-flex items-center gap-1.5 shrink-0 font-[600]"
               title="View & Download Resume"
             >
               <Download className="h-3.5 w-3.5 text-[#FAF7EF] shrink-0" />
@@ -543,10 +522,10 @@ export default function MobbinPortfolio() {
 
 
       {/* ================= MAIN CONTAINER - EXTENDS FULLY TO SIDES ================= */}
-      <main className="mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-[1360px] pt-3 sm:pt-6 pb-20 sm:pb-28 flex flex-col gap-16 sm:gap-24 lg:gap-32 w-full">
+      <main className="mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-[1360px] pt-4 sm:pt-7 pb-20 sm:pb-28 flex flex-col gap-16 sm:gap-24 lg:gap-32 w-full">
 
         {/* ================= YASHB HERO SECTION ================= */}
-        <section id="hero" className="relative pt-7 pb-10 sm:pt-11 sm:pb-16 lg:pt-15 lg:pb-20 flex flex-col justify-center w-full">
+        <section id="hero" className="relative pt-8 pb-10 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 flex flex-col justify-center w-full">
 
           {/* Ambient Warm Radial Background Glow */}
           <div 
@@ -573,7 +552,7 @@ export default function MobbinPortfolio() {
                 </div>
                 <div className="text-center px-1">
                   <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Meda Anilkumar</span>
-                  <span className="font-mono text-[10.5px] text-[#4B63FF] font-[700] mt-0.5 block uppercase tracking-wider">SWE &amp; AI BUILDER 🚀</span>
+                  <span className="font-mono text-[10px] bg-[#FECE12] text-[#111111] font-[750] px-2 py-0.5 rounded-full inline-block mt-0.5 uppercase tracking-wider shadow-xs">BUILDING COOL STUFF ✨</span>
                 </div>
               </div>
             </div>
@@ -599,18 +578,18 @@ export default function MobbinPortfolio() {
 
               {/* Status Pill Badge with playful tilt */}
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFFFFF] border border-[#DBD8D0] text-[11.5px] sm:text-[12px] font-mono font-[700] text-[#111111] shadow-[0_2px_0_#DBD8D0,inset_0_1px_1.5px_#fff] rotate-[-1deg]">
-                <span className="h-2 w-2 rounded-full bg-[#4B63FF] animate-pulse" />
-                <span>AVAILABLE FOR FULL-TIME ROLES</span>
+                <span className="h-2 w-2 rounded-full bg-[#FECE12] animate-pulse" />
+                <span>AVAILABLE FOR FULL-TIME &amp; REMOTE ROLES 🚀</span>
               </div>
 
               {/* Yashb Main Headline */}
               <h1 className="font-shantell text-[28px] xs:text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] font-[800] text-[#111111] leading-[1.12] tracking-[-0.5px] break-words max-w-3xl mx-auto">
-                Hi, I'm <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">Meda Anilkumar</span>, building software &amp; AI products.
+                Hi, I'm <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-6">Meda Anilkumar</span>.
               </h1>
 
-              {/* Subtext in Inter */}
-              <p className="font-inter text-[14.5px] sm:text-[16px] font-[400] text-[#45433D] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
-                Computer Science graduate from Bengaluru crafting high-impact products and probing foundation models. Creator of <strong className="text-[#111111] font-[700]">OmniRecon</strong> (21 MCP tools), founder of <strong className="text-[#111111] font-[700]">Spora</strong> (200+ users), REVA Hackathon winner, and Springer-accepted AI researcher.
+              {/* Subtext in Inter - Personal Introduction & Proof */}
+              <p className="font-inter text-[15px] sm:text-[16.5px] font-[450] text-[#45433D] leading-relaxed max-w-xl sm:max-w-2xl mx-auto">
+                I'm a software engineer and builder based in Bengaluru. I love building real products and useful developer tools. I created <strong className="text-[#111111] font-[700]">OmniRecon</strong> (21 MCP tools for coding agents), founded <strong className="text-[#111111] font-[700]">Spora</strong> (200+ users on Google Play), contribute to <a href="#opensource" className="text-[#111111] font-[700] underline decoration-[#FECE12] decoration-2 underline-offset-2 hover:text-[#B87500] transition-colors">LiteLLM &amp; Haystack</a>, and published AI research with Springer.
               </p>
 
               {/* Action Hub with Tactile 3D Soft Clay Buttons */}
@@ -623,7 +602,7 @@ export default function MobbinPortfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-outline h-10 sm:h-11 px-4.5 sm:px-5.5 text-[12.5px] sm:text-[13px] group"
-                    title="Download / Test Spora on Google Play Store"
+                    title="Download / Test Spora on Google Play Store (200+ users)"
                   >
                     <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M3.609 1.814L13.792 12 3.61 22.186A2.38 2.38 0 0 1 3.39 21.8V2.2c0-.134.076-.268.219-.386z" fill="#00D2FF" />
@@ -643,7 +622,7 @@ export default function MobbinPortfolio() {
                     title="Read Springer-Accepted Research Paper (SCBI)"
                   >
                     <FileText className="h-4 w-4 text-[#111111] shrink-0" />
-                    <span>Research paper</span>
+                    <span>Research Paper</span>
                     <span className="text-[9.5px] uppercase tracking-wider font-[750] px-1.5 py-0.5 rounded-full bg-[#111111] text-[#FAF7EF] shrink-0 hidden md:inline">Springer</span>
                     <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
                   </a>
@@ -661,8 +640,18 @@ export default function MobbinPortfolio() {
                   </a>
                 </div>
 
-                {/* Row 2: Remaining 3 Buttons (OpenReview, GitHub Kit, Research on 𝕏) */}
+                {/* Row 2: Open Source, OpenReview, GitHub Kit, Research on 𝕏 */}
                 <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 w-full">
+                  <a
+                    href="#opensource"
+                    className="btn-pill-soft text-[12px] font-mono group"
+                    title="View Open-Source Contributions (LiteLLM, Haystack, Hugging Face, pandas)"
+                  >
+                    <GitPullRequest className="h-3.5 w-3.5 text-[#B87500] shrink-0" />
+                    <span>Open Source (6 PRs)</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
+                  </a>
+
                   <a
                     href={openReviewUrl}
                     target="_blank"
@@ -750,7 +739,7 @@ export default function MobbinPortfolio() {
                 </div>
                 <div className="text-center px-1">
                   <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Hackathon Victory</span>
-                  <span className="font-mono text-[10.5px] text-[#4B63FF] font-[700] mt-0.5 block uppercase tracking-wider">REVA 2nd PRIZE 🏆</span>
+                  <span className="font-mono text-[10px] bg-[#FECE12] text-[#111111] font-[750] px-2 py-0.5 rounded-full inline-block mt-0.5 uppercase tracking-wider shadow-xs">REVA 2nd PRIZE 🏆</span>
                 </div>
               </div>
             </div>
@@ -766,7 +755,7 @@ export default function MobbinPortfolio() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
               <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
-                Meet <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">Anilkumar</span>.
+                Meet <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">Anilkumar</span>.
               </h2>
             </div>
           </div>
@@ -778,17 +767,17 @@ export default function MobbinPortfolio() {
             <div className="lg:col-span-7 card-yashb p-6 sm:p-8 md:p-10 flex flex-col justify-center space-y-4">
               <div className="space-y-3.5">
                 <h3 className="font-shantell text-xl sm:text-2xl font-[800] text-[#111111] leading-snug tracking-tight">
-                  Full-stack AI engineer &amp; researcher turning ambiguous problems into real-world systems.
+                  Software engineer and builder who loves turning ambitious ideas into dependable products.
                 </h3>
                 <div className="space-y-3 font-inter text-[14.5px] sm:text-[15.5px] text-[#45433D] leading-relaxed">
                   <p>
-                    Hey, I’m Anil Kumar! I’m a Computer Science graduate specializing in Data Science, focused on full-stack architecture, applied AI, and developer tools. I enjoy diving deep into hard technical problems and building software that feels effortless to use.
+                    Hey, I'm Anil! I love building software from the ground up, whether that means crafting clean interfaces, designing reliable backend APIs, or building practical tools for AI coding agents.
                   </p>
                   <p>
-                    I’ve shipped products end-to-end across AI, mobile, and web systems. On <strong className="text-[#111111] font-[700]">Spora</strong>, I owned the entire stack from the ground up—building the product interfaces, backend infrastructure, AI-driven discovery, and production deployment. I’ve also built real-time voice and streaming pipelines, tuning latency and reliability for high-concurrency environments.
+                    I enjoy shipping real things that people actually use. When building <strong className="text-[#111111] font-[700]">Spora</strong>, I owned the entire journey from design and database architecture to real-time feeds and the Google Play launch. With <strong className="text-[#111111] font-[700]">OmniRecon</strong>, I built an open-source MCP toolkit that gives AI coding agents real browser awareness, backed by 163 passing tests.
                   </p>
                   <p>
-                    Alongside building, I conduct independent AI research (including a paper accepted by <strong className="text-[#111111] font-[700]">Springer</strong>), which taught me to challenge assumptions and prove solutions with measurable data. I love working closely with teams and users, understanding true operational constraints, and turning complex, open-ended requirements into dependable software that ships.
+                    I also care about understanding how systems behave. My research on detecting LLM hallucinations was accepted for publication by <strong className="text-[#111111] font-[700]">Springer</strong>, which taught me to validate ideas with measurable data. Above all, I enjoy collaborating with teams, listening to users, and writing code that is clean, fast, and easy to maintain.
                   </p>
                 </div>
 
@@ -823,18 +812,17 @@ export default function MobbinPortfolio() {
 
                 {/* Top Floating Badge */}
                 <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-mono font-[700] text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.15),inset_0_1px_1.5px_#fff] flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#4B63FF] animate-pulse" />
-                  <span>AVAILABLE FOR ROLES</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FECE12] animate-pulse" />
+                  <span>AVAILABLE: FULL-TIME &amp; REMOTE</span>
                 </div>
 
                 {/* Bottom Overlay Info */}
                 <div className="absolute bottom-5 left-5 right-5 text-white">
                   <div className="flex items-center gap-1.5 mb-1.5">
-                    <MapPin className="h-3.5 w-3.5 text-[#C4CCF6]" />
-                    <span className="font-mono text-[11px] font-[700] uppercase tracking-wider text-[#C4CCF6]">Bengaluru, India</span>
+                    <MapPin className="h-3.5 w-3.5 text-[#FECE12]" />
+                    <span className="font-mono text-[11px] font-[700] uppercase tracking-wider text-[#FECE12]">Bengaluru, India</span>
                   </div>
                   <h3 className="font-shantell text-2xl font-[800] text-white leading-tight">Meda Anilkumar</h3>
-                  <p className="font-inter text-[13px] text-[#FAF7EF]/90 font-[500] mt-0.5">Software Engineer &amp; AI Systems Builder</p>
                 </div>
               </div>
             </div>
@@ -843,283 +831,131 @@ export default function MobbinPortfolio() {
         </section>
 
         {/* ================= SELECTED WORK & PROJECTS ================= */}
-        <section id="projects" className="space-y-6 sm:space-y-8 scroll-mt-24 w-full">
+        <section id="projects" className="space-y-4 scroll-mt-24 w-full">
+          {/* Clean Header */}
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-1">
+            <h2 className="font-shantell text-2xl sm:text-3xl font-[800] text-[#111111]">
+              Featured <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">Projects</span>
+            </h2>
+            <span className="text-[12.5px] font-mono text-[#6A6253]">
+              Agent tools, consumer platforms &amp; foundation model research
+            </span>
+          </div>
 
-          {/* Section Header (No dividing line below) */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-1">
-            <div>
-              <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
-                Featured <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">projects</span> &amp; systems.
-              </h2>
-              <p className="font-inter text-[13.5px] sm:text-[14px] text-[#6A6253] mt-1">
-                Full-spectrum autonomous agent tools, consumer platforms, and foundation model research.
-              </p>
-            </div>
-
-            {/* Filter & View Mode Controls: First Carousel, Second Grid */}
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-              {/* Segmented Filter Pills */}
-              <div className="flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md rounded-full text-[12px] sm:text-[12.5px] font-[500] shadow-[0_4px_12px_-2px_rgba(80,70,55,0.12),inset_0_1.5px_2px_#fff] max-w-full overflow-x-auto no-scrollbar shrink-0">
-                {[
-                  { id: "all", label: "All Work" },
-                  { id: "product", label: "Shipped Platforms" },
-                  { id: "research", label: "Research" }
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setSelectedCategory(tab.id)}
-                    className={`px-3.5 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 font-inter text-[12px] ${selectedCategory === tab.id
-                        ? 'bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] font-[600] shadow-[0_3px_8px_-1px_rgba(0,0,0,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.3)]'
-                        : 'text-[#45433D] hover:text-[#111111] hover:bg-black/5'
-                      }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* View Mode Toggle: First Carousel, Second Grid */}
-              <div className="hidden sm:inline-flex items-center gap-1 p-1 bg-white/90 backdrop-blur-md rounded-full shadow-[0_4px_12px_-2px_rgba(80,70,55,0.12),inset_0_1.5px_2px_#fff]">
+          {/* Tactile Segmented Filter Dock - Snug fit, no right gap */}
+          <div className="flex">
+            <div className="w-fit inline-flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md rounded-full border border-[#DBD8D0] shadow-[0_4px_12px_-2px_rgba(80,70,55,0.1),inset_0_1.5px_2px_#fff] overflow-x-auto no-scrollbar max-w-full">
+              {[
+                { id: "flagship", label: "Flagship Products", count: allProjects.filter(p => p.type === 'flagship').length },
+                { id: "research", label: "AI Research", count: allProjects.filter(p => p.type === 'research').length },
+                { id: "hackathon", label: "Hackathon Winner", count: allProjects.filter(p => p.type === 'hackathon').length }
+              ].map((tab) => (
                 <button
-                  type="button"
-                  onClick={() => setProjectViewMode("carousel")}
-                  className={`px-3 py-1.5 rounded-full transition-all cursor-pointer font-inter text-[11.5px] font-[600] inline-flex items-center gap-1.5 ${
-                    projectViewMode === "carousel"
-                      ? "bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] shadow-xs"
-                      : "text-[#6A6253] hover:text-[#111111]"
+                  key={tab.id}
+                  onClick={() => setSelectedCategory(tab.id)}
+                  className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all cursor-pointer font-[700] text-[12px] sm:text-[12.5px] flex items-center gap-2 whitespace-nowrap shrink-0 ${
+                    selectedCategory === tab.id
+                      ? 'bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] shadow-[0_3px_8px_-1px_rgba(0,0,0,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.25)]'
+                      : 'text-[#45433D] hover:text-[#111111] hover:bg-[#F3EFE6]'
                   }`}
-                  title="Switch to Carousel View (First layout)"
-                  aria-label="Carousel view"
                 >
-                  <Columns3 className="h-3.5 w-3.5" />
-                  <span>Carousel</span>
+                  <span>{tab.label}</span>
+                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                    selectedCategory === tab.id ? 'bg-white/20 text-[#FAF7EF]' : 'bg-[#EFECE4] text-[#6A6253]'
+                  }`}>
+                    {tab.count}
+                  </span>
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setProjectViewMode("grid")}
-                  className={`px-3 py-1.5 rounded-full transition-all cursor-pointer font-inter text-[11.5px] font-[600] inline-flex items-center gap-1.5 ${
-                    projectViewMode === "grid"
-                      ? "bg-gradient-to-b from-[#22201D] to-[#11100E] text-[#FAF8F4] shadow-xs"
-                      : "text-[#6A6253] hover:text-[#111111]"
-                  }`}
-                  title="Switch to Grid View (Second layout)"
-                  aria-label="Grid view"
-                >
-                  <LayoutGrid className="h-3.5 w-3.5" />
-                  <span>Grid</span>
-                </button>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Project Showcase: First Carousel Layout, Second Grid Layout */}
-          {projectViewMode === "carousel" ? (
-            /* First: Carousel View (Wide tactile cards with smooth scroll) */
-            <div className="space-y-4">
+          {/* Clean Responsive Project Cards Grid - Only displays selected category */}
+          <div className={`grid gap-5 sm:gap-6 w-full pt-1 ${
+            filteredProjects.length === 1 
+              ? 'grid-cols-1 max-w-xl' 
+              : filteredProjects.length === 2 
+                ? 'grid-cols-1 md:grid-cols-2' 
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+          }`}>
+            {filteredProjects.map((project) => (
               <div
-                ref={projectsScrollRef}
-                className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar w-full px-1"
+                key={project.id}
+                className="card-project p-6 sm:p-7 flex flex-col justify-between h-full"
               >
-                {filteredProjects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="card-project w-[88vw] max-w-[420px] sm:w-[410px] md:w-[430px] shrink-0 snap-start p-6 sm:p-7 flex flex-col justify-between min-h-[460px] sm:min-h-[480px]"
-                  >
-                    <div className="space-y-4 flex-1 flex flex-col">
-                      {/* Top Bar: Status Badge + Period */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="badge-yashb-blue shadow-xs">
-                          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                          <span>{project.badge}</span>
-                        </span>
-                        <span className="font-mono text-[11.5px] font-[600] text-[#6A6253]">
-                          {project.period}
-                        </span>
-                      </div>
+                <div className="space-y-3 flex-1 flex flex-col">
+                  {/* Top Bar: Status Badge + Period */}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="badge-yashb-blue shadow-xs">
+                      <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                      <span>{project.badge}</span>
+                    </span>
+                    <span className="font-mono text-[11.5px] font-[600] text-[#6A6253]">
+                      {project.period}
+                    </span>
+                  </div>
 
-                      {/* Title, Role & LLD Metric */}
-                      <div className="space-y-1.5 pt-1">
-                        <h3 className="font-shantell text-[18.5px] sm:text-[20px] font-[800] text-[#111111] leading-snug">
-                          {project.title}
-                        </h3>
-                        <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] font-mono">
-                          <span className="font-[600] text-[#6A6253]">{project.role}</span>
-                          <span className="font-[700] text-[#4B63FF]">{project.lldMetric}</span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="font-inter text-[13.5px] text-[#45433D] leading-relaxed">
-                        {project.description}
-                      </p>
-
-                      {/* Key Highlight Box */}
-                      {project.bulletPoints && project.bulletPoints[0] && (
-                        <div className="p-3.5 rounded-[16px] bg-[#FAF8F4] text-[12.5px] text-[#2B2620] leading-relaxed font-inter shadow-[inset_0_1.5px_2px_rgba(60,50,35,0.06),0_1px_1.5px_#fff] flex items-start gap-2.5 border-l-3 border-[#4B63FF]">
-                          <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
-                          <span>{project.bulletPoints[0]}</span>
-                        </div>
-                      )}
-
-                      {/* Tech Stack Pills */}
-                      <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
-                        {project.stack.map((tech: string) => (
-                          <span key={tech} className="tag-yashb text-[11px]">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-5 mt-auto grid grid-cols-2 gap-2.5 w-full border-t border-[#DBD8D0]/50">
-                      <a
-                        href={project.links[0]?.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary h-9.5 text-[12px] px-3 justify-center min-w-0 group/btn"
-                      >
-                        <span className="truncate">{project.links[0]?.label}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => setActiveProjectModal(project)}
-                        className="btn-outline h-9.5 text-[12px] px-3 justify-center min-w-0 cursor-pointer"
-                        title="Inspect Low-Level Architecture Specs"
-                      >
-                        <Cpu className="h-3.5 w-3.5 text-[#4B63FF] shrink-0" />
-                        <span className="truncate">Architecture</span>
-                      </button>
+                  {/* Title & Metric */}
+                  <div className="space-y-1 pt-1">
+                    <h3 className="font-shantell text-[18px] sm:text-[19px] font-[800] text-[#111111] leading-snug">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] font-mono">
+                      <span className="font-[600] text-[#6A6253]">{project.role}</span>
+                      <span className="font-[700] text-[#B87500]">{project.lldMetric}</span>
                     </div>
                   </div>
-                ))}
-              </div>
 
-              {/* Carousel Controls Bar */}
-              <div className="flex items-center justify-center sm:justify-end gap-2.5 pt-2">
-                <button
-                  type="button"
-                  onClick={() => scrollProjects("left")}
-                  aria-label="Previous system"
-                  className="btn-outline btn-icon-3d"
-                  title="Scroll left"
-                >
-                  <ChevronLeft className="h-5 w-5 stroke-[2.2] shrink-0 text-[#111111]" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollProjects("right")}
-                  aria-label="Next system"
-                  className="btn-primary btn-icon-3d"
-                  title="Scroll right"
-                >
-                  <ChevronRight className="h-5 w-5 stroke-[2.2] shrink-0 text-[#FAF7EF]" />
-                </button>
-              </div>
-            </div>
-          ) : (
-            /* Second: Grid View */
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 w-full">
-                {filteredProjects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="card-project p-6 sm:p-7 flex flex-col justify-between min-h-[460px] sm:min-h-[480px]"
-                  >
-                    <div className="space-y-4 flex-1 flex flex-col">
-                      {/* Top Bar: Status Badge + Period */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="badge-yashb-blue shadow-xs">
-                          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                          <span>{project.badge}</span>
-                        </span>
-                        <span className="font-mono text-[11.5px] font-[600] text-[#6A6253]">
-                          {project.period}
-                        </span>
-                      </div>
+                  {/* Description */}
+                  <p className="font-inter text-[13px] text-[#45433D] leading-relaxed">
+                    {project.description}
+                  </p>
 
-                      {/* Title, Role & LLD Metric */}
-                      <div className="space-y-1.5 pt-1">
-                        <h3 className="font-shantell text-[18.5px] sm:text-[20px] font-[800] text-[#111111] leading-snug">
-                          {project.title}
-                        </h3>
-                        <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] font-mono">
-                          <span className="font-[600] text-[#6A6253]">{project.role}</span>
-                          <span className="font-[700] text-[#4B63FF]">{project.lldMetric}</span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="font-inter text-[13.5px] text-[#45433D] leading-relaxed">
-                        {project.description}
-                      </p>
-
-                      {/* Key Highlight Box */}
-                      {project.bulletPoints && project.bulletPoints[0] && (
-                        <div className="p-3.5 rounded-[16px] bg-[#FAF8F4] text-[12.5px] text-[#2B2620] leading-relaxed font-inter shadow-[inset_0_1.5px_2px_rgba(60,50,35,0.06),0_1px_1.5px_#fff] flex items-start gap-2.5 border-l-3 border-[#4B63FF]">
-                          <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
-                          <span>{project.bulletPoints[0]}</span>
-                        </div>
-                      )}
-
-                      {/* Tech Stack Pills */}
-                      <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
-                        {project.stack.map((tech: string) => (
-                          <span key={tech} className="tag-yashb text-[11px]">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-5 mt-auto grid grid-cols-2 gap-2.5 w-full border-t border-[#DBD8D0]/50">
-                      <a
-                        href={project.links[0]?.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary h-9.5 text-[12px] px-3 justify-center min-w-0 group/btn"
-                      >
-                        <span className="truncate">{project.links[0]?.label}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => setActiveProjectModal(project)}
-                        className="btn-outline h-9.5 text-[12px] px-3 justify-center min-w-0 cursor-pointer"
-                        title="Inspect Low-Level Architecture Specs"
-                      >
-                        <Cpu className="h-3.5 w-3.5 text-[#4B63FF] shrink-0" />
-                        <span className="truncate">Architecture</span>
-                      </button>
-                    </div>
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
+                    {project.stack.map((tech: string) => (
+                      <span key={tech} className="tag-yashb text-[10.5px]">
+                        {tech}
+                      </span>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
 
-              {/* Grid Footer Action */}
-              <div className="flex items-center justify-center pt-2">
-                <button
-                  type="button"
-                  onClick={() => setProjectViewMode("carousel")}
-                  className="text-[12px] font-mono font-[700] text-[#4B63FF] hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-white px-4 py-2 rounded-full shadow-[0_2.5px_6px_-1px_rgba(80,70,55,0.12),inset_0_1px_1.5px_#fff]"
-                >
-                  <Columns3 className="h-3.5 w-3.5" />
-                  <span>Switch back to Carousel View</span>
-                </button>
+                {/* Action Buttons */}
+                <div className="pt-4 mt-5 grid grid-cols-2 gap-2 w-full border-t border-[#DBD8D0]/50">
+                  <a
+                    href={project.links[0]?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary h-9 text-[12px] px-3 justify-center min-w-0 group/btn"
+                  >
+                    <span className="truncate">{project.links[0]?.label}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setActiveProjectModal(project)}
+                    className="btn-outline h-9 text-[12px] px-3 justify-center min-w-0 cursor-pointer"
+                    title="Inspect Low-Level Architecture Specs"
+                  >
+                    <Cpu className="h-3.5 w-3.5 text-[#B87500] shrink-0" />
+                    <span className="truncate">Architecture</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-
+            ))}
+          </div>
         </section>
+
+        {/* ================= OPEN-SOURCE CONTRIBUTIONS (TIER-1 REPOS) ================= */}
+        <OpenSourceSection />
 
         {/* ================= CORE CAPABILITIES & STACK ================= */}
         <section id="skills" className="space-y-6 sm:space-y-8 scroll-mt-24 w-full">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
               <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
-                Architectural <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">stack</span> &amp; systems.
+                Skills &amp; <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">technologies</span> I work with.
               </h2>
             </div>
 
@@ -1158,7 +994,7 @@ export default function MobbinPortfolio() {
                     className="card-yashb p-6 space-y-4"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-[14px] bg-white shadow-[0_3px_8px_-1px_rgba(80,70,55,0.14),inset_0_1.5px_2px_#fff] flex items-center justify-center shrink-0 text-[#4B63FF]">
+                      <div className="h-10 w-10 rounded-[14px] bg-[#FECE12]/20 border border-[#FECE12]/40 shadow-[0_3px_8px_-1px_rgba(80,70,55,0.14),inset_0_1.5px_2px_#fff] flex items-center justify-center shrink-0 text-[#111111]">
                         <Icon className="h-4.5 w-4.5" />
                       </div>
                       <h4 className="font-shantell text-[16.5px] font-[800] text-[#111111]">
@@ -1184,12 +1020,12 @@ export default function MobbinPortfolio() {
             {/* Engineering Depth Philosophy Banner */}
             <div className="card-tactile-sm p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[13.5px] text-[#45433D] font-inter">
               <div className="flex items-center gap-2.5">
-                <Sparkles className="h-4 w-4 text-[#4B63FF] shrink-0" />
+                <Sparkles className="h-4 w-4 text-[#B87500] shrink-0" />
                 <span>
                   <strong className="text-[#111111] font-[700]">Engineering Principle:</strong> From transformer residual stream activations down to sub-100ms client-side DOM reconciliation, engineered for production reliability.
                 </span>
               </div>
-              <span className="font-mono text-[11px] text-[#4B63FF] font-[700] uppercase tracking-wider shrink-0">
+              <span className="font-mono text-[11px] text-[#B87500] font-[700] uppercase tracking-wider shrink-0">
                 zero-leakage · type-safe · reproducible
               </span>
             </div>
@@ -1202,11 +1038,11 @@ export default function MobbinPortfolio() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-2">
             <div>
               <h2 className="font-shantell text-2xl sm:text-3xl md:text-[38px] font-[800] text-[#111111] leading-[1.1] tracking-[-0.4px]">
-                Foundation models &amp; <span className="text-[#4B63FF] underline decoration-[#C4CCF6] decoration-wavy decoration-2">interpretability</span>.
+                AI research &amp; <span className="text-[#FECE12] underline decoration-[#FECE12] decoration-wavy decoration-3 underline-offset-4">publications</span>.
               </h2>
             </div>
             <p className="font-inter text-[13px] text-[#6A6253] max-w-md sm:text-right">
-              Probing frozen transformer representations and tabular generative models with open falsification suites.
+              Independent research probing foundation model representations with open reproducible kits.
             </p>
           </div>
 
@@ -1228,7 +1064,7 @@ export default function MobbinPortfolio() {
                   <h3 className="font-shantell text-lg sm:text-xl font-[800] text-[#111111] leading-tight">
                     SCBI: Self-Consistent Basis Invention
                   </h3>
-                  <p className="font-mono text-[12px] font-[700] text-[#4B63FF] mt-1">
+                  <p className="font-mono text-[12px] font-[700] text-[#B87500] mt-1">
                     Mechanistic Interpretability &amp; Latent Basis Discovery
                   </p>
                 </div>
@@ -1239,15 +1075,15 @@ export default function MobbinPortfolio() {
 
                 <div className="space-y-1.5 text-[13px] text-[#45433D] font-inter">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>Inference-time representation learning without modifying billions of weights</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>Shipped turn-key open-source falsification suite on GitHub</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>Accepted for publication in peer-reviewed scientific proceedings (Springer)</span>
                   </div>
                 </div>
@@ -1314,7 +1150,7 @@ export default function MobbinPortfolio() {
                   <h3 className="font-shantell text-xl sm:text-2xl font-[800] text-[#111111] leading-tight">
                     LaTable: Generative Models for Tabular Data
                   </h3>
-                  <p className="font-mono text-[12.5px] font-[700] text-[#4B63FF] mt-1">
+                  <p className="font-mono text-[12.5px] font-[700] text-[#B87500] mt-1">
                     Diffusion-Transformer Generation &amp; Metadata Conditioning
                   </p>
                 </div>
@@ -1325,15 +1161,15 @@ export default function MobbinPortfolio() {
 
                 <div className="space-y-2 text-[13.5px] text-[#45433D] font-inter">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>Diffusion formulations for mixed continuous and discrete distributions</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>Benchmarked against CTGAN and TabDDPM baselines</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                     <span>LLM contextual encoders for relational column prior mapping</span>
                   </div>
                 </div>
@@ -1341,7 +1177,7 @@ export default function MobbinPortfolio() {
 
               <div className="pt-6 flex items-center justify-between text-[13px] text-[#6A6253]">
                 <span className="font-mono font-[700] flex items-center gap-1.5 text-[#111111]">
-                  <FlaskConical className="h-4 w-4 text-[#4B63FF]" />
+                  <FlaskConical className="h-4 w-4 text-[#B87500]" />
                   <span>TABULAR MODALITY RESEARCH</span>
                 </span>
                 <span className="tag-yashb text-[11px] font-mono font-[700] text-[#111111]">
@@ -1387,7 +1223,7 @@ export default function MobbinPortfolio() {
               Ready to build <span className="underline decoration-[#DBD6C7]/50 decoration-wavy">something amazing?</span>
             </h2>
             <p className="font-inter text-[15px] sm:text-[16.5px] text-[#E7E1D2]/80 leading-relaxed max-w-2xl mx-auto pt-1">
-              Open for full-time Software Engineer &amp; AI Engineer roles in Bengaluru or Remote worldwide. Let's talk about turning complex requirements into dependable systems that ship.
+              Open for full-time Software Engineer and AI roles in Bengaluru or Remote. Feel free to reach out if you'd like to collaborate or just have a chat!
             </p>
           </div>
 
@@ -1529,7 +1365,7 @@ export default function MobbinPortfolio() {
               {/* Architecture Blueprint Banner */}
               <div className="p-4 sm:p-5 rounded-[16px] bg-gradient-to-r from-[#1E1C1A] to-[#11100E] text-[#FAF8F5] shadow-[inset_0_1px_2px_rgba(255,255,255,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
                 <div className="space-y-1">
-                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#A5B4FC] font-[700] block">
+                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#FECE12] font-[700] block">
                     {activeProjectModal.lldType || "SYSTEM ARCHITECTURE SPEC"}
                   </span>
                   <span className="font-shantell text-[17px] sm:text-[19px] font-[800] text-[#FFFFFF] block leading-snug">
@@ -1537,11 +1373,11 @@ export default function MobbinPortfolio() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-mono bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-[#C4CCF6] font-[700] text-[11px]">
+                  <span className="font-mono bg-[#FECE12]/20 text-[#FECE12] px-3 py-1.5 rounded-full border border-[#FECE12]/30 font-[700] text-[11px]">
                     {activeProjectModal.lldMetric}
                   </span>
                   <span className="badge-yashb-blue text-[10.5px]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#FECE12] animate-pulse" />
                     <span>{activeProjectModal.badge}</span>
                   </span>
                 </div>
@@ -1551,7 +1387,7 @@ export default function MobbinPortfolio() {
               {activeProjectModal.lldFlow && activeProjectModal.lldFlow.length > 0 && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="font-[750] text-[#4B63FF] flex items-center gap-1.5 uppercase tracking-wider">
+                    <span className="font-[750] text-[#B87500] flex items-center gap-1.5 uppercase tracking-wider">
                       <Terminal className="h-3.5 w-3.5" />
                       <span>Component Pipeline &amp; Data Flow</span>
                     </span>
@@ -1563,7 +1399,7 @@ export default function MobbinPortfolio() {
                       {activeProjectModal.lldFlow.map((step: string, sIdx: number) => (
                         <React.Fragment key={sIdx}>
                           <div className="shrink-0 px-2.5 py-1 rounded-[6px] bg-white border border-[#DBD8D0] shadow-2xs flex items-center gap-1.5">
-                            <span className="h-3.5 w-3.5 rounded-full bg-[#C4CCF6] text-[#2B2620] font-mono text-[9.5px] font-bold flex items-center justify-center">
+                            <span className="h-3.5 w-3.5 rounded-full bg-[#FECE12] text-[#111111] font-mono text-[9.5px] font-bold flex items-center justify-center">
                               {sIdx + 1}
                             </span>
                             <span className="text-[11.5px] font-mono font-[700] text-[#111111]">
@@ -1571,7 +1407,7 @@ export default function MobbinPortfolio() {
                             </span>
                           </div>
                           {sIdx < activeProjectModal.lldFlow.length - 1 && (
-                            <span className="text-[#4B63FF] font-bold text-[11px] shrink-0">➔</span>
+                            <span className="text-[#B87500] font-bold text-[11px] shrink-0">➔</span>
                           )}
                         </React.Fragment>
                       ))}
@@ -1583,7 +1419,7 @@ export default function MobbinPortfolio() {
               {/* System Overview */}
               <div className="space-y-1.5">
                 <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
-                  <Layers className="h-3.5 w-3.5 text-[#4B63FF]" />
+                  <Layers className="h-3.5 w-3.5 text-[#B87500]" />
                   <span>System Overview</span>
                 </h4>
                 <p className="text-[13.5px] text-[#45433D] font-inter leading-relaxed bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
@@ -1608,7 +1444,7 @@ export default function MobbinPortfolio() {
               {activeProjectModal.deepDive?.architecture && (
                 <div className="space-y-1.5">
                   <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
-                    <Cpu className="h-3.5 w-3.5 text-[#4B63FF]" />
+                    <Cpu className="h-3.5 w-3.5 text-[#B87500]" />
                     <span>Low-Level Architecture &amp; Technical Invariants</span>
                   </h4>
                   <p className="text-[13.5px] text-[#45433D] font-inter leading-relaxed bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
@@ -1620,19 +1456,19 @@ export default function MobbinPortfolio() {
               {/* Technical Telemetry & Invariants Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[12px]">
                 <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
-                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Primary Storage</span>
+                  <span className="text-[10px] uppercase font-[700] text-[#B87500] block mb-0.5">Primary Storage</span>
                   <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldStorage || "Stateful Cache / DB"}</span>
                 </div>
                 <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
-                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Concurrency Pattern</span>
+                  <span className="text-[10px] uppercase font-[700] text-[#B87500] block mb-0.5">Concurrency Pattern</span>
                   <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldPattern || "Asynchronous Non-Blocking"}</span>
                 </div>
                 <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
-                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">Key Metric / Latency</span>
+                  <span className="text-[10px] uppercase font-[700] text-[#B87500] block mb-0.5">Key Metric / Latency</span>
                   <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldMetric || "Sub-second Execution"}</span>
                 </div>
                 <div className="p-3.5 rounded-[12px] bg-[#FAF7EF] border border-[#DBD8D0]">
-                  <span className="text-[10px] uppercase font-[700] text-[#4B63FF] block mb-0.5">System Paradigm</span>
+                  <span className="text-[10px] uppercase font-[700] text-[#B87500] block mb-0.5">System Paradigm</span>
                   <span className="text-[#111111] font-[600] text-[12px]">{activeProjectModal.lldType || "Decoupled Architecture"}</span>
                 </div>
               </div>
@@ -1641,13 +1477,13 @@ export default function MobbinPortfolio() {
               {activeProjectModal.bulletPoints && activeProjectModal.bulletPoints.length > 0 && (
                 <div className="space-y-2">
                   <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
-                    <Sparkles className="h-3.5 w-3.5 text-[#4B63FF]" />
+                    <Sparkles className="h-3.5 w-3.5 text-[#B87500]" />
                     <span>Core Engineering Highlights</span>
                   </h4>
                   <div className="space-y-2 bg-[#FAF7EF] p-4 rounded-[12px] border border-[#DBD8D0]">
                     {activeProjectModal.bulletPoints.map((pt: string, i: number) => (
                       <div key={i} className="flex items-start gap-2.5 text-[13px] text-[#45433D] font-inter">
-                        <CheckCircle2 className="h-4 w-4 text-[#4B63FF] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-4 w-4 text-[#B87500] shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </div>
                     ))}
@@ -1676,7 +1512,7 @@ export default function MobbinPortfolio() {
               {/* Full Tech Stack */}
               <div className="space-y-2">
                 <h4 className="text-[11px] font-mono font-[700] uppercase tracking-wider text-[#6A6253] flex items-center gap-1.5">
-                  <Code2 className="h-3.5 w-3.5 text-[#4B63FF]" />
+                  <Code2 className="h-3.5 w-3.5 text-[#B87500]" />
                   <span>Full Technology Stack</span>
                 </h4>
                 <div className="flex flex-wrap gap-1.5">

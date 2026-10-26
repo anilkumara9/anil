@@ -415,7 +415,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
           {/* Visual Topology Diagram */}
           <div className="grid grid-cols-3 gap-3">
             <div className="p-4 rounded-[20px] bg-white/[0.03] border border-white/10 text-center space-y-1.5">
-              <div className="h-9 w-9 rounded-full bg-blue-500/20 text-blue-400 mx-auto flex items-center justify-center font-bold text-xs">
+              <div className="h-9 w-9 rounded-full bg-[#FECE12]/20 text-[#FECE12] mx-auto flex items-center justify-center font-bold text-xs">
                 UI
               </div>
               <span className="font-bold text-[13px] text-white block">React / Next.js</span>
