@@ -533,48 +533,11 @@ export default function MobbinPortfolio() {
             style={{ background: "radial-gradient(120% 130% at 38% 14%, rgb(254, 253, 249) 0%, rgb(241, 236, 225) 60%, rgb(226, 216, 198) 100%)" }}
           />
 
-          {/* 3-Column Wide Border-Aligned Hero Layout */}
-          <div className="w-full flex items-center justify-between gap-4 lg:gap-8 xl:gap-12">
+          {/* Centered Hero Layout */}
+          <div className="w-full flex items-center justify-center">
 
-            {/* Left Image Card: Positioned on the left border */}
-            <div className="hidden lg:flex w-[210px] xl:w-[235px] shrink-0 justify-start">
-              <div
-                className="polaroid-card group cursor-pointer w-[205px] xl:w-[230px] transition-all duration-300 hover:scale-[1.03]"
-                style={{ '--rot': '-3.5deg', transform: 'rotate(-3.5deg)' } as React.CSSProperties}
-              >
-                <div className="aspect-[4/4.7] w-full rounded-[12px] overflow-hidden bg-[#FAF7EF] mb-2 shadow-inner border border-[#DBD8D0]">
-                  <img
-                    src="/anil.png"
-                    alt="Meda Anilkumar"
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                    loading="eager"
-                  />
-                </div>
-                <div className="text-center px-1">
-                  <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Meda Anilkumar</span>
-                  <span className="font-mono text-[10px] bg-[#FECE12] text-[#111111] font-[750] px-2 py-0.5 rounded-full inline-block mt-0.5 uppercase tracking-wider shadow-xs">BUILDING COOL STUFF ✨</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Center Hero Column - Extends comfortably without being squeezed */}
-            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-3.5 sm:space-y-4 relative z-10 flex-1 px-1 sm:px-2">
-
-              {/* Mobile Polaroids Duo */}
-              <div className="flex lg:hidden items-center justify-center gap-3 pb-0.5">
-                <div className="polaroid-card shadow-md p-1.5 rounded-[12px] w-24 sm:w-28" style={{ transform: 'rotate(-2deg)' }}>
-                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-[#DBD8D0]">
-                    <img src="/anil.png" alt="Meda Anilkumar" className="w-full h-full object-cover object-top" loading="eager" />
-                  </div>
-                  <span className="font-shantell text-[11px] sm:text-[12px] font-[800] text-[#111111] block truncate">Anilkumar 👨‍💻</span>
-                </div>
-                <div className="polaroid-card shadow-md p-1.5 rounded-[12px] w-24 sm:w-28" style={{ transform: 'rotate(2deg)' }}>
-                  <div className="aspect-square rounded-[8px] overflow-hidden mb-1 border border-[#DBD8D0]">
-                    <img src="/ghibli-hackathon.jpg" alt="Hackathon win" className="w-full h-full object-cover" />
-                  </div>
-                  <span className="font-shantell text-[11px] sm:text-[12px] font-[800] text-[#111111] block truncate">REVA 2nd 🏆</span>
-                </div>
-              </div>
+            {/* Center Hero Column */}
+            <div className="text-center max-w-2xl xl:max-w-3xl mx-auto space-y-3.5 sm:space-y-4 relative z-10 w-full px-1 sm:px-2">
 
               {/* Status Pill Badge with playful tilt */}
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFFFFF] border border-[#DBD8D0] text-[11.5px] sm:text-[12px] font-mono font-[700] text-[#111111] shadow-[0_2px_0_#DBD8D0,inset_0_1px_1.5px_#fff] rotate-[-1deg]">
@@ -661,7 +624,7 @@ export default function MobbinPortfolio() {
                   >
                     <BookOpen className="h-3.5 w-3.5 text-[#111111] shrink-0" />
                     <span>OpenReview</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors shrink-0" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[#6A6253] group-hover:text-[#111111] transition-colors" />
                   </a>
 
                   <a
@@ -720,27 +683,6 @@ export default function MobbinPortfolio() {
                   <Award className="h-4 w-4 text-[#111111]" />
                   <span>B.E. CSE · CGPA 8.09 / 10</span>
                 </span>
-              </div>
-            </div>
-
-            {/* Right Image Card: Positioned on the right border */}
-            <div className="hidden lg:flex w-[210px] xl:w-[235px] shrink-0 justify-end">
-              <div
-                className="polaroid-card group cursor-pointer w-[205px] xl:w-[230px] transition-all duration-300 hover:scale-[1.03]"
-                style={{ '--rot': '3.5deg', transform: 'rotate(3.5deg)' } as React.CSSProperties}
-              >
-                <div className="aspect-[4/4.7] w-full rounded-[12px] overflow-hidden bg-[#FAF7EF] mb-2 shadow-inner border border-[#DBD8D0]">
-                  <img
-                    src="/ghibli-hackathon.jpg"
-                    alt="Hackathon victory"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="text-center px-1">
-                  <span className="font-shantell text-[15px] xl:text-[16px] font-[800] text-[#111111] block leading-tight">Hackathon Victory</span>
-                  <span className="font-mono text-[10px] bg-[#FECE12] text-[#111111] font-[750] px-2 py-0.5 rounded-full inline-block mt-0.5 uppercase tracking-wider shadow-xs">REVA 2nd PRIZE 🏆</span>
-                </div>
               </div>
             </div>
 
