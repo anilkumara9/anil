@@ -1,168 +1,276 @@
-import React, { useEffect, useState } from 'react';
-import { Search, X, FileText, Download, Github, Linkedin, Mail, Phone, ExternalLink, Sparkles, Folder, ArrowRight, GitPullRequest } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { 
+  Search, 
+  Home, 
+  Briefcase, 
+  GitBranch, 
+  Cpu, 
+  Atom, 
+  BookOpen, 
+  Mail, 
+  FileText, 
+  Github, 
+  Linkedin, 
+  Phone
+} from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (sectionId: string) => void;
-  paperUrl: string;
-  resumeUrl: string;
+  paperUrl?: string;
+  resumeUrl?: string;
 }
 
-const CommandPalette: React.FC<CommandPaletteProps> = ({
+interface CommandItem {
+  id: string;
+  title: string;
+  icon: React.ElementType;
+  sectionId?: string;
+  url?: string;
+  action?: () => void;
+}
+
+export default function CommandPalette({
   isOpen,
   onClose,
   onNavigate,
-  paperUrl,
-  resumeUrl
-}) => {
+  resumeUrl = "https://drive.google.com/file/d/1C_JAbG5rhGSdrsy8sGT8kT9f5FdH0qU2/view?usp=sharing"
+}: CommandPaletteProps) {
   const [query, setQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  const navigationItems: CommandItem[] = [
+    { id: 'home', title: 'Home', icon: Home, sectionId: 'hero' },
+    { id: 'work', title: 'Work & Experience', icon: Briefcase, sectionId: 'work' },
+    { id: 'opensource', title: 'Open Source', icon: GitBranch, sectionId: 'opensource' },
+    { id: 'skills', title: 'Skills & Stack', icon: Cpu, sectionId: 'skills' },
+    { id: 'research', title: 'SCBI Research', icon: Atom, sectionId: 'research' },
+    { id: 'bookshelf', title: 'Bookshelf', icon: BookOpen, sectionId: 'bookshelf' },
+    { id: 'contact', title: 'Contact', icon: Mail, sectionId: 'contact' },
+  ];
+
+  const actionItems: CommandItem[] = [
+    { 
+      id: 'resume', 
+      title: 'View Resume (PDF)', 
+      icon: FileText, 
+      url: resumeUrl 
+    },
+    { 
+      id: 'github', 
+      title: 'GitHub Profile (@anilkumara9)', 
+      icon: Github, 
+      url: 'https://github.com/anilkumara9' 
+    },
+    { 
+      id: 'linkedin', 
+      title: 'LinkedIn Profile', 
+      icon: Linkedin, 
+      url: 'https://www.linkedin.com/in/anilkumar-meda-2b2624331' 
+    },
+    { 
+      id: 'email', 
+      title: 'Email: anilkumarmeda6@gmail.com', 
+      icon: Mail, 
+      url: 'mailto:anilkumarmeda6@gmail.com' 
+    },
+    { 
+      id: 'phone', 
+      title: 'Call: +91 9972437551', 
+      icon: Phone, 
+      url: 'tel:+919972437551' 
+    },
+  ];
+
+  // Filter items
+  const filteredNav = navigationItems.filter(item =>
+    item.title.toLowerCase().includes(query.toLowerCase())
+  );
+  const filteredActions = actionItems.filter(item =>
+    item.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const allFilteredItems = [...filteredNav, ...filteredActions];
+
+  // Focus input on open
   useEffect(() => {
+    if (isOpen) {
+      setQuery('');
+      setSelectedIndex(0);
+      setTimeout(() => inputRef.current?.focus(), 50);
+    }
+  }, [isOpen]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if (e.key === 'Escape') {
         e.preventDefault();
-        if (isOpen) onClose();
-        else onClose(); // toggling can be handled by parent
-      }
-      if (e.key === 'Escape' && isOpen) {
         onClose();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev + 1) % (allFilteredItems.length || 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex(prev => (prev - 1 + allFilteredItems.length) % (allFilteredItems.length || 1));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const selected = allFilteredItems[selectedIndex];
+        if (selected) {
+          executeItem(selected);
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, selectedIndex, allFilteredItems]);
+
+  const executeItem = (item: CommandItem) => {
+    if (item.sectionId) {
+      onNavigate(item.sectionId);
+      onClose();
+    } else if (item.url) {
+      window.open(item.url, '_blank', 'noopener,noreferrer');
+      onClose();
+    } else if (item.action) {
+      item.action();
+      onClose();
+    }
+  };
 
   if (!isOpen) return null;
 
-  const actions = [
-    {
-      category: 'Navigation',
-      items: [
-        { id: 'hero', title: 'Home / Hero', desc: 'Overview, interactive lab, and core highlights', icon: Sparkles },
-        { id: 'about', title: 'About Meda', desc: 'Background, education, and career profile', icon: Sparkles },
-        { id: 'research', title: 'SCBI Research Spotlight', desc: 'Inference-time representation learning', icon: FileText },
-        { id: 'experience', title: 'Work Experience (CampusPe)', desc: 'AI intern, production GenAI features', icon: Folder },
-        { id: 'projects', title: 'Featured Projects (8)', desc: 'OmniRecon (21 MCP tools), Spora (200+ users), Edge ML, Invisly', icon: Folder },
-        { id: 'opensource', title: 'Open-Source Contributions', desc: 'LiteLLM (62k★), Haystack (27k★), Hugging Face, pandas, LangChain', icon: GitPullRequest },
-        { id: 'skills', title: 'Technical Skills Matrix', desc: 'PyTorch, Next.js, Edge ML, LangChain, Cloud', icon: Sparkles },
-        { id: 'education', title: 'Education & Awards', desc: 'NHCE B.E. (8.09 CGPA) & REVA Hackathon 2nd Prize', icon: Folder },
-        { id: 'timeline', title: 'Interactive Timeline', desc: 'Chronological roadmap of projects & research', icon: Folder },
-        { id: 'contact', title: 'Get In Touch', desc: 'Email, phone, and direct messaging form', icon: Mail },
-      ]
-    },
-    {
-      category: 'Direct Links & Actions',
-      items: [
-        { title: 'Download Resume (PDF)', desc: 'Open verified resume file', icon: Download, url: resumeUrl },
-        { title: 'OmniRecon on GitHub', desc: 'Full-spectrum web recon MCP server (21 tools, 163 tests)', icon: Github, url: 'https://github.com/anilkumara9/omnirecon' },
-        { title: 'OmniRecon Launch on 𝕏', desc: 'Read launch announcement & architecture breakdown', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2109905045814968746?s=20' },
-        { title: 'Read SCBI Research Paper', desc: 'Full empirical paper on causal steering', icon: FileText, url: paperUrl },
-        { title: 'SCBI Research Breakdown on 𝕏', desc: 'Read research post & findings thread', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2108649451917308224?s=20' },
-        { title: 'View Spora Demo on 𝕏', desc: 'Knowledge platform video demo', icon: ExternalLink, url: 'https://x.com/anilKumar09873/status/2096482373299057022' },
-        { title: 'GitHub Profile', desc: 'Explore all repositories & open source code', icon: Github, url: 'https://github.com/anilkumara9' },
-        { title: 'LinkedIn Profile', desc: 'Connect professionally', icon: Linkedin, url: 'https://www.linkedin.com/in/anilkumar-meda-2b2624331' },
-        { title: 'Send Direct Email', desc: 'anilkumarmeda6@gmail.com', icon: Mail, url: 'mailto:anilkumarmeda6@gmail.com' },
-        { title: 'Call on Phone', desc: '+91 9986489887', icon: Phone, url: 'tel:+919986489887' },
-      ]
-    }
-  ];
-
-  const filteredActions = actions.map(cat => ({
-    ...cat,
-    items: cat.items.filter(item => 
-      item.title.toLowerCase().includes(query.toLowerCase()) || 
-      item.desc.toLowerCase().includes(query.toLowerCase())
-    )
-  })).filter(cat => cat.items.length > 0);
+  let currentIndex = -1;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div 
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+      onClick={onClose}
+    >
+      {/* Modal Dialog Card (Exact matching reference image) */}
       <div 
-        className="w-full max-w-2xl bg-[#FFFFFF] border border-[#e5e5ea] rounded-[24px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="w-full max-w-[500px] bg-[#18181B] border border-[#2B2B32] rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.95)] overflow-hidden animate-in zoom-in-95 duration-150 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-[#e5e5ea]">
-          <Search className="h-5 w-5 text-[#141414]" />
+        {/* Top Search Input Row */}
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#26262E]">
+          <Search className="size-[17px] text-zinc-400 shrink-0" />
           <input
+            ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type a command, project name, or section (e.g., Spora, SCBI, Resume)..."
-            className="flex-1 bg-transparent text-[15px] text-[#141414] placeholder-[#707070] focus:outline-none"
-            autoFocus
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
+            placeholder="Type a command or search..."
+            className="flex-1 bg-transparent text-[14px] text-zinc-100 placeholder:text-zinc-500 focus:outline-none font-sans"
           />
-          <button 
-            onClick={onClose}
-            className="h-8 w-8 rounded-full flex items-center justify-center text-[#707070] hover:text-[#141414] hover:bg-[#f3f3f3] transition-colors"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          <kbd className="px-1.5 py-0.5 rounded bg-[#24242B] text-zinc-400 text-[11px] font-mono border border-zinc-700/40 select-none">
+            Esc
+          </kbd>
         </div>
 
-        {/* Results List */}
-        <div className="max-h-[60vh] overflow-y-auto p-3 space-y-4">
-          {filteredActions.length === 0 ? (
-            <div className="py-12 text-center text-[14px] text-[#707070]">
-              No matching commands or projects found for "{query}".
-            </div>
-          ) : (
-            filteredActions.map((cat, idx) => (
-              <div key={idx} className="space-y-1.5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#707070] px-3">
-                  {cat.category}
-                </span>
-                <div className="space-y-1">
-                  {cat.items.map((item, itemIdx) => {
-                    const Icon = item.icon;
-                    return (
-                      <div
-                        key={itemIdx}
-                        onClick={() => {
-                          if ('url' in item && item.url) {
-                            window.open(item.url, '_blank');
-                          } else if ('id' in item && item.id) {
-                            onNavigate(item.id);
-                          }
-                          onClose();
-                        }}
-                        className="group flex items-center justify-between p-3 rounded-[16px] hover:bg-[#f3f3f3] cursor-pointer transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="h-9 w-9 rounded-full bg-[#f8f8fa] border border-[#e5e5ea] flex items-center justify-center text-[#141414] group-hover:scale-105 transition-transform">
-                            <Icon className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <span className="text-[14px] font-semibold text-[#141414] block group-hover:text-[#0066ff] transition-colors">
-                              {item.title}
-                            </span>
-                            <span className="text-[12px] text-[#707070] block">
-                              {item.desc}
-                            </span>
-                          </div>
-                        </div>
-                        <ArrowRight className="h-4 w-4 text-[#707070] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </div>
-                    );
-                  })}
-                </div>
+        {/* Scrollable Command List */}
+        <div className="p-2 max-h-[360px] overflow-y-auto no-scrollbar space-y-4">
+          {/* Navigate Group */}
+          {filteredNav.length > 0 && (
+            <div>
+              <div className="px-3 pt-1 pb-1.5 text-[11px] font-medium text-zinc-500 uppercase tracking-wider font-sans select-none">
+                Navigate
               </div>
-            ))
+              <div className="space-y-0.5">
+                {filteredNav.map((item) => {
+                  currentIndex++;
+                  const isSelected = currentIndex === selectedIndex;
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => executeItem(item)}
+                      onMouseEnter={() => setSelectedIndex(currentIndex)}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-colors text-[13.5px] font-medium select-none ${
+                        isSelected 
+                          ? 'bg-[#26262D] text-white' 
+                          : 'text-zinc-300 hover:bg-[#202026] hover:text-white'
+                      }`}
+                    >
+                      <Icon className={`size-[16px] shrink-0 ${isSelected ? 'text-white' : 'text-zinc-400'}`} />
+                      <span className="truncate">{item.title}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Quick Actions / Links Group */}
+          {filteredActions.length > 0 && (
+            <div>
+              <div className="px-3 pt-1 pb-1.5 text-[11px] font-medium text-zinc-500 uppercase tracking-wider font-sans select-none">
+                Quick Links &amp; Actions
+              </div>
+              <div className="space-y-0.5">
+                {filteredActions.map((item) => {
+                  currentIndex++;
+                  const isSelected = currentIndex === selectedIndex;
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => executeItem(item)}
+                      onMouseEnter={() => setSelectedIndex(currentIndex)}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-colors text-[13.5px] font-medium select-none ${
+                        isSelected 
+                          ? 'bg-[#26262D] text-white' 
+                          : 'text-zinc-300 hover:bg-[#202026] hover:text-white'
+                      }`}
+                    >
+                      <Icon className={`size-[16px] shrink-0 ${isSelected ? 'text-white' : 'text-zinc-400'}`} />
+                      <span className="truncate">{item.title}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {allFilteredItems.length === 0 && (
+            <div className="py-8 text-center text-zinc-500 text-[13px]">
+              No commands or sections found for "{query}"
+            </div>
           )}
         </div>
 
-        {/* Footer shortcuts */}
-        <div className="px-5 py-3 bg-[#f8f8fa] border-t border-[#e5e5ea] flex items-center justify-between text-[12px] text-[#707070]">
-          <div className="flex items-center gap-3">
-            <span>Navigation: <kbd className="px-1.5 py-0.5 rounded bg-[#ffffff] border border-[#e0e0e0] font-mono text-[10px] text-[#141414]">Click</kbd></span>
-            <span>Close: <kbd className="px-1.5 py-0.5 rounded bg-[#ffffff] border border-[#e0e0e0] font-mono text-[10px] text-[#141414]">Esc</kbd></span>
+        {/* Footer Bar (Exact matching reference image) */}
+        <div className="px-4 py-2.5 border-t border-[#24242B] bg-[#141416]/50 flex items-center justify-between text-[11px] text-zinc-500 select-none">
+          {/* Left navigation controls */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
+              <kbd className="px-1.5 py-0.5 rounded bg-[#24242B] text-zinc-400 font-mono text-[10px] border border-zinc-700/30">↑</kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-[#24242B] text-zinc-400 font-mono text-[10px] border border-zinc-700/30">↓</kbd>
+              <span className="ml-1 text-zinc-400">Navigate</span>
+            </div>
+            <div className="flex items-center gap-1 ml-2">
+              <kbd className="px-1.5 py-0.5 rounded bg-[#24242B] text-zinc-400 font-mono text-[10px] border border-zinc-700/30">↵</kbd>
+              <span className="ml-1 text-zinc-400">Select</span>
+            </div>
           </div>
-          <span className="font-semibold text-[#141414]">Meda Anilkumar Portfolio</span>
+
+          {/* Right close hint */}
+          <div className="flex items-center gap-1.5">
+            <kbd className="px-1.5 py-0.5 rounded bg-[#24242B] text-zinc-400 font-mono text-[10px] border border-zinc-700/30">Esc</kbd>
+            <span className="text-zinc-400">Close</span>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default CommandPalette;
+}

@@ -143,7 +143,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-[12px] text-slate-300">
             <p>📧 Email: <a href="mailto:anilkumarmeda6@gmail.com" className="text-[#FC535B] hover:underline">anilkumarmeda6@gmail.com</a></p>
-            <p>📱 Phone: <a href="tel:+919986489887" className="text-[#0066ff] hover:underline">+91 9986489887</a></p>
+            <p>📱 Phone: <a href="tel:+919972437551" className="text-[#0066ff] hover:underline">+91 9972437551</a></p>
             <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/anilkumar-meda-2b2624331" target="_blank" rel="noopener noreferrer" className="text-[#FC535B] hover:underline">linkedin.com/in/anilkumar-meda-2b2624331</a></p>
           </div>
         );
