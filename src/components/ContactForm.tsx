@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle, Loader2, Mail, Phone, MapPin, Clock, Copy, Check } from 'lucide-react';
+import { Send, CheckCircle, Loader2, Mail, Phone, MapPin, Clock, Copy, Check, ExternalLink } from 'lucide-react';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -7,10 +7,10 @@ const ContactForm: React.FC = () => {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'dispatched'>('idle');
   const [copied, setCopied] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+  const [copiedMessage, setCopiedMessage] = useState(false);
 
   const copyEmail = () => {
     navigator.clipboard.writeText('anilkumarmeda6@gmail.com');
@@ -29,47 +29,51 @@ const ContactForm: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-    setErrorMessage('');
+  const subject = `⚡ Portfolio Message from ${formData.name || 'Visitor'}`;
+  const bodyText = `Hi Anil,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=anilkumarmeda6@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+  const mailtoUrl = `mailto:anilkumarmeda6@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
 
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/anilkumarmeda6@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `⚡ Portfolio Message from ${formData.name}`,
-          _replyto: formData.email,
-          _template: 'table',
-          _captcha: 'false'
-        })
-      });
-
-      if (response.ok) {
-        setStatus('success');
-      } else {
-        throw new Error('Server returned an error');
-      }
-    } catch (err) {
-      console.error('Contact form error:', err);
-      setStatus('error');
-      setErrorMessage('Could not send message automatically.');
-    }
+  const copyFormattedMessage = () => {
+    const fullText = `To: anilkumarmeda6@gmail.com\nSubject: ${subject}\nFrom: ${formData.name} (${formData.email})\n\n${formData.message}`;
+    navigator.clipboard.writeText(fullText);
+    setCopiedMessage(true);
+    setTimeout(() => setCopiedMessage(false), 2200);
   };
 
-  const handleMailtoFallback = () => {
-    const subject = encodeURIComponent(`Portfolio Message from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hi Anil,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`
-    );
-    window.location.href = `mailto:anilkumarmeda6@gmail.com?subject=${subject}&body=${body}`;
+  const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || "de8d12b7-a99d-4a56-8af6-59c112cffeb8";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    try {
+      const data = new FormData(e.currentTarget);
+      data.append("access_key", WEB3FORMS_ACCESS_KEY);
+      data.append("subject", subject);
+      data.append("from_name", formData.name);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data
+      });
+
+      const resData = await response.json().catch(() => ({}));
+
+      if (response.ok && resData.success) {
+        setStatus('success');
+        return;
+      }
+      throw new Error(resData.message || 'Submission failed');
+    } catch (err) {
+      console.warn('Web3Forms dispatch error, falling back to email dispatch:', err);
+      try {
+        window.location.href = mailtoUrl;
+      } catch {
+        // Ignore if mailto protocol isn't bound to desktop handler
+      }
+      setStatus('dispatched');
+    }
   };
 
   return (
@@ -215,6 +219,54 @@ const ContactForm: React.FC = () => {
                 ← Send another message
               </button>
             </div>
+          ) : status === 'dispatched' ? (
+            <div className="p-6 rounded-2xl bg-[#12131A] border border-[#27272A] space-y-4">
+              <div className="flex items-center gap-2.5 text-emerald-400">
+                <Mail className="w-5 h-5 shrink-0" />
+                <h3 className="text-base font-medium text-white">Opening your email to send...</h3>
+              </div>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Your message has been pre-formatted for <span className="text-zinc-200 font-medium">anilkumarmeda6@gmail.com</span>. 
+                If your email app didn't open automatically, choose an option below:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <a
+                  href={gmailUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-900 text-xs font-semibold transition-all hover:scale-[1.01] shadow-sm"
+                >
+                  <Mail className="w-4 h-4 text-rose-500" />
+                  <span>Open in Gmail (Web) →</span>
+                </a>
+                <a
+                  href={mailtoUrl}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#181924] hover:bg-[#202130] border border-[#27272A] text-zinc-200 text-xs font-medium transition-all hover:scale-[1.01]"
+                >
+                  <ExternalLink className="w-4 h-4 text-zinc-400" />
+                  <span>Default Mail App →</span>
+                </a>
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-[#27272A] text-xs">
+                <button
+                  type="button"
+                  onClick={copyFormattedMessage}
+                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+                >
+                  {copiedMessage ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedMessage ? 'Message copied to clipboard!' : 'Copy full message text'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="text-zinc-500 hover:text-zinc-300 font-mono text-xs cursor-pointer"
+                >
+                  ← Edit message
+                </button>
+              </div>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -267,19 +319,6 @@ const ContactForm: React.FC = () => {
                 />
               </div>
 
-              {status === 'error' && (
-                <div className="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-xs">
-                  {errorMessage}{' '}
-                  <button
-                    type="button"
-                    onClick={handleMailtoFallback}
-                    className="underline font-bold text-white hover:text-rose-200 cursor-pointer ml-1"
-                  >
-                    Send via email client →
-                  </button>
-                </div>
-              )}
-
               <div className="flex items-center justify-between pt-1">
                 <span className="text-[11px] font-mono text-zinc-500">
                   Straight to inbox · &lt; 24h
@@ -292,7 +331,7 @@ const ContactForm: React.FC = () => {
                   {status === 'submitting' ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending directly...</span>
+                      <span>Sending message...</span>
                     </>
                   ) : (
                     <>
