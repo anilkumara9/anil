@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Phone, BookOpen } from 'lucide-react';
 export default function AkoderFooter() {
   return (
     <footer 
-      className="w-full text-[#FAF7EF] pt-10 sm:pt-14 pb-0 mt-6 sm:mt-8 relative overflow-hidden bg-[#050505] border-t border-[#1C1C20]"
+      className="w-full text-[#FAF7EF] pt-10 sm:pt-14 pb-[max(1.5rem,env(safe-area-inset-bottom,1.5rem))] mt-6 sm:mt-8 relative overflow-hidden bg-[#050505] border-t border-[#1C1C20]"
     >
       {/* Subtle Ambient Radial Glow at top */}
       <div 
@@ -20,11 +20,11 @@ export default function AkoderFooter() {
         }}
       />
 
-      <div className="container mx-auto max-w-[880px] px-4 sm:px-6 relative z-10 text-center space-y-6">
+      <div className="w-full max-w-[880px] mx-auto px-4 sm:px-6 relative z-10 text-center space-y-6">
         {/* Centered Quote in Instrument Serif */}
         <div className="space-y-3.5">
-          <blockquote className="font-serif italic text-3xl sm:text-5xl md:text-[50px] text-white font-normal leading-[1.2] tracking-tight max-w-2xl mx-auto select-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-            The soul becomes dyed with<br />the color of its thoughts.
+          <blockquote className="font-serif italic text-2xl xs:text-3xl sm:text-4xl md:text-[50px] text-white font-normal leading-[1.25] tracking-tight max-w-2xl mx-auto select-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] px-2">
+            The soul becomes dyed with<br className="hidden sm:inline" /> the color of its thoughts.
           </blockquote>
           <p className="font-mono text-xs sm:text-[12.5px] text-[#A1A1AA] tracking-[0.3em] uppercase pt-1.5 select-none font-normal">
             Marcus Aurelius
@@ -32,7 +32,7 @@ export default function AkoderFooter() {
         </div>
 
         {/* Social Links Row below the quote (Matching Hero Section) */}
-        <div className="pt-2 flex items-center justify-center gap-3 sm:gap-4 text-zinc-400">
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-2 xs:gap-3 sm:gap-4 text-zinc-400">
           <a
             href="https://github.com/anilkumara9"
             target="_blank"

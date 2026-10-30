@@ -240,7 +240,7 @@ export default function AkoderHero() {
           {/* Intro Text Block (Left) */}
           <div className="flex-1 min-w-0 space-y-2 sm:space-y-3">
             {/* Hello, I'm Meda Anilkumar 👋 (Upright Instrument Serif matching screenshot) */}
-            <p className="flex items-center gap-1.5 sm:gap-2 font-serif text-[21px] xs:text-[25px] sm:text-[28px] md:text-[32px] text-white font-normal not-italic tracking-normal truncate">
+            <p className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-serif text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] text-white font-normal not-italic tracking-normal">
               <span>Hello, I'm Meda Anilkumar</span>
               <span className="inline-block text-xl sm:text-2xl hover:animate-wave origin-bottom-right cursor-default shrink-0">
                 👋
@@ -248,19 +248,19 @@ export default function AkoderHero() {
             </p>
 
             {/* Main Headline (Clean, punchy, humanized, no dashes) */}
-            <h1 className="text-[16.5px] xs:text-[18.5px] sm:text-2xl md:text-[26px] font-semibold text-white leading-[1.28] tracking-tight font-sans">
+            <h1 className="text-[15.5px] xs:text-[18px] sm:text-2xl md:text-[26px] font-semibold text-white leading-[1.28] tracking-tight font-sans">
               I craft software, tinker with AI, and build things that matter.
             </h1>
 
             {/* Bio paragraph */}
-            <p className="text-[14px] sm:text-[15px] text-zinc-400 font-sans leading-relaxed max-w-xl font-normal">
+            <p className="text-[13.5px] sm:text-[15px] text-zinc-400 font-sans leading-relaxed max-w-xl font-normal">
               Most of my days are spent writing clean code, contributing to open source, and exploring how machines think. Always building, always curious.
             </p>
 
             {/* Location + Phone + Social Icons one by one on that row (no buttons) */}
-            <div className="pt-1 flex flex-wrap items-center gap-3 text-[13.5px] text-zinc-400 font-sans">
-              <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-zinc-500 shrink-0" />
+            <div className="pt-1 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] sm:text-[13.5px] text-zinc-400 font-sans">
+              <div className="flex items-center gap-1.5">
+                <Globe className="h-3.5 w-3.5 text-zinc-500 shrink-0" />
                 <span>Bengaluru, India</span>
               </div>
 
@@ -275,7 +275,7 @@ export default function AkoderHero() {
                 <span className="font-mono text-xs">+91 9972437551</span>
               </a>
 
-              <span className="text-zinc-600 select-none hidden sm:inline" aria-hidden="true">•</span>
+              <span className="text-zinc-600 select-none hidden min-[440px]:inline" aria-hidden="true">•</span>
 
               {/* Direct icons one by one (no buttons) */}
               <div className="flex items-center gap-3 text-zinc-400">
@@ -350,7 +350,7 @@ export default function AkoderHero() {
             </div>
           </div>
 
-          {/* Anil's Paper-Look Profile Photo Badge (Substantially enlarged to fill the height gap) */}
+          {/* Anil's Paper-Look Profile Photo Badge */}
           <div className="shrink-0 relative">
             <div className="relative size-20 xs:size-24 sm:size-36 md:size-44 lg:size-48 rounded-full p-1 sm:p-2 bg-[#FAF8F5] border border-[#E5E0D8] shadow-[0_12px_28px_rgba(0,0,0,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.9),_inset_0_-1.5px_2px_rgba(0,0,0,0.14)] ring-1 ring-black/10 overflow-hidden flex items-center justify-center">
               <div className="w-full h-full rounded-full overflow-hidden border border-black/10 shadow-inner">

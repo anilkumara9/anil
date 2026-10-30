@@ -127,8 +127,8 @@ export default function App() {
       } as React.CSSProperties}
     >
       
-      {/* Extended Continuous Side Lines running full viewport height (880px wide) */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 left-0 right-0 z-20 hidden select-none md:block">
+      {/* Extended Continuous Side Lines running full viewport height (880px wide) - Only visible when screen is wide enough for gutters */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 left-0 right-0 z-20 hidden select-none min-[920px]:block">
         <div className="relative mx-auto h-full w-full max-w-[880px]">
           {/* Left continuous line */}
           <div className="absolute inset-y-0 left-0 w-px bg-[#26262B]" />
@@ -137,8 +137,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* Side Gutter Dotted Frame: covered with black shadow a little bit, not fully */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 hidden select-none overflow-hidden md:block">
+      {/* Side Gutter Dotted Frame: only visible when screen is wide enough for gutters */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 hidden select-none overflow-hidden min-[920px]:block">
         <div className="relative mx-auto h-full w-full max-w-[880px]">
           {/* Left: visible dots near the line */}
           <div className="absolute inset-y-0 w-36 sm:w-48 right-full [mask-image:linear-gradient(to_bottom,transparent,black_3rem,black_calc(100%_-_3rem),transparent)]">
@@ -159,7 +159,7 @@ export default function App() {
       {/* Cursor Hover Spotlight Overlay: ONLY a small tight portion of dots glows under cursor */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none fixed inset-0 z-10 hidden select-none overflow-hidden md:block transition-opacity duration-200"
+        className="pointer-events-none fixed inset-0 z-10 hidden select-none overflow-hidden min-[920px]:block transition-opacity duration-200"
         style={{
           opacity: mousePos.isHovering ? 1 : 0,
           WebkitMaskImage: `radial-gradient(circle 36px at ${mousePos.x}px ${mousePos.y}px, black 15%, transparent 100%)`,
@@ -187,8 +187,8 @@ export default function App() {
         <AkoderNav
           onOpenSearch={() => setIsSearchOpen(true)}
         />
-        {/* Header spacer to preserve document flow */}
-        <div className="h-10 mb-0 shrink-0 pointer-events-none" aria-hidden="true" />
+        {/* Header spacer to preserve document flow with safe-area support */}
+        <div className="h-[calc(2.75rem+env(safe-area-inset-top,0px))] sm:h-12 shrink-0 pointer-events-none" aria-hidden="true" />
 
         {/* Main Sections (Each section is a full-width line block with edge-to-edge dividing borders) */}
         <main className="flex-1 w-full divide-y divide-[#1C1C20]">

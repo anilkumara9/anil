@@ -510,10 +510,10 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <GraduationCap className="size-[17px] text-zinc-400 group-hover:text-white transition-colors shrink-0" />
-            <h3 className="text-[15px] sm:text-[16px] font-medium text-[#F4F4F5] group-hover:text-white tracking-tight transition-colors">
+            <h3 className="text-[14.5px] sm:text-[16px] font-medium text-[#F4F4F5] group-hover:text-white tracking-tight transition-colors">
               Academic Details
             </h3>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#141418] text-zinc-400 border border-[#222227] shrink-0">
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#141418] text-zinc-400 border border-[#222227] shrink-0 hidden min-[440px]:inline-block">
               NHCE · BKG PU · MDRS
             </span>
           </div>

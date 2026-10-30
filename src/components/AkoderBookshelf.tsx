@@ -198,8 +198,8 @@ export default function AkoderBookshelf() {
       <div className="relative pt-4 pb-2">
 
         {/* Books Rail with smooth horizontal scroll on smaller viewports */}
-        <div className="relative overflow-x-auto scrollbar-none overscroll-x-contain py-4">
-          <div className="flex items-end justify-center min-w-max gap-[3px] mx-auto px-4 sm:px-8 min-h-[365px]">
+        <div className="relative overflow-x-auto no-scrollbar overscroll-x-contain py-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex items-end justify-start sm:justify-center min-w-max gap-[3px] mx-auto px-2 sm:px-8 min-h-[365px]">
             {books.map((book) => {
               const isOpen = openBookId === book.id;
               const depth = book.spineWidth;

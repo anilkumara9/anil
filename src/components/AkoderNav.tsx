@@ -196,15 +196,15 @@ function GlossyStarIcon() {
 
 export default function AkoderNav({ onOpenSearch }: AkoderNavProps) {
   return (
-    <header className="pointer-events-none fixed top-[max(0.65rem,env(safe-area-inset-top,0.65rem))] left-0 right-0 z-50 mx-auto flex h-10 sm:h-11 w-full max-w-[880px] items-center justify-between gap-1 sm:gap-2 px-1.5 xs:px-2.5 sm:px-6">
+    <header className="pointer-events-none fixed top-[max(0.5rem,env(safe-area-inset-top,0.5rem))] left-0 right-0 z-50 mx-auto flex h-10 sm:h-11 w-full max-w-[880px] items-center justify-between gap-1 sm:gap-2 px-2 xs:px-3 sm:px-6">
 
       {/* Left Navigation Group (Gray UI: bg-[#202126], border-[#32333B], white text) */}
-      <nav aria-label="Site navigation" className="pointer-events-auto flex items-center gap-1 sm:gap-2 min-w-0">
+      <nav aria-label="Site navigation" className="pointer-events-auto flex items-center gap-1 xs:gap-1.5 sm:gap-2 min-w-0 max-w-[calc(100%-85px)] xs:max-w-[calc(100%-110px)] sm:max-w-none overflow-x-auto no-scrollbar py-0.5">
         {/* Anil's Profile Photo Anchor */}
         <a
           href="#hero"
           aria-label="Home"
-          className="relative flex h-8 w-8 sm:h-[34px] sm:w-[34px] shrink-0 items-center justify-center rounded-full overflow-hidden ring-1.5 ring-[#32333B] hover:ring-zinc-400 shadow-sm transition-transform hover:scale-105 active:scale-95 cursor-pointer bg-[#202126]"
+          className="relative flex h-7 w-7 xs:h-8 xs:w-8 sm:h-[34px] sm:w-[34px] shrink-0 items-center justify-center rounded-full overflow-hidden ring-1.5 ring-[#32333B] hover:ring-zinc-400 shadow-sm transition-transform hover:scale-105 active:scale-95 cursor-pointer bg-[#202126]"
         >
           <img
             src="/anil.png"
@@ -213,65 +213,65 @@ export default function AkoderNav({ onOpenSearch }: AkoderNavProps) {
           />
         </a>
 
-        {/* 1. Work Button (Gray UI) */}
+        {/* 1. Work Button */}
         <a
           href="#work"
-          className="group flex h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs"
+          className="group flex h-7 xs:h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 xs:px-2.5 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
         >
           <span>Work</span>
-          <div className="shrink-0 flex items-center justify-center transition-transform group-hover:scale-110">
+          <div className="hidden sm:flex shrink-0 items-center justify-center transition-transform group-hover:scale-110">
             <KeycapStickerIcon />
           </div>
         </a>
 
-        {/* 2. Open Source Button (Gray UI) */}
+        {/* 2. Open Source Button */}
         <a
           href="#opensource"
-          className="group flex h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs"
+          className="group flex h-7 xs:h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 xs:px-2.5 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
         >
           <span>
-            <span className="inline sm:hidden">Open</span>
-            <span className="hidden sm:inline">Open Source</span>
+            <span className="inline md:hidden">Open</span>
+            <span className="hidden md:inline">Open Source</span>
           </span>
-          <div className="shrink-0 flex items-center justify-center transition-transform group-hover:scale-110">
+          <div className="hidden sm:flex shrink-0 items-center justify-center transition-transform group-hover:scale-110">
             <ChatBubbleStickerIcon />
           </div>
         </a>
 
-        {/* 3. Skills Button (Gray UI) */}
+        {/* 3. Skills Button */}
         <a
           href="#skills"
-          className="group flex h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs"
+          className="group flex h-7 xs:h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 xs:px-2.5 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
         >
           <span>Skills</span>
-          <div className="shrink-0 flex items-center justify-center transition-transform group-hover:scale-110">
+          <div className="hidden sm:flex shrink-0 items-center justify-center transition-transform group-hover:scale-110">
             <SkillsTerminalStickerIcon />
           </div>
         </a>
 
-        {/* 4. Contact Button (Gray UI) */}
+        {/* 4. Contact Button */}
         <a
           href="#contact"
-          className="group flex h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs"
+          className="group flex h-7 xs:h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-2 xs:px-2.5 sm:pl-3.5 sm:pr-2.5 text-[11px] xs:text-[11.5px] sm:text-[12.5px] font-medium text-white transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
         >
           <span>Contact</span>
-          <div className="shrink-0 flex items-center justify-center transition-transform group-hover:scale-110">
+          <div className="hidden sm:flex shrink-0 items-center justify-center transition-transform group-hover:scale-110">
             <CoffeeCupStickerIcon />
           </div>
         </a>
       </nav>
 
       {/* Right Control Actions Group (Gray UI) */}
-      <div className="pointer-events-auto flex shrink-0 items-center gap-1 sm:gap-2">
-        {/* Search Command Palette Trigger (Gray UI Squircle) */}
+      <div className="pointer-events-auto flex shrink-0 items-center gap-1 xs:gap-1.5 sm:gap-2 pl-1">
+        {/* Search Command Palette Trigger */}
         <div className="relative group">
           <button
             type="button"
             onClick={onOpenSearch}
             aria-label="Open search command palette"
-            className="flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-xl bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] text-zinc-300 hover:text-white transition-colors cursor-pointer shadow-xs shrink-0"
+            className="flex h-7 w-7 xs:h-8 xs:w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-xl bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] text-zinc-300 hover:text-white transition-colors cursor-pointer shadow-xs shrink-0"
           >
-            <Search className="size-[13px] sm:size-[14.5px]" />
+            <Search className="size-[12px] xs:size-[13px] sm:size-[14.5px]" />
           </button>
 
           {/* Upward Notch Tooltip */}
@@ -285,21 +285,21 @@ export default function AkoderNav({ onOpenSearch }: AkoderNavProps) {
           </div>
         </div>
 
-        {/* GitHub Button (Gray UI Pill: Normal = GitHub Icon, Hover = Stars) */}
+        {/* GitHub Button (Visible on screens >= 400px) */}
         <a
           href="https://github.com/anilkumara9"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View on GitHub"
-          className="group flex h-8 w-8 sm:w-auto sm:h-[34px] items-center rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-0 sm:px-3.5 transition-all duration-150 cursor-pointer justify-center shadow-xs shrink-0"
+          className="group hidden min-[400px]:flex h-7 w-7 xs:h-8 xs:w-8 sm:w-auto sm:h-[34px] items-center rounded-full bg-[#202126] hover:bg-[#2A2B32] border border-[#32333B] px-0 sm:px-3.5 transition-all duration-150 cursor-pointer justify-center shadow-xs shrink-0"
         >
-          {/* Normal state: GitHub icon & count */}
+          {/* Normal state */}
           <div className="flex items-center gap-1.5 text-[12px] font-mono text-zinc-300 group-hover:hidden transition-all">
-            <Github className="size-[13.5px] sm:size-[14px]" />
+            <Github className="size-[12.5px] xs:size-[13.5px] sm:size-[14px]" />
             <span className="font-sans font-medium text-white text-[12px] hidden sm:inline">42</span>
           </div>
 
-          {/* Hover state: ONLY show the stars & count! */}
+          {/* Hover state */}
           <div className="hidden group-hover:flex items-center gap-1.5 text-[12px] font-mono text-zinc-100 transition-all animate-in fade-in zoom-in-95 duration-150">
             <GlossyStarIcon />
             <span className="font-sans font-semibold text-amber-300 text-[12px] hidden sm:inline">42</span>
@@ -312,10 +312,10 @@ export default function AkoderNav({ onOpenSearch }: AkoderNavProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View and Download Resume"
-          className="group flex h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#FECE12] hover:bg-[#F3C400] text-[#0A0A0A] font-semibold px-2 sm:px-3.5 text-[11px] sm:text-[12px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xs cursor-pointer shrink-0"
+          className="group flex h-7 xs:h-8 sm:h-[34px] items-center gap-1 sm:gap-1.5 rounded-full bg-[#FECE12] hover:bg-[#F3C400] text-[#0A0A0A] font-semibold px-2 xs:px-2.5 sm:px-3.5 text-[11px] sm:text-[12px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xs cursor-pointer shrink-0 whitespace-nowrap"
         >
-          <FileText className="size-[12px] sm:size-[13px] stroke-[2.2] text-[#0A0A0A]" />
-          <span className="max-[370px]:hidden">Resume</span>
+          <FileText className="size-[11.5px] xs:size-[12px] sm:size-[13px] stroke-[2.2] text-[#0A0A0A]" />
+          <span>Resume</span>
           <ArrowUpRight className="size-[11px] sm:size-[12px] stroke-[2.4] opacity-75 group-hover:opacity-100 transition-opacity text-[#0A0A0A] hidden sm:inline" />
         </a>
       </div>
