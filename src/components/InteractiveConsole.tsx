@@ -63,6 +63,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-slate-300 text-[12px]">
             <p className="text-slate-400">Available commands:</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">shiftsense</span> — Screen-aware Windows AI sidebar (double-tap Shift, 99 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">omnirecon</span> — Autonomous web recon MCP for coding agents (21 tools, 163 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">spora</span> — Bootstrapped social platform specs (200+ users)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">scbi</span> — Foundation model representation steering findings</p>
@@ -70,6 +71,26 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
             <p><span className="text-[#FC535B] font-mono font-semibold">experience</span> — Industry work at CampusPe</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">contact</span> — Reach out via email, phone, or LinkedIn</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">clear</span> — Reset terminal output</p>
+          </div>
+        );
+        break;
+      case 'shiftsense':
+        output = (
+          <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
+            <p className="font-bold text-white flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+              ShiftSense: Screen Aware AI Sidebar for Windows
+            </p>
+            <p className="text-slate-400">Electron · Windows UI Automation · 99 Tests Passing · Nov 2026</p>
+            <p>Opens with a double tap of Shift to answer questions about the app in front of you, in place, using UI Automation screen reads and local markdown memory with Claude, OpenAI, or local Ollama models.</p>
+            <div className="flex items-center gap-3 pt-1">
+              <a href="https://github.com/anilkumara9/shiftsense/releases" target="_blank" rel="noopener noreferrer" className="text-[#F2F536] hover:underline inline-flex items-center gap-1">
+                Download Installer <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <a href="https://github.com/anilkumara9/shiftsense" target="_blank" rel="noopener noreferrer" className="text-[#FC535B] hover:underline inline-flex items-center gap-1">
+                GitHub Repo <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
           </div>
         );
         break;

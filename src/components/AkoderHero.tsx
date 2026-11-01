@@ -82,6 +82,16 @@ export default function AkoderHero() {
       ),
     },
     {
+      label: 'ShiftSense',
+      badge: 'v1.5.1 · 99 Tests',
+      href: 'https://github.com/anilkumara9/shiftsense/releases',
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 4L4 12h5v8h6v-8h5L12 4z" />
+        </svg>
+      ),
+    },
+    {
       label: 'OmniRecon on 𝕏',
       href: 'https://x.com/anilKumar09873/status/2109905045814968746?a=SYvA4nMXUt3yw3fABSs&s=20',
       icon: (

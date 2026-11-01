@@ -31,6 +31,46 @@ export interface WorkProject {
 
 export const WORK_PROJECTS: WorkProject[] = [
   {
+    id: "shiftsense",
+    title: "ShiftSense: Screen Aware AI Sidebar for Windows",
+    shortTitle: "ShiftSense",
+    period: "Nov 2026",
+    role: "Creator & Systems Architect",
+    type: "flagship",
+    year: "2026",
+    featured: true,
+    badge: "v1.5.1 · 99 Tests",
+    accentBadge: true,
+    tagline: "Screen Aware AI Sidebar for Windows · Double-Tap Shift · 99 Tests Passing",
+    description: "A Windows AI sidebar (Electron, Node.js) that opens with a double tap of Shift and answers questions about the app in front of you, in place, using UI Automation screen reads and local markdown memory, with Claude, OpenAI, or local Ollama models.",
+    lldType: "NATIVE DESKTOP / UI AUTOMATION",
+    lldMetric: "Double-Tap Shift · 99 Tests Passing",
+    lldStorage: "Local Markdown Memory & Encrypted Store",
+    lldPattern: "Global Shift Hook + In-Place Context Synthesis",
+    lldFlow: ["Double-Tap Shift Hook", "Windows UI Automation Reader", "Privacy Redactor & Exclusion Filter", "Multi-LLM Dispatcher (Claude / OpenAI / Ollama)", "In-Place Native Sidebar"],
+    bulletPoints: [
+      "A Windows AI sidebar (Electron, Node.js) that opens with a double tap of Shift and answers questions about the app in front of you, in place",
+      "Uses native Windows UI Automation screen reads and maintains local markdown memory",
+      "Multi-model integration with Anthropic Claude, OpenAI, or local offline Ollama models",
+      "Private by design: automated password redaction, per-app no-read exclusion lists, and approval-gated computer use",
+      "Shipped publicly with dual-OS GitHub Actions CI on Windows and Linux (99 tests), installer releases with SHA-256 checksums, and a v1.5.1 fix for live shutdown crashes"
+    ],
+    deepDive: {
+      problem: "Switching away from an active window to query an AI copilot causes friction, broken focus, and lost context. Conventional screen capture tools either blindly screenshot unencrypted screens (leaking confidential passwords) or fail to parse structured UI state.",
+      architecture: "Engineered in Electron and Node.js with native C++ keyboard hooks and Windows UI Automation accessibility readers. Scans the foreground app hierarchy, strips sensitive fields and passwords before inference, and streams answers from Claude, OpenAI, or offline Ollama into an instant floating sidebar with markdown memory persistence.",
+      keyOutcomes: [
+        "Instant double-tap Shift summoning that delivers in-place contextual assistance without defocusing the host application.",
+        "Zero-leak privacy safeguards: automated password redaction, customizable per-app exclusion lists, and approval gates for desktop actions.",
+        "Production-grade release lifecycle: cross-platform GitHub Actions CI across Windows & Linux with 99 passing tests, cryptographically verified installer releases (SHA-256), and v1.5.1 production stability."
+      ]
+    },
+    stack: ["Electron", "Node.js", "Windows UI Automation", "Claude API", "Ollama", "OpenAI", "TypeScript", "GitHub Actions"],
+    links: [
+      { label: "Installer Releases", url: "https://github.com/anilkumara9/shiftsense/releases", primary: true },
+      { label: "GitHub Repository", url: "https://github.com/anilkumara9/shiftsense", primary: false }
+    ]
+  },
+  {
     id: "campuspe",
     title: "CampusPe: AI Engineering Internship",
     shortTitle: "CampusPe",

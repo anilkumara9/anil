@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { 
+  Terminal,
   Search, 
   Home, 
   Briefcase, 
@@ -52,6 +53,12 @@ export default function CommandPalette({
   ];
 
   const actionItems: CommandItem[] = [
+    { 
+      id: 'shiftsense', 
+      title: 'ShiftSense: Windows AI Sidebar (v1.5.1 Releases)', 
+      icon: Terminal, 
+      url: 'https://github.com/anilkumara9/shiftsense/releases' 
+    },
     { 
       id: 'resume', 
       title: 'View Resume (PDF)', 

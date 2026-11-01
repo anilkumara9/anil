@@ -70,6 +70,8 @@ export const generateResumePDF = (data: ResumeData) => {
   
   // My Work
   addSection('MY WORK (LIVE PRODUCTS)');
+  addText('ShiftSense (Screen-Aware AI Sidebar for Windows - Nov 2026)', 11, true);
+  addText('Engineered a Windows AI sidebar (Electron, Node.js) activated via double-tap Shift; reads UI Automation trees with password masking, local markdown memory, and 99 tests passing.');
   addText('OmniRecon (Full-Spectrum Web Recon for Coding Agents)', 11, true);
   addText('Built OmniRecon, a suite of 21 Model Context Protocol (MCP) tools with 163 passing tests enabling coding agents to explore websites, capture live API traffic, extract design systems, and verify rebuilds.');
   addText('Spora (Jan 2026 - Present)', 11, true);

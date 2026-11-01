@@ -17,6 +17,22 @@ interface TimelineEvent {
 const InteractiveTimeline: React.FC = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([
     {
+      id: 'shiftsense',
+      date: 'Nov 2026',
+      title: 'ShiftSense: Screen Aware AI Sidebar for Windows',
+      organization: 'Native Desktop · Electron & UI Automation',
+      description: 'Windows AI sidebar that opens with double-tap Shift; contextualizes foreground windows with UI Automation reads, local markdown memory, and 99 tests.',
+      type: 'project',
+      details: [
+        'Opens instantly via double tap of Shift to answer questions about the app in front of you, in place',
+        'Uses native Windows UI Automation screen reads and local markdown memory with Claude, OpenAI, or local Ollama models',
+        'Private by design: automated password redaction, per-app no-read lists, and approval-gated computer use',
+        'Shipped publicly: GitHub Actions CI on Windows and Linux (99 tests), installer releases with SHA-256 checksums, and v1.5.1 stability fixes'
+      ],
+      link: 'https://github.com/anilkumara9/shiftsense/releases',
+      linkText: 'Installer Releases'
+    },
+    {
       id: 'omnirecon',
       date: 'Oct 2026 – Present',
       title: 'OmniRecon: Full-Spectrum Web Recon for Coding Agents',
