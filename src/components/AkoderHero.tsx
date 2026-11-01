@@ -247,9 +247,9 @@ export default function AkoderHero() {
               </span>
             </p>
 
-            {/* Main Headline (Clean, punchy, humanized, no dashes) */}
+            {/* Main Headline with Freelancer role */}
             <h1 className="text-[15.5px] xs:text-[18px] sm:text-2xl md:text-[26px] font-semibold text-white leading-[1.28] tracking-tight font-sans">
-              I craft software, tinker with AI, and build things that matter.
+              Freelancer &middot; Software &amp; AI Engineer &mdash; I craft software, tinker with AI, and build things that matter.
             </h1>
 
             {/* Bio paragraph */}
