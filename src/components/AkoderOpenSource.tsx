@@ -544,6 +544,61 @@ export default function AkoderOpenSource() {
     setOpenRepoId(prev => (prev === repoId ? null : repoId));
   };
 
+  // Helper function to get authentic GitHub repository preview cards
+  const getOpenSourcePreview = (repoId: string, pr?: OpenSourcePR) => {
+    if (pr?.id === 'mlflow-url-sync' || pr?.repoName?.toLowerCase().includes('mlflow')) {
+      return {
+        imageSrc: '/previews/mlflow.png',
+        url: pr?.forkUrl || pr?.issueUrl || 'https://github.com/mlflow/mlflow',
+        title: 'MLflow'
+      };
+    }
+    switch (repoId) {
+      case 'deepmind-hope':
+        return {
+          imageSrc: '/previews/hope.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/google-deepmind/hope',
+          title: 'Google DeepMind: HOPE'
+        };
+      case 'litellm':
+        return {
+          imageSrc: '/previews/litellm.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/BerriAI/litellm',
+          title: 'BerriAI / litellm'
+        };
+      case 'haystack':
+        return {
+          imageSrc: '/previews/haystack.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/deepset-ai/haystack',
+          title: 'deepset-ai / haystack'
+        };
+      case 'pandas':
+        return {
+          imageSrc: '/previews/pandas.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/pandas-dev/pandas',
+          title: 'pandas-dev / pandas'
+        };
+      case 'langchain-mlflow':
+        return {
+          imageSrc: '/previews/langchain.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/langchain-ai/langchain',
+          title: 'langchain-ai / langchain'
+        };
+      case 'sentence-transformers':
+        return {
+          imageSrc: '/previews/sentence_transformers.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com/UKPLab/sentence-transformers',
+          title: 'UKPLab / sentence-transformers'
+        };
+      default:
+        return {
+          imageSrc: '/previews/hope.png',
+          url: pr?.prUrl || pr?.forkUrl || 'https://github.com',
+          title: 'GitHub'
+        };
+    }
+  };
+
   // Lock body scroll and listen for ESC key when PR modal is active
   useEffect(() => {
     if (!selectedPR) return;
@@ -632,13 +687,14 @@ export default function AkoderOpenSource() {
           const isDeepMind = repo.id === 'deepmind-hope';
           const isOpen = openRepoId === repo.id;
           const displayedPRs = isDeepMind && !showAllDeepMind ? repo.prs.slice(0, 6) : repo.prs;
+          const repoPreview = getOpenSourcePreview(repo.id);
 
           return (
             <div key={repo.id} className="relative transition-all">
               {/* Repo Header Bar - Click to Toggle Sub-Section */}
               <div
                 onClick={() => toggleRepo(repo.id)}
-                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-2 px-2.5 -mx-2.5 rounded-lg hover:bg-[#121216]/60 transition-colors cursor-pointer select-none"
+                className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-2 px-2.5 -mx-2.5 rounded-lg hover:bg-[#121216]/60 transition-colors cursor-pointer select-none"
               >
                 <div className="flex items-center gap-2 flex-wrap">
                   <img
@@ -690,44 +746,87 @@ export default function AkoderOpenSource() {
                     {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </div>
+
+                {/* Floating Real GitHub Preview Card on Repo Hover */}
+                <div 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const target = repo.repoUrl;
+                    if (target && target.startsWith('http')) {
+                      window.open(target, '_blank', 'noopener,noreferrer');
+                    }
+                  }}
+                  className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
+                >
+                  <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
+                    <img
+                      src={repoPreview.imageSrc}
+                      alt={`${repo.name} preview`}
+                      className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-[#0D1117]"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Sub-Section Block Table with Hairline Dividers - Only Visible When Open */}
               {isOpen && (
                 <div className="mt-2 animate-in fade-in duration-150">
                   <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-                    {displayedPRs.map((pr) => (
-                      <div
-                        key={pr.id}
-                        onClick={() => setSelectedPR(pr)}
-                        className="group flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
-                      >
-                        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 min-w-0">
-                          <span className="font-mono text-[11.5px] text-amber-400/90 group-hover:text-amber-300 shrink-0 sm:w-[70px]">
-                            {pr.prNumber || 'Branch'}
-                          </span>
-                          <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white truncate sm:max-w-[420px] md:max-w-[490px]">
-                            {pr.title}
-                          </span>
-                        </div>
+                    {displayedPRs.map((pr) => {
+                      const prPreview = getOpenSourcePreview(repo.id, pr);
+                      return (
+                        <div
+                          key={pr.id}
+                          onClick={() => setSelectedPR(pr)}
+                          className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
+                        >
+                          <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 min-w-0">
+                            <span className="font-mono text-[11.5px] text-amber-400/90 group-hover:text-amber-300 shrink-0 sm:w-[70px]">
+                              {pr.prNumber || 'Branch'}
+                            </span>
+                            <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white truncate sm:max-w-[420px] md:max-w-[490px]">
+                              {pr.title}
+                            </span>
+                          </div>
 
-                        <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
-                          <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
-                            {pr.statusNote}
-                          </span>
-                          <a
-                            href={pr.prUrl || pr.forkUrl || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
-                            title={`View on GitHub`}
+                          <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
+                            <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
+                              {pr.statusNote}
+                            </span>
+                            <a
+                              href={pr.prUrl || pr.forkUrl || '#'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
+                              title={`View on GitHub`}
+                            >
+                              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                          </div>
+
+                          {/* Floating Real GitHub Preview Card in Middle on Hover */}
+                          <div 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const target = pr.prUrl || pr.forkUrl || repo.repoUrl;
+                              if (target && target.startsWith('http')) {
+                                window.open(target, '_blank', 'noopener,noreferrer');
+                              }
+                            }}
+                            className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
                           >
-                            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                          </a>
+                            <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
+                              <img
+                                src={prPreview.imageSrc}
+                                alt={`${pr.title} preview`}
+                                className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-[#0D1117]"
+                              />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   {/* DeepMind Toggle to expand all 15 PRs */}
