@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, GraduationCap, ChevronDown, X } from 'lucide-react';
+import { LinkPreview } from './ui/link-preview';
 
 export interface WorkProject {
   id: string;
@@ -414,6 +415,35 @@ interface AkoderWorkProps {
   onSelectProject?: (project: WorkProject) => void;
 }
 
+
+function getProjectPreview(project: WorkProject) {
+  if (project.id === 'hackathon') {
+    return {
+      url: '/reva-certificate.jpg',
+      isStatic: true as const,
+      imageSrc: '/reva-certificate.jpg'
+    };
+  }
+
+  if (project.id === 'invisly') {
+    return {
+      url: 'https://invisly.in',
+      isStatic: true as const,
+      imageSrc: '/invisly.png'
+    };
+  }
+
+  // Prioritize GitHub repository link if available, otherwise web link
+  const githubLink = project.links.find(l => l.url.includes('github.com'))?.url;
+  const webLink = project.links.find(l => l.url.startsWith('http'))?.url;
+  const targetUrl = githubLink || webLink || 'https://github.com/anilkumara9';
+
+  return {
+    url: targetUrl,
+    isStatic: false as const
+  };
+}
+
 export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(false);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
@@ -448,61 +478,65 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                 </span>
               </div>
 
-              {/* Projects Block Table with Hairline Dividers */}
+              {/* Projects Block Table with Hairline Dividers & Aceternity Link Previews */}
               <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-                {yearProjects.map(project => (
-                  <div
-                    key={project.id}
-                    onClick={() => onSelectProject?.(project)}
-                    className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
-                      <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
-                        {project.shortTitle || project.title}
-                      </span>
-                      <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
-                        {project.tagline || project.description}
-                      </span>
-                    </div>
+                {yearProjects.map(project => {
+                  const preview = getProjectPreview(project);
 
-                    <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
-                      {project.badge && (
-                        <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
-                          {project.badge}
-                        </span>
-                      )}
-                      <a
-                        href={project.links[0]?.url || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
-                        title={`Open ${project.shortTitle || project.title}`}
-                      >
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </a>
-                    </div>
-
-                    {/* Certificate Hover Preview when hovering ANYWHERE across the Hackathon project row without clicking */}
-                    {project.id === 'hackathon' && (
-                      <div 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsCertModalOpen(true);
-                        }}
-                        className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[240px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
-                      >
-                        <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
-                          <img
-                            src="/reva-certificate.jpg"
-                            alt="REVA University Hackathon Certificate"
-                            className="w-full h-auto rounded-[5px] object-contain block"
-                          />
+                  return (
+                    <div
+                      key={project.id}
+                      onClick={() => onSelectProject?.(project)}
+                      className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
+                        {/* Interactive Link Preview on Project Title */}
+                        <div 
+                          className="shrink-0 sm:w-[130px] md:w-[155px]"
+                          onClick={(e) => {
+                            if (project.id === 'hackathon') {
+                              e.stopPropagation();
+                              setIsCertModalOpen(true);
+                            }
+                          }}
+                        >
+                          <LinkPreview
+                            url={preview.url}
+                            isStatic={preview.isStatic}
+                            imageSrc={preview.imageSrc}
+                            width={220}
+                            height={135}
+                            className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white inline-block cursor-pointer"
+                          >
+                            {project.shortTitle || project.title}
+                          </LinkPreview>
                         </div>
+
+                        <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
+                          {project.tagline || project.description}
+                        </span>
                       </div>
-                    )}
-                  </div>
-                ))}
+
+                      <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
+                        {project.badge && (
+                          <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
+                            {project.badge}
+                          </span>
+                        )}
+                        <a
+                          href={project.links[0]?.url || '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
+                          title={`Open ${project.shortTitle || project.title}`}
+                        >
+                          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Outside Hand-drawn Note, Trophy Character & Sketched Arrow on Right Side in gutter (matching 'Hi I am Anil' style) */}
