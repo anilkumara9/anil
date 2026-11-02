@@ -420,27 +420,32 @@ function getProjectPreview(project: WorkProject) {
   if (project.id === 'hackathon') {
     return {
       url: '/reva-certificate.jpg',
-      isStatic: true as const,
-      imageSrc: '/reva-certificate.jpg'
+      imageSrc: '/reva-certificate.jpg',
+      isCert: true
     };
   }
 
-  if (project.id === 'invisly') {
-    return {
-      url: 'https://invisly.in',
-      isStatic: true as const,
-      imageSrc: '/invisly.png'
-    };
-  }
+  const previewMap: Record<string, string> = {
+    shiftsense: '/previews/shiftsense.png',
+    campuspe: '/previews/campuspe.png',
+    omnirecon: '/previews/omnirecon.png',
+    spora: '/previews/spora.png',
+    scbi: '/previews/scbi.png',
+    invisly: '/previews/invisly.png',
+    're-id': '/previews/re-id.png',
+    polo: '/previews/polo.png',
+    latable: '/previews/latable.png',
+  };
 
-  // Prioritize GitHub repository link if available, otherwise web link
+  const imageSrc = previewMap[project.id] || '/previews/shiftsense.png';
   const githubLink = project.links.find(l => l.url.includes('github.com'))?.url;
   const webLink = project.links.find(l => l.url.startsWith('http'))?.url;
   const targetUrl = githubLink || webLink || 'https://github.com/anilkumara9';
 
   return {
     url: targetUrl,
-    isStatic: false as const
+    imageSrc,
+    isCert: false
   };
 }
 
@@ -478,7 +483,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                 </span>
               </div>
 
-              {/* Projects Block Table with Hairline Dividers & Aceternity Link Previews */}
+              {/* Projects Block Table with Hairline Dividers & Live Link Previews */}
               <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
                 {yearProjects.map(project => {
                   const preview = getProjectPreview(project);
@@ -490,27 +495,9 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                       className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
-                        {/* Interactive Link Preview on Project Title */}
-                        <div 
-                          className="shrink-0 sm:w-[130px] md:w-[155px]"
-                          onClick={(e) => {
-                            if (project.id === 'hackathon') {
-                              e.stopPropagation();
-                              setIsCertModalOpen(true);
-                            }
-                          }}
-                        >
-                          <LinkPreview
-                            url={preview.url}
-                            isStatic={preview.isStatic}
-                            imageSrc={preview.imageSrc}
-                            width={220}
-                            height={135}
-                            className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white inline-block cursor-pointer"
-                          >
-                            {project.shortTitle || project.title}
-                          </LinkPreview>
-                        </div>
+                        <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
+                          {project.shortTitle || project.title}
+                        </span>
 
                         <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
                           {project.tagline || project.description}
@@ -533,6 +520,27 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                         >
                           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
+                      </div>
+
+                      {/* Floating Link & Certificate Preview in Middle on Cursor Hover */}
+                      <div 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (preview.isCert) {
+                            setIsCertModalOpen(true);
+                          } else if (preview.url && preview.url.startsWith('http')) {
+                            window.open(preview.url, '_blank', 'noopener,noreferrer');
+                          }
+                        }}
+                        className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
+                      >
+                        <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
+                          <img
+                            src={preview.imageSrc}
+                            alt={`${project.shortTitle || project.title} preview`}
+                            className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-black/60"
+                          />
+                        </div>
                       </div>
                     </div>
                   );
