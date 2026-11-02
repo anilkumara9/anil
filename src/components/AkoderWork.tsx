@@ -490,7 +490,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                           e.stopPropagation();
                           setIsCertModalOpen(true);
                         }}
-                        className="absolute bottom-full mb-2 left-2 sm:left-3 z-50 w-[210px] sm:w-[240px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
+                        className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[240px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
                       >
                         <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
                           <img
@@ -531,7 +531,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                         e.stopPropagation();
                         setIsCertModalOpen(true);
                       }}
-                      className="absolute top-full mt-2 left-0 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1 pointer-events-none group-hover/sticker:opacity-100 group-hover/sticker:translate-y-0 group-hover/sticker:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
+                      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1.5 pointer-events-none group-hover/sticker:opacity-100 group-hover/sticker:translate-y-0 group-hover/sticker:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
                     >
                       <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
                         <img
