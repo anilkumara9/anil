@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, GraduationCap, ChevronDown, X } from 'lucide-react';
 import { LinkPreview } from './ui/link-preview';
 
@@ -461,7 +461,25 @@ function getProjectPreview(project: WorkProject) {
 export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(false);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
+  const [isNhceModalOpen, setIsNhceModalOpen] = useState(false);
   const years: ('2026' | '2025' | '2024')[] = ['2026', '2025', '2024'];
+
+  useEffect(() => {
+    if (!isCertModalOpen && !isNhceModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsCertModalOpen(false);
+        setIsNhceModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isCertModalOpen, isNhceModalOpen]);
 
   return (
     <section id="work" className="px-4 sm:px-8 py-8 sm:py-10 scroll-mt-20">
@@ -659,14 +677,36 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
         {isAcademicsOpen && (
           <div className="mt-2 divide-y divide-[#1C1C20] border-t border-[#1C1C20] animate-in fade-in-50 duration-200">
             {/* 1. College (B.E. Computer Science) */}
-            <div className="py-4">
+            <div 
+              className="py-4 group relative cursor-pointer hover:bg-[#121216]/50 -mx-2.5 px-2.5 rounded-lg transition-colors"
+              onClick={() => setIsNhceModalOpen(true)}
+            >
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                <h4 className="font-medium text-[15px] sm:text-[15.5px] text-[#F4F4F5] tracking-tight">
-                  New Horizon College of Engineering, Bengaluru
-                </h4>
-                <span className="font-mono text-[12px] text-zinc-400 shrink-0">
-                  Aug 2022 – Jul 2026
-                </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h4 className="font-medium text-[15px] sm:text-[15.5px] text-[#F4F4F5] group-hover:text-amber-300 tracking-tight transition-colors">
+                    New Horizon College of Engineering, Bengaluru
+                  </h4>
+                  <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 inline-flex items-center gap-1">
+                    <span>🎓</span>
+                    <span>Graduation Letter</span>
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="font-mono text-[12px] text-zinc-400">
+                    Aug 2022 – Jul 2026
+                  </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsNhceModalOpen(true);
+                    }}
+                    className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
+                    title="View Graduation Letter"
+                  >
+                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </button>
+                </div>
               </div>
               <div className="text-[13.5px] text-zinc-300 font-sans mb-1">
                 B.E. in Computer Science and Engineering (Data Science)
@@ -698,6 +738,27 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                     <span>Computer Networks</span>
                   </li>
                 </ul>
+              </div>
+
+              {/* Floating Graduation Certificate Preview Card on Hover */}
+              <div 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsNhceModalOpen(true);
+                }}
+                className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
+              >
+                <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
+                  <img
+                    src="/nhce-certificate.jpg"
+                    alt="New Horizon College of Engineering Graduation Letter Preview"
+                    className="w-full h-auto max-h-[160px] rounded-lg object-contain block bg-[#0D1117]"
+                  />
+                  <div className="pt-1.5 pb-0.5 px-1 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                    <span className="text-amber-400 flex items-center gap-1">🎓 Graduation Letter</span>
+                    <span className="text-zinc-500">Click to view</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -781,6 +842,60 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
               <img
                 src="/reva-certificate.jpg"
                 alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
+                className="max-w-full max-h-[74vh] object-contain rounded-lg shadow-2xl border border-white/10"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Full-Screen NHCE Certificate Lightbox Modal */}
+      {isNhceModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setIsNhceModalOpen(false)}
+        >
+          <div
+            className="relative max-w-3xl w-full bg-[#111218] border border-amber-500/40 rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Top Bar */}
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#161720]">
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400 text-lg">🎓</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-white">New Horizon College of Engineering</h3>
+                  <p className="text-xs text-zinc-400">Bachelor of Engineering · CSE (Data Science) Graduation Letter</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/nhce-certificate.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                >
+                  <span>Open Full Size</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsNhceModalOpen(false)}
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                  aria-label="Close dialog"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Body */}
+            <div className="p-3 sm:p-6 bg-black/50 flex items-center justify-center max-h-[80vh] overflow-auto">
+              <img
+                src="/nhce-certificate.jpg"
+                alt="New Horizon College of Engineering Graduation Letter"
                 className="max-w-full max-h-[74vh] object-contain rounded-lg shadow-2xl border border-white/10"
               />
             </div>
