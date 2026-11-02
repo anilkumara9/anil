@@ -72,7 +72,9 @@ const InteractiveTimeline: React.FC = () => {
       details: [
         'Constructed GenAI prompt engineering harnesses and structured JSON schema validation loops',
         'Streamlined model response streaming, latency bottlenecks, and error-recovery fallbacks'
-      ]
+      ],
+      link: 'https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing',
+      linkText: 'View Proof (Drive)'
     },
     {
       id: '3',

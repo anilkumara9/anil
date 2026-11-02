@@ -105,7 +105,8 @@ export const WORK_PROJECTS: WorkProject[] = [
     },
     stack: ["Generative AI", "LLM APIs", "Next.js", "Python", "TypeScript", "Prompt Engineering"],
     links: [
-      { label: "CampusPe", url: "https://campuspe.com", primary: true }
+      { label: "Internship Proof (Drive)", url: "https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing", primary: true },
+      { label: "CampusPe", url: "https://campuspe.com", primary: false }
     ]
   },
   {
@@ -422,6 +423,14 @@ function getProjectPreview(project: WorkProject) {
       url: '/reva-certificate.jpg',
       imageSrc: '/reva-certificate.jpg',
       isCert: true
+    };
+  }
+
+  if (project.id === 'campuspe') {
+    return {
+      url: 'https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing',
+      imageSrc: '/previews/campuspe_proof.png',
+      isCert: false
     };
   }
 

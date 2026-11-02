@@ -420,6 +420,37 @@ export default function App() {
                 </div>
               )}
 
+              {/* Official Internship Proof Showcase for CampusPe */}
+              {activeProjectModal.id === 'campuspe' && (
+                <div className="p-6 sm:p-7 space-y-3 bg-[#13141D]/60 border-b border-[#1C1D25]">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-amber-400 font-semibold flex items-center gap-1.5">
+                      <span>📄</span> Official Internship Proof Letter
+                    </span>
+                    <a
+                      href="https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+                    >
+                      Open Google Drive ↗
+                    </a>
+                  </div>
+                  <a
+                    href="https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-xl overflow-hidden border border-white/20 hover:border-amber-400/60 shadow-xl bg-black/40 transition-colors group cursor-pointer"
+                  >
+                    <img
+                      src="/previews/campuspe_proof.png"
+                      alt="CampusPe Official Internship Proof Document"
+                      className="w-full h-auto object-contain max-h-[420px] mx-auto group-hover:scale-[1.01] transition-transform duration-300"
+                    />
+                  </a>
+                </div>
+              )}
+
               {/* Technologies Used Section */}
               <div className="p-6 sm:p-7 space-y-3">
                 <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
