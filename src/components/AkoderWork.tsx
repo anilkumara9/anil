@@ -457,9 +457,34 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                     className="group flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
-                      <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
-                        {project.shortTitle || project.title}
-                      </span>
+                      {project.id === 'hackathon' ? (
+                        <div className="relative group/cert shrink-0 sm:w-[130px] md:w-[155px]">
+                          <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white inline-block">
+                            {project.shortTitle || project.title}
+                          </span>
+
+                          {/* Certificate Hover Preview directly on the project title (Clean, compact, no over-design) */}
+                          <div 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsCertModalOpen(true);
+                            }}
+                            className="absolute bottom-full mb-2 left-0 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1 pointer-events-none group-hover/cert:opacity-100 group-hover/cert:translate-y-0 group-hover/cert:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
+                          >
+                            <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
+                              <img
+                                src="/reva-certificate.jpg"
+                                alt="REVA University Hackathon Certificate"
+                                className="w-full h-auto rounded-[5px] object-contain block"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
+                          {project.shortTitle || project.title}
+                        </span>
+                      )}
                       <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
                         {project.tagline || project.description}
                       </span>
@@ -492,36 +517,17 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                   aria-hidden="true"
                   className="absolute -right-36 sm:-right-48 md:-right-56 lg:-right-64 xl:-right-72 -top-28 sm:-top-36 md:-top-44 z-20 select-none hidden xl:flex flex-col items-start rotate-[2deg] pointer-events-none"
                 >
-                  {/* Trophy Cutout Sticker with Interactive Hover Certificate Preview */}
-                  <div className="relative group/cert pointer-events-auto mb-1.5">
-                    <div
-                      onClick={() => setIsCertModalOpen(true)}
-                      className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300"
-                      title="Hover to preview certificate · Click to enlarge"
-                    >
-                      <img
-                        src="/profile-cutout.webp"
-                        alt="Anil character holding trophy"
-                        className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
-                      />
-                    </div>
-
-                    {/* Clean Certificate Preview directly below character sticker on hover */}
-                    <div 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsCertModalOpen(true);
-                      }}
-                      className="absolute top-full mt-2 left-0 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1 pointer-events-none group-hover/cert:opacity-100 group-hover/cert:translate-y-0 group-hover/cert:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
-                    >
-                      <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
-                        <img
-                          src="/reva-certificate.jpg"
-                          alt="REVA University Hackathon Certificate"
-                          className="w-full h-auto rounded-[5px] object-contain block"
-                        />
-                      </div>
-                    </div>
+                  {/* Trophy Cutout Sticker */}
+                  <div
+                    onClick={() => setIsCertModalOpen(true)}
+                    className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300 pointer-events-auto mb-1.5"
+                    title="Click to view REVA Hackathon winner specs"
+                  >
+                    <img
+                      src="/profile-cutout.webp"
+                      alt="Anil character holding trophy"
+                      className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
+                    />
                   </div>
 
                   {/* Handwritten text in Caveat script font */}
