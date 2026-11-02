@@ -506,51 +506,20 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                       />
                     </div>
 
-                    {/* Floating Certificate Preview Card on Hover (Opens Left towards Content) */}
+                    {/* Clean Certificate Preview directly below character sticker on hover */}
                     <div 
                       onClick={(e) => {
                         e.stopPropagation();
                         setIsCertModalOpen(true);
                       }}
-                      className="absolute right-[85%] bottom-[-10px] z-50 w-[320px] sm:w-[370px] opacity-0 translate-x-3 pointer-events-none group-hover/cert:opacity-100 group-hover/cert:translate-x-0 group-hover/cert:pointer-events-auto transition-all duration-300 ease-out cursor-pointer drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)]"
+                      className="absolute top-full mt-2 left-0 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1 pointer-events-none group-hover/cert:opacity-100 group-hover/cert:translate-y-0 group-hover/cert:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
                     >
-                      <div className="bg-[#12131A]/95 backdrop-blur-xl border border-amber-500/40 rounded-2xl p-3 shadow-2xl space-y-2 hover:border-amber-400 transition-colors">
-                        {/* Card Header */}
-                        <div className="flex items-center justify-between pb-1.5 border-b border-white/10 text-left">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-amber-400 text-sm">🏆</span>
-                            <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-amber-300">
-                              REVA Hackathon Certificate
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-0.5">
-                            Click to expand ↗
-                          </span>
-                        </div>
-
-                        {/* Certificate Image Frame */}
-                        <div className="relative rounded-lg overflow-hidden border border-white/10 bg-white/5 aspect-[1.414/1] group/img">
-                          <img
-                            src="/reva-certificate.jpg"
-                            alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-2.5">
-                            <span className="text-white text-[11px] font-medium bg-black/80 px-2 py-0.5 rounded backdrop-blur-sm border border-white/20">
-                              🔍 Click to view full resolution
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Card Caption */}
-                        <div className="text-left space-y-0.5 pt-0.5">
-                          <p className="text-[12px] font-semibold text-zinc-200">
-                            Hack-n-Fly with Copilot Hackathon
-                          </p>
-                          <p className="text-[11px] text-zinc-400 font-sans">
-                            Second Place Winner · REVA University (Feb 2025)
-                          </p>
-                        </div>
+                      <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
+                        <img
+                          src="/reva-certificate.jpg"
+                          alt="REVA University Hackathon Certificate"
+                          className="w-full h-auto rounded-[5px] object-contain block"
+                        />
                       </div>
                     </div>
                   </div>
