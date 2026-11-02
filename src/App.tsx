@@ -394,6 +394,32 @@ export default function App() {
                 </div>
               )}
 
+              {/* Official Certificate Showcase for Hackathon Project */}
+              {activeProjectModal.id === 'hackathon' && (
+                <div className="p-6 sm:p-7 space-y-3 bg-[#13141D]/60 border-b border-[#1C1D25]">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-amber-400 font-semibold flex items-center gap-1.5">
+                      <span>🏆</span> Official Award Certificate (Second Place)
+                    </span>
+                    <a
+                      href="/reva-certificate.jpg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+                    >
+                      View Original ↗
+                    </a>
+                  </div>
+                  <div className="rounded-xl overflow-hidden border border-amber-500/30 shadow-xl bg-black/40">
+                    <img
+                      src="/reva-certificate.jpg"
+                      alt="REVA University Hack-n-Fly Hackathon Second Place Certificate"
+                      className="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Technologies Used Section */}
               <div className="p-6 sm:p-7 space-y-3">
                 <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">

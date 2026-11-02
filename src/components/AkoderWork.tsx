@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, GraduationCap, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, GraduationCap, ChevronDown, X } from 'lucide-react';
 
 export interface WorkProject {
   id: string;
@@ -404,7 +404,8 @@ export const WORK_PROJECTS: WorkProject[] = [
     },
     stack: ["Next.js", "Vapi AI", "Voice Agents", "LLM APIs", "WebSockets"],
     links: [
-      { label: "Code on GitHub", url: "https://github.com/anilkumara9/ai-tutor", primary: true }
+      { label: "View Certificate 🏆", url: "/reva-certificate.jpg", primary: true },
+      { label: "Code on GitHub", url: "https://github.com/anilkumara9/ai-tutor", primary: false }
     ]
   }
 ];
@@ -415,6 +416,7 @@ interface AkoderWorkProps {
 
 export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(false);
+  const [isCertModalOpen, setIsCertModalOpen] = useState(false);
   const years: ('2026' | '2025' | '2024')[] = ['2026', '2025', '2024'];
 
   return (
@@ -490,17 +492,67 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                   aria-hidden="true"
                   className="absolute -right-36 sm:-right-48 md:-right-56 lg:-right-64 xl:-right-72 -top-28 sm:-top-36 md:-top-44 z-20 select-none hidden xl:flex flex-col items-start rotate-[2deg] pointer-events-none"
                 >
-                  {/* Trophy Cutout Sticker ABOVE */}
-                  <div
-                    onClick={() => onSelectProject?.(yearProjects[0])}
-                    className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300 pointer-events-auto mb-1.5"
-                    title="Click to view REVA Hackathon winner specs"
-                  >
-                    <img
-                      src="/profile-cutout.webp"
-                      alt="Anil character holding trophy"
-                      className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
-                    />
+                  {/* Trophy Cutout Sticker with Interactive Hover Certificate Preview */}
+                  <div className="relative group/cert pointer-events-auto mb-1.5">
+                    <div
+                      onClick={() => setIsCertModalOpen(true)}
+                      className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300"
+                      title="Hover to preview certificate · Click to enlarge"
+                    >
+                      <img
+                        src="/profile-cutout.webp"
+                        alt="Anil character holding trophy"
+                        className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
+                      />
+                    </div>
+
+                    {/* Floating Certificate Preview Card on Hover (Opens Left towards Content) */}
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsCertModalOpen(true);
+                      }}
+                      className="absolute right-[85%] bottom-[-10px] z-50 w-[320px] sm:w-[370px] opacity-0 translate-x-3 pointer-events-none group-hover/cert:opacity-100 group-hover/cert:translate-x-0 group-hover/cert:pointer-events-auto transition-all duration-300 ease-out cursor-pointer drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)]"
+                    >
+                      <div className="bg-[#12131A]/95 backdrop-blur-xl border border-amber-500/40 rounded-2xl p-3 shadow-2xl space-y-2 hover:border-amber-400 transition-colors">
+                        {/* Card Header */}
+                        <div className="flex items-center justify-between pb-1.5 border-b border-white/10 text-left">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-amber-400 text-sm">🏆</span>
+                            <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-amber-300">
+                              REVA Hackathon Certificate
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-0.5">
+                            Click to expand ↗
+                          </span>
+                        </div>
+
+                        {/* Certificate Image Frame */}
+                        <div className="relative rounded-lg overflow-hidden border border-white/10 bg-white/5 aspect-[1.414/1] group/img">
+                          <img
+                            src="/reva-certificate.jpg"
+                            alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-2.5">
+                            <span className="text-white text-[11px] font-medium bg-black/80 px-2 py-0.5 rounded backdrop-blur-sm border border-white/20">
+                              🔍 Click to view full resolution
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Card Caption */}
+                        <div className="text-left space-y-0.5 pt-0.5">
+                          <p className="text-[12px] font-semibold text-zinc-200">
+                            Hack-n-Fly with Copilot Hackathon
+                          </p>
+                          <p className="text-[11px] text-zinc-400 font-sans">
+                            Second Place Winner · REVA University (Feb 2025)
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Handwritten text in Caveat script font */}
@@ -642,6 +694,60 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
           </div>
         )}
       </div>
+
+      {/* Full-Screen Certificate Lightbox Modal */}
+      {isCertModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setIsCertModalOpen(false)}
+        >
+          <div
+            className="relative max-w-4xl w-full bg-[#111218] border border-amber-500/40 rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Top Bar */}
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#161720]">
+              <div className="flex items-center gap-2">
+                <span className="text-amber-400 text-lg">🏆</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-white">REVA University Hackathon Certificate</h3>
+                  <p className="text-xs text-zinc-400">Second Place · Hack-n-Fly with Copilot (Feb 2025)</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/reva-certificate.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                >
+                  <span>Open Full Size</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsCertModalOpen(false)}
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                  aria-label="Close dialog"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Body */}
+            <div className="p-3 sm:p-6 bg-black/50 flex items-center justify-center max-h-[80vh] overflow-auto">
+              <img
+                src="/reva-certificate.jpg"
+                alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
+                className="max-w-full max-h-[74vh] object-contain rounded-lg shadow-2xl border border-white/10"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
