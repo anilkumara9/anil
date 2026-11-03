@@ -89,16 +89,19 @@ export default function App() {
     };
   }, []);
 
-  // Lock body scroll when modal or search dialog is active
+  // Lock body & document scroll when modal or search dialog is active
   useEffect(() => {
     if (activeProjectModal || isSearchOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow || '';
+        document.documentElement.style.overflow = originalHtmlOverflow || '';
+      };
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [activeProjectModal, isSearchOpen]);
 
   // Global keyboard shortcuts
@@ -242,11 +245,16 @@ export default function App() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 overscroll-none"
           onClick={() => setActiveProjectModal(null)}
+          onWheel={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+            }
+          }}
         >
           <div
-            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] text-[#E4E4E7] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden max-h-[88vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] text-[#E4E4E7] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden max-h-[88vh] flex flex-col my-auto animate-in zoom-in-95 duration-200 overscroll-contain"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Minimalist Top Right Close Button (matching reference) */}
@@ -260,7 +268,20 @@ export default function App() {
             </button>
 
             {/* Scrollable Modal Content */}
-            <div className="overflow-y-auto modal-dark-scroll my-2 sm:my-3 mr-1 sm:mr-2 p-6 sm:p-9 pt-6 sm:pt-8 pr-5 sm:pr-8 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
+            <div 
+              className="overflow-y-auto overscroll-contain modal-dark-scroll my-2 sm:my-3 mr-1 sm:mr-2 p-6 sm:p-9 pt-6 sm:pt-8 pr-5 sm:pr-8 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans"
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const isScrollingDown = e.deltaY > 0;
+                const isScrollingUp = e.deltaY < 0;
+
+                if (isScrollingDown && Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight) {
+                  e.preventDefault();
+                } else if (isScrollingUp && el.scrollTop <= 0) {
+                  e.preventDefault();
+                }
+              }}
+            >
               
               {/* Header: Title & Meta */}
               <div className="space-y-2 pr-8">

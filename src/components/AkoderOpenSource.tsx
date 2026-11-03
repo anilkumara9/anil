@@ -610,12 +610,15 @@ export default function AkoderOpenSource() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    const originalOverflow = document.body.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = originalBodyOverflow || '';
+      document.documentElement.style.overflow = originalHtmlOverflow || '';
     };
   }, [selectedPR]);
 
@@ -771,7 +774,7 @@ export default function AkoderOpenSource() {
               {/* Sub-Section Block Table with Hairline Dividers - Only Visible When Open */}
               {isOpen && (
                 <div className="mt-2 animate-in fade-in duration-150">
-                  <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
+                  <div className="divide-y divide-[#18181C]/50">
                     {displayedPRs.map((pr) => {
                       const prPreview = getOpenSourcePreview(repo.id, pr);
                       return (
@@ -874,11 +877,16 @@ export default function AkoderOpenSource() {
           role="dialog"
           aria-modal="true"
           onClick={() => setSelectedPR(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-150 overscroll-none"
+          onWheel={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+            }
+          }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[88vh] text-zinc-100 animate-in zoom-in-95 duration-150"
+            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[88vh] text-zinc-100 animate-in zoom-in-95 duration-150 overscroll-contain"
           >
             {/* Minimalist Top Right Close Button */}
             <button
@@ -891,7 +899,20 @@ export default function AkoderOpenSource() {
             </button>
 
             {/* Scrollable Content */}
-            <div className="overflow-y-auto modal-dark-scroll my-2 sm:my-3 mr-1 sm:mr-2 p-6 sm:p-9 pt-6 sm:pt-8 pr-5 sm:pr-8 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
+            <div 
+              className="overflow-y-auto overscroll-contain modal-dark-scroll my-2 sm:my-3 mr-1 sm:mr-2 p-6 sm:p-9 pt-6 sm:pt-8 pr-5 sm:pr-8 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans"
+              onWheel={(e) => {
+                const el = e.currentTarget;
+                const isScrollingDown = e.deltaY > 0;
+                const isScrollingUp = e.deltaY < 0;
+
+                if (isScrollingDown && Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight) {
+                  e.preventDefault();
+                } else if (isScrollingUp && el.scrollTop <= 0) {
+                  e.preventDefault();
+                }
+              }}
+            >
               
               {/* Header: Title & Meta */}
               <div className="space-y-2 pr-8">
