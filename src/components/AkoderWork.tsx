@@ -800,16 +800,16 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setIsCertModalOpen(false)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#111218] border border-amber-500/40 rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] animate-in zoom-in-95 duration-200"
+            className="relative max-w-4xl w-full bg-[#000000] border border-white/10 rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.98)] animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Top Bar */}
-            <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#161720]">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black">
+              <div className="flex items-center gap-2.5">
                 <span className="text-amber-400 text-lg">🏆</span>
                 <div>
                   <h3 className="text-sm font-semibold text-white">REVA University Hackathon Certificate</h3>
@@ -821,7 +821,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                   href="/reva-certificate.jpg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-mono text-[#38bdf8] hover:underline transition-colors"
                 >
                   <span>Open Full Size</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -829,20 +829,20 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                 <button
                   type="button"
                   onClick={() => setIsCertModalOpen(false)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                  className="p-1.5 text-zinc-400 hover:text-white transition-colors cursor-pointer"
                   aria-label="Close dialog"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
             {/* Modal Image Body */}
-            <div className="p-3 sm:p-6 bg-black/50 flex items-center justify-center max-h-[80vh] overflow-auto">
+            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll">
               <img
                 src="/reva-certificate.jpg"
                 alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
-                className="max-w-full max-h-[74vh] object-contain rounded-lg shadow-2xl border border-white/10"
+                className="max-w-full max-h-[74vh] object-contain rounded-2xl shadow-2xl border border-white/10"
               />
             </div>
           </div>
@@ -854,16 +854,16 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setIsNhceModalOpen(false)}
         >
           <div
-            className="relative max-w-3xl w-full bg-[#111218] border border-amber-500/40 rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] animate-in zoom-in-95 duration-200"
+            className="relative max-w-3xl w-full bg-[#000000] border border-white/10 rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.98)] animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Top Bar */}
-            <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#161720]">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black">
+              <div className="flex items-center gap-2.5">
                 <span className="text-amber-400 text-lg">🎓</span>
                 <div>
                   <h3 className="text-sm font-semibold text-white">New Horizon College of Engineering</h3>
@@ -875,7 +875,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                   href="/nhce-certificate.jpg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-mono text-[#38bdf8] hover:underline transition-colors"
                 >
                   <span>Open Full Size</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -883,20 +883,20 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                 <button
                   type="button"
                   onClick={() => setIsNhceModalOpen(false)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                  className="p-1.5 text-zinc-400 hover:text-white transition-colors cursor-pointer"
                   aria-label="Close dialog"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
             {/* Modal Image Body */}
-            <div className="p-3 sm:p-6 bg-black/50 flex items-center justify-center max-h-[80vh] overflow-auto">
+            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll">
               <img
                 src="/nhce-certificate.jpg"
                 alt="New Horizon College of Engineering Graduation Letter"
-                className="max-w-full max-h-[74vh] object-contain rounded-lg shadow-2xl border border-white/10"
+                className="max-w-full max-h-[74vh] object-contain rounded-2xl shadow-2xl border border-white/10"
               />
             </div>
           </div>

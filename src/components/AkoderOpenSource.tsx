@@ -868,199 +868,184 @@ export default function AkoderOpenSource() {
         })}
       </div>
 
-      {/* Editorial Block Line PR Case Study Modal */}
+      {/* Editorial Pitch Black PR Case Study Modal matching Reference */}
       {selectedPR && (
         <div
           role="dialog"
           aria-modal="true"
           onClick={() => setSelectedPR(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-150"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl bg-[#090A0F] border border-[#1C1D25] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] text-zinc-100 animate-in zoom-in-95 duration-150"
+            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col max-h-[88vh] text-zinc-100 animate-in zoom-in-95 duration-150"
           >
-            {/* Header Block with Clean Block Lines */}
-            <div className="p-6 sm:p-7 border-b border-[#1C1D25] bg-[#0E0F15] shrink-0">
-              <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1.5 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/25">
-                      {selectedPR.prNumber || 'Fork Branch'}
-                    </span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#15161E] text-zinc-300 border border-[#252735]">
-                      {selectedPR.repoName}
-                    </span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12131A] text-zinc-400 border border-[#20212C]">
-                      {selectedPR.statusNote}
-                    </span>
-                  </div>
-                  <h3 className="text-[19px] sm:text-[22px] font-serif font-medium text-white tracking-tight leading-snug pt-1">
-                    {selectedPR.title}
-                  </h3>
-                </div>
+            {/* Minimalist Top Right Close Button */}
+            <button
+              type="button"
+              onClick={() => setSelectedPR(null)}
+              aria-label="Close dialog"
+              className="absolute top-5 right-5 sm:top-6 sm:right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer p-1.5 z-20"
+            >
+              <X className="w-5 h-5" />
+            </button>
 
-                <button
-                  type="button"
-                  onClick={() => setSelectedPR(null)}
-                  aria-label="Close dialog"
-                  className="size-8 rounded-full bg-[#181923] hover:bg-[#232431] border border-[#272835] flex items-center justify-center text-zinc-400 hover:text-white transition-colors cursor-pointer shrink-0"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-
-              {/* Action Links */}
-              <div className="flex flex-wrap items-center gap-2 pt-3.5 mt-3 border-t border-[#1C1D25]/70">
-                {selectedPR.prUrl && (
-                  <a
-                    href={selectedPR.prUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-mono bg-white text-black hover:bg-zinc-200 font-medium shadow-sm transition-all"
-                  >
-                    <GitPullRequest className="w-3.5 h-3.5" />
-                    <span>View PR ({selectedPR.prNumber})</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {selectedPR.forkUrl && (
-                  <a
-                    href={selectedPR.forkUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-mono bg-white text-black hover:bg-zinc-200 font-medium shadow-sm transition-all"
-                  >
-                    <GitBranch className="w-3.5 h-3.5" />
-                    <span>View Branch on GitHub</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                {selectedPR.issueUrl && (
-                  <a
-                    href={selectedPR.issueUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-mono bg-[#15161E] hover:bg-[#1E202B] border border-[#252735] text-zinc-300 hover:text-white transition-all"
-                  >
-                    <span>Linked Issue ({selectedPR.issueNumber})</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-                {selectedPR.repoName.includes('DeepMind') && (
-                  <a
-                    href="https://github.com/google-deepmind/hope/pulls"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-mono bg-[#15161E] hover:bg-[#1E202B] border border-[#252735] text-amber-300 hover:text-amber-200 transition-all"
-                  >
-                    <span>All 15 DeepMind PRs</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* Modal Body with Clean Block Line Sections */}
-            <div className="overflow-y-auto divide-y divide-[#1C1D25] text-[13.5px]">
-              {/* Meta Specs Grid with Crisp Hairline Block Lines */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y sm:divide-y-0 divide-[#1C1D25] bg-[#0B0C11]">
-                <div className="p-4 sm:p-5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Repository</span>
-                  <span className="font-mono text-[12px] text-zinc-200 font-medium block truncate">
+            {/* Scrollable Content */}
+            <div className="overflow-y-auto modal-dark-scroll p-6 sm:p-9 pt-7 sm:pt-9 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
+              
+              {/* Header: Title & Meta */}
+              <div className="space-y-2 pr-8">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-[11.5px] text-zinc-400">
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/25">
+                    {selectedPR.prNumber || 'Fork Branch'}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-white/[0.06] text-zinc-300 border border-white/10">
                     {selectedPR.repoName}
                   </span>
+                  <span className="text-zinc-500">•</span>
+                  <span className="text-zinc-400">{selectedPR.stats}</span>
+                  <span className="text-zinc-500">•</span>
+                  <span className="text-emerald-400">{selectedPR.statusNote}</span>
                 </div>
-                <div className="p-4 sm:p-5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Code Impact</span>
-                  <span className="font-mono text-[12px] text-amber-300 font-medium block truncate">
-                    {selectedPR.stats}
-                  </span>
-                </div>
-                <div className="p-4 sm:p-5 col-span-2 sm:col-span-1">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Status</span>
-                  <span className="font-mono text-[12px] text-emerald-400 font-medium block truncate">
-                    {selectedPR.statusNote}
-                  </span>
-                </div>
+
+                <h3 className="text-[22px] sm:text-[25px] font-semibold text-white tracking-tight leading-snug">
+                  {selectedPR.title}
+                </h3>
               </div>
 
-              {/* Problem & Root Cause Section */}
-              <div className="p-6 sm:p-7 space-y-2.5">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                  Problem &amp; Context
-                </span>
-                <p className="text-[14px] text-zinc-300 leading-relaxed font-sans">
-                  {selectedPR.problem}
-                </p>
+              {/* Problem & Context */}
+              <div className="space-y-2 text-zinc-200">
+                <p>{selectedPR.problem}</p>
               </div>
 
               {/* Engineered Fix & Technical Solution */}
-              <div className="p-6 sm:p-7 space-y-3">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                  Engineered Fix &amp; Implementation
-                </span>
-                <p className="text-[13.5px] text-zinc-300 leading-relaxed font-sans">
+              <div className="space-y-2 pt-1">
+                <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                  Engineered Fix:
+                </h4>
+                <p className="text-zinc-300">
                   {selectedPR.engineeredFix}
                 </p>
-
-                {selectedPR.outcomes && selectedPR.outcomes.length > 0 && (
-                  <div className="pt-2 space-y-2">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block">Verified Outcomes:</span>
-                    <ul className="space-y-1.5 pl-0.5">
-                      {selectedPR.outcomes.map((outcome, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-[13px] text-zinc-400 leading-relaxed font-sans">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{outcome}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
 
-              {/* Interview / Engineering Talk Track */}
-              {selectedPR.talkTrack && (
-                <div className="p-6 sm:p-7 space-y-2">
-                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                    Engineering Summary
-                  </span>
-                  <blockquote className="border-l-2 border-amber-400/60 pl-3.5 py-1 text-[13.5px] text-zinc-300 italic font-sans leading-relaxed">
-                    "{selectedPR.talkTrack}"
-                  </blockquote>
+              {/* Verified Outcomes */}
+              {selectedPR.outcomes && selectedPR.outcomes.length > 0 && (
+                <div className="space-y-2 pt-1">
+                  <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Verified Outcomes:
+                  </h4>
+                  <ul className="space-y-1.5 text-zinc-300">
+                    {selectedPR.outcomes.map((outcome, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-emerald-400 font-mono select-none shrink-0">✓</span>
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
 
-              {/* Tech Stack Pills */}
-              <div className="p-6 sm:p-7 space-y-3">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                  Technologies &amp; Disciplines
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {selectedPR.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 rounded-md text-[11.5px] font-mono bg-[#13141C] text-zinc-300 border border-[#21232E]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              {/* Engineering Summary / Talk Track */}
+              {selectedPR.talkTrack && (
+                <div className="space-y-1.5 pt-1">
+                  <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Summary:
+                  </h4>
+                  <p className="text-zinc-300 italic">
+                    "{selectedPR.talkTrack}"
+                  </p>
+                </div>
+              )}
+
+              {/* Technologies & Disciplines */}
+              {selectedPR.tags && selectedPR.tags.length > 0 && (
+                <div className="pt-2">
+                  <h4 className="text-[12px] font-mono uppercase tracking-wider text-zinc-400 font-semibold mb-2.5">
+                    Disciplines &amp; Stack:
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedPR.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-full text-[12px] font-mono bg-white/[0.04] text-zinc-300 border border-white/[0.08]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Links section (matching the reference image style) */}
+              <div className="pt-3 space-y-2 font-mono text-[13px]">
+                <span className="text-zinc-300 font-semibold block">Links:</span>
+                <div className="space-y-1.5">
+                  {selectedPR.prUrl && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-zinc-500 select-none">—</span>
+                      <span className="text-zinc-400 font-medium">Pull Request:</span>
+                      <a
+                        href={selectedPR.prUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#38bdf8] hover:underline inline-flex items-center gap-1 font-sans break-all"
+                      >
+                        <span>{selectedPR.prUrl.replace(/^https?:\/\//, '')}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                      </a>
+                    </div>
+                  )}
+
+                  {selectedPR.forkUrl && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-zinc-500 select-none">—</span>
+                      <span className="text-zinc-400 font-medium">Branch on GitHub:</span>
+                      <a
+                        href={selectedPR.forkUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#38bdf8] hover:underline inline-flex items-center gap-1 font-sans break-all"
+                      >
+                        <span>{selectedPR.forkUrl.replace(/^https?:\/\//, '')}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                      </a>
+                    </div>
+                  )}
+
+                  {selectedPR.issueUrl && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-zinc-500 select-none">—</span>
+                      <span className="text-zinc-400 font-medium">Issue ({selectedPR.issueNumber}):</span>
+                      <a
+                        href={selectedPR.issueUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#38bdf8] hover:underline inline-flex items-center gap-1 font-sans break-all"
+                      >
+                        <span>{selectedPR.issueUrl.replace(/^https?:\/\//, '')}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                      </a>
+                    </div>
+                  )}
+
+                  {selectedPR.repoName.includes('DeepMind') && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-zinc-500 select-none">—</span>
+                      <span className="text-zinc-400 font-medium">DeepMind PRs:</span>
+                      <a
+                        href="https://github.com/google-deepmind/hope/pulls"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#38bdf8] hover:underline inline-flex items-center gap-1 font-sans break-all"
+                      >
+                        <span>github.com/google-deepmind/hope/pulls</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
 
-            {/* Footer Block */}
-            <div className="p-4 sm:p-5 border-t border-[#1C1D25] bg-[#0E0F15] flex items-center justify-between gap-3 shrink-0">
-              <span className="font-mono text-[11px] text-zinc-500 hidden sm:inline">
-                Press ESC or click outside to dismiss
-              </span>
-              <button
-                type="button"
-                onClick={() => setSelectedPR(null)}
-                className="px-4 py-1.5 rounded-full bg-[#181923] hover:bg-[#232431] border border-[#272835] text-[12px] font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer ml-auto"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>

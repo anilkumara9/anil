@@ -237,7 +237,7 @@ export default function App() {
         resumeUrl="https://drive.google.com/file/d/1C_JAbG5rhGSdrsy8sGT8kT9f5FdH0qU2/view?usp=sharing"
       />
 
-      {/* Project Case Study Modal (Proper Block Line & Premium Design) */}
+      {/* Project Case Study Modal (Sleek Pitch Black Minimalist Dialog matching Reference) */}
       {activeProjectModal && (
         <div
           role="dialog"
@@ -246,192 +246,159 @@ export default function App() {
           onClick={() => setActiveProjectModal(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-[#090A0E] text-[#F4F4F5] border border-[#22232B] rounded-2xl shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] overflow-hidden max-h-[88vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-xl sm:max-w-2xl bg-[#000000] text-[#E4E4E7] border border-white/10 rounded-[28px] sm:rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.98)] overflow-hidden max-h-[88vh] flex flex-col my-auto animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header Block (Crisp Block Line border-b) */}
-            <div className="p-6 sm:p-7 border-b border-[#1C1D25] bg-[#0E0F15] shrink-0">
-              <div className="flex items-start justify-between gap-4">
-                <div className="space-y-2 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {activeProjectModal.badge && (
-                      <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-[#181923] text-zinc-300 border border-[#272835]">
-                        {activeProjectModal.badge}
-                      </span>
-                    )}
-                    <span className="font-mono text-[11px] text-zinc-500">
-                      {activeProjectModal.period}
-                    </span>
-                    <span className="text-zinc-700 font-mono text-[11px]">•</span>
-                    <span className="font-mono text-[11px] text-zinc-400">
-                      {activeProjectModal.role}
-                    </span>
-                  </div>
+            {/* Minimalist Top Right Close Button (matching reference) */}
+            <button
+              type="button"
+              onClick={() => setActiveProjectModal(null)}
+              aria-label="Close dialog"
+              className="absolute top-5 right-5 sm:top-6 sm:right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer p-1.5 z-20"
+            >
+              <X className="w-5 h-5" />
+            </button>
 
-                  <h3 className="font-serif text-[23px] sm:text-[26px] font-normal text-white tracking-tight leading-snug">
-                    {activeProjectModal.title}
-                  </h3>
+            {/* Scrollable Modal Content */}
+            <div className="overflow-y-auto modal-dark-scroll p-6 sm:p-9 pt-7 sm:pt-9 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
+              
+              {/* Header: Title & Meta */}
+              <div className="space-y-2 pr-8">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-[11.5px] text-zinc-400">
+                  {activeProjectModal.badge && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/[0.06] text-zinc-300 border border-white/10">
+                      {activeProjectModal.badge}
+                    </span>
+                  )}
+                  <span>{activeProjectModal.period}</span>
+                  <span className="text-zinc-600">•</span>
+                  <span>{activeProjectModal.role}</span>
+                </div>
 
-                  <p className="text-[13.5px] text-zinc-400 leading-relaxed max-w-xl">
-                    {activeProjectModal.tagline || activeProjectModal.description}
+                <h3 className="text-[23px] sm:text-[26px] font-semibold text-white tracking-tight leading-snug">
+                  {activeProjectModal.title}
+                </h3>
+
+                {activeProjectModal.tagline && (
+                  <p className="text-[14px] text-zinc-400 leading-relaxed">
+                    {activeProjectModal.tagline}
                   </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveProjectModal(null)}
-                  aria-label="Close dialog"
-                  className="size-8 rounded-full bg-[#181923] hover:bg-[#232431] border border-[#272835] flex items-center justify-center text-zinc-400 hover:text-white transition-colors cursor-pointer shrink-0"
-                >
-                  <X className="h-4 w-4" />
-                </button>
+                )}
               </div>
 
-              {/* Action Buttons in Header */}
-              {activeProjectModal.links && activeProjectModal.links.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 pt-3.5 mt-3 border-t border-[#1C1D25]/70">
-                  {activeProjectModal.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-mono transition-all ${
-                        link.primary
-                          ? 'bg-white text-black hover:bg-zinc-200 font-medium shadow-sm'
-                          : 'bg-[#15161E] hover:bg-[#1E202B] border border-[#252735] text-zinc-300 hover:text-white'
-                      }`}
-                    >
-                      <span>{link.label}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Modal Body with Clean Block Line Sections */}
-            <div className="overflow-y-auto divide-y divide-[#1C1D25] text-[13.5px]">
-
-              {/* Meta Specs Grid with Crisp Hairline Block Lines */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y sm:divide-y-0 divide-[#1C1D25] bg-[#0B0C11]">
-                <div className="p-4 sm:p-5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Role &amp; Focus</span>
-                  <span className="font-mono text-[12px] text-zinc-200 font-medium block truncate" title={activeProjectModal.role}>
-                    {activeProjectModal.role}
-                  </span>
-                </div>
-                <div className="p-4 sm:p-5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Key Highlight</span>
-                  <span className="font-mono text-[12px] text-amber-300 font-medium block truncate" title={activeProjectModal.lldMetric || activeProjectModal.badge}>
-                    {activeProjectModal.lldMetric || activeProjectModal.badge}
-                  </span>
-                </div>
-                <div className="p-4 sm:p-5 col-span-2 sm:col-span-1">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-1">Timeline</span>
-                  <span className="font-mono text-[12px] text-zinc-200 font-medium block truncate">
-                    {activeProjectModal.period}
-                  </span>
-                </div>
-              </div>
-
-              {/* Overview & Purpose Section */}
-              <div className="p-6 sm:p-7 space-y-2.5">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                  Overview &amp; Purpose
-                </span>
-                <p className="text-[14px] text-zinc-300 leading-relaxed font-sans">
-                  {activeProjectModal.description}
-                </p>
+              {/* Main Narrative Description */}
+              <div className="space-y-3.5 text-zinc-200">
+                <p>{activeProjectModal.description}</p>
                 {activeProjectModal.deepDive?.problem && (
-                  <p className="text-[13.5px] text-zinc-400 leading-relaxed font-sans pt-1">
+                  <p className="text-zinc-300">
                     {activeProjectModal.deepDive.problem}
                   </p>
                 )}
               </div>
 
-              {/* Key Capabilities / Highlights Section */}
+              {/* Engineering & Architecture */}
+              {activeProjectModal.deepDive?.architecture && (
+                <div className="space-y-2 pt-1">
+                  <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Architecture &amp; Engineering
+                  </h4>
+                  <p className="text-zinc-300">
+                    {activeProjectModal.deepDive.architecture}
+                  </p>
+                </div>
+              )}
+
+              {/* Key Capabilities / Highlights */}
               {activeProjectModal.bulletPoints && activeProjectModal.bulletPoints.length > 0 && (
-                <div className="p-6 sm:p-7 space-y-3">
-                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                    Core Highlights &amp; Capabilities
-                  </span>
-                  <div className="space-y-2.5">
+                <div className="space-y-2.5 pt-1">
+                  <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Key Highlights:
+                  </h4>
+                  <ul className="space-y-2 text-zinc-300">
                     {activeProjectModal.bulletPoints.map((point, idx) => (
-                      <div key={idx} className="flex items-start gap-3 text-[13.5px] text-zinc-300 leading-relaxed font-sans">
-                        <span className="font-mono text-amber-400/80 text-[11.5px] shrink-0 mt-0.5">0{idx + 1}.</span>
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-zinc-500 font-mono select-none shrink-0">—</span>
                         <span>{point}</span>
-                      </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Key Outcomes */}
+              {activeProjectModal.deepDive?.keyOutcomes && activeProjectModal.deepDive.keyOutcomes.length > 0 && (
+                <div className="space-y-2 pt-1">
+                  <h4 className="text-[13px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Outcomes:
+                  </h4>
+                  <ul className="space-y-1.5 text-zinc-300">
+                    {activeProjectModal.deepDive.keyOutcomes.map((outcome, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-emerald-400/90 font-mono select-none shrink-0">✓</span>
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Technologies & Stack */}
+              {activeProjectModal.stack && activeProjectModal.stack.length > 0 && (
+                <div className="pt-2">
+                  <h4 className="text-[12px] font-mono uppercase tracking-wider text-zinc-400 font-semibold mb-2.5">
+                    Stack:
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {activeProjectModal.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-full text-[12px] font-mono bg-white/[0.04] text-zinc-300 border border-white/[0.08]"
+                      >
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Engineering Architecture & Technical Solution */}
-              {activeProjectModal.deepDive?.architecture && (
-                <div className="p-6 sm:p-7 space-y-3">
-                  <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                    Engineering &amp; Architecture
-                  </span>
-                  <p className="text-[13.5px] text-zinc-300 leading-relaxed font-sans">
-                    {activeProjectModal.deepDive.architecture}
-                  </p>
-
-                  {/* Production Outcomes */}
-                  {activeProjectModal.deepDive?.keyOutcomes && activeProjectModal.deepDive.keyOutcomes.length > 0 && (
-                    <div className="pt-2 space-y-2">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block">Outcomes:</span>
-                      <ul className="space-y-1.5 pl-0.5">
-                        {activeProjectModal.deepDive.keyOutcomes.map((outcome, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-[13px] text-zinc-400 leading-relaxed font-sans">
-                            <span className="text-emerald-400 font-mono text-[12px] shrink-0 mt-0.5">✓</span>
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Official Certificate Showcase for Hackathon Project */}
+              {/* Hackathon Certificate Showcase */}
               {activeProjectModal.id === 'hackathon' && (
-                <div className="p-6 sm:p-7 space-y-3 bg-[#13141D]/60 border-b border-[#1C1D25]">
+                <div className="pt-2 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-amber-400 font-semibold flex items-center gap-1.5">
-                      <span>🏆</span> Official Award Certificate (Second Place)
+                    <span className="font-mono text-[11px] text-amber-300 font-medium flex items-center gap-1.5">
+                      <span>🏆</span> Award Certificate (Second Place)
                     </span>
                     <a
                       href="/reva-certificate.jpg"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+                      className="text-[12px] font-mono text-[#38bdf8] hover:underline flex items-center gap-1"
                     >
                       View Original ↗
                     </a>
                   </div>
-                  <div className="rounded-xl overflow-hidden border border-amber-500/30 shadow-xl bg-black/40">
+                  <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/60">
                     <img
                       src="/reva-certificate.jpg"
-                      alt="REVA University Hack-n-Fly Hackathon Second Place Certificate"
-                      className="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-300"
+                      alt="REVA University Hackathon Second Place Certificate"
+                      className="w-full h-auto object-cover"
                     />
                   </div>
                 </div>
               )}
 
-              {/* Official Internship Proof Showcase for CampusPe */}
+              {/* CampusPe Internship Proof Showcase */}
               {activeProjectModal.id === 'campuspe' && (
-                <div className="p-6 sm:p-7 space-y-3 bg-[#13141D]/60 border-b border-[#1C1D25]">
+                <div className="pt-2 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-amber-400 font-semibold flex items-center gap-1.5">
+                    <span className="font-mono text-[11px] text-amber-300 font-medium flex items-center gap-1.5">
                       <span>📄</span> Official Internship Proof Letter
                     </span>
                     <a
                       href="https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+                      className="text-[12px] font-mono text-[#38bdf8] hover:underline flex items-center gap-1"
                     >
                       Open Google Drive ↗
                     </a>
@@ -440,47 +407,41 @@ export default function App() {
                     href="https://drive.google.com/file/d/1tlyNOtx1AanaKCU8CnGBHQ1FcdxqhHyt/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-xl overflow-hidden border border-white/20 hover:border-amber-400/60 shadow-xl bg-black/40 transition-colors group cursor-pointer"
+                    className="block rounded-2xl overflow-hidden border border-white/10 hover:border-white/25 shadow-2xl bg-black/60 transition-colors group cursor-pointer"
                   >
                     <img
                       src="/previews/campuspe_proof.png"
                       alt="CampusPe Official Internship Proof Document"
-                      className="w-full h-auto object-contain max-h-[420px] mx-auto group-hover:scale-[1.01] transition-transform duration-300"
+                      className="w-full h-auto max-h-[380px] object-contain mx-auto"
                     />
                   </a>
                 </div>
               )}
 
-              {/* Technologies Used Section */}
-              <div className="p-6 sm:p-7 space-y-3">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500 font-semibold block">
-                  Technologies &amp; Tools
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {activeProjectModal.stack.map((tech) => (
-                    <span 
-                      key={tech}
-                      className="px-2.5 py-1 rounded-md text-[11.5px] font-mono bg-[#13141C] text-zinc-300 border border-[#21232E]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {/* Links (matching the reference image style: My Work: - Portfolio: ... - GitHub: ...) */}
+              {activeProjectModal.links && activeProjectModal.links.length > 0 && (
+                <div className="pt-3 space-y-2 font-mono text-[13px]">
+                  <span className="text-zinc-300 font-semibold block">Links:</span>
+                  <div className="space-y-1.5">
+                    {activeProjectModal.links.map((link) => (
+                      <div key={link.label} className="flex items-baseline gap-2">
+                        <span className="text-zinc-500 select-none">—</span>
+                        <span className="text-zinc-400 font-medium">{link.label}:</span>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#38bdf8] hover:underline inline-flex items-center gap-1 font-sans break-all"
+                        >
+                          <span>{link.url.replace(/^https?:\/\//, '')}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
+              )}
 
-            {/* Footer Block (Crisp Block Line border-t) */}
-            <div className="p-4 sm:p-5 border-t border-[#1C1D25] bg-[#0E0F15] flex items-center justify-between gap-3 shrink-0">
-              <span className="font-mono text-[11px] text-zinc-500 hidden sm:inline">
-                Press ESC or click outside to dismiss
-              </span>
-              <button
-                type="button"
-                onClick={() => setActiveProjectModal(null)}
-                className="px-4 py-1.5 rounded-full bg-[#181923] hover:bg-[#232431] border border-[#272835] text-[12px] font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer ml-auto"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>
