@@ -260,7 +260,7 @@ export default function App() {
             </button>
 
             {/* Scrollable Modal Content */}
-            <div className="overflow-y-auto modal-dark-scroll p-6 sm:p-9 pt-7 sm:pt-9 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
+            <div className="overflow-y-auto modal-dark-scroll my-2 sm:my-3 mr-1 sm:mr-2 p-6 sm:p-9 pt-6 sm:pt-8 pr-5 sm:pr-8 space-y-6 text-[14.5px] sm:text-[15px] leading-[1.75] font-sans">
               
               {/* Header: Title & Meta */}
               <div className="space-y-2 pr-8">

@@ -838,7 +838,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
             </div>
 
             {/* Modal Image Body */}
-            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll">
+            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll my-2 mr-1 sm:mr-2">
               <img
                 src="/reva-certificate.jpg"
                 alt="REVA University Hack-n-Fly Hackathon 2nd Place Certificate"
@@ -892,7 +892,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
             </div>
 
             {/* Modal Image Body */}
-            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll">
+            <div className="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[80vh] overflow-auto modal-dark-scroll my-2 mr-1 sm:mr-2">
               <img
                 src="/nhce-certificate.jpg"
                 alt="New Horizon College of Engineering Graduation Letter"
