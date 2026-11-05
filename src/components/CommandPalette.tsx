@@ -54,6 +54,12 @@ export default function CommandPalette({
 
   const actionItems: CommandItem[] = [
     { 
+      id: 'openusage', 
+      title: 'OpenUsage: Windows AI Subscription & Spend Tracker', 
+      icon: Terminal, 
+      url: 'https://github.com/anilkumara9/openusage-windows' 
+    },
+    { 
       id: 'shiftsense', 
       title: 'ShiftSense: Windows AI Sidebar (v1.5.1 Releases)', 
       icon: Terminal, 

@@ -17,6 +17,22 @@ interface TimelineEvent {
 const InteractiveTimeline: React.FC = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([
     {
+      id: 'openusage',
+      date: 'Nov 2026 – Present',
+      title: 'OpenUsage: Windows AI Subscription & Spend Tracker',
+      organization: 'Windows System Tray · Electron & DPAPI',
+      description: 'System tray app monitoring AI coding subscriptions, session/weekly quotas, token spend, and burn rates across 12+ providers in one panel.',
+      type: 'project',
+      details: [
+        'Real-time tracking of limits, credits, token usage, dollar balances, reset countdowns, and burn rate across 12+ providers',
+        'Native Windows system tray gauge ring summarizing your worst metric with instant color thresholds (on-track, warning, critical)',
+        'Priority board calculating burn velocity against reset countdowns to prevent mid-sprint subscription lockouts',
+        'Zero telemetry: credentials encrypted exclusively with Windows DPAPI (Electron safeStorage), calling provider APIs directly'
+      ],
+      link: 'https://github.com/anilkumara9/openusage-windows',
+      linkText: 'GitHub Repo'
+    },
+    {
       id: 'shiftsense',
       date: 'Nov 2026',
       title: 'ShiftSense: Screen Aware AI Sidebar for Windows',

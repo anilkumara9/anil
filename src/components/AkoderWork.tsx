@@ -72,6 +72,46 @@ export const WORK_PROJECTS: WorkProject[] = [
     ]
   },
   {
+    id: "openusage",
+    title: "OpenUsage for Windows: AI Subscriptions & API Spend Tracker",
+    shortTitle: "OpenUsage",
+    period: "Nov 2026 – Present",
+    role: "Creator & Systems Engineer",
+    type: "flagship",
+    year: "2026",
+    featured: true,
+    badge: "Windows Tray · DPAPI",
+    accentBadge: true,
+    tagline: "Track AI Coding Subscriptions & API Spend from the Windows System Tray · 12+ Providers",
+    description: "A native Windows system tray application that tracks AI coding subscriptions and API spend in real time: session and weekly limits, credits, token usage, spend, reset countdowns, and burn rate across 12+ providers (Claude, ChatGPT/Codex, Cursor, Copilot, Antigravity, Grok, Devin, OpenRouter, Ollama) in one unified dashboard panel.",
+    lldType: "SYSTEM TRAY / SECURITY ARCHITECTURE",
+    lldMetric: "12+ Providers · DPAPI Encryption",
+    lldStorage: "Windows DPAPI (Electron safeStorage)",
+    lldPattern: "Direct Polling IPC + In-Tray Gauge Synthesis",
+    lldFlow: ["Windows System Tray Gauge", "Electron Main Polling Daemon", "Windows DPAPI Secure Key Vault", "Direct Provider Usage Endpoints", "Priority Board & Trend Visualizer"],
+    bulletPoints: [
+      "Tracks real-time limits, credits, token usage, dollar balances, reset times, and burn rates across 12+ AI providers in one panel",
+      "Native Windows system tray gauge ring summarizing your worst metric with instant color thresholds (on-track, warning, critical)",
+      "Priority board that automatically surfaces whichever quota or rate limit across all accounts will run out first with burn velocity analysis",
+      "Zero-telemetry & hardened local security: credentials never leave Windows DPAPI encrypted storage, calling provider APIs directly without proxies",
+      "Interactive 7-day and 30-day SVG usage trend charts with per-day hover inspection, model-level breakdowns, and rate-limit reset claims"
+    ],
+    deepDive: {
+      problem: "Engineers and AI practitioners actively juggle 4–6 subscription plans and API keys (Claude Pro, Cursor, ChatGPT Team, GitHub Copilot, OpenRouter), leading to fragmented visibility, unexpected mid-sprint lockouts, opaque token depletion, and insecure storage of sensitive API tokens in plain-text configs.",
+      architecture: "Architected with an Electron main process (Node 22) decoupled from a minimalist renderer over IPC. Authenticates providers via OAuth, device-code flows, API keys, or org tokens with credentials encrypted strictly through Windows DPAPI (via Electron safeStorage). Directly polls official provider usage APIs with zero proxy servers, zero analytics, and zero tracking. Features SVG historical trend engines and Win32 tray gauge integration.",
+      keyOutcomes: [
+        "Eliminated subscription blindspots by consolidating 12+ major AI providers (Claude, Cursor, Copilot, Codex, Grok, Devin, Ollama) into a single glanceable tray panel.",
+        "Zero-trust credential safety: all auth tokens and keys are encrypted via OS-level Windows DPAPI, ensuring zero cloud exfiltration or intermediary server dependencies.",
+        "Proactive burnout prevention: priority board detects fast-burning tokens and calculates pace against reset windows with customizable desktop alerts."
+      ]
+    },
+    stack: ["Electron", "Node.js (v22)", "Windows DPAPI", "Win32 Tray", "IPC Architecture", "OAuth 2.0", "JavaScript", "SVG Data Viz"],
+    links: [
+      { label: "GitHub Repository", url: "https://github.com/anilkumara9/openusage-windows", primary: true },
+      { label: "Architecture Spec", url: "https://github.com/anilkumara9/openusage-windows#system-design", primary: false }
+    ]
+  },
+  {
     id: "campuspe",
     title: "CampusPe: AI Engineering Internship",
     shortTitle: "CampusPe",
@@ -436,6 +476,7 @@ function getProjectPreview(project: WorkProject) {
 
   const previewMap: Record<string, string> = {
     shiftsense: '/previews/shiftsense.png',
+    openusage: '/previews/openusage.png',
     campuspe: '/previews/campuspe.png',
     omnirecon: '/previews/omnirecon.png',
     spora: '/previews/spora.png',

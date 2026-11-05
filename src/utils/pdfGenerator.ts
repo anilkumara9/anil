@@ -70,6 +70,8 @@ export const generateResumePDF = (data: ResumeData) => {
   
   // My Work
   addSection('MY WORK (LIVE PRODUCTS)');
+  addText('OpenUsage for Windows (AI Subscriptions & API Spend Tracker - Nov 2026)', 11, true);
+  addText('Engineered a native Windows system tray app (Electron, Node.js, DPAPI) tracking real-time session/weekly quotas, token spend, and burn rates across 12+ AI providers (Claude, Cursor, Copilot, Codex, Grok, Ollama) with zero telemetry.');
   addText('ShiftSense (Screen-Aware AI Sidebar for Windows - Nov 2026)', 11, true);
   addText('Engineered a Windows AI sidebar (Electron, Node.js) activated via double-tap Shift; reads UI Automation trees with password masking, local markdown memory, and 99 tests passing.');
   addText('OmniRecon (Full-Spectrum Web Recon for Coding Agents)', 11, true);

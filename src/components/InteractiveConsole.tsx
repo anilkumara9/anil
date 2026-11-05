@@ -63,6 +63,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-slate-300 text-[12px]">
             <p className="text-slate-400">Available commands:</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">openusage</span> — Windows AI subscription &amp; spend tracker (12+ providers, DPAPI)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">shiftsense</span> — Screen-aware Windows AI sidebar (double-tap Shift, 99 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">omnirecon</span> — Autonomous web recon MCP for coding agents (21 tools, 163 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">spora</span> — Bootstrapped social platform specs (200+ users)</p>
@@ -71,6 +72,26 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
             <p><span className="text-[#FC535B] font-mono font-semibold">experience</span> — Industry work at CampusPe</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">contact</span> — Reach out via email, phone, or LinkedIn</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">clear</span> — Reset terminal output</p>
+          </div>
+        );
+        break;
+      case 'openusage':
+        output = (
+          <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
+            <p className="font-bold text-white flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+              OpenUsage for Windows: AI Subscriptions &amp; Spend Tracker
+            </p>
+            <p className="text-slate-400">Electron · Windows DPAPI · System Tray Gauge · 12+ Providers · Nov 2026</p>
+            <p>Track your AI coding subscriptions and API spend from the Windows system tray: session/weekly limits, credits, token usage, spend, reset countdowns, and burn rate across Claude, Cursor, Copilot, Codex, Grok, Devin, and Ollama in one panel.</p>
+            <div className="flex items-center gap-3 pt-1">
+              <a href="https://github.com/anilkumara9/openusage-windows" target="_blank" rel="noopener noreferrer" className="text-[#F2F536] hover:underline inline-flex items-center gap-1">
+                GitHub Repository <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <a href="https://github.com/anilkumara9/openusage-windows#system-design" target="_blank" rel="noopener noreferrer" className="text-[#FC535B] hover:underline inline-flex items-center gap-1">
+                Architecture Spec <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
           </div>
         );
         break;
