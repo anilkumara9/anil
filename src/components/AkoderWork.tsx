@@ -512,145 +512,39 @@ function getProjectPreview(project: WorkProject) {
 }
 
 
-interface ProjectRowProps {
-  project: WorkProject;
-  onSelectProject?: (project: WorkProject) => void;
-  onOpenCertModal: () => void;
-  isSplit?: boolean;
-}
-
-function ProjectRow({ project, onSelectProject, onOpenCertModal, isSplit }: ProjectRowProps) {
-  const preview = getProjectPreview(project);
-
-  if (isSplit) {
-    return (
-      <div
-        key={project.id}
-        onClick={() => onSelectProject?.(project)}
-        className="group relative flex flex-col justify-between gap-1 py-3 px-3 hover:bg-[#14141a] transition-colors cursor-pointer rounded-lg"
-      >
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-medium text-[14px] text-[#F4F4F5] group-hover:text-white truncate">
-              {project.shortTitle || project.title}
-            </span>
-            {project.badge && (
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227] shrink-0">
-                {project.badge}
-              </span>
-            )}
-          </div>
-          <a
-            href={project.links[0]?.url || '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors shrink-0"
-            title={`Open ${project.shortTitle || project.title}`}
-          >
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
-        </div>
-
-        <p className="text-[12.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] line-clamp-2 leading-relaxed">
-          {project.tagline || project.description}
-        </p>
-
-        {/* Floating Link & Certificate Preview in Middle on Cursor Hover */}
-        <div 
-          onClick={(e) => {
-            e.stopPropagation();
-            if (preview.isCert) {
-              onOpenCertModal();
-            } else if (preview.url && preview.url.startsWith('http')) {
-              window.open(preview.url, '_blank', 'noopener,noreferrer');
-            }
-          }}
-          className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
-        >
-          <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
-            <img
-              src={preview.imageSrc}
-              alt={`${project.shortTitle || project.title} preview`}
-              className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-black/60"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      key={project.id}
-      onClick={() => onSelectProject?.(project)}
-      className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
-    >
-      <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
-        <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
-          {project.shortTitle || project.title}
-        </span>
-
-        <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
-          {project.tagline || project.description}
-        </span>
-      </div>
-
-      <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
-        {project.badge && (
-          <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
-            {project.badge}
-          </span>
-        )}
-        <a
-          href={project.links[0]?.url || '#'}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
-          title={`Open ${project.shortTitle || project.title}`}
-        >
-          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </a>
-      </div>
-
-      {/* Floating Link & Certificate Preview in Middle on Cursor Hover */}
-      <div 
-        onClick={(e) => {
-          e.stopPropagation();
-          if (preview.isCert) {
-            onOpenCertModal();
-          } else if (preview.url && preview.url.startsWith('http')) {
-            window.open(preview.url, '_blank', 'noopener,noreferrer');
-          }
-        }}
-        className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
-      >
-        <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
-          <img
-            src={preview.imageSrc}
-            alt={`${project.shortTitle || project.title} preview`}
-            className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-black/60"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(false);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
   const [isNhceModalOpen, setIsNhceModalOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'desktop' | 'web' | 'research'>('all');
-  const [layoutMode, setLayoutMode] = useState<'split' | 'stacked'>('split');
 
-  const years: ('2026' | '2025' | '2024')[] = ['2026', '2025', '2024'];
+  const desktopProjects = WORK_PROJECTS.filter(
+    p => p.id === 'shiftsense' || p.id === 'openusage' || p.id === 'invisly' || p.category === 'desktop'
+  );
 
-  const desktopProjects = WORK_PROJECTS.filter(p => p.category === 'desktop');
-  const webProjects = WORK_PROJECTS.filter(p => p.category === 'web');
-  const researchProjects = WORK_PROJECTS.filter(p => p.category === 'research');
-  const nonDesktopProjects = WORK_PROJECTS.filter(p => p.category !== 'desktop');
+  const sections: { id: string; label: string; projects: WorkProject[] }[] = [
+    {
+      id: 'work-desktop',
+      label: 'Desktop',
+      projects: desktopProjects
+    },
+    {
+      id: 'work-2026',
+      label: '2026',
+      projects: WORK_PROJECTS.filter(
+        p => p.year === '2026' && p.id !== 'shiftsense' && p.id !== 'openusage' && p.id !== 'invisly'
+      )
+    },
+    {
+      id: 'work-2025',
+      label: '2025',
+      projects: WORK_PROJECTS.filter(p => p.year === '2025')
+    },
+    {
+      id: 'work-2024',
+      label: '2024',
+      projects: WORK_PROJECTS.filter(p => p.year === '2024')
+    }
+  ];
 
   useEffect(() => {
     if (!isCertModalOpen && !isNhceModalOpen) return;
@@ -675,434 +569,169 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
 
   return (
     <section id="work" className="px-4 sm:px-8 py-8 sm:py-10 scroll-mt-20">
-      {/* Section Header with Category Filters & Layout Switcher */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h2 className="text-[20px] sm:text-[22px] font-medium text-[#F4F4F5] tracking-tight">
-            Work <span className="text-[13.5px] sm:text-[15px] font-normal text-zinc-400 font-sans tracking-normal">(Experience &amp; Academics)</span>
-          </h2>
-        </div>
-
-        {/* View / Category Filter Tabs */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('all')}
-            className={`px-2.5 py-1 text-[11.5px] font-mono rounded-md border transition-all ${
-              selectedCategory === 'all'
-                ? 'bg-[#1C1C22] text-white border-zinc-500 shadow-sm'
-                : 'bg-[#101014] text-zinc-400 border-[#222228] hover:text-zinc-200'
-            }`}
-          >
-            All ({WORK_PROJECTS.length})
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('desktop')}
-            className={`px-2.5 py-1 text-[11.5px] font-mono rounded-md border transition-all flex items-center gap-1.5 ${
-              selectedCategory === 'desktop'
-                ? 'bg-blue-950/40 text-blue-300 border-blue-500/50 shadow-sm'
-                : 'bg-[#101014] text-zinc-400 border-[#222228] hover:text-blue-300'
-            }`}
-          >
-            <span>🖥️</span>
-            <span>Desktop Apps ({desktopProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('web')}
-            className={`px-2.5 py-1 text-[11.5px] font-mono rounded-md border transition-all flex items-center gap-1.5 ${
-              selectedCategory === 'web'
-                ? 'bg-emerald-950/40 text-emerald-300 border-emerald-500/50 shadow-sm'
-                : 'bg-[#101014] text-zinc-400 border-[#222228] hover:text-emerald-300'
-            }`}
-          >
-            <span>🌐</span>
-            <span>Web &amp; Cloud ({webProjects.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('research')}
-            className={`px-2.5 py-1 text-[11.5px] font-mono rounded-md border transition-all flex items-center gap-1.5 ${
-              selectedCategory === 'research'
-                ? 'bg-purple-950/40 text-purple-300 border-purple-500/50 shadow-sm'
-                : 'bg-[#101014] text-zinc-400 border-[#222228] hover:text-purple-300'
-            }`}
-          >
-            <span>🧪</span>
-            <span>Research ({researchProjects.length})</span>
-          </button>
-
-          {/* Side-by-side vs Stacked view toggle when 'all' is selected */}
-          {selectedCategory === 'all' && (
-            <div className="hidden min-[680px]:flex items-center ml-1 pl-2 border-l border-[#222228] gap-1">
-              <button
-                type="button"
-                onClick={() => setLayoutMode('split')}
-                title="Side-by-side view: Desktop apps on one side, Web & Research on the other"
-                className={`px-2 py-0.5 text-[11px] font-mono rounded border transition-colors ${
-                  layoutMode === 'split'
-                    ? 'bg-[#22222a] text-white border-zinc-400'
-                    : 'text-zinc-500 border-transparent hover:text-zinc-300'
-                }`}
-              >
-                Split
-              </button>
-              <button
-                type="button"
-                onClick={() => setLayoutMode('stacked')}
-                title="Stacked view: Dedicated desktop section followed by chronological timeline"
-                className={`px-2 py-0.5 text-[11px] font-mono rounded border transition-colors ${
-                  layoutMode === 'stacked'
-                    ? 'bg-[#22222a] text-white border-zinc-400'
-                    : 'text-zinc-500 border-transparent hover:text-zinc-300'
-                }`}
-              >
-                Stacked
-              </button>
-            </div>
-          )}
-        </div>
+      {/* Section Header */}
+      <div className="mb-5">
+        <h2 className="text-[20px] sm:text-[22px] font-medium text-[#F4F4F5] tracking-tight">
+          Work <span className="text-[13.5px] sm:text-[15px] font-normal text-zinc-400 font-sans tracking-normal">(Experience &amp; Academics)</span>
+        </h2>
       </div>
 
-      {/* Main Projects Presentation */}
-      {selectedCategory === 'desktop' && (
-        <div id="work-desktop" className="space-y-4 animate-in fade-in-50 duration-200">
-          <div className="p-3.5 rounded-xl border border-blue-500/20 bg-blue-950/15 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="text-xl">🖥️</span>
-              <div>
-                <h3 className="text-sm font-semibold text-blue-200">Native Desktop Applications</h3>
-                <p className="text-xs text-zinc-400">Windows UI Automation · System Tray &amp; DPAPI · Low-Latency Copilots</p>
-              </div>
-            </div>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-500/30">
-              3 Systems
-            </span>
-          </div>
+      {/* Project Groups (Desktop Title + Year Groups) */}
+      <div className="space-y-6">
+        {sections.map(section => {
+          if (section.projects.length === 0) return null;
 
-          <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-            {desktopProjects.map(project => (
-              <ProjectRow
-                key={project.id}
-                project={project}
-                onSelectProject={onSelectProject}
-                onOpenCertModal={() => setIsCertModalOpen(true)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {selectedCategory === 'web' && (
-        <div className="space-y-4 animate-in fade-in-50 duration-200">
-          <div className="p-3.5 rounded-xl border border-emerald-500/20 bg-emerald-950/15 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="text-xl">🌐</span>
-              <div>
-                <h3 className="text-sm font-semibold text-emerald-200">Web &amp; Cloud Platforms</h3>
-                <p className="text-xs text-zinc-400">Full-Stack SaaS · MCP Agent Protocol · Real-Time Systems</p>
-              </div>
-            </div>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-500/30">
-              {webProjects.length} Projects
-            </span>
-          </div>
-
-          <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-            {webProjects.map(project => (
-              <ProjectRow
-                key={project.id}
-                project={project}
-                onSelectProject={onSelectProject}
-                onOpenCertModal={() => setIsCertModalOpen(true)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {selectedCategory === 'research' && (
-        <div className="space-y-4 animate-in fade-in-50 duration-200">
-          <div className="p-3.5 rounded-xl border border-purple-500/20 bg-purple-950/15 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="text-xl">🧪</span>
-              <div>
-                <h3 className="text-sm font-semibold text-purple-200">AI Research &amp; Edge ML</h3>
-                <p className="text-xs text-zinc-400">Inference-Time Interpretability · Edge CV · Tabular Diffusion</p>
-              </div>
-            </div>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-900/40 text-purple-300 border border-purple-500/30">
-              {researchProjects.length} Papers &amp; Models
-            </span>
-          </div>
-
-          <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-            {researchProjects.map(project => (
-              <ProjectRow
-                key={project.id}
-                project={project}
-                onSelectProject={onSelectProject}
-                onOpenCertModal={() => setIsCertModalOpen(true)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {selectedCategory === 'all' && layoutMode === 'split' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in-50 duration-200">
-          {/* Left Side: Desktop Applications */}
-          <div id="work-desktop" className="flex flex-col">
-            <div className="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-[#222228]">
-              <div className="flex items-center gap-2">
-                <span className="text-base">🖥️</span>
-                <span className="font-medium text-[14px] text-zinc-200">
-                  Desktop &amp; Native Apps
+          return (
+            <div key={section.id} id={section.id} className="relative scroll-mt-24">
+              {/* Sticker + Title Badge */}
+              <div className="flex items-center gap-2 mb-2.5">
+                <img
+                  src="/folder-sticker.png"
+                  alt=""
+                  className="w-5 h-5 object-contain select-none shrink-0"
+                />
+                <span className="font-serif italic text-[13.5px] text-zinc-300 bg-[#141417] px-2.5 py-0.5 rounded border border-[#222226]">
+                  {section.label}
                 </span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/40 text-blue-300 border border-blue-500/30">
-                3 Dedicated Apps
-              </span>
-            </div>
 
-            <div className="divide-y divide-[#18181C] border border-[#18181C] rounded-xl bg-[#0a0a0d] p-1 shadow-sm">
-              {desktopProjects.map(project => (
-                <ProjectRow
-                  key={project.id}
-                  project={project}
-                  onSelectProject={onSelectProject}
-                  onOpenCertModal={() => setIsCertModalOpen(true)}
-                  isSplit={true}
-                />
-              ))}
-            </div>
-          </div>
+              {/* Projects Block Table with Hairline Dividers & Live Link Previews */}
+              <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
+                {section.projects.map(project => {
+                  const preview = getProjectPreview(project);
 
-          {/* Right Side: Web, Cloud & Research */}
-          <div className="flex flex-col relative">
-            <div className="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-[#222228]">
-              <div className="flex items-center gap-2">
-                <span className="text-base">🌐</span>
-                <span className="font-medium text-[14px] text-zinc-200">
-                  Web, Cloud &amp; Research
-                </span>
-              </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
-                8 Projects · 2024–2026
-              </span>
-            </div>
-
-            <div className="divide-y divide-[#18181C] border border-[#18181C] rounded-xl bg-[#0a0a0d] p-1 shadow-sm">
-              {nonDesktopProjects.map(project => (
-                <ProjectRow
-                  key={project.id}
-                  project={project}
-                  onSelectProject={onSelectProject}
-                  onOpenCertModal={() => setIsCertModalOpen(true)}
-                  isSplit={true}
-                />
-              ))}
-            </div>
-
-            {/* Outside Hand-drawn Note, Trophy Character & Sketched Arrow on Right Side in gutter */}
-            <div
-              aria-hidden="true"
-              className="absolute -right-36 sm:-right-48 md:-right-56 lg:-right-64 xl:-right-72 bottom-10 z-20 select-none hidden xl:flex flex-col items-start rotate-[2deg] pointer-events-none"
-            >
-              {/* Trophy Cutout Sticker with Interactive Hover Preview */}
-              <div className="relative group/sticker pointer-events-auto mb-1.5">
-                <div
-                  onClick={() => setIsCertModalOpen(true)}
-                  className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300"
-                  title="Hover to preview certificate · Click to enlarge"
-                >
-                  <img
-                    src="/profile-cutout.webp"
-                    alt="Anil character holding trophy"
-                    className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
-                  />
-                </div>
-
-                {/* Certificate Preview directly below character sticker on hover */}
-                <div 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsCertModalOpen(true);
-                  }}
-                  className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1.5 pointer-events-none group-hover/sticker:opacity-100 group-hover/sticker:translate-y-0 group-hover/sticker:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
-                >
-                  <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
-                    <img
-                      src="/reva-certificate.jpg"
-                      alt="REVA University Hackathon Certificate"
-                      className="w-full h-auto rounded-[5px] object-contain block"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Handwritten text in Caveat script font */}
-              <div className="font-['Caveat',_'Shantell_Sans',_cursive] text-[18px] sm:text-[22px] lg:text-[25px] text-zinc-100 leading-tight font-medium tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] text-left whitespace-nowrap">
-                <div>Won 2nd Prize 🏆</div>
-                <div className="text-[15px] sm:text-[18px] lg:text-[21px] text-zinc-300 -mt-0.5">out of 50+ teams!</div>
-              </div>
-
-              {/* Sketched Hand-drawn Curving Arrow pointing down-left across border into REVA project row */}
-              <svg 
-                width="52" 
-                height="46" 
-                viewBox="0 0 52 46" 
-                fill="none" 
-                className="text-zinc-300 drop-shadow-md mt-1 ml-1"
-              >
-                <path 
-                  d="M44 4 C38 18, 24 28, 6 34" 
-                  stroke="currentColor" 
-                  strokeWidth="2.4" 
-                  strokeLinecap="round" 
-                  fill="none" 
-                />
-                <path 
-                  d="M17 26 L6 34 L14 40" 
-                  stroke="currentColor" 
-                  strokeWidth="2.4" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {selectedCategory === 'all' && layoutMode === 'stacked' && (
-        <div className="space-y-7 animate-in fade-in-50 duration-200">
-          {/* Dedicated Desktop & Native Applications Section */}
-          <div id="work-desktop" className="relative scroll-mt-24">
-            <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-base">🖥️</span>
-              <span className="font-serif italic text-[13.5px] text-blue-200 bg-blue-950/30 px-2.5 py-0.5 rounded border border-blue-500/30">
-                Desktop &amp; Native Applications
-              </span>
-              <span className="text-[11px] font-mono text-zinc-400 hidden sm:inline">
-                ShiftSense · OpenUsage · Invisly
-              </span>
-            </div>
-
-            <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-              {desktopProjects.map(project => (
-                <ProjectRow
-                  key={project.id}
-                  project={project}
-                  onSelectProject={onSelectProject}
-                  onOpenCertModal={() => setIsCertModalOpen(true)}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Chronological Web, AI & Research Applications */}
-          {years.map(year => {
-            const yearProjects = nonDesktopProjects.filter(p => p.year === year);
-            if (yearProjects.length === 0) return null;
-
-            return (
-              <div key={year} id={`work-${year}`} className="relative scroll-mt-24">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <img
-                    src="/folder-sticker.png"
-                    alt=""
-                    className="w-5 h-5 object-contain select-none shrink-0"
-                  />
-                  <span className="font-serif italic text-[13.5px] text-zinc-300 bg-[#141417] px-2.5 py-0.5 rounded border border-[#222226]">
-                    {year}
-                  </span>
-                  <span className="text-[11px] font-mono text-zinc-500">
-                    {year === '2026' ? 'Web, MCP & Research' : year === '2025' ? 'SaaS & Foundational ML' : 'Hackathons'}
-                  </span>
-                </div>
-
-                <div className="divide-y divide-[#18181C] border-y border-[#18181C]">
-                  {yearProjects.map(project => (
-                    <ProjectRow
+                  return (
+                    <div
                       key={project.id}
-                      project={project}
-                      onSelectProject={onSelectProject}
-                      onOpenCertModal={() => setIsCertModalOpen(true)}
-                    />
-                  ))}
-                </div>
+                      onClick={() => onSelectProject?.(project)}
+                      className="group relative flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4 py-3 px-2 sm:px-3 hover:bg-[#121216]/60 transition-colors cursor-pointer"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0">
+                        <span className="font-medium text-[14.5px] text-[#F4F4F5] group-hover:text-white shrink-0 sm:w-[130px] md:w-[155px]">
+                          {project.shortTitle || project.title}
+                        </span>
 
-                {year === '2024' && (
-                  <div
-                    aria-hidden="true"
-                    className="absolute -right-36 sm:-right-48 md:-right-56 lg:-right-64 xl:-right-72 -top-28 sm:-top-36 md:-top-44 z-20 select-none hidden xl:flex flex-col items-start rotate-[2deg] pointer-events-none"
-                  >
-                    <div className="relative group/sticker pointer-events-auto mb-1.5">
-                      <div
-                        onClick={() => setIsCertModalOpen(true)}
-                        className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300"
-                        title="Hover to preview certificate · Click to enlarge"
-                      >
-                        <img
-                          src="/profile-cutout.webp"
-                          alt="Anil character holding trophy"
-                          className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
-                        />
+                        <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
+                          {project.tagline || project.description}
+                        </span>
                       </div>
 
+                      <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-auto pt-1 sm:pt-0">
+                        {project.badge && (
+                          <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#141418] text-zinc-400 border border-[#222227]">
+                            {project.badge}
+                          </span>
+                        )}
+                        <a
+                          href={project.links[0]?.url || '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-zinc-500 group-hover:text-zinc-200 p-0.5 transition-colors"
+                          title={`Open ${project.shortTitle || project.title}`}
+                        >
+                          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
+                      </div>
+
+                      {/* Floating Link & Certificate Preview in Middle on Cursor Hover */}
                       <div 
                         onClick={(e) => {
                           e.stopPropagation();
-                          setIsCertModalOpen(true);
+                          if (preview.isCert) {
+                            setIsCertModalOpen(true);
+                          } else if (preview.url && preview.url.startsWith('http')) {
+                            window.open(preview.url, '_blank', 'noopener,noreferrer');
+                          }
                         }}
-                        className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1.5 pointer-events-none group-hover/sticker:opacity-100 group-hover/sticker:translate-y-0 group-hover/sticker:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
+                        className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 z-50 w-[220px] sm:w-[250px] opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.95)]"
                       >
-                        <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
+                        <div className="rounded-xl overflow-hidden border border-white/25 bg-[#0E0F14] p-1.5 shadow-2xl hover:border-amber-400/80 transition-colors">
                           <img
-                            src="/reva-certificate.jpg"
-                            alt="REVA University Hackathon Certificate"
-                            className="w-full h-auto rounded-[5px] object-contain block"
+                            src={preview.imageSrc}
+                            alt={`${project.shortTitle || project.title} preview`}
+                            className="w-full h-auto max-h-[145px] rounded-lg object-contain block bg-black/60"
                           />
                         </div>
                       </div>
                     </div>
+                  );
+                })}
+              </div>
 
-                    <div className="font-['Caveat',_'Shantell_Sans',_cursive] text-[18px] sm:text-[22px] lg:text-[25px] text-zinc-100 leading-tight font-medium tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] text-left whitespace-nowrap">
-                      <div>Won 2nd Prize 🏆</div>
-                      <div className="text-[15px] sm:text-[18px] lg:text-[21px] text-zinc-300 -mt-0.5">out of 50+ teams!</div>
+              {/* Outside Hand-drawn Note, Trophy Character & Sketched Arrow on Right Side in gutter (matching 'Hi I am Anil' style) */}
+              {section.id === 'work-2024' && (
+                <div
+                  aria-hidden="true"
+                  className="absolute -right-36 sm:-right-48 md:-right-56 lg:-right-64 xl:-right-72 -top-28 sm:-top-36 md:-top-44 z-20 select-none hidden xl:flex flex-col items-start rotate-[2deg] pointer-events-none"
+                >
+                  {/* Trophy Cutout Sticker with Interactive Hover Preview */}
+                  <div className="relative group/sticker pointer-events-auto mb-1.5">
+                    <div
+                      onClick={() => setIsCertModalOpen(true)}
+                      className="cursor-pointer hover:scale-105 hover:rotate-0 transition-transform duration-300"
+                      title="Hover to preview certificate · Click to enlarge"
+                    >
+                      <img
+                        src="/profile-cutout.webp"
+                        alt="Anil character holding trophy"
+                        className="w-18 sm:w-22 md:w-26 lg:w-30 h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] rotate-[-3deg]"
+                      />
                     </div>
 
-                    <svg 
-                      width="52" 
-                      height="46" 
-                      viewBox="0 0 52 46" 
-                      fill="none" 
-                      className="text-zinc-300 drop-shadow-md mt-1 ml-1"
+                    {/* Certificate Preview directly below character sticker on hover */}
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsCertModalOpen(true);
+                      }}
+                      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50 w-[210px] sm:w-[230px] opacity-0 translate-y-1.5 pointer-events-none group-hover/sticker:opacity-100 group-hover/sticker:translate-y-0 group-hover/sticker:pointer-events-auto transition-all duration-200 ease-out cursor-pointer drop-shadow-[0_16px_32px_rgba(0,0,0,0.9)]"
                     >
-                      <path 
-                        d="M44 4 C38 18, 24 28, 6 34" 
-                        stroke="currentColor" 
-                        strokeWidth="2.4" 
-                        strokeLinecap="round" 
-                        fill="none" 
-                      />
-                      <path 
-                        d="M17 26 L6 34 L14 40" 
-                        stroke="currentColor" 
-                        strokeWidth="2.4" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                      />
-                    </svg>
+                      <div className="rounded-lg overflow-hidden border border-white/25 bg-[#0E0F14] p-1 shadow-2xl hover:border-amber-400/80 transition-colors">
+                        <img
+                          src="/reva-certificate.jpg"
+                          alt="REVA University Hackathon Certificate"
+                          className="w-full h-auto rounded-[5px] object-contain block"
+                        />
+                      </div>
+                    </div>
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+
+                  {/* Handwritten text in Caveat script font */}
+                  <div className="font-['Caveat',_'Shantell_Sans',_cursive] text-[18px] sm:text-[22px] lg:text-[25px] text-zinc-100 leading-tight font-medium tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] text-left whitespace-nowrap">
+                    <div>Won 2nd Prize 🏆</div>
+                    <div className="text-[15px] sm:text-[18px] lg:text-[21px] text-zinc-300 -mt-0.5">out of 50+ teams!</div>
+                  </div>
+
+                  {/* Sketched Hand-drawn Curving Arrow pointing down-left across border into REVA project row */}
+                  <svg 
+                    width="52" 
+                    height="46" 
+                    viewBox="0 0 52 46" 
+                    fill="none" 
+                    className="text-zinc-300 drop-shadow-md mt-1 ml-1"
+                  >
+                    <path 
+                      d="M44 4 C38 18, 24 28, 6 34" 
+                      stroke="currentColor" 
+                      strokeWidth="2.4" 
+                      strokeLinecap="round" 
+                      fill="none" 
+                    />
+                    <path 
+                      d="M17 26 L6 34 L14 40" 
+                      stroke="currentColor" 
+                      strokeWidth="2.4" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                    />
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       {/* Academic Details (Collapsible Open/Close, Clean Non-Card Style) */}
       <div className="mt-9 pt-6 border-t border-[#1C1C20]">

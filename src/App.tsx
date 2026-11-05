@@ -26,6 +26,7 @@ const RAIL_ITEMS: RailItem[] = [
   { id: "hero", label: "Top" },
   { id: "hero-intro", label: "Intro" },
   { id: "work", label: "Work" },
+  { id: "work-desktop", label: "Desktop" },
   { id: "work-2026", label: "2026" },
   { id: "work-2025", label: "2025" },
   { id: "work-2024", label: "2024" },
