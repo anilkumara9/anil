@@ -32,6 +32,7 @@ const RAIL_ITEMS: RailItem[] = [
   { id: "work-2024", label: "2024" },
   { id: "opensource", label: "Open Source" },
   { id: "opensource-prs", label: "PRs" },
+  { id: "opensource-activity", label: "Activity" },
   { id: "skills", label: "Skills" },
   { id: "skills-tax", label: "Stack" },
   { id: "research", label: "Research" },

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, X, GitPullRequest, GitBranch, ExternalLink, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { GitHubActivity } from './ui/github-activity';
+import { ANIL_FALLBACK_CONTRIBUTIONS, ANIL_TOP_REPOS } from '../data/anil-github-data';
 
 export interface OpenSourcePR {
   id: string;
@@ -869,6 +871,50 @@ export default function AkoderOpenSource() {
             </div>
           );
         })}
+      </div>
+
+      {/* Real-Time GitHub Activity Heatmap & Top Repositories */}
+      <div id="opensource-activity" className="mt-10 pt-7 border-t border-[#1C1C20] scroll-mt-24">
+        {/* Activity Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <img
+              src="/folder-sticker.png"
+              alt=""
+              className="w-5 h-5 object-contain select-none shrink-0"
+            />
+            <span className="font-serif italic text-[13.5px] text-zinc-300 bg-[#141417] px-2.5 py-0.5 rounded border border-[#222226]">
+              Activity
+            </span>
+            <span className="text-[12px] font-mono text-zinc-400 hidden sm:inline">
+              GitHub Heatmap &amp; Contributions
+            </span>
+          </div>
+
+          <a
+            href="https://github.com/anilkumara9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[12px] font-mono text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5 group"
+          >
+            <span>@anilkumara9</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
+
+        {/* GitHub Activity Component from swamimalode07/rare-ui/github-activity */}
+        <div className="w-full flex justify-center overflow-x-auto py-1">
+          <GitHubActivity
+            username="anilkumara9"
+            contributions={ANIL_FALLBACK_CONTRIBUTIONS}
+            repos={ANIL_TOP_REPOS}
+            showMonths={true}
+            defaultOpen={false}
+            accent="#39d353"
+            label="Top Active Repositories"
+            className="w-full border border-[#222228] bg-[#000000] text-white shadow-2xl rounded-[24px]"
+          />
+        </div>
       </div>
 
       {/* Editorial Pitch Black PR Case Study Modal matching Reference */}

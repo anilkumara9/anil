@@ -26,6 +26,9 @@
   --color-hairline-soft: #E7E1D2;
   --color-text-muted: #817E77;
   --color-text-faint: #9E9B93;
+  --color-foreground: #F4F4F5;
+  --color-background: #050505;
+  --color-card: #0E0E12;
 }
 
 :root {
