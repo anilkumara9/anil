@@ -33,6 +33,53 @@ export interface WorkProject {
 
 export const WORK_PROJECTS: WorkProject[] = [
   {
+    id: "diskpilot",
+    category: "desktop",
+    title: "DiskPilot for Windows: Storage Intelligence & Drive Manager",
+    shortTitle: "DiskPilot",
+    period: "Nov 2026 – Present",
+    role: "Creator & Systems Architect",
+    type: "flagship",
+    year: "2026",
+    featured: true,
+    badge: "Rust · Tauri v2 · MFT",
+    accentBadge: true,
+    tagline: "Storage Manager for Windows · Direct NTFS MFT Reader · Zero Deletions Without Approval",
+    description: "An open-source storage manager and disk intelligence application for Windows built with Rust, Tauri v2, and React 19. Scans drives read-only via a parallel walker or direct Master File Table (MFT) reader, monitors USN change journals in real time, indexes files with on-device OCR, and provides safety-gated cleanups with reversible Recycle Bin actions and SMART drive health telemetry.",
+    lldType: "NATIVE DESKTOP / RUST SYSTEMS / STORAGE",
+    lldMetric: "Direct MFT Reader · USN Journal Sync",
+    lldStorage: "Local Audit History & Reversible Recycle Bin Vault",
+    lldPattern: "Direct MFT Parsing + Safety Gate Pipeline",
+    lldFlow: [
+      "NTFS MFT Raw Reader / Parallel Walker",
+      "USN Change Journal Daemon",
+      "On-Device Windows OCR Indexer",
+      "Treemap Visualizer & Growth Forecaster",
+      "Safety-Gated Review Engine (Undo-Enabled)"
+    ],
+    bulletPoints: [
+      "Dual scanning engine: parallel directory walker and raw NTFS Master File Table (MFT) reader executing scans in fractions of standard time",
+      "Real-time USN change journal integration keeping size allocations and search indices current within seconds between full scans",
+      "Global Quick Search popup (Ctrl+Shift+Space) with on-device Windows OCR indexing text within screenshots and images",
+      "Zero silent deletions: multi-tier safety pipeline (Likely safe / Review first / Keep) routing strictly to Recycle Bin with full rollback/undo history",
+      "Physical storage diagnostics: ATA and NVMe SMART telemetry calculating SSD life expectancy, temperatures, and predictive failure alerts"
+    ],
+    deepDive: {
+      problem: "Traditional disk cleanup utilities either aggressively delete crucial caches and user data without explanation, or require multiple fragmented single-purpose tools (WinDirStat for treemaps, BleachBit for cleaning, CrystalDiskInfo for SMART health, Everything for search) without safety guarantees or undo capabilities.",
+      architecture: "Engineered in Rust and Tauri v2 with React 19. Implements raw Win32 NTFS MFT readers for ultra-high-speed disk indexing, continuous USN change journal tracking, on-device OCR processing, interactive SVG treemap visualizers, and a cryptographically verifiable release pipeline (SHA-256 with signed updates).",
+      keyOutcomes: [
+        "Consolidated whole-disk management: ultra-fast MFT search, treemap visualization, duplicate detection with SHA-256, and physical drive health in a single lightweight desktop app.",
+        "Zero-risk cleanup safety: all operations are plan-previewed, safety-tiered, and default to the Recycle Bin with an audit log and one-click undo.",
+        "Shipped open-source with dual NSIS and MSI installers, winget application updates, and automated GitHub Actions verification."
+      ]
+    },
+    stack: ["Rust", "Tauri v2", "React 19", "Windows API", "NTFS MFT", "USN Journal", "TypeScript", "Tailwind CSS"],
+    links: [
+      { label: "Installer Releases", url: "https://github.com/anilkumara9/diskpilot/releases", primary: true },
+      { label: "GitHub Repository", url: "https://github.com/anilkumara9/diskpilot", primary: false }
+    ]
+  },
+  {
     id: "shiftsense",
     category: "desktop",
     title: "ShiftSense: Screen Aware AI Sidebar for Windows",
@@ -487,6 +534,7 @@ function getProjectPreview(project: WorkProject) {
   }
 
   const previewMap: Record<string, string> = {
+    diskpilot: '/previews/diskpilot.png',
     shiftsense: '/previews/shiftsense.png',
     openusage: '/previews/openusage.png',
     campuspe: '/previews/campuspe.png',
@@ -518,7 +566,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
   const [isNhceModalOpen, setIsNhceModalOpen] = useState(false);
 
   const desktopProjects = WORK_PROJECTS.filter(
-    p => p.id === 'shiftsense' || p.id === 'openusage' || p.id === 'invisly' || p.category === 'desktop'
+    p => p.id === 'diskpilot' || p.id === 'shiftsense' || p.id === 'openusage' || p.id === 'invisly' || p.category === 'desktop'
   );
 
   const sections: { id: string; label: string; projects: WorkProject[] }[] = [
@@ -531,7 +579,7 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
       id: 'work-2026',
       label: '2026',
       projects: WORK_PROJECTS.filter(
-        p => p.year === '2026' && p.id !== 'shiftsense' && p.id !== 'openusage' && p.id !== 'invisly'
+        p => p.year === '2026' && p.category !== 'desktop'
       )
     },
     {

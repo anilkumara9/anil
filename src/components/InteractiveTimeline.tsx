@@ -17,6 +17,22 @@ interface TimelineEvent {
 const InteractiveTimeline: React.FC = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([
     {
+      id: 'diskpilot',
+      date: 'Nov 2026 – Present',
+      title: 'DiskPilot: Windows Storage Intelligence & Drive Manager',
+      organization: 'Native Desktop · Rust, Tauri v2 & React 19',
+      description: 'Storage manager for Windows that scans drives read-only via parallel walker or direct NTFS MFT reader, monitors USN change journals in real time, and deletes nothing without approval.',
+      type: 'project',
+      details: [
+        'Dual scanning engine: parallel directory walker and raw NTFS Master File Table (MFT) reader executing scans in fractions of standard time',
+        'Real-time USN change journal integration keeping size allocations and search indices current within seconds between full scans',
+        'Global Quick Search popup (Ctrl+Shift+Space) with on-device Windows OCR indexing text within screenshots and images',
+        'Safety-gated cleanup engine routing strictly to Recycle Bin with full rollback/undo history and ATA/NVMe SMART health diagnostics'
+      ],
+      link: 'https://github.com/anilkumara9/diskpilot',
+      linkText: 'GitHub Repo'
+    },
+    {
       id: 'openusage',
       date: 'Nov 2026 – Present',
       title: 'OpenUsage: Windows AI Subscription & Spend Tracker',

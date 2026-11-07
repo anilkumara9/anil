@@ -63,6 +63,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-slate-300 text-[12px]">
             <p className="text-slate-400">Available commands:</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">diskpilot</span> — Windows storage intelligence &amp; drive manager (Rust, Tauri v2, MFT)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">openusage</span> — Windows AI subscription &amp; spend tracker (12+ providers, DPAPI)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">shiftsense</span> — Screen-aware Windows AI sidebar (double-tap Shift, 99 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">omnirecon</span> — Autonomous web recon MCP for coding agents (21 tools, 163 tests)</p>
@@ -72,6 +73,26 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
             <p><span className="text-[#FC535B] font-mono font-semibold">experience</span> — Industry work at CampusPe</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">contact</span> — Reach out via email, phone, or LinkedIn</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">clear</span> — Reset terminal output</p>
+          </div>
+        );
+        break;
+      case 'diskpilot':
+        output = (
+          <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
+            <p className="font-bold text-white flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              DiskPilot: Windows Storage Intelligence &amp; Drive Manager
+            </p>
+            <p className="text-slate-400">Rust · Tauri v2 · React 19 · NTFS MFT Reader · USN Journal · Nov 2026</p>
+            <p>The storage manager for Windows that shows you everything and deletes nothing without your approval. Features direct NTFS Master File Table reads, real-time USN change journal sync, on-device OCR search, safety-gated cleanups with undo, and ATA/NVMe SMART health diagnostics.</p>
+            <div className="flex items-center gap-3 pt-1">
+              <a href="https://github.com/anilkumara9/diskpilot/releases" target="_blank" rel="noopener noreferrer" className="text-[#F2F536] hover:underline inline-flex items-center gap-1">
+                Download Releases <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <a href="https://github.com/anilkumara9/diskpilot" target="_blank" rel="noopener noreferrer" className="text-[#FC535B] hover:underline inline-flex items-center gap-1">
+                GitHub Repository <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
           </div>
         );
         break;

@@ -1856,6 +1856,11 @@ export const ANIL_FALLBACK_CONTRIBUTIONS: Contribution[] = [
 
 export const ANIL_TOP_REPOS: RepoContribution[] = [
   {
+    "name": "diskpilot",
+    "count": 64,
+    "href": "https://github.com/anilkumara9/diskpilot"
+  },
+  {
     "name": "anil",
     "count": 48,
     "href": "https://github.com/anilkumara9/anil"

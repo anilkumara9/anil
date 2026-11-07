@@ -54,6 +54,12 @@ export default function CommandPalette({
 
   const actionItems: CommandItem[] = [
     { 
+      id: 'diskpilot', 
+      title: 'DiskPilot: Windows Storage Manager (Rust · Tauri v2 · MFT)', 
+      icon: Terminal, 
+      url: 'https://github.com/anilkumara9/diskpilot' 
+    },
+    { 
       id: 'openusage', 
       title: 'OpenUsage: Windows AI Subscription & Spend Tracker', 
       icon: Terminal, 

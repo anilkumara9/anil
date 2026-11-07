@@ -82,6 +82,18 @@ export default function AkoderHero() {
       ),
     },
     {
+      label: 'DiskPilot',
+      badge: 'Rust · Tauri v2',
+      href: 'https://github.com/anilkumara9/diskpilot',
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 12H2M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+          <line x1="6" y1="16" x2="6.01" y2="16" />
+          <line x1="10" y1="16" x2="10.01" y2="16" />
+        </svg>
+      ),
+    },
+    {
       label: 'OpenUsage',
       badge: 'Windows Tray',
       href: 'https://github.com/anilkumara9/openusage-windows',
