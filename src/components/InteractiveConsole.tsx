@@ -63,8 +63,8 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
         output = (
           <div className="space-y-1 text-slate-300 text-[12px]">
             <p className="text-slate-400">Available commands:</p>
-            <p><span className="text-[#FC535B] font-mono font-semibold">diskpilot</span> — Windows storage intelligence &amp; drive manager (Rust, Tauri v2, MFT)</p>
-            <p><span className="text-[#FC535B] font-mono font-semibold">openusage</span> — Windows AI subscription &amp; spend tracker (12+ providers, DPAPI)</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">diskpilot</span> — Windows storage intelligence (most complex I have built from scratch)</p>
+            <p><span className="text-[#FC535B] font-mono font-semibold">openusage</span> — Windows AI spend tracker (most complex I have built from scratch)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">shiftsense</span> — Screen-aware Windows AI sidebar (double-tap Shift, 99 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">omnirecon</span> — Autonomous web recon MCP for coding agents (21 tools, 163 tests)</p>
             <p><span className="text-[#FC535B] font-mono font-semibold">spora</span> — Bootstrapped social platform specs (200+ users)</p>
@@ -81,7 +81,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
           <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
             <p className="font-bold text-white flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              DiskPilot: Windows Storage Intelligence &amp; Drive Manager
+              DiskPilot (most complex I have built from scratch): Windows Storage Intelligence
             </p>
             <p className="text-slate-400">Rust · Tauri v2 · React 19 · NTFS MFT Reader · USN Journal · Nov 2026</p>
             <p>The storage manager for Windows that shows you everything and deletes nothing without your approval. Features direct NTFS Master File Table reads, real-time USN change journal sync, on-device OCR search, safety-gated cleanups with undo, and ATA/NVMe SMART health diagnostics.</p>
@@ -101,7 +101,7 @@ const InteractiveConsole: React.FC<InteractiveConsoleProps> = ({ paperUrl }) => 
           <div className="space-y-1.5 text-[12px] text-slate-300 bg-white/5 p-3 rounded-[12px] border border-white/10">
             <p className="font-bold text-white flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-              OpenUsage for Windows: AI Subscriptions &amp; Spend Tracker
+              OpenUsage (most complex I have built from scratch): AI Subscriptions &amp; Spend Tracker
             </p>
             <p className="text-slate-400">Electron · Windows DPAPI · System Tray Gauge · 12+ Providers · Nov 2026</p>
             <p>Track your AI coding subscriptions and API spend from the Windows system tray: session/weekly limits, credits, token usage, spend, reset countdowns, and burn rate across Claude, Cursor, Copilot, Codex, Grok, Devin, and Ollama in one panel.</p>

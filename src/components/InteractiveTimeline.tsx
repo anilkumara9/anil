@@ -19,7 +19,7 @@ const InteractiveTimeline: React.FC = () => {
     {
       id: 'diskpilot',
       date: 'Nov 2026 – Present',
-      title: 'DiskPilot: Windows Storage Intelligence & Drive Manager',
+      title: 'DiskPilot (most complex I have built from scratch): Windows Storage Intelligence',
       organization: 'Native Desktop · Rust, Tauri v2 & React 19',
       description: 'Storage manager for Windows that scans drives read-only via parallel walker or direct NTFS MFT reader, monitors USN change journals in real time, and deletes nothing without approval.',
       type: 'project',
@@ -35,7 +35,7 @@ const InteractiveTimeline: React.FC = () => {
     {
       id: 'openusage',
       date: 'Nov 2026 – Present',
-      title: 'OpenUsage: Windows AI Subscription & Spend Tracker',
+      title: 'OpenUsage (most complex I have built from scratch): Windows AI Subscription Tracker',
       organization: 'Windows System Tray · Electron & DPAPI',
       description: 'System tray app monitoring AI coding subscriptions, session/weekly quotas, token spend, and burn rates across 12+ providers in one panel.',
       type: 'project',
