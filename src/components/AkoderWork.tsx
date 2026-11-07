@@ -660,7 +660,16 @@ export default function AkoderWork({ onSelectProject }: AkoderWorkProps) {
                         </span>
 
                         <span className="text-[13.5px] text-[#8E8E93] group-hover:text-[#A1A1AA] truncate leading-relaxed">
-                          {project.tagline || project.description}
+                          {project.tagline?.includes('(Most complex I have built from scratch)') ? (
+                            <>
+                              <span className="text-[#38bdf8] font-medium select-none">
+                                (most complex I have built from scratch)
+                              </span>
+                              <span>{project.tagline.replace('(Most complex I have built from scratch)', '')}</span>
+                            </>
+                          ) : (
+                            project.tagline || project.description
+                          )}
                         </span>
                       </div>
 

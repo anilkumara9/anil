@@ -299,12 +299,31 @@ export default function App() {
                 </div>
 
                 <h3 className="text-[23px] sm:text-[26px] font-semibold text-white tracking-tight leading-snug">
-                  {activeProjectModal.title}
+                  {activeProjectModal.title.includes('(most complex I have built from scratch)') ? (
+                    <>
+                      {activeProjectModal.title.split('(most complex I have built from scratch)')[0]}
+                      <span className="text-[#38bdf8] font-medium text-[19px] sm:text-[21px]">
+                        (most complex I have built from scratch)
+                      </span>
+                      {activeProjectModal.title.split('(most complex I have built from scratch)')[1]}
+                    </>
+                  ) : (
+                    activeProjectModal.title
+                  )}
                 </h3>
 
                 {activeProjectModal.tagline && (
                   <p className="text-[14px] text-zinc-400 leading-relaxed">
-                    {activeProjectModal.tagline}
+                    {activeProjectModal.tagline.includes('(Most complex I have built from scratch)') ? (
+                      <>
+                        <span className="text-[#38bdf8] font-medium">
+                          (most complex I have built from scratch)
+                        </span>
+                        <span>{activeProjectModal.tagline.replace('(Most complex I have built from scratch)', '')}</span>
+                      </>
+                    ) : (
+                      activeProjectModal.tagline
+                    )}
                   </p>
                 )}
               </div>

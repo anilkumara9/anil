@@ -278,7 +278,17 @@ const InteractiveTimeline: React.FC = () => {
                   {/* Title & Organization */}
                   <div>
                     <h4 className="font-shantell text-[15.5px] sm:text-[17px] font-[800] text-[#111111] leading-snug">
-                      {event.title}
+                      {event.title.includes('(most complex I have built from scratch)') ? (
+                        <>
+                          {event.title.split('(most complex I have built from scratch)')[0]}
+                          <span className="text-blue-600 dark:text-[#38bdf8] font-bold">
+                            (most complex I have built from scratch)
+                          </span>
+                          {event.title.split('(most complex I have built from scratch)')[1]}
+                        </>
+                      ) : (
+                        event.title
+                      )}
                     </h4>
                     <p className="text-[12.5px] font-[500] text-[#6A6253] mt-0.5 font-inter">
                       {event.organization}
